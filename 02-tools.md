@@ -293,4 +293,34 @@ async function verifyUI() {
 
 ---
 
-*更新时间：2026-03-25*
+## 2026-03-26 更新：热门 Agent Harness 框架
+
+### 顶级框架（按 Star 数排序）
+
+| 框架 | Stars | 特点 | 适用场景 |
+|------|-------|------|---------|
+| [superpowers](https://github.com/obra/superpowers) | 112K+ | Agentic Skills 框架 | 所有 AI 编程助手 |
+| [everything-claude-code](https://github.com/affaan-m/everything-claude-code) | 107K+ | Claude Code 资源大全 | Claude Code 用户 |
+| [lobehub](https://github.com/lobehub/lobehub) | 74K+ | 多 Agent 协作平台 | 团队协作 |
+| [Prompt-Engineering-Guide](https://github.com/dair-ai/Prompt-Engineering-Guide) | 72K+ | 提示工程指南 | 学习资源 |
+| [deer-flow](https://github.com/bytedance/deer-flow) | 45K+ | 字节 SuperAgent | 长时任务 |
+| [crewAI](https://github.com/crewAIInc/crewAI) | 47K+ | 多 Agent 协作 | 角色扮演场景 |
+| [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | 42K+ | AI 驱动开发方法论 | 敏捷开发 |
+| [langgraph](https://github.com/langchain-ai/langgraph) | 27K+ | 图结构 Agent | 复杂工作流 |
+| [openai-agents-python](https://github.com/openai/openai-agents-python) | 20K+ | OpenAI 官方 SDK | OpenAI 生态 |
+| [adk-python](https://github.com/google/adk-python) | 18K+ | Google Agent 工具包 | Google 生态 |
+
+### Context Engineering 专项资源
+
+| 项目 | Stars | 特点 |
+|------|-------|------|
+| [get-shit-done](https://github.com/gsd-build/get-shit-done) | 41K+ | Meta-prompting + Spec-driven |
+| [parlant](https://github.com/emcie-co/parlant) | 17K+ | 客户交互控制层 |
+| [Agent-Skills-for-Context-Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering) | 14K+ | Context Engineering Skills |
+| [context-engineering-intro](https://github.com/coleam00/context-engineering-intro) | 12K+ | Context Engineering 入门 |
+| [Context-Engineering](https://github.com/davidkimai/Context-Engineering) | 8K+ | Karpathy 启发的手册 |
+| [MineContext](https://github.com/volcengine/MineContext) | 5K+ | 字节 Context Engineering |
+
+---
+
+*更新时间：2026-03-26*

@@ -97,6 +97,50 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-03-26 - Agent-First 开发范式 & GAN 启发的多 Agent 架构
+
+**重大更新**：
+
+1. **OpenAI Harness Engineering 实践报告**
+   - 📝 来源：[OpenAI Blog - Harness Engineering](https://openai.com/index/harness-engineering/)
+   - 🔑 核心发现：团队用 3 名工程师 + Codex 在 5 个月内构建了百万行代码产品
+   - 💡 关键原则："Humans steer. Agents execute." - 人类掌舵，代理执行
+   - 📊 成果：平均每天 3.5 PR/工程师，零手写代码
+
+2. **Anthropic 三 Agent 架构**
+   - 📝 来源：[Anthropic Blog - Harness Design for Long-Running Apps](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+   - 🎯 新架构：Planner → Generator → Evaluator（规划器-生成器-评估器）
+   - 💡 灵感：借鉴 GAN（生成对抗网络）设计多 Agent 系统
+   - ⚠️ 关键问题解决：
+     - Context Anxiety（上下文焦虑）：模型在接近上下文限制时过早结束
+     - Self-Evaluation Bias（自评偏差）：Agent 对自己工作评价过高
+
+3. **Context Engineering 黄金法则**
+   - 📜 规则："Give Codex a map, not a 1,000-page instruction manual"
+   - ✅ AGENTS.md 应作为目录，而非百科全书
+   - ✅ 使用 docs/ 目录存放结构化知识库
+   - ✅ 机械强制：CI 任务验证文档新鲜度和交叉链接
+
+4. **热门 Agent Harness 框架更新**
+   - [obra/superpowers](https://github.com/obra/superpowers) - 112K ⭐ - Agentic Skills 框架
+   - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) - 45K ⭐ - 字节跳动 SuperAgent Harness
+   - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) - 47K ⭐ - 多 Agent 协作框架
+   - [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) - 42K ⭐ - AI 驱动开发方法论
+   - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) - 27K ⭐ - 图结构 Agent 构建
+   - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) - 20K ⭐ - OpenAI 官方 Agent SDK
+   - [google/adk-python](https://github.com/google/adk-python) - 18K ⭐ - Google Agent 开发工具包
+
+5. **Termdock AI CLI 最佳实践**
+   - 📝 来源：[Termdock Blog](https://www.termdock.com/en/blog)
+   - 🎯 主题：AI Agent 工作流、Claude Code、MCP、Agent Skills
+   - 📚 最新文章：
+     - AI Agent Workflow Guide 2026
+     - Personal Recommendation Engine with AI CLI
+     - Annual Review with AI CLI
+     - Interview Practice with AI CLI
+
+---
+
 ### 2026-03-25 - 初始化
 
 **新增**：
@@ -112,9 +156,4 @@ Harness Engineering (最上层)
 ---
 
 *本指南持续更新中，每天汇总最新的 Harness Engineering 最佳实践和工具动态。*
-
-
-## 测试更新（2026-03-25 23:48）
-
-这是一个测试更新，验证定时任务能否正确推送到 GitHub。
 
