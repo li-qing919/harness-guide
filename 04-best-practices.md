@@ -469,4 +469,184 @@ harness:
 
 ---
 
+## 10. Anthropic 长时任务 Harness 设计（2026-03-26 更新）
+
+**来源**：[Anthropic - Effective Harnesses for Long-Running Agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
+
+### 双模式架构
+
+```yaml
+harness:
+  # 首次运行
+  initializer_agent:
+    prompt: "specialized_first_run_prompt"
+    outputs:
+      - init.sh           # 环境初始化脚本
+      - claude-progress.txt  # 进度日志
+      - initial_commit    # 基线代码
+      
+  # 后续运行
+  coding_agent:
+    prompt: "incremental_progress_prompt"
+    behavior: "每次会话只做增量进展"
+    handoff: "留下清晰的 artifacts 给下一个会话"
+```
+
+### 进度文件结构
+
+```markdown
+# claude-progress.txt
+
+## 2026-03-26 Session 1
+- Set up project structure
+- Created base components
+- Next: Implement authentication
+
+## 2026-03-26 Session 2
+- Implemented login form
+- Added JWT validation
+- Next: Add permission system
+```
+
+### Claude 4 多上下文窗口最佳实践
+
+> "Use a different prompt for the very first context window."
+
+```yaml
+prompts:
+  first_window: |
+    你是初始化 Agent。
+    任务：设置项目环境
+    输出：init.sh, claude-progress.txt, 初始提交
+    
+  subsequent_windows: |
+    你是增量开发 Agent。
+    任务：阅读 claude-progress.txt，继续开发
+    规则：每次只做一个功能，完成后更新进度文件
+```
+
+---
+
+## 11. 基准测试基础设施噪声（2026-03-26 更新）
+
+**来源**：[Anthropic - Infrastructure Noise](https://www.anthropic.com/engineering/infrastructure-noise)
+
+### 问题
+
+> 基础设施配置可使基准测试波动几个百分点——有时甚至超过排行榜上顶级模型之间的差距。
+
+### 推荐配置
+
+```yaml
+eval_infrastructure:
+  # 不要只指定一个值
+  resources:
+    cpu:
+      guaranteed: 2        # 保底分配
+      limit: 6             # 硬杀阈值
+    memory:
+      guaranteed: 4GB
+      limit: 12GB
+      
+  # 建议：3x ceiling
+  ceiling_multiplier: 3    # 将错误率从 5.8% 降到 2.1%
+```
+
+### 排行榜解读
+
+| 差距 | 可信度 |
+|------|--------|
+| < 3% | 需要质疑配置一致性 |
+| 3-5% | 谨慎解读 |
+| > 5% | 可能是真实差异 |
+
+---
+
+## 12. Agent Harness 的苦涩教训（2026-03-26 更新）
+
+**来源**：[Phil Schmid - Agent Harness 2026](https://www.philschmid.de/agent-harness-2026)
+
+### 核心价值
+
+> A Harness turns vague, multi-step agent workflows into **structured data that we can log and grade**, allowing us to hill-climb effectively.
+
+### Harness 作为测试平台
+
+```yaml
+harness_as_benchmark:
+  purpose: "轻松测试和比较不同模型"
+  
+  capabilities:
+    - 模型 A/B 测试
+    - 性能对比
+    - 约束验证
+    
+  benefits:
+    - 可复现性
+    - 可比较性
+    - 可优化性
+```
+
+### 苦涩教训
+
+> 构建复杂 Agent 系统的"苦涩教训"：简单的方法 + 更多计算 > 复杂的方法
+
+**建议**：
+- 优先投资基础设施
+- 保持架构简单
+- 让模型做繁重工作
+
+---
+
+## 13. Termdock 配置文件最佳实践（2026-03-26 更新）
+
+**来源**：[Termdock Blog](https://termdock.com/zh/blog)
+
+### SKILL.md vs CLAUDE.md vs AGENTS.md
+
+| 文件 | 作用 | 谁读取 | 使用场景 |
+|------|------|--------|---------|
+| **SKILL.md** | 定义技能行为 | 特定 skill 调用时 | 可复用的技能模块 |
+| **CLAUDE.md** | 项目上下文 | Claude Code 每次启动 | 项目级配置 |
+| **AGENTS.md** | 工作区规则 | 所有 Agent 共享 | 全局规则 |
+
+### 10 个让 AI Agent 变笨的 CLAUDE.md 错误
+
+1. **过长**：超过 500 行
+2. **结构混乱**：没有清晰的章节
+3. **过时信息**：包含已删除功能的说明
+4. **矛盾规则**：同一件事有多个不同的说明
+5. **缺少示例**：只有抽象规则没有具体例子
+6. **过度限制**：限制了 Agent 的创造力
+7. **忽略上下文**：不考虑项目实际情况
+8. **缺少验证**：没有告诉 Agent 如何验证
+9. **硬编码路径**：路径写死而不是使用变量
+10. **缺少更新机制**：没有说明如何更新文档
+
+### 正确做法
+
+```markdown
+# CLAUDE.md 最佳实践
+
+## 结构（控制在 100-200 行）
+
+1. 项目概述（2-3 句）
+2. 技术栈（列表）
+3. 关键规则（5-10 条）
+4. 常用命令（5-10 个）
+5. 参考文档链接（指向详细文档）
+
+## 规则示例
+
+### ✅ 好的规则
+- "所有 API 调用必须有错误处理"
+- "测试文件与源文件同名，后缀 .test.ts"
+
+### ❌ 坏的规则
+- "代码要写好"（太模糊）
+- "使用最佳实践"（没有具体说明）
+```
+
+---
+
 *更新时间：2026-03-26*

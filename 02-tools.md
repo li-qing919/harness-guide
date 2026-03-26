@@ -295,20 +295,32 @@ async function verifyUI() {
 
 ## 2026-03-26 更新：热门 Agent Harness 框架
 
-### 顶级框架（按 Star 数排序）
+### 顶级框架（按 Star 数排序，2026-03-26 数据）
 
-| 框架 | Stars | 特点 | 适用场景 |
-|------|-------|------|---------|
-| [superpowers](https://github.com/obra/superpowers) | 112K+ | Agentic Skills 框架 | 所有 AI 编程助手 |
-| [everything-claude-code](https://github.com/affaan-m/everything-claude-code) | 107K+ | Claude Code 资源大全 | Claude Code 用户 |
-| [lobehub](https://github.com/lobehub/lobehub) | 74K+ | 多 Agent 协作平台 | 团队协作 |
-| [Prompt-Engineering-Guide](https://github.com/dair-ai/Prompt-Engineering-Guide) | 72K+ | 提示工程指南 | 学习资源 |
-| [deer-flow](https://github.com/bytedance/deer-flow) | 45K+ | 字节 SuperAgent | 长时任务 |
-| [crewAI](https://github.com/crewAIInc/crewAI) | 47K+ | 多 Agent 协作 | 角色扮演场景 |
-| [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | 42K+ | AI 驱动开发方法论 | 敏捷开发 |
-| [langgraph](https://github.com/langchain-ai/langgraph) | 27K+ | 图结构 Agent | 复杂工作流 |
-| [openai-agents-python](https://github.com/openai/openai-agents-python) | 20K+ | OpenAI 官方 SDK | OpenAI 生态 |
-| [adk-python](https://github.com/google/adk-python) | 18K+ | Google Agent 工具包 | Google 生态 |
+| 框架 | Stars | 日增长 | 特点 | 适用场景 |
+|------|-------|--------|------|---------|
+| [superpowers](https://github.com/obra/superpowers) | 112,651 | +614 | Agentic Skills 框架 | 所有 AI 编程助手 |
+| [everything-claude-code](https://github.com/affaan-m/everything-claude-code) | 108,007 | - | Agent Harness 性能优化 | Claude Code/Codex/Cursor |
+| [lobehub](https://github.com/lobehub/lobehub) | 74,313 | - | 多 Agent 协作平台 | 团队协作 |
+| [oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent) | 43,481 | - | 最佳 Agent Harness | OpenCode 用户 |
+| [crewAI](https://github.com/crewAIInc/crewAI) | 47,212 | +121 | 多 Agent 协作 | 角色扮演场景 |
+| [deer-flow](https://github.com/bytedance/deer-flow) | 46,171 | +171 | 字节 SuperAgent | 长时任务研究 |
+| [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | 42,261 | +261 | AI 驱动开发方法论 | 敏捷开发 |
+| [learn-claude-code](https://github.com/shareAI-lab/learn-claude-code) | 38,763 | - | 纳米 Claude Code 实现 | 学习 Agent Harness |
+| [langgraph](https://github.com/langchain-ai/langgraph) | 27,475 | +475 | 图结构 Agent | 复杂工作流 |
+| [deepagents](https://github.com/langchain-ai/deepagents) | 17,483 | - | LangChain Harness | 计划+文件系统+子代理 |
+| [openai-agents-python](https://github.com/openai/openai-agents-python) | 20,310 | +310 | OpenAI 官方 SDK | OpenAI 生态 |
+| [adk-python](https://github.com/google/adk-python) | 18,594 | +594 | Google Agent 工具包 | Google 生态 |
+
+### 新兴 Harness 项目
+
+| 项目 | Stars | 特点 |
+|------|-------|------|
+| [Trellis](https://github.com/mindfold-ai/Trellis) | 4,179 | 最佳 Agent Harness 设计 |
+| [desloppify](https://github.com/peteromallet/desloppify) | 2,614 | 让 slop 代码变优雅 |
+| [dexto](https://github.com/truffle-ai/dexto) | 598 | 通用 Agent Harness |
+| [moosestack](https://github.com/514-labs/moosestack) | 558 | ClickHouse 分析 Harness |
+| [oh-my-agent](https://github.com/first-fluke/oh-my-agent) | 496 | 便携式多 Agent Harness |
 
 ### Context Engineering 专项资源
 

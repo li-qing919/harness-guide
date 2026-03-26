@@ -97,7 +97,52 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
-### 2026-03-26 - Agent-First 开发范式 & GAN 启发的多 Agent 架构
+### 2026-03-26 - 长时任务 Harness 设计 & 基准测试基础设施噪声
+
+**重大更新**：
+
+1. **Anthropic 长时任务 Harness 新方案**
+   - 📝 来源：[Anthropic - Effective Harnesses for Long-Running Agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
+   - 🔑 核心创新：Initializer Agent + Coding Agent 双模式
+   - 💡 关键组件：
+     - `init.sh` 脚本初始化环境
+     - `claude-progress.txt` 跨会话进度日志
+     - 初始 git commit 作为基线
+
+2. **Anthropic 基准测试基础设施噪声研究**
+   - 📝 来源：[Anthropic - Quantifying Infrastructure Noise](https://www.anthropic.com/engineering/infrastructure-noise)
+   - ⚠️ 发现：基础设施配置可使基准测试波动几个百分点
+   - 💡 建议：
+     - 指定资源的 guaranteed allocation 和 hard kill threshold
+     - 3x ceiling 可将错误率从 5.8% 降到 2.1%
+     - 排行榜差距 < 3% 需要质疑配置一致性
+
+3. **Phil Schmid: Agent Harness 的苦涩教训**
+   - 📝 来源：[Phil Schmid - Agent Harness 2026](https://www.philschmid.de/agent-harness-2026)
+   - 🎯 核心洞察：Harness 将模糊的多步骤工作流转化为可记录、可评分的结构化数据
+   - 💡 价值：允许有效地"爬山"优化
+
+4. **Termdock 最新实践**
+   - 📝 来源：[Termdock Blog](https://termdock.com/zh/blog)
+   - 🎯 主题：SKILL.md vs CLAUDE.md vs AGENTS.md 配置最佳实践
+   - 📚 最新文章：
+     - 让 AI Agent 变笨的 10 个 CLAUDE.md 错误
+     - 用 3 个 AI CLI 工具同时建构全端应用程式
+     - AI CLI 品牌资产生成器
+
+5. **热门 Agent Harness 框架更新（2026-03-26）**
+   - [obra/superpowers](https://github.com/obra/superpowers) - 112,651 ⭐ (+614) - Agentic Skills 框架
+   - [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code) - 108,007 ⭐ - Agent Harness 性能优化系统
+   - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) - 47,212 ⭐ (+121) - 多 Agent 协作框架
+   - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) - 46,171 ⭐ (+171) - 字节跳动 SuperAgent Harness
+   - [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) - 42,261 ⭐ (+261) - AI 驱动开发方法论
+   - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) - 27,475 ⭐ (+475) - 图结构 Agent 构建
+   - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) - 20,310 ⭐ (+310) - OpenAI 官方 Agent SDK
+   - [google/adk-python](https://github.com/google/adk-python) - 18,594 ⭐ (+594) - Google Agent 开发工具包
+
+---
+
+### 2026-03-26 (早) - Agent-First 开发范式 & GAN 启发的多 Agent 架构
 
 **重大更新**：
 
