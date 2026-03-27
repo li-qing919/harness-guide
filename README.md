@@ -97,6 +97,53 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-03-27 - Claude Code Auto Mode & 基准测试噪声量化研究
+
+**重大更新**：
+
+1. **Anthropic: Claude Code Auto Mode - 更安全的权限跳过**
+   - 📝 来源：[Anthropic - Claude Code Auto Mode](https://www.anthropic.com/engineering/claude-code-auto-mode) (Mar 25, 2026)
+   - 🔑 核心问题：默认的权限确认导致"审批疲劳"（approval fatigue），用户逐渐不再关注
+   - 💡 解决方案：Auto Mode - 更安全的自动执行模式
+   - 🎯 设计原则：在保持安全性的前提下减少用户交互负担
+
+2. **Anthropic: Harness Design for Long-Running Application Development**
+   - 📝 来源：[Anthropic - Harness Design for Long-Running Apps](https://www.anthropic.com/engineering/harness-design-long-running-apps) (Mar 24, 2026)
+   - 🎯 核心挑战：让 Claude 生产高质量、长时间运行的复杂应用
+   - 💡 三 Agent 架构：Planner → Generator → Evaluator
+   - 🔑 关键创新：借鉴 GAN 设计模式解决 Context Anxiety 和 Self-Evaluation Bias
+
+3. **Termdock: AI Agent Workflow Guide 2026**
+   - 📝 来源：[Termdock - AI Agent Workflow Guide 2026](https://www.termdock.com/en/blog/ai-agent-workflow-guide-2026) (Mar 23, 2026)
+   - 🎯 主题：从聊天到终端自动化的完整指南
+   - 💡 核心内容：
+     - Daily Standup 自动化
+     - 多 Agent 代码审查
+     - MCP 集成
+     - 结构化 Prompt 设计
+   - 📚 适用场景：构建可重复、可脚本化、版本控制的 AI 系统
+
+4. **Termdock: Personal Recommendation Engine with AI CLI**
+   - 📝 来源：[Termdock - Personal Recommendation Engine](https://www.termdock.com/en/blog/ai-cli-personalized-recommendations) (Mar 23, 2026)
+   - 🎯 问题：不再信任为联盟佣金编写的"最佳"列表
+   - 💡 解决方案：将具体约束输入 AI CLI，获取带解释的排名推荐
+
+5. **热门 Agent Harness 框架更新（2026-03-27）**
+   - [obra/superpowers](https://github.com/obra/superpowers) - **115,680** ⭐ (+3,029) 🚀 - Agentic Skills 框架
+   - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) - **48,301** ⭐ (+2,130) 🚀 - 字节跳动 SuperAgent Harness
+   - [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) - **42,432** ⭐ (+171) - AI 驱动开发方法论
+   - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) - **47,304** ⭐ (+92) - 多 Agent 协作框架
+   - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) - **27,587** ⭐ (+112) - 图结构 Agent 构建
+   - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) - **20,340** ⭐ (+30) - OpenAI 官方 Agent SDK
+   - [google/adk-python](https://github.com/google/adk-python) - **18,609** ⭐ (+15) - Google Agent 开发工具包
+
+**关键洞察**：
+- Superpowers 和 DeerFlow 本周增长显著（各增 3000+/2000+ stars）
+- Claude Code 的 Auto Mode 是解决"审批疲劳"的重要尝试
+- 三 Agent 架构（Planner-Generator-Evaluator）正在成为长时任务的标准模式
+
+---
+
 ### 2026-03-26 - 长时任务 Harness 设计 & 基准测试基础设施噪声
 
 **重大更新**：
