@@ -97,50 +97,123 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
-### 2026-03-27 - Claude Code Auto Mode & 基准测试噪声量化研究
+### 2026-03-28 (下午) - 理论体系深化 & 框架版本迭代
 
 **重大更新**：
 
-1. **Anthropic: Claude Code Auto Mode - 更安全的权限跳过**
-   - 📝 来源：[Anthropic - Claude Code Auto Mode](https://www.anthropic.com/engineering/claude-code-auto-mode) (Mar 25, 2026)
-   - 🔑 核心问题：默认的权限确认导致"审批疲劳"（approval fatigue），用户逐渐不再关注
-   - 💡 解决方案：Auto Mode - 更安全的自动执行模式
-   - 🎯 设计原则：在保持安全性的前提下减少用户交互负担
+1. **Epsilla: "Agents aren't hard; the Harness is hard."**
+   - 📝 来源：[Epsilla Blog - Harness Engineering Evolution](https://www.epsilla.com/blogs/harness-engineering-evolution-prompt-context-autonomous-agents) (Mar 2026)
+   - 🔑 核心论点得到 OpenAI 和 Anthropic 验证：通过规则、反馈循环和 linter 约束 agent 的解空间，反而提升生产力和可靠性
+   - 💡 Harness Engineering 构建围绕 AI agent 的完整运行环境，在更高层次上架构规则、反馈和基础设施系统，防止 agent 犯错
 
-2. **Anthropic: Harness Design for Long-Running Application Development**
-   - 📝 来源：[Anthropic - Harness Design for Long-Running Apps](https://www.anthropic.com/engineering/harness-design-long-running-apps) (Mar 24, 2026)
-   - 🎯 核心挑战：让 Claude 生产高质量、长时间运行的复杂应用
-   - 💡 三 Agent 架构：Planner → Generator → Evaluator
-   - 🔑 关键创新：借鉴 GAN 设计模式解决 Context Anxiety 和 Self-Evaluation Bias
+2. **Agent Engineering: Harness Engineering 正式定义**
+   - 📝 来源：[Agent Engineering - Harness Engineering in 2026](https://www.agent-engineering.dev/article/harness-engineering-in-2026-the-discipline-that-makes-ai-agents-production-ready)
+   - 🎯 正式定义：设计**约束、工具、反馈循环、文档和验证系统**的学科，引导 AI agent 产出可靠、可维护、可扩展的软件
+   - 📜 历史脉络：2025 年底 Mitchell Hashimoto 讨论 → 2026 年 OpenAI 内部实验正式化
+   - ⚠️ 解决核心痛点：纯上下文工程的局限——agent 在长时间运行任务中仍会漂移、积累"熵"
 
-3. **Termdock: AI Agent Workflow Guide 2026**
-   - 📝 来源：[Termdock - AI Agent Workflow Guide 2026](https://www.termdock.com/en/blog/ai-agent-workflow-guide-2026) (Mar 23, 2026)
-   - 🎯 主题：从聊天到终端自动化的完整指南
-   - 💡 核心内容：
-     - Daily Standup 自动化
-     - 多 Agent 代码审查
-     - MCP 集成
-     - 结构化 Prompt 设计
-   - 📚 适用场景：构建可重复、可脚本化、版本控制的 AI 系统
+3. **Phil Schmid: Agent Harness 的苦涩教训**
+   - 📝 来源：[Phil Schmid - Agent Harness 2026](https://www.philschmid.de/agent-harness-2026)
+   - 🎯 Harness 将模糊的多步骤 agent 工作流转化为结构化数据来记录和评分
+   - 💡 关键技术：上下文压缩、状态卸载到存储、将任务隔离到子 agent
 
-4. **Termdock: Personal Recommendation Engine with AI CLI**
-   - 📝 来源：[Termdock - Personal Recommendation Engine](https://www.termdock.com/en/blog/ai-cli-personalized-recommendations) (Mar 23, 2026)
-   - 🎯 问题：不再信任为联盟佣金编写的"最佳"列表
-   - 💡 解决方案：将具体约束输入 AI CLI，获取带解释的排名推荐
+4. **Cobus Greyling: AI Harness Engineering 崛起**
+   - 📝 来源：[The Rise of AI Harness Engineering](https://cobusgreyling.medium.com/the-rise-of-ai-harness-engineering-5f5220de393e)
+   - 🎯 Harness Engineering 是决定 AI Agent 是否真正能在生产环境中工作的缺失架构层
 
-5. **热门 Agent Harness 框架更新（2026-03-27）**
-   - [obra/superpowers](https://github.com/obra/superpowers) - **115,680** ⭐ (+3,029) 🚀 - Agentic Skills 框架
-   - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) - **48,301** ⭐ (+2,130) 🚀 - 字节跳动 SuperAgent Harness
-   - [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) - **42,432** ⭐ (+171) - AI 驱动开发方法论
-   - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) - **47,304** ⭐ (+92) - 多 Agent 协作框架
-   - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) - **27,587** ⭐ (+112) - 图结构 Agent 构建
-   - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) - **20,340** ⭐ (+30) - OpenAI 官方 Agent SDK
-   - [google/adk-python](https://github.com/google/adk-python) - **18,609** ⭐ (+15) - Google Agent 开发工具包
+5. **Deloitte 2026 技术预测：AI Agent 编排**
+   - 📝 来源：[Deloitte - Unlocking Exponential Value with AI Agent Orchestration](https://www.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2026/ai-agent-orchestration.html)
+   - 🔑 德勤明确将"AI agent 编排"列为关键解锁
+   - 💡 工作流变得模块化并由 agent 驱动
+   - 📊 2026 年 AI agent 将在不同编程语言、框架、基础设施和通信协议中扩散
+
+6. **多 Agent 编排框架对比（2026 最新）**
+   - 📝 来源：[Best Multi-Agent Frameworks 2026](https://gurusup.com/blog/best-multi-agent-frameworks-2026)
+   - 🎯 对比 6 大框架：OpenAI Agents SDK、LangGraph、CrewAI、AutoGen/AG2、Google ADK 和 Claude Agent SDK
+   - 💡 选择建议：不同框架适用不同场景，需要根据项目需求选择
+
+7. **热门框架动态（2026-03-28 下午数据）**
+   - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) - **50,454** ⭐ 🚀 - 首次突破 50K！
+     - 🐛 MCP filesystem 路径暴露问题（#1452）
+     - 🔧 Memory 管理/清除功能请求（#1333）
+     - 🛠️ ViewImageMiddleware fallback 修复（#1336）
+   - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) - **27,711** ⭐
+     - 📦 `langgraph==1.1.3` (2026-03-18)
+     - 🔒 安全更新：cryptography 46.0.5 → 46.0.6
+     - 📝 新增威胁模型文档（#7026）
+   - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) - **47,387** ⭐
+     - 📦 `1.13.0rc1` (2026-03-27)
+     - 🔒 XXE 防护：xml.etree.ElementTree → defusedxml（#4967）
+     - 🐛 循环检测 off-by-one 修复（#5034）
+   - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) - **20,361** ⭐
+     - 📦 `v0.13.2` (2026-03-26)
+     - 🐛 Prompt caching 在 base64 输入时降至 0%（#2784）
+     - 🔧 流式工具执行 guardrail 修复（#2688）
+   - [google/adk-python](https://github.com/google/adk-python) - **18,629** ⭐
+     - 📦 `v2.0.0a2` (alpha, 2026-03-27) + `v1.28.0` (stable, 2026-03-26)
+     - 🔒 MCP 集成缺少消息级认证和完整性验证（#4840）
+     - ⚠️ 多 agent 导致应用启动变慢（#4870）
 
 **关键洞察**：
-- Superpowers 和 DeerFlow 本周增长显著（各增 3000+/2000+ stars）
-- Claude Code 的 Auto Mode 是解决"审批疲劳"的重要尝试
-- 三 Agent 架构（Planner-Generator-Evaluator）正在成为长时任务的标准模式
+- 📐 **理论体系成熟**：Harness Engineering 从实践经验上升为正式学科定义
+- 🏗️ **行业共识形成**：Epsilla、Phil Schmid、Cobus Greyling 等多方观点趋于一致
+- 📊 **德勤背书**：AI Agent 编排被列入 2026 关键技术预测
+- 🚀 **DeerFlow 里程碑**：字节跳动 SuperAgent Harness 首次突破 50K stars
+- 🔒 **安全意识提升**：多个框架集中修复安全漏洞（XXE、加密库、MCP 认证）
+
+---
+
+### 2026-03-28 (上午) - 基础设施噪声量化 & 框架生态动态
+
+**重大更新**：
+
+1. **Anthropic: 基础设施噪声对 AI 编码评估的影响研究**
+   - 📝 来源：[Anthropic - Quantifying infrastructure noise in agentic coding evals](https://www.anthropic.com/engineering/quantifying-infrastructure-noise) (Mar 28, 2026)
+   - ⚠️ 关键发现：基础设施配置可使 AI 编码基准测试波动几个百分点
+   - 💡 技术建议：指定资源的 guaranteed allocation 和 hard kill threshold
+   - 🎯 实证数据：3x ceiling 可将错误率从 5.8% 降到 2.1%
+   - 🔍 排名榜启示：差距 < 3% 需要质疑配置一致性
+
+2. **Anthropic: 长时应用开发的 Harness 设计模式**
+   - 📝 来源：[Anthropic - Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps) (Mar 24, 2026)
+   - 🎯 核心挑战：解决 Context Anxiety（上下文焦虑）和 Self-Evaluation Bias（自评偏差）
+   - 💡 三 Agent 架构：Planner → Generator → Evaluator（借鉴 GAN 设计模式）
+   - 🔑 创新组件：Initializer Agent + Coding Agent 双模式协作
+
+3. **Termdock: AI Agent 工作流全栈指南**
+   - 📝 来源：[Termdock - AI Agent Workflow Guide 2026](https://www.termdock.com/en/blog/ai-agent-workflow-guide-2026)
+   - 🎯 核心价值：从聊天到终端自动化的完整工作流重构
+   - 💡 实践要点：
+     - Daily Standup 自动化报告生成
+     - 多 Agent 并行代码审查系统
+     - MCP 服务器集成最佳实践
+     - 结构化 Prompt 工程方法论
+   - 📚 适用场景：构建可重复、可版本控制的企业级 AI 系统
+
+4. **热门 Agent Harness 框架动态（2026-03-28）**
+   - [obra/superpowers](https://github.com/obra/superpowers) - **118,831** ⭐ (+3,151) 🚀 - Agentic Skills 框架
+     - 📈 最新更新：技能插件自动注册系统、Codex 工具集成增强
+   - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) - **50,324** ⭐ (+2,023) 🚀 - 字节跳动 SuperAgent Harness
+     - 📈 最新更新：better-auth 服务助手、CI 工作流优化、跨语言文档同步
+   - [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) - **42,604** ⭐ (+172) - AI 驱动开发方法论
+     - 📈 最新更新：插件市场重构、.claude-plugin 元数据支持
+   - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) - **47,380** ⭐ (+78) - 多 Agent 协作框架
+   - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) - **27,702** ⭐ (+115) - 图结构 Agent 构建
+   - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) - **20,361** ⭐ (+21) - OpenAI 官方 Agent SDK
+   - [google/adk-python](https://github.com/google/adk-python) - **18,628** ⭐ (+19) - Google Agent 开发工具包
+
+5. **Context Engineering 最佳实践新进展**
+   - 🎯 核心原则："Give Codex a map, not a 1,000-page instruction manual"
+   - 📋 文档策略：AGENTS.md 作为目录，docs/ 目录存放结构化知识
+   - 🔧 机械强制：CI 任务验证文档新鲜度和交叉链接完整性
+   - 💡 实践模式：CLAUDE.md + AGENTS.md 分层架构设计
+
+**关键洞察**：
+- 🚀 **生态爆发期**：Superpowers 突破 118K stars，DeerFlow 接近 50K stars，生态增长显著
+- 🔧 **基础设施重要性**：配置一致性对 AI Agent 性能评估的关键影响被量化确认
+- 🏗️ **架构演进**：三 Agent 架构（Planner-Generator-Evaluator）成为长时任务标准模式
+- 🔌 **标准化进程**：MCP 集成、插件系统、元数据规范推动生态标准化
+- 📊 **工程化成熟**：从概念验证转向生产就绪的工程化解决方案
 
 ---
 

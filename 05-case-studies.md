@@ -299,4 +299,36 @@ quality_gates:
 
 ---
 
-*更新时间：2026-03-25*
+*更新时间：2026-03-28*
+
+---
+
+## 2026-03-28 补充：行业理论与实战新洞察
+
+### Deloitte 2026 技术预测要点
+- 德勤明确将 **AI Agent 编排** 列为关键解锁
+- 工作流模块化 + Agent 驱动 = 指数级价值释放
+- 2026 年 AI agent 将横跨多种编程语言、框架、基础设施和通信协议扩散
+
+### Harness Engineering 理论体系成型
+- **核心定义（Agent Engineering）**：设计约束、工具、反馈循环、文档和验证系统的学科
+- **Epsilla 核心论点**："Agents aren't hard; the Harness is hard." — 约束解空间反而提升可靠性
+- **历史脉络**：2025 Mitchell Hashimoto 提出 → 2026 OpenAI 内部实验正式化
+- **解决痛点**：纯上下文工程在长时任务中仍会漂移、积累"熵"
+
+### 多 Agent 框架选型参考（2026 最新）
+| 框架 | 核心优势 | 最佳场景 |
+|------|---------|---------|
+| OpenAI Agents SDK | 轻量、快速迭代 | OpenAI 生态项目 |
+| LangGraph | 图结构工作流 | 复杂状态机 |
+| CrewAI | 角色扮演协作 | 模拟团队协作 |
+| AutoGen/AG2 | 对话式编排 | 多轮对话 |
+| Google ADK | 代码优先、双版本 | Google Cloud 集成 |
+| Claude Agent SDK | Anthropic 原生 | Claude 模型场景 |
+
+### 安全修复趋势（2026-03-28）
+- **CrewAI**: defusedxml 替换 xml.etree.ElementTree 防 XXE 攻击
+- **LangGraph**: cryptography 升级 + 威胁模型文档
+- **Google ADK**: MCP 认证缺失问题暴露
+- **OpenAI Agents SDK**: 流式 guardrail 修复
+- 📌 **启示**：Agent 框架安全成熟度快速提升，企业采用前应关注安全更新频率

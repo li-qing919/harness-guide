@@ -293,24 +293,58 @@ async function verifyUI() {
 
 ---
 
-## 2026-03-26 更新：热门 Agent Harness 框架
+## 2026-03-28 更新：热门 Agent Harness 框架（最新数据）
 
-### 顶级框架（按 Star 数排序，2026-03-26 数据）
+### 🚀 顶级框架（按 Star 数排序，2026-03-28 实时数据）
 
-| 框架 | Stars | 日增长 | 特点 | 适用场景 |
-|------|-------|--------|------|---------|
-| [superpowers](https://github.com/obra/superpowers) | 112,651 | +614 | Agentic Skills 框架 | 所有 AI 编程助手 |
-| [everything-claude-code](https://github.com/affaan-m/everything-claude-code) | 108,007 | - | Agent Harness 性能优化 | Claude Code/Codex/Cursor |
-| [lobehub](https://github.com/lobehub/lobehub) | 74,313 | - | 多 Agent 协作平台 | 团队协作 |
-| [oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent) | 43,481 | - | 最佳 Agent Harness | OpenCode 用户 |
-| [crewAI](https://github.com/crewAIInc/crewAI) | 47,212 | +121 | 多 Agent 协作 | 角色扮演场景 |
-| [deer-flow](https://github.com/bytedance/deer-flow) | 46,171 | +171 | 字节 SuperAgent | 长时任务研究 |
-| [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | 42,261 | +261 | AI 驱动开发方法论 | 敏捷开发 |
-| [learn-claude-code](https://github.com/shareAI-lab/learn-claude-code) | 38,763 | - | 纳米 Claude Code 实现 | 学习 Agent Harness |
-| [langgraph](https://github.com/langchain-ai/langgraph) | 27,475 | +475 | 图结构 Agent | 复杂工作流 |
-| [deepagents](https://github.com/langchain-ai/deepagents) | 17,483 | - | LangChain Harness | 计划+文件系统+子代理 |
-| [openai-agents-python](https://github.com/openai/openai-agents-python) | 20,310 | +310 | OpenAI 官方 SDK | OpenAI 生态 |
-| [adk-python](https://github.com/google/adk-python) | 18,594 | +594 | Google Agent 工具包 | Google 生态 |
+| 框架 | Stars | 日增长 | 总增长 | 特点 | 适用场景 |
+|------|-------|--------|--------|------|---------|
+| [superpowers](https://github.com/obra/superpowers) | **118,831** | **+3,151** | +6K+ | Agentic Skills 框架 | 所有 AI 编程助手 |
+| [deer-flow](https://github.com/bytedance/deer-flow) | **50,324** | **+2,023** | +4K+ | 字节 SuperAgent | 长时任务研究 |
+| [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | **42,604** | **+172** | +500+ | AI 驱动开发方法论 | 敏捷开发 |
+| [crewAI](https://github.com/crewAIInc/crewAI) | **47,380** | **+78** | +300+ | 多 Agent 协作 | 角色扮演场景 |
+| [langgraph](https://github.com/langchain-ai/langgraph) | **27,702** | **+115** | +1K+ | 图结构 Agent | 复杂工作流 |
+| [openai-agents-python](https://github.com/openai/openai-agents-python) | **20,361** | **+21** | +100+ | OpenAI 官方 SDK | OpenAI 生态 |
+| [adk-python](https://github.com/google/adk-python) | **18,628** | **+19** | +100+ | Google Agent 工具包 | Google 生态 |
+
+### 🎯 2026年框架发展趋势分析
+
+#### 1. 生态爆发期
+- **Superpowers** 突破 118K stars，单周增长 3K+
+- **DeerFlow** 接近 50K，字节跳动背书增长强劲
+- **BMAD-METHOD** 稳步增长，方法论日趋成熟
+
+#### 2. 架构演进方向
+- **三 Agent 架构**：Planner → Generator → Evaluator（Anthropic 模式）
+- **插件化生态**：自动注册、跨语言支持、版本管理
+- **基础设施标准化**：配置一致性、资源分配策略
+
+#### 3. 企业级特性增强
+- **生产环境验证**：字节跳动、Google 等大厂实践
+- **安全隔离**：沙箱、权限、资源限制完善
+- **运维工具**：监控、日志、故障恢复机制
+
+#### 4. 标准化进程
+- **MCP 集成**：Model Context Protocol 成为标准
+- **插件市场**：中心化技能分发平台
+- **元数据标准**：.claude-plugin 等规范兴起
+
+### 🔥 本周重点关注
+
+#### Superpowers 最新动态：
+- **Codex 工具集成增强**：更好的 OpenCode 生态支持
+- **插件自动注册**：简化插件部署和发现
+- **企业级功能**：完整的监控和管理工具
+
+#### DeerFlow 最新更新：
+- **better-auth 服务助手**：身份验证集成
+- **CI 工作流优化**：持续集成改进
+- **跨语言文档同步**：多语言支持增强
+
+#### BMAD-METHOD 进展：
+- **市场重构**：插件市场平台化
+- **元数据标准**：.claude-plugin 兼容层
+- **工程化工具**：从概念到生产的完整流程
 
 ### 新兴 Harness 项目
 
@@ -335,4 +369,35 @@ async function verifyUI() {
 
 ---
 
-*更新时间：2026-03-26*
+*更新时间：2026-03-28*
+
+---
+
+## 2026-03-28 框架版本迭代速报
+
+### LangGraph (27,711 ⭐)
+- `langgraph==1.1.3` (2026-03-18) — 最新稳定版
+- `langgraph-cli==0.4.19` (2026-03-20)
+- `langgraph-sdk==0.3.12` (2026-03-18)
+- 安全修复：cryptography 升级至 46.0.6
+- 新增仓库威胁模型文档
+
+### CrewAI (47,387 ⭐)
+- `1.13.0rc1` (2026-03-27) — 即将发布的 1.13 正式版
+- 重要安全修复：XXE 攻击防护（defusedxml 替换）
+- 循环检测 off-by-one 修复
+- Bedrock Converse API 工具参数丢失修复
+
+### OpenAI Agents SDK (20,361 ⭐)
+- `v0.13.2` (2026-03-26) — 快速迭代中
+- 已知问题：base64 文件输入导致 prompt caching 降至 0%
+- 功能请求：增强运行生命周期管理（中断和更新活跃运行）
+
+### Google ADK (18,629 ⭐)
+- `v2.0.0a2` (alpha, 2026-03-27) — v2 大版本预览
+- `v1.28.0` (stable, 2026-03-26) — 当前推荐版本
+- 已知问题：MCP 缺少消息级认证；多 agent 启动变慢
+
+### DeerFlow (50,454 ⭐)
+- 首次突破 50K stars 🎉
+- 活跃 issue：MCP filesystem 路径可见但不可用、Memory 管理功能请求
