@@ -142,6 +142,38 @@ IDLE → INITIALIZING → RUNNING → PAUSED → STOPPED
 
 ---
 
+## OpenAI 官方 Harness Engineering 核心概念（2026-03-29 更新）
+
+**来源**：[OpenAI Blog - Harness Engineering](https://openai.com/index/harness-engineering/)
+
+OpenAI 正式发布 Harness Engineering 方法论，定义了以下核心概念：
+
+### Agent Legibility（Agent 可读性）
+- 确保代码、文档和配置对 AI Agent 可读、可理解
+- 结构化文档 > 自然语言描述 > 无文档
+- Agent 能自主导航代码库的前提条件
+
+### Repository Knowledge as System of Record
+- 代码仓库作为唯一知识来源
+- AGENTS.md 作为入口目录（非百科全书）
+- 文档与代码同版本管理，CI 验证新鲜度
+
+### Execution Plans（执行计划）
+- 将复杂任务分解为结构化执行步骤
+- 人类审核计划 → Agent 按计划执行
+- 支持计划的中断、恢复和重定向
+
+### Martin Fowler 背书
+- Martin Fowler 公开点赞 Harness Engineering 理念
+- 标志着该方法论获得软件工程界权威认可
+
+### 工程师角色转变
+- **从**：代码编写者
+- **到**：环境设计者（Environment Designer）
+- Codex Agent 在空仓库上自主完成代码生成、Bug 修复、测试和可观测性任务
+
+---
+
 ## 2026年新架构趋势
 
 ### 1. 三 Agent 架构模式（Planner-Generator-Evaluator）
@@ -305,4 +337,4 @@ handoff_artifact:
 
 ---
 
-*更新时间：2026-03-26*
+*更新时间：2026-03-29*

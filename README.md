@@ -97,6 +97,61 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-03-29 - OpenAI 官方方法论发布 & Context Engineering 标准化
+
+**重大更新**：
+
+1. **OpenAI 正式发布 Harness Engineering 方法论**
+   - 📝 来源：[OpenAI Blog - Harness Engineering](https://openai.com/index/harness-engineering/)
+   - 🎯 新增核心概念：Agent Legibility、Repository Knowledge as System of Record、Execution Plans
+   - 👤 Martin Fowler 公开背书
+   - 💡 工程师角色从代码编写者转变为环境设计者
+
+2. **Anthropic Context Engineering 官方最佳实践**
+   - 📝 来源：[Anthropic - Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
+   - 🔑 五大上下文来源管理：System Instructions、Tool Definitions、MCP、External Data、Message History
+   - 💡 关键策略：Tool Result Clearing、Compaction、Progressive Disclosure
+   - 🆕 Memory Tool 公测版发布
+
+3. **Context Engineering 六大核心技术实战版**
+   - 📝 来源：[Context Engineering 6 Techniques](https://pub.towardsai.net/context-engineering-the-6-techniques-that-actually-matter-in-2026-90bb0272ae85)
+   - 🎯 技术矩阵：Progressive Disclosure / Compression / Routing / Evolved Retrieval / Tool Management / Evaluation
+   - 💡 分层架构：Entry Control → Runtime Management → Knowledge Layer → Feedback Loop
+
+4. **MCP 成为 Agent-Tool 连接标准**
+   - 📝 来源：[State of Context Engineering in 2026](https://medium.com/@kushalbanda/state-of-context-engineering-in-2026-cf92d010eab1)
+   - 🎯 MCP 被 Anthropic、OpenAI、Google 等主要厂商采纳
+   - ⚠️ 核心挑战：累积 Action History 挤占 System Instructions 和 Tool Definitions 空间
+
+5. **主流媒体关注 Harness Engineering**
+   - 📝 来源：[Chosun - Korea Daily](https://www.chosun.com/english/industry-en/2026/03/26/QEFHIB7ANJFC5A77U3ITLMGHQY/)
+   - 📝 来源：[NXCode Complete Guide](https://www.nxcode.io/resources/news/harness-engineering-complete-guide-ai-agent-codex-2026)
+   - 🎯 Harness Engineering 获得韩国主流媒体报道，概念走向大众
+
+6. **热门框架动态（2026-03-29 数据）**
+   - [obra/superpowers](https://github.com/obra/superpowers) - **120,748** ⭐ 🚀 - Inline Self-Review 替代 Subagent Review Loops，执行时间减少 25 分钟
+   - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) - **51,257** ⭐ 🚀 - 突破 51K！lead_agent Channel Assistant ID 支持
+   - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) - **47,428** ⭐ - v1.13.0rc1
+   - [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) - **42,712** ⭐ - v6.2.2 依赖图重构
+   - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) - **27,782** ⭐ - CLI v0.4.19
+   - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) - **20,375** ⭐ - v0.13.2
+   - [google/adk-python](https://github.com/google/adk-python) - **18,643** ⭐ - v2.0.0-alpha.2
+
+**更新文件**：
+- `01-architecture.md` — 新增 OpenAI 官方 Harness Engineering 核心概念章节
+- `02-tools.md` — 更新框架 star 数据和版本迭代速报
+- `04-best-practices.md` — 新增 Context Engineering 官方最佳实践、六大核心技术、MCP 标准化
+- `05-case-studies.md` — 新增主流媒体关注和框架里程碑分析
+
+**关键洞察**：
+- 🏛️ **方法论官方化**：OpenAI 正式发布 Harness Engineering 方法论，Martin Fowler 背书
+- 📐 **Context Engineering 标准化**：Anthropic 发布官方指南，六大核心技术框架成型
+- 🔌 **MCP 标准确立**：Model Context Protocol 成为 Agent-Tool 连接的事实标准
+- 📰 **主流媒体关注**：Harness Engineering 从技术圈走向大众视野
+- 🚀 **Superpowers 里程碑**：突破 120K stars，Self-Review 模式革新减少编排开销
+
+---
+
 ### 2026-03-28 (下午) - 理论体系深化 & 框架版本迭代
 
 **重大更新**：

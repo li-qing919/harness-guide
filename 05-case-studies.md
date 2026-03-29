@@ -299,7 +299,7 @@ quality_gates:
 
 ---
 
-*更新时间：2026-03-28*
+*更新时间：2026-03-29*
 
 ---
 
@@ -332,3 +332,23 @@ quality_gates:
 - **Google ADK**: MCP 认证缺失问题暴露
 - **OpenAI Agents SDK**: 流式 guardrail 修复
 - 📌 **启示**：Agent 框架安全成熟度快速提升，企业采用前应关注安全更新频率
+
+---
+
+## 2026-03-29 补充：Harness Engineering 主流化 & Context Engineering 标准化
+
+### Harness Engineering 获得主流媒体关注
+- **朝鲜日报（Chosun）** 英文版报道：Harness Engineering 成为 AI 编码时代人类开发者新角色
+- **NXCode 完整指南**：详细阐述 Harness Engineering 包含但不限于 Context Engineering 和 Prompt Engineering
+- **核心要点**：Harness Engineering 运作在更高层面——关注让 Agent 可靠的完整系统：约束条件、反馈循环、文档化和生命周期管理
+
+### Superpowers v5.0.6 里程碑
+- **Inline Self-Review 替代 Subagent Review Loops**
+- 执行时间减少约 25 分钟而不降低质量
+- 📌 **启示**：Review 机制正在从"多 Agent 评审"转向"单 Agent 自审"，减少编排开销
+
+### DeerFlow 51K+ stars 里程碑
+- 字节跳动 DeerFlow 持续增长突破 51K
+- lead_agent 支持自定义 Channel Assistant ID
+- 修复 MemoryMiddleware 和 task_tool 中 thread_id 回调逻辑
+- 📌 **启示**：长周期 SuperAgent 框架在生产环境中的记忆管理仍是关键挑战

@@ -649,4 +649,141 @@ harness_as_benchmark:
 
 ---
 
-*更新时间：2026-03-26*
+## 14. Anthropic Context Engineering 官方最佳实践（2026-03-29 更新）
+
+**来源**：[Anthropic - Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
+
+### 全上下文状态管理
+
+Anthropic 官方发布 Context Engineering 完整指南，覆盖五大上下文来源：
+
+```
+┌──────────────────────────────────────────────┐
+│            Full Context State                │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  │
+│  │  System  │  │   Tool   │  │   MCP    │  │
+│  │Instructions│  │Definitions│  │ Servers │  │
+│  └──────────┘  └──────────┘  └──────────┘  │
+│  ┌──────────┐  ┌──────────────────────────┐ │
+│  │ External │  │    Message History       │ │
+│  │   Data   │  │  (累积增长的主要来源)      │ │
+│  └──────────┘  └──────────────────────────┘ │
+└──────────────────────────────────────────────┘
+```
+
+### 关键策略
+
+#### Tool Result Clearing（工具结果清除）
+- Agent 执行工具后，大体积结果应及时清理
+- 防止历史消息挤占 System Instructions 和工具定义空间
+
+#### Context Compaction（上下文压缩）
+- 定期压缩累积的对话历史
+- 保留关键决策和状态信息
+- 丢弃已处理的中间结果
+
+#### Progressive Disclosure（渐进式信息加载）
+- 按需加载，而非一次性注入全部上下文
+- AGENTS.md → docs/ → 具体文件，层层递进
+
+#### Memory Tool（记忆工具公测版）
+- Claude Developer Platform 发布 Memory Tool 公测版
+- 支持通过文件系统在上下文窗口外存储和查询信息
+- 解决长任务中上下文窗口限制问题
+
+---
+
+## 15. Context Engineering 六大核心技术（2026-03-29 更新）
+
+**来源**：[Context Engineering: The 6 Techniques That Actually Matter in 2026](https://pub.towardsai.net/context-engineering-the-6-techniques-that-actually-matter-in-2026-90bb0272ae85)
+
+### 技术矩阵
+
+| 技术 | 核心目标 | 实施方式 |
+|------|---------|---------|
+| **Progressive Disclosure** | 控制何时加载什么 | 分层加载：AGENTS.md → docs/ → 具体文件 |
+| **Compression** | 压缩累积历史 | 摘要生成、关键信息提取、丢弃冗余 |
+| **Routing** | 查询路由到正确来源 | 意图识别 → 选择正确的知识库/工具 |
+| **Evolved Retrieval** | 进化式检索 | 向量检索 + 关键词混合、自适应排序 |
+| **Tool Management** | 工具能力面控制 | 按需激活/隐藏工具、减少干扰 |
+| **Evaluation** | 评估机制 | 自动评分、A/B 测试、反馈循环 |
+
+### 生产环境组合策略
+
+```
+┌──────────────────────────────────────────────────┐
+│                  Evaluation Layer                 │
+│         (衡量整体效果，驱动优化循环)                 │
+├──────────────────────────────────────────────────┤
+│                 Retrieval Layer                   │
+│        (按需加载外部知识和历史经验)                  │
+├──────────────────────────────────────────────────┤
+│            Runtime Management Layer               │
+│     Routing + Compression 管理运行时上下文          │
+├──────────────────────────────────────────────────┤
+│              Entry Control Layer                  │
+│    Progressive Disclosure + Tool Management       │
+│          控制信息入口和工具可见性                     │
+└──────────────────────────────────────────────────┘
+```
+
+### 实践建议
+
+1. **分层组合使用**：单一技术不足以覆盖所有场景
+2. **优先投入 Entry Control**：从 Progressive Disclosure 和 Tool Management 开始
+3. **Evaluation 驱动优化**：建立量化指标，持续迭代
+4. **避免过度设计**：按需添加，不是一次性实现全部
+
+---
+
+## 16. MCP 成为 Agent-Tool 连接标准（2026-03-29 更新）
+
+**来源**：[State of Context Engineering in 2026](https://medium.com/@kushalbanda/state-of-context-engineering-in-2026-cf92d010eab1)
+
+### MCP（Model Context Protocol）现状
+
+- MCP 已成为连接 AI Agent 和外部工具的标准协议
+- 被 Anthropic、OpenAI、Google 等主要 AI 厂商采纳
+- 提供统一的工具发现、调用和结果返回机制
+
+### 核心挑战：Action History 膨胀
+
+```
+上下文窗口分配：
+
+理想状态：              实际情况：
+┌───────────────┐      ┌───────────────┐
+│ System Inst.  │ 30%  │ System Inst.  │ 10% ← 被挤压
+├───────────────┤      ├───────────────┤
+│ Tool Defs     │ 25%  │ Tool Defs     │ 8%  ← 被挤压
+├───────────────┤      ├───────────────┤
+│ Working Mem   │ 25%  │               │     │
+├───────────────┤      │ Action History│ 82% ← 膨胀！
+│ Action History│ 20%  │               │     │
+└───────────────┘      └───────────────┘
+```
+
+### 推荐架构
+
+```yaml
+context_architecture:
+  entry_control:
+    - progressive_disclosure  # 渐进式披露
+    - tool_management         # 工具面控制
+    
+  runtime_management:
+    - routing                 # 查询路由
+    - compression             # 历史压缩
+    
+  knowledge_layer:
+    - retrieval               # 按需检索
+    - external_data           # 外部数据源
+    
+  feedback_loop:
+    - evaluation              # 效果评估
+    - optimization            # 持续优化
+```
+
+---
+
+*更新时间：2026-03-29*

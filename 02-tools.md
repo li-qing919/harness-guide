@@ -295,17 +295,17 @@ async function verifyUI() {
 
 ## 2026-03-28 更新：热门 Agent Harness 框架（最新数据）
 
-### 🚀 顶级框架（按 Star 数排序，2026-03-28 实时数据）
+### 🚀 顶级框架（按 Star 数排序，2026-03-29 实时数据）
 
 | 框架 | Stars | 日增长 | 总增长 | 特点 | 适用场景 |
 |------|-------|--------|--------|------|---------|
-| [superpowers](https://github.com/obra/superpowers) | **118,831** | **+3,151** | +6K+ | Agentic Skills 框架 | 所有 AI 编程助手 |
-| [deer-flow](https://github.com/bytedance/deer-flow) | **50,324** | **+2,023** | +4K+ | 字节 SuperAgent | 长时任务研究 |
-| [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | **42,604** | **+172** | +500+ | AI 驱动开发方法论 | 敏捷开发 |
-| [crewAI](https://github.com/crewAIInc/crewAI) | **47,380** | **+78** | +300+ | 多 Agent 协作 | 角色扮演场景 |
-| [langgraph](https://github.com/langchain-ai/langgraph) | **27,702** | **+115** | +1K+ | 图结构 Agent | 复杂工作流 |
-| [openai-agents-python](https://github.com/openai/openai-agents-python) | **20,361** | **+21** | +100+ | OpenAI 官方 SDK | OpenAI 生态 |
-| [adk-python](https://github.com/google/adk-python) | **18,628** | **+19** | +100+ | Google Agent 工具包 | Google 生态 |
+| [superpowers](https://github.com/obra/superpowers) | **120,748** | **+1,917** | +8K+ | Agentic Skills 框架 | 所有 AI 编程助手 |
+| [deer-flow](https://github.com/bytedance/deer-flow) | **51,257** | **+803** | +5K+ | 字节 SuperAgent | 长时任务研究 |
+| [crewAI](https://github.com/crewAIInc/crewAI) | **47,428** | **+48** | +400+ | 多 Agent 协作 | 角色扮演场景 |
+| [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | **42,712** | **+108** | +600+ | AI 驱动开发方法论 | 敏捷开发 |
+| [langgraph](https://github.com/langchain-ai/langgraph) | **27,782** | **+71** | +1.1K+ | 图结构 Agent | 复杂工作流 |
+| [openai-agents-python](https://github.com/openai/openai-agents-python) | **20,375** | **+14** | +100+ | OpenAI 官方 SDK | OpenAI 生态 |
+| [adk-python](https://github.com/google/adk-python) | **18,643** | **+14** | +100+ | Google Agent 工具包 | Google 生态 |
 
 ### 🎯 2026年框架发展趋势分析
 
@@ -369,7 +369,46 @@ async function verifyUI() {
 
 ---
 
-*更新时间：2026-03-28*
+*更新时间：2026-03-29*
+
+---
+
+## 2026-03-29 框架版本迭代速报
+
+### Superpowers (120,748 ⭐)
+- `v5.0.6` (2026-03-25)
+- 🎯 **重大改进**：用 Inline Self-Review 替代 Subagent Review Loops
+- 📊 执行时间减少约 25 分钟，质量不降
+- 目前 star 数最高的 Agent 技能框架和开发方法论项目
+
+### DeerFlow (51,257 ⭐)
+- 持续增长，已超 51K ⭐
+- 🔧 支持通过 lead_agent 自定义 Channel Assistant ID
+- 🐛 修复 MemoryMiddleware 和 task_tool 中 thread_id 回调逻辑
+
+### BMAD-METHOD (42,712 ⭐)
+- `v6.2.2` (2026-03-26)
+- 📋 module-help CSV 现代化为 13 列格式
+- 🔄 使用 `after`/`before` 依赖图替代序列号
+- 🔧 重写 bmad-help 执行逻辑
+
+### LangGraph (27,782 ⭐)
+- `langgraph-cli==0.4.19` (2026-03-20) — 最新
+- 新增 `deploy revisions list` 命令
+- 依赖更新和安全修复
+
+### CrewAI (47,428 ⭐)
+- `v1.13.0rc1` (2026-03-27) — 即将正式发布
+- 继续迭代多 Agent 协作能力
+
+### OpenAI Agents SDK (20,375 ⭐)
+- `v0.13.2` (2026-03-26)
+- 修复 griffelib 依赖和 private tool metadata 泄露问题
+
+### Google ADK (18,643 ⭐)
+- `v2.0.0-alpha.2` (2026-03-27)
+- 新增 Agent 名称验证防止任意模块导入
+- 修复多个 Bug，向 2.0 正式版推进
 
 ---
 
