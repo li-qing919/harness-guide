@@ -786,4 +786,80 @@ context_architecture:
 
 ---
 
-*更新时间：2026-03-29*
+## 17. Context Engineering 六层上下文架构（2026-03-30 更新）
+
+**来源**：[Context Engineering for AI Agents (2025): Practical Guide](https://promptbuilder.cc/blog/context-engineering-agents-guide-2025)
+
+### 六层结构模型
+
+将 Agent 输入视为六层结构——从系统级到任务级：
+
+```
+┌──────────────────────────────────────────┐
+│  Layer 6: Current Task (当前任务)         │
+│  → 用户即时请求                           │
+├──────────────────────────────────────────┤
+│  Layer 5: Conversation History (对话历史) │
+│  → 多轮对话上下文                         │
+├──────────────────────────────────────────┤
+│  Layer 4: Tool Definitions (工具定义)     │
+│  → 可用工具和 API 描述                     │
+├──────────────────────────────────────────┤
+│  Layer 3: Retrieved Documents (检索文档)  │
+│  → RAG / 知识库检索结果                    │
+├──────────────────────────────────────────┤
+│  Layer 2: Long-Term Memory (长期记忆)     │
+│  → 持久化知识和偏好                        │
+├──────────────────────────────────────────┤
+│  Layer 1: System Instructions (系统指令)  │
+│  → 角色、约束、全局规则                    │
+└──────────────────────────────────────────┘
+```
+
+### 效果衡量指标
+
+| 指标 | 说明 | 目标 |
+|------|------|------|
+| 任务成功率 | Agent 是否正确完成任务 | > 90% |
+| 检索精度 | RAG 返回结果的相关性 | > 85% |
+| 工具使用准确率 | 正确选择和调用工具 | > 95% |
+| 用户满意度 | 用户对结果的满意程度 | > 80% |
+
+---
+
+## 18. Context Engineering 系统工程视角（2026-03-30 更新）
+
+**来源**：[Redis Blog - Context Engineering Best Practices](https://redis.io/blog/context-engineering-best-practices-for-an-emerging-discipline/)
+
+### 从 Prompt Engineering 到系统工程
+
+> **Philipp Schmid**："构建有效 AI Agent 的秘诀不在于代码复杂度，而在于提供的上下文质量。"
+
+> **Andrej Karpathy**："LLM 是新操作系统的内核进程。"
+
+> **Lance Martin**："LLM 是 CPU，上下文窗口是 RAM。"
+
+### Memory 层的关键地位
+
+**核心论点**：没有记忆层的 Context Engineering 只是换了个名字的 Prompt Engineering。
+
+```
+Prompt Engineering:
+  输入 → LLM → 输出（无状态）
+
+Context Engineering:
+  输入 + Memory + 检索 + 工具 → LLM → 输出（有状态）
+                                         ↓
+                                    更新 Memory
+```
+
+### 实践要点
+
+1. **上下文质量 > 代码复杂度**：好的 Agent 不需要复杂的代码框架
+2. **Memory 是分水岭**：区分 Context Engineering 和 Prompt Engineering 的关键组件
+3. **RAM 类比**：上下文窗口有限，需要像管理内存一样管理上下文
+4. **OS 类比**：LLM 如同操作系统内核，上下文工程如同系统编程
+
+---
+
+*更新时间：2026-03-30*

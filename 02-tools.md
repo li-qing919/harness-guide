@@ -373,6 +373,59 @@ async function verifyUI() {
 
 ---
 
+## 2026-03-30 框架版本迭代速报
+
+### Superpowers (122,872 ⭐)
+- 已进入 Claude 官方插件市场
+- 🎯 **核心理念**：Agent 先理解需求 → 生成规格 → 分块展示给用户确认 → 制定实施计划 → 子 Agent 驱动开发
+- 支持 Claude Code、Cursor、Codex 和 OpenCode
+- 真正的红/绿 TDD 流程
+
+### DeerFlow (52,492 ⭐)
+- 🔥 **DeerFlow 2.0 已完成全面重写**（与 v1 无代码共享）
+- 定位升级为 **"Super Agent Harness"**
+- 2026-02-28 登顶 GitHub Trending 第一名
+- 新版本集成：sub-agent 编排、记忆管理、沙箱环境和可扩展技能系统
+- 推荐模型：Doubao-Seed-2.0-Code、DeepSeek v3.2 和 Kimi 2.5
+- 🐛 近期修复 artifacts API 存储型 XSS 漏洞（CVE）
+
+### LangGraph (27,869 ⭐)
+- 被多家独立评测评为 **2026 年最佳 AI Agent 框架**
+- 核心特性：持久化执行（Durable Execution）、Human-in-the-loop、综合记忆系统
+- LangSmith 调试集成 + 生产级部署支持
+- 集成 Deep Agents 和 LangChain 生态系统
+
+### CrewAI (47,510 ⭐)
+- 完全独立于 LangChain 的轻量级 Python 框架
+- 支持 **Crews**（自主协作）和 **Flows**（企业级事件驱动架构）两种模式
+- 已获得超过 **10 万开发者认证**
+- 🆕 推出 **AMP Suite 企业套件**：Control Plane、追踪可观测性、统一管理平台、安全合规
+
+### OpenAI Agents SDK (20,402 ⭐)
+- 🆕 **Provider-agnostic**：支持 OpenAI Responses/Chat Completions API 及 **100+ 其他 LLM**
+- 核心功能：Agent as Tools / Handoffs、MCP 工具支持、Guardrails 安全检查
+- Human-in-the-loop、Session 管理和 Realtime Voice Agent 支持
+
+### Google ADK (18,654 ⭐)
+- Code-first Python Agent 工具包，优化 Gemini 但模型无关
+- 🆕 **近期新增**：
+  - 自定义服务注册（Service Registry）
+  - Session Rewind（回滚到之前调用状态）
+  - Vertex AI Code Execution Sandbox 的 CodeExecutor
+  - Agent Config（无代码配置）
+  - Tool Confirmation（HITL 工具确认流）
+
+### BMAD-METHOD (42,823 ⭐)
+- 🆕 **V6 发布**，定位为 AI 驱动的敏捷开发方法论框架
+- 核心特性：
+  - 12+ 专项 Agent（PM、架构师、开发者、UX 等）
+  - **规模-领域自适应**（自动根据项目复杂度调整规划深度）
+  - **Party Mode**（多 Agent 角色协作）
+  - Skills Architecture + Dev Loop Automation
+- 100% 免费开源
+
+---
+
 ## 2026-03-29 框架版本迭代速报
 
 ### Superpowers (120,748 ⭐)

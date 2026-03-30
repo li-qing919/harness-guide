@@ -97,7 +97,70 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
-### 2026-03-29 - OpenAI 官方方法论发布 & Context Engineering 标准化
+### 2026-03-30 - 行业转向确认 & 框架重大迭代
+
+**重大更新**：
+
+1. **Aakash Gupta 热文：2025 Was Agents, 2026 Is Agent Harnesses**
+   - 📝 来源：[Medium - 2025 Was Agents. 2026 Is Agent Harnesses.](https://aakashgupta.medium.com/2025-was-agents-2026-is-agent-harnesses-heres-why-that-changes-everything-073e9877655e)
+   - 🎯 核心论点：Agent 是引擎，Harness 是整车；行业焦点正式从"构建 Agent"转向"构建 Harness"
+   - 💡 分析了对产品管理和技术架构的影响
+
+2. **Context Engineering 六层上下文架构**
+   - 📝 来源：[Context Engineering for AI Agents Guide](https://promptbuilder.cc/blog/context-engineering-agents-guide-2025)
+   - 🎯 六层结构：System Instructions → Long-Term Memory → Retrieved Documents → Tool Definitions → Conversation History → Current Task
+   - 💡 效果衡量指标：任务成功率、检索精度、工具使用准确率、用户满意度
+
+3. **Context Engineering 系统工程视角**
+   - 📝 来源：[Redis Blog - Context Engineering Best Practices](https://redis.io/blog/context-engineering-best-practices-for-an-emerging-discipline/)
+   - 🔑 Karpathy："LLM 是新操作系统的内核进程"
+   - 🔑 Lance Martin："LLM 是 CPU，上下文窗口是 RAM"
+   - 💡 核心论点：没有记忆层的 Context Engineering 只是换了个名字的 Prompt Engineering
+
+4. **DeerFlow 2.0 全面重写**
+   - 📝 来源：[GitHub - bytedance/deer-flow](https://github.com/bytedance/deer-flow)
+   - 🔥 与 v1 无代码共享，定位升级为 "Super Agent Harness"
+   - 🏆 2026-02-28 登顶 GitHub Trending 第一名
+   - 🐛 修复 artifacts API 存储型 XSS 漏洞
+
+5. **Superpowers 进入 Claude 官方插件市场**
+   - 📝 来源：[GitHub - obra/superpowers](https://github.com/obra/superpowers)
+   - ⭐ **122,872** stars，最高 Agent 技能框架
+   - 🎯 真正的红/绿 TDD 流程，支持 Claude Code、Cursor、Codex、OpenCode
+
+6. **LangGraph 获评 2026 最佳 AI Agent 框架**
+   - 📝 来源：多家独立评测
+   - 🎯 持久化执行 + 综合记忆系统 + LangSmith 集成
+
+7. **CrewAI AMP Suite 企业套件发布**
+   - 🆕 Control Plane、追踪可观测性、统一管理平台、安全合规
+   - 超 10 万开发者认证
+
+8. **Google ADK 新特性**
+   - 🆕 Session Rewind、Service Registry、Agent Config（无代码配置）、Tool Confirmation（HITL）
+
+9. **热门框架动态（2026-03-30 数据）**
+   - [obra/superpowers](https://github.com/obra/superpowers) - **122,872** ⭐ 🚀 - 进入 Claude 官方市场
+   - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) - **52,492** ⭐ 🚀 - 2.0 全面重写
+   - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) - **47,510** ⭐ - AMP Suite 企业套件
+   - [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) - **42,823** ⭐ - V6 发布
+   - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) - **27,869** ⭐ - 2026 最佳框架
+   - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) - **20,402** ⭐ - 100+ LLM 支持
+   - [google/adk-python](https://github.com/google/adk-python) - **18,654** ⭐ - Session Rewind 等新特性
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-03-30 框架版本迭代速报（全部 star 数据更新 + 新特性）
+- `04-best-practices.md` — 新增六层上下文架构、系统工程视角（Karpathy/Lance Martin 类比）
+- `05-case-studies.md` — 新增行业转向分析、DeerFlow 2.0 重写、Superpowers 里程碑
+
+**关键洞察**：
+- 🔄 **行业转向确认**：从"构建 Agent"到"构建 Harness"成为广泛共识
+- 🏗️ **DeerFlow 2.0 重写**：Super Agent Harness 从实验框架走向生产平台
+- 📐 **Context Engineering 理论深化**：Karpathy/Lance Martin 等权威类比推动概念普及
+- 🚀 **Superpowers 里程碑**：进入 Claude 官方市场，标准化技能分发渠道形成
+- 📊 **框架生态持续增长**：Superpowers 122K+、DeerFlow 52K+、BMAD V6 发布
+
+---
 
 **重大更新**：
 

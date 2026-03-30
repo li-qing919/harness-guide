@@ -299,7 +299,7 @@ quality_gates:
 
 ---
 
-*更新时间：2026-03-29*
+*更新时间：2026-03-30*
 
 ---
 
@@ -352,3 +352,29 @@ quality_gates:
 - lead_agent 支持自定义 Channel Assistant ID
 - 修复 MemoryMiddleware 和 task_tool 中 thread_id 回调逻辑
 - 📌 **启示**：长周期 SuperAgent 框架在生产环境中的记忆管理仍是关键挑战
+
+---
+
+## 2026-03-30 补充：Harness Engineering 行业转向 & 框架重大迭代
+
+### 行业焦点从 Agent 转向 Harness
+- **Aakash Gupta (Medium 热文)**：["2025 Was Agents. 2026 Is Agent Harnesses."](https://aakashgupta.medium.com/2025-was-agents-2026-is-agent-harnesses-heres-why-that-changes-everything-073e9877655e)
+- 核心论点：Agent 本身是引擎，Harness 是整车——决定了 Agent 能否在生产环境中稳定交付
+- 📌 **启示**：行业共识加速形成，Harness Engineering 对产品管理和技术架构的影响日益显著
+
+### DeerFlow 2.0 全面重写
+- 字节跳动 DeerFlow 2.0 已完成全面重写，与 v1 无代码共享
+- 定位从 Agent 框架升级为 **"Super Agent Harness"**
+- 2026-02-28 登顶 GitHub Trending 第一名
+- 修复了 artifacts API 存储型 XSS 漏洞（CVE）
+- 📌 **启示**：Super Agent Harness 正在从实验性框架走向生产级平台
+
+### Superpowers 进入 Claude 官方市场
+- 122,872 ⭐，目前 star 数最高的 Agent 技能框架
+- 真正的红/绿 TDD 流程：Agent 理解需求 → 生成规格 → 用户确认 → 实施计划 → 子 Agent 开发
+- 📌 **启示**：AI 编程助手市场正在形成标准化技能分发渠道
+
+### LangGraph 获评 2026 最佳框架
+- 多家独立评测将 LangGraph 评为 2026 年最佳 AI Agent 框架
+- 核心优势：持久化执行（Durable Execution）+ 综合记忆系统
+- 📌 **启示**：生产级部署能力成为框架竞争的关键差异点
