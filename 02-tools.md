@@ -493,3 +493,51 @@ async function verifyUI() {
 ### DeerFlow (50,454 ⭐)
 - 首次突破 50K stars 🎉
 - 活跃 issue：MCP filesystem 路径可见但不可用、Memory 管理功能请求
+
+---
+
+## 2026-03-31 框架版本迭代速报
+
+### Superpowers (125,616 ⭐)
+- ⭐ 突破 **125K** stars 里程碑
+- `v5.0.6` (2026-03-25)
+- 内联 self-review 和 brainstorm server 重构
+- 修复跨平台 owner-PID 生命周期监控
+- 修复 owner 以不同用户运行时的误报问题
+
+### DeerFlow (54,031 ⭐)
+- ⭐ 持续增长突破 **54K**
+- 修复前端 agent 检查路由至 gateway (#1572)
+- 优化 Docker 构建使用镜像加速 (#1600)
+- 修复开发环境 venv 同步问题 (#1626)
+
+### LangGraph (27,963 ⭐)
+- 持续依赖更新（pygments 2.19.2 → 2.20.0）
+- 涉及 checkpoint-postgres、sdk-py、checkpoint-sqlite 等多个子模块
+- `cli==0.4.19` (2026-03-20)
+
+### CrewAI (47,617 ⭐)
+- `v1.13.0rc1` (2026-03-27) — 即将正式发布
+- 重构类型注解（用普通 type 替代 InstanceOf[T]）
+- 移除未使用的第三方 LLM 目录
+- 将 LLM 类转换为 Pydantic BaseModel
+- 大规模代码重构为 1.13 稳定版做准备
+
+### OpenAI Agents SDK (20,426 ⭐)
+- `v0.13.2` (2026-03-26)
+- 修复 server conversation tracker 中过期的 hydrated input ID (#2800)
+- 修复 chat completions 输入对 raw image_url 内容的兼容性 (#2799)
+- 新增 Codex Stop hook 用于针对性 Ruff 整理 (#2795)
+
+### Google ADK (18,672 ⭐)
+- `v2.0.0a2` (2026-03-27) — Alpha
+- 🔥 **重大更新**：ADK 2.0 Alpha 引入确定性工作流和图式编排
+- 新增 LocalEnvironment 用于本地命令执行和文件 I/O
+- 新增 EnvironmentToolset 支持
+- 支持 A2A 协议和 MCP 集成
+
+### BMAD-METHOD (42,981 ⭐)
+- `v6.2.2` (2026-03-26)
+- 新增法语翻译输出路径解析文档 (#2140)
+- quick-dev 模式 one-shot 路由生成 spec trace 文件 (#2121)
+- 修复 party-mode 下 solo 模式响应展示 (#2164)

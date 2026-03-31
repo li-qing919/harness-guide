@@ -378,3 +378,35 @@ quality_gates:
 - 多家独立评测将 LangGraph 评为 2026 年最佳 AI Agent 框架
 - 核心优势：持久化执行（Durable Execution）+ 综合记忆系统
 - 📌 **启示**：生产级部署能力成为框架竞争的关键差异点
+
+---
+
+## 2026-03-31 补充：Martin Fowler 深度点评 & 框架生态持续增长
+
+### Martin Fowler 对 Harness Engineering 的深入点评
+- 📝 来源：[Martin Fowler - Exploring Gen AI: Harness Engineering](https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html)
+- 🎯 探讨了自定义 lint 规则、结构性测试、基础上下文和知识文档等是否将成为新一代服务模板
+- 💡 提出代码库设计模式的"Harness 化"是否会成为新的抽象层
+- 📌 **启示**：Martin Fowler 的持续关注表明 Harness Engineering 正在从前沿实践走向软件工程主流方法论
+
+### Phil Schmid：Context Engineering 是新技能，不是 Prompting
+- 📝 来源：[Phil Schmid - Context Engineering](https://www.philschmid.de/context-engineering)
+- 🎯 核心论点：Context Engineering 是设计和构建动态系统的学科——在正确的时间、以正确的格式、为 LLM 提供正确信息和工具
+- 💡 Context 不只是单一 prompt，而包括对话历史、工具定义、检索文档、用户画像和系统指令的完整数据环境
+- 📌 **启示**：Context Engineering 正在从"高级 Prompting 技巧"重新定义为独立的系统工程学科
+
+### 框架生态持续增长（2026-03-31 数据）
+- [obra/superpowers](https://github.com/obra/superpowers) — **125,616** ⭐ 🚀（+2,744）— 突破 125K
+- [bytedance/deer-flow](https://github.com/bytedance/deer-flow) — **54,031** ⭐ 🚀（+1,539）— 突破 54K
+- [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) — **47,617** ⭐（+107）
+- [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) — **42,981** ⭐（+158）
+- [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) — **27,963** ⭐（+94）
+- [openai/openai-agents-python](https://github.com/openai/openai-agents-python) — **20,426** ⭐（+24）
+- [google/adk-python](https://github.com/google/adk-python) — **18,672** ⭐（+18）— ADK 2.0 Alpha 重大更新
+
+### Google ADK 2.0 Alpha 亮点
+- 🔥 引入**确定性工作流和图式编排**
+- 新增 **LocalEnvironment** 用于本地命令执行和文件 I/O
+- 新增 **EnvironmentToolset** 支持
+- 支持 **A2A 协议**和 **MCP 集成**
+- 📌 **启示**：Google ADK 正在从轻量 SDK 演进为完整的 Agent 编排平台

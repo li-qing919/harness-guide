@@ -862,4 +862,25 @@ Context Engineering:
 
 ---
 
-*更新时间：2026-03-30*
+## 19. Context Engineering 防止"上下文腐烂"（2026-03-31 更新）
+
+**来源**：[Context Engineering for AI Agents: 2026 Developer Guide (Fast.io)](https://fast.io/resources/context-engineering-ai-agents/)
+
+### Context Rot（上下文腐烂）
+
+> 对话过长导致模型丢失主要目标的问题——"context rot"是长时任务 Agent 最大的敌人。
+
+### 实践建议
+
+1. **预算化上下文窗口**：为不同类型内容分配固定的 token 预算比例
+2. **压缩历史对话**：定期生成摘要，丢弃已处理的中间结果
+3. **使用标准协议**（如 MCP）：确保工具上下文始终格式正确
+4. **Task-Agent 模式**：选取最重要文件和关键对话轮次构建高密度上下文
+
+### 核心洞察
+
+> Context Engineering 不是单一技术，而是**防止信息退化的系统设计**。每一步操作都在消耗上下文预算，需要像管理财务预算一样管理上下文空间。
+
+---
+
+*更新时间：2026-03-31*

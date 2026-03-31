@@ -97,6 +97,53 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-03-31 - Martin Fowler 深度点评 & 框架生态持续增长
+
+**更新**：
+
+1. **Martin Fowler 深度点评 Harness Engineering**
+   - 📝 来源：[Martin Fowler - Exploring Gen AI: Harness Engineering](https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html)
+   - 🎯 探讨自定义 lint 规则、结构性测试、知识文档是否成为新一代服务模板
+   - 💡 提出代码库设计模式的"Harness 化"是否会成为新的抽象层
+
+2. **Phil Schmid：Context Engineering 是独立学科，不是 Prompting**
+   - 📝 来源：[Phil Schmid - Context Engineering](https://www.philschmid.de/context-engineering)
+   - 🎯 Context = 对话历史 + 工具定义 + 检索文档 + 用户画像 + 系统指令的完整数据环境
+   - 💡 关键策略：上下文压缩、状态卸载、子代理隔离、动态上下文组装
+
+3. **Fast.io：Context Engineering 防止"上下文腐烂"**
+   - 📝 来源：[Context Engineering for AI Agents (Fast.io)](https://fast.io/resources/context-engineering-ai-agents/)
+   - 🎯 "Context Rot"（上下文腐烂）概念：对话过长导致模型丢失主要目标
+   - 💡 预算化上下文窗口、压缩历史对话、MCP 标准协议、Task-Agent 模式
+
+4. **Google ADK 2.0 Alpha 重大更新**
+   - 🔥 引入确定性工作流和图式编排
+   - 🆕 LocalEnvironment（本地命令执行和文件 I/O）
+   - 🆕 EnvironmentToolset 支持
+   - 🔌 A2A 协议和 MCP 集成
+
+5. **热门框架动态（2026-03-31 数据）**
+   - [obra/superpowers](https://github.com/obra/superpowers) — **125,616** ⭐ 🚀（+2,744）— 突破 125K
+   - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) — **54,031** ⭐ 🚀（+1,539）— 突破 54K
+   - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) — **47,617** ⭐ — v1.13.0rc1 大规模重构
+   - [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) — **42,981** ⭐ — v6.2.2
+   - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) — **27,963** ⭐ — 持续依赖更新
+   - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) — **20,426** ⭐ — v0.13.2 修复
+   - [google/adk-python](https://github.com/google/adk-python) — **18,672** ⭐ — ADK 2.0 Alpha
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-03-31 框架版本迭代速报（全部 star 数据更新）
+- `04-best-practices.md` — 新增 Context Engineering 防止"上下文腐烂"最佳实践
+- `05-case-studies.md` — 新增 Martin Fowler 深度点评、Phil Schmid Context Engineering、ADK 2.0 Alpha 分析
+
+**关键洞察**：
+- 🏛️ **Martin Fowler 深度参与**：从"背书"到"深度点评"，标志方法论成熟度进一步提升
+- 📐 **Context Engineering 学科化**：Phil Schmid 明确定义为独立系统工程学科
+- 🚀 **Superpowers 125K**：保持最快增长速度，生态系统持续扩大
+- 🔧 **Google ADK 2.0 Alpha**：从轻量 SDK 演进为完整 Agent 编排平台
+
+---
+
 ### 2026-03-30 - 行业转向确认 & 框架重大迭代
 
 **重大更新**：
