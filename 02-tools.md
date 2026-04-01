@@ -496,6 +496,52 @@ async function verifyUI() {
 
 ---
 
+## 2026-04-01 框架版本迭代速报
+
+### Superpowers (128,140 ⭐)
+- ⭐ 单日增长 +2,524，持续高速增长
+- `v5.0.7` (2026-03-31)
+- 🆕 **新增 GitHub Copilot CLI 支持**：SessionStart 上下文注入、Claude Code 到 Copilot CLI 的工具映射表
+- 📌 **启示**：跨编码 Agent 通用技能框架的定位进一步强化，不再绑定单一 Agent 平台
+
+### DeerFlow (55,237 ⭐)
+- ⭐ 持续增长突破 **55K**
+- 🔧 修复 Sandbox 并发执行命令的序列化问题（#1435）
+- 🔧 修复 Sandbox 挂载路径的跨平台兼容性（#1638, #1634）
+- 📌 **启示**：长周期 SuperAgent Harness 的 Sandbox 稳定性是生产化关键
+
+### LangGraph (28,068 ⭐)
+- 📦 `v1.1.4` (2026-03-31) 发布
+- 修复递归限制默认哨兵值冲突
+- 新增 LangSmith 集成元数据
+- 依赖升级：Pygments、cryptography 等
+- 📌 **启示**：持续强化与 LangSmith 可观测性的集成，巩固生产级框架定位
+
+### CrewAI (47,726 ⭐)
+- 📦 `v1.13.0a4` (2026-03-31) alpha 版
+- 稳定版 `v1.12.2` 于 3/26 发布
+- 📌 **启示**：v1.13 稳定版即将到来，预发布迭代活跃
+
+### OpenAI Agents SDK (20,463 ⭐)
+- 📦 `v0.13.3` (2026-03-31) 发布
+- 修复 server conversation tracker 中过期的 hydrated input IDs
+- 修复 chat completions 输入对 raw image_url content parts 的支持
+- 新增非 OpenAI Provider 代码示例文档
+- 📌 **启示**：服务端会话管理和多模态输入兼容性是近期重点
+
+### Google ADK (18,687 ⭐)
+- 修复了 Agent 名称验证以防止任意模块导入的安全漏洞
+- 修复 SSE 连接问题
+- 📌 **启示**：安全加固是 2.0 Alpha 阶段的重点
+
+### BMAD-METHOD (43,099 ⭐)
+- `v6.2.2` 持续优化
+- 重构模块帮助 CSV 为 13 列格式引入 after/before 依赖图
+- 重写 bmad-help 为基于结果的技能设计（缩短约 50%）
+- 📌 **启示**：模块化和技能设计的持续优化
+
+---
+
 ## 2026-03-31 框架版本迭代速报
 
 ### Superpowers (125,616 ⭐)

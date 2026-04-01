@@ -410,3 +410,34 @@ quality_gates:
 - 新增 **EnvironmentToolset** 支持
 - 支持 **A2A 协议**和 **MCP 集成**
 - 📌 **启示**：Google ADK 正在从轻量 SDK 演进为完整的 Agent 编排平台
+
+---
+
+## 2026-04-01 补充：LangChain Harness 实战 & Phil Schmid 定义 Agent Harness
+
+### LangChain DeepAgents Harness Engineering 实战：TerminalBench 提升 13.7 分
+- 📝 来源：[LangChain Blog - Improving Deep Agents with Harness Engineering](https://blog.langchain.com/improving-deep-agents-with-harness-engineering/)
+- 🎯 通过优化 System Prompt、Tools 和 Middleware 三个维度，TerminalBench 2.0 分数从 **52.8 → 66.5**
+- 💡 引入 **Ralph Wiggum Loop**（验证循环）和 **Multi-model Harness**（多模型脚手架）概念
+- 📌 **启示**：这是 Harness Engineering 落地的标杆案例——不换模型，仅通过优化脚手架就能显著提升 Agent 表现
+
+### Phil Schmid：Agent Harness 是 2026 年最重要的基础设施
+- 📝 来源：[Phil Schmid - The Importance of Agent Harness in 2026](https://www.philschmid.de/agent-harness-2026)
+- 🎯 核心论点：Agent Harness 不是 Agent 本身，而是围绕模型管理长周期任务的**基础设施层**
+- 💡 Harness 包含：prompt 预设、工具调用编排、生命周期钩子和子 Agent 管理
+- 🔑 **关键金句**："好模型配差 Harness 不如差模型配好 Harness"
+- 📌 **启示**：Harness 是 Agent 的操作系统——这进一步确认了 Harness Engineering 作为独立学科的地位
+
+### Superpowers v5.0.7 扩展至 GitHub Copilot CLI
+- 🆕 新增 GitHub Copilot CLI 支持：SessionStart 上下文注入、工具映射表
+- 128,140 ⭐，保持最快增长速度
+- 📌 **启示**："跨编码 Agent 通用技能"定位进一步强化——同一套技能可同时用于 Claude Code、Cursor、Codex 和 GitHub Copilot CLI
+
+### 框架生态持续增长（2026-04-01 数据）
+- [obra/superpowers](https://github.com/obra/superpowers) — **128,140** ⭐ 🚀（+2,524）— 新增 Copilot CLI 支持
+- [bytedance/deer-flow](https://github.com/bytedance/deer-flow) — **55,237** ⭐ 🚀（+1,206）— Sandbox 稳定性修复
+- [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) — **47,726** ⭐（+109）— v1.13.0a4 alpha
+- [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) — **43,099** ⭐（+118）— 技能设计优化
+- [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) — **28,068** ⭐（+105）— v1.1.4 发布
+- [openai/openai-agents-python](https://github.com/openai/openai-agents-python) — **20,463** ⭐（+37）— v0.13.3
+- [google/adk-python](https://github.com/google/adk-python) — **18,687** ⭐（+15）— 安全加固

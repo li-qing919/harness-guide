@@ -883,4 +883,102 @@ Context Engineering:
 
 ---
 
-*更新时间：2026-03-31*
+## 20. LangChain DeepAgents Harness Engineering 实战（2026-04-01 更新）
+
+**来源**：[LangChain Blog - Improving Deep Agents with Harness Engineering](https://blog.langchain.com/improving-deep-agents-with-harness-engineering/)
+
+### 核心成果
+
+LangChain 团队通过聚焦三个优化维度，将 DeepAgents CLI 在 TerminalBench 2.0 上从 **52.8 提升到 66.5**（+13.7 分）：
+
+### 三大优化维度
+
+#### 1. System Prompt 优化
+- 精心设计系统提示词，明确 Agent 角色和行为边界
+- 结构化指令 > 自然语言描述
+
+#### 2. Tools 优化
+- 工具定义的精确性和完整性直接影响 Agent 表现
+- 减少模糊工具，增加精确描述
+
+#### 3. Middleware 优化（模型/工具调用钩子）
+- 引入 **Ralph Wiggum Loop**：验证循环确保 Agent 不偏离任务
+- **Multi-model Harness**：不同子任务使用不同模型
+
+### Ralph Wiggum Loop 验证循环
+
+```
+Task → Agent Execute → Verify Output → [Pass → Next Task]
+                                      → [Fail → Retry with Context]
+```
+
+核心思想：Agent 在完成每一步后进行自我验证，防止"看起来对但实际错"的结果累积。
+
+### Multi-model Harness 概念
+
+```yaml
+harness:
+  planning:
+    model: "claude-opus"  # 高质量规划
+    max_tokens: 4000
+    
+  coding:
+    model: "gpt-4.1"     # 快速编码
+    max_tokens: 8000
+    
+  review:
+    model: "claude-sonnet"  # 精确审查
+    max_tokens: 2000
+```
+
+### 实践建议
+
+1. **优先优化 System Prompt**：投入产出比最高
+2. **工具定义比数量重要**：精确定义 > 大量模糊工具
+3. **引入验证循环**：防止错误累积
+4. **考虑 Multi-model**：不同任务用不同模型
+
+---
+
+## 21. Context Engineering 可观测性实践（2026-04-01 更新）
+
+**来源**：[Comet - Context Engineering: The Discipline Behind Reliable LLM Applications](https://www.comet.com/site/blog/context-engineering/)
+
+### Context Engineering 的核心定义
+
+> Context Engineering 是设计、治理和优化围绕每次 LLM 生成的全部信息——指令、事实、工具、策略——的学科。
+
+### 访问和溯源管理
+
+1. **所有权追踪**：维护每个上下文元素的所有权
+2. **来源溯源**：记录检索数据的来源
+3. **版本历史**：系统 prompt 的完整版本历史
+
+### 可观测性工具推荐
+
+使用 **Opik** 等工具捕获每次 LLM 调用：
+- 系统 prompt 快照
+- Few-shot 示例记录
+- 检索上下文和元数据
+- 完整的调用链追踪
+
+```yaml
+observability:
+  tool: "opik"
+  capture:
+    - system_prompt
+    - few_shot_examples
+    - retrieval_context
+    - metadata
+    - call_chain
+```
+
+### 实践要点
+
+1. **每次调用都是可审计的**：完整的上下文快照
+2. **溯源即质量**：知道信息来自哪里比信息本身更重要
+3. **版本化一切**：系统 prompt、few-shot 示例、检索策略都需要版本控制
+
+---
+
+*更新时间：2026-04-01*

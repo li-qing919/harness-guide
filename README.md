@@ -97,6 +97,58 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-04-01 - LangChain Harness 实战标杆 & Superpowers 跨 Agent 平台扩展
+
+**更新**：
+
+1. **LangChain DeepAgents Harness Engineering 实战**
+   - 📝 来源：[LangChain Blog - Improving Deep Agents with Harness Engineering](https://blog.langchain.com/improving-deep-agents-with-harness-engineering/)
+   - 🎯 TerminalBench 2.0 分数从 52.8 → 66.5（+13.7 分），不换模型仅优化脚手架
+   - 💡 引入 Ralph Wiggum Loop 验证循环和 Multi-model Harness 概念
+
+2. **Phil Schmid：Agent Harness 是 2026 年最重要的基础设施**
+   - 📝 来源：[Phil Schmid - Agent Harness 2026](https://www.philschmid.de/agent-harness-2026)
+   - 🎯 Harness 不是 Agent 本身，而是管理长周期任务的基础设施层
+   - 💡 "好模型配差 Harness 不如差模型配好 Harness"
+
+3. **Comet Context Engineering 可观测性实践**
+   - 📝 来源：[Comet - Context Engineering](https://www.comet.com/site/blog/context-engineering/)
+   - 🎯 访问和溯源管理：每个上下文元素的所有权、来源、版本历史
+   - 💡 推荐 Opik 等工具实现完整调用链追踪
+
+4. **Superpowers v5.0.7 新增 GitHub Copilot CLI 支持**
+   - 🆕 SessionStart 上下文注入、Claude Code → Copilot CLI 工具映射
+   - 128,140 ⭐（+2,524），跨编码 Agent 通用技能定位强化
+
+5. **框架版本更新**
+   - LangGraph v1.1.4 — 递归限制修复 + LangSmith 元数据
+   - OpenAI Agents SDK v0.13.3 — 服务端会话管理修复
+   - DeerFlow — Sandbox 并发序列化和跨平台路径兼容性修复
+   - CrewAI v1.13.0a4 alpha — v1.13 稳定版即将到来
+
+6. **热门框架动态（2026-04-01 数据）**
+   - [obra/superpowers](https://github.com/obra/superpowers) — **128,140** ⭐ 🚀（+2,524）— Copilot CLI 支持
+   - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) — **55,237** ⭐ 🚀（+1,206）— Sandbox 稳定性
+   - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) — **47,726** ⭐ — v1.13.0a4
+   - [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) — **43,099** ⭐ — 技能设计优化
+   - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) — **28,068** ⭐ — v1.1.4
+   - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) — **20,463** ⭐ — v0.13.3
+   - [google/adk-python](https://github.com/google/adk-python) — **18,687** ⭐ — 安全加固
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-04-01 框架版本迭代速报（全部 star 数据更新）
+- `04-best-practices.md` — 新增 LangChain DeepAgents 实战、Context Engineering 可观测性实践
+- `05-case-studies.md` — 新增 LangChain Harness 实战、Phil Schmid Agent Harness 定义、Superpowers 跨平台扩展
+
+**关键洞察**：
+- 📊 **Harness 优化效果量化**：LangChain 实战证明仅优化脚手架即可提升 Agent 13.7 分
+- 🏗️ **Harness = 操作系统**：Phil Schmid 明确定位 Harness 为 Agent 的基础设施层
+- 🔭 **可观测性成为关键**：Context Engineering 需要完整的调用链追踪和溯源管理
+- 🔌 **跨 Agent 技能标准化**：Superpowers 扩展至 GitHub Copilot CLI，通用技能生态成型
+- 🚀 **Superpowers 128K**：持续保持最快增长速度
+
+---
+
 ### 2026-03-31 - Martin Fowler 深度点评 & 框架生态持续增长
 
 **更新**：
