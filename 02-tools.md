@@ -496,6 +496,54 @@ async function verifyUI() {
 
 ---
 
+## 2026-04-02 框架版本迭代速报
+
+### Superpowers (130,230 ⭐)
+- ⭐ 单日增长 +2,090，突破 **130K** 里程碑 🎉
+- `v5.0.7` (2026-03-31)
+- 新增 contributor guidelines 以减少低质量 Agent PR
+- 为 Agent 面向的 guardrails 添加贡献者指南
+- 📌 **启示**：130K stars 标志着社区规模最大的 Agentic Skills 框架地位进一步巩固
+
+### DeerFlow (56,018 ⭐)
+- ⭐ 持续增长突破 **56K**
+- 修复前端按线程持久化模型选择（#1553）
+- 修复飞书文件路径被误判为命令的问题（#1654）
+- 修复网关层防止客户端发送 context 时的 400 错误（#1660）
+- 📌 **启示**：跨平台兼容性和网关层稳定性是长周期 SuperAgent 的持续优化方向
+
+### LangGraph (28,160 ⭐)
+- `v1.1.4` (2026-03-31) — 已在上期速报覆盖
+- 修复 URL 和 README 问题，更新 configurable metadata 支持
+- 📌 **启示**：图编排框架标杆持续稳定迭代
+
+### CrewAI (47,789 ⭐)
+- 📦 `v1.13.0a6` (2026-04-01) — alpha 版本持续迭代
+- 新增 **A2UI 扩展**支持 v0.8/v0.9 schema 与文档
+- 为 **GPT-5 和 o 系列模型**添加 multimodal vision 前缀支持
+- 📌 **启示**：CrewAI 率先适配 GPT-5 和多模态 vision，框架前瞻性布局
+
+### OpenAI Agents SDK (20,494 ⭐)
+- 📦 `v0.13.4` (2026-04-01) 发布
+- 新增本地 MCP Server 的 **callable approval policies** 支持（#2818）
+- 升级 Codex Action 到 1.6 版本
+- 📌 **启示**：approval policies 是 Agent 安全控制的重要方向，允许细粒度的工具调用审批
+
+### Google ADK (18,694 ⭐)
+- `v2.0.0a2` (2026-03-27) — Alpha 阶段
+- 新增 `gemini-3.1-flash-live-preview` 模型的 Live 模式支持
+- 重构 Vertex AI Session Service 的事件处理
+- 📌 **启示**：2.0 Alpha API 变动较大，生产环境建议仍使用 v1.x
+
+### BMAD-METHOD (43,229 ⭐)
+- `v6.2.2` (2026-03-26)
+- 新增 bmad-checkpoint-preview skill（#2145）
+- 修复 adversarial triage 审查问题
+- 移除 Barry quick-flow-solo-dev agent
+- 📌 **启示**：checkpoint 预览技能增强了开发流程的可视化能力
+
+---
+
 ## 2026-04-01 框架版本迭代速报
 
 ### Superpowers (128,140 ⭐)

@@ -441,3 +441,44 @@ quality_gates:
 - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) — **28,068** ⭐（+105）— v1.1.4 发布
 - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) — **20,463** ⭐（+37）— v0.13.3
 - [google/adk-python](https://github.com/google/adk-python) — **18,687** ⭐（+15）— 安全加固
+
+---
+
+## 2026-04-02 补充：Anthropic Harness 迭代经验 & Context Engineering 新范式
+
+### Anthropic 发布 Harness 设计迭代经验
+- 📝 来源：[Anthropic - Harness Design for Long-Running Application Development](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+- 🎯 从初始化 Agent + 编码 Agent 的**双 Agent 架构简化为更统一的结构**
+- 💡 加入针对 AI 功能构建的 prompt 优化
+- 🔑 揭示了 Harness 设计如何**突破基线模型的性能天花板**
+- 📌 **启示**：Harness 架构本身需要持续迭代——不是一次设计定终身，而是像软件一样持续重构
+
+### NxCode 发布 Harness Engineering 完整指南
+- 📝 来源：[NxCode - Harness Engineering Complete Guide 2026](https://www.nxcode.io/resources/news/harness-engineering-complete-guide-ai-agent-codex-2026)
+- 🎯 将 Harness Engineering 定义为"设计让 AI Agent 可靠运行的系统"的**新学科**
+- 💡 覆盖四大核心：约束机制、反馈循环、文档化和生命周期管理
+- 📌 **启示**：2026 年 Harness Engineering 概念普及的重要推手，提供了面向开发者的系统化入门
+
+### LangChain Context Engineering 四大策略框架
+- 📝 来源：[LangChain Blog - Context Engineering for Agents](https://blog.langchain.com/context-engineering-for-agents/)
+- 🎯 系统化归纳为 **Write / Select / Compress / Isolate** 四大策略桶
+- 💡 结合 LangGraph 长期记忆能力，提供跨会话持久化上下文的生产级方案
+- 引用多个主流 Agent 产品的实际实现案例验证策略通用性
+- 📌 **启示**：Context Engineering 的策略框架正在走向标准化，四大策略桶成为共识
+
+### Context Engineering 2026 三大认知颠覆
+- 📝 来源：[The AI Corner - Context Engineering Guide 2026](https://www.the-ai-corner.com/p/context-engineering-guide-2026)
+- ⚡ **"Think step by step" 对推理模型有害** — 干扰原生推理链
+- ⚡ **长 prompt 超 3000 token 开始降性能** — 注意力分散存在拐点
+- ⚡ **Few-shot CoT 仅剩格式对齐** — 推理模型不需要示例教"怎么想"
+- 💡 替代方案：**Prompt-as-Code** 配合版本控制 + 6 组件 prompt 架构 + 4 层防御策略
+- 📌 **启示**：2026 年 Context Engineering 的认知框架全面升级，很多 2025 年的"最佳实践"已经过时
+
+### 框架生态持续增长（2026-04-02 数据）
+- [obra/superpowers](https://github.com/obra/superpowers) — **130,230** ⭐ 🚀（+2,090）— 突破 130K 里程碑 🎉
+- [bytedance/deer-flow](https://github.com/bytedance/deer-flow) — **56,018** ⭐ 🚀（+781）— 网关层稳定性修复
+- [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) — **47,789** ⭐（+63）— A2UI 扩展 + GPT-5 支持
+- [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) — **43,229** ⭐（+130）— checkpoint-preview skill
+- [langchain-ai/langgraph](https://langchain-ai/langgraph) — **28,160** ⭐（+92）— configurable metadata
+- [openai/openai-agents-python](https://github.com/openai/openai-agents-python) — **20,494** ⭐（+31）— v0.13.4 approval policies
+- [google/adk-python](https://github.com/google/adk-python) — **18,694** ⭐（+7）— gemini-3.1-flash-live-preview

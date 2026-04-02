@@ -97,6 +97,62 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-04-02 - Context Engineering 认知升级 & Superpowers 突破 130K
+
+**更新**：
+
+1. **Anthropic Harness 设计迭代经验**
+   - 📝 来源：[Anthropic - Harness Design for Long-Running Application Development](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+   - 🎯 从双 Agent 架构简化为更统一的结构
+   - 💡 Harness 设计本身需要持续迭代，像软件一样持续重构
+
+2. **LangChain Context Engineering 四大策略框架**
+   - 📝 来源：[LangChain Blog - Context Engineering for Agents](https://blog.langchain.com/context-engineering-for-agents/)
+   - 🎯 Write / Select / Compress / Isolate 四大策略桶走向标准化
+   - 💡 结合 LangGraph 提供跨会话持久化上下文的生产级方案
+
+3. **Context Engineering 2026 三大认知颠覆**
+   - 📝 来源：[The AI Corner - Context Engineering Guide 2026](https://www.the-ai-corner.com/p/context-engineering-guide-2026)
+   - ⚡ "Think step by step" 对推理模型有害
+   - ⚡ 长 prompt 超 3000 token 开始降性能
+   - ⚡ Few-shot CoT 仅剩格式对齐
+   - 💡 替代方案：Prompt-as-Code + 6 组件架构 + 4 层防御策略
+
+4. **htek.dev Harness 原型实践**
+   - 📝 来源：[Agent Harnesses: Why 2026 Isn't About More Agents](https://htek.dev/articles/agent-harnesses-controlling-ai-agents-2026/)
+   - 🎯 实际构建 Harness 原型：工具拦截、预算控制、迭代循环
+   - 💡 2026 年的挑战是控制 Agent 的基础设施，而非构建更多 Agent
+
+5. **框架版本更新**
+   - Superpowers — **130,230** ⭐ 🎉 突破 130K 里程碑
+   - DeerFlow — **56,018** ⭐ 网关层稳定性修复
+   - CrewAI — **47,789** ⭐ A2UI 扩展 + GPT-5 多模态 vision 支持
+   - OpenAI Agents SDK — **20,494** ⭐ v0.13.4 approval policies
+   - BMAD-METHOD — **43,229** ⭐ checkpoint-preview skill
+
+6. **热门框架动态（2026-04-02 数据）**
+   - [obra/superpowers](https://github.com/obra/superpowers) — **130,230** ⭐ 🚀（+2,090）— 突破 130K 🎉
+   - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) — **56,018** ⭐ 🚀（+781）
+   - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) — **47,789** ⭐ — A2UI + GPT-5
+   - [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) — **43,229** ⭐
+   - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) — **28,160** ⭐
+   - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) — **20,494** ⭐ — v0.13.4
+   - [google/adk-python](https://github.com/google/adk-python) — **18,694** ⭐
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-04-02 框架版本迭代速报（Superpowers 突破 130K）
+- `04-best-practices.md` — 新增 LangChain 四大策略桶、Context Engineering 认知转变、Prompt-as-Code 方法论、Harness 原型实践
+- `05-case-studies.md` — 新增 Anthropic 迭代经验、NxCode 指南、Context Engineering 认知颠覆
+
+**关键洞察**：
+- 🧠 **Context Engineering 认知升级**：2025 年的很多"最佳实践"（如 CoT、长 prompt）在推理模型时代已过时
+- 📐 **四大策略桶标准化**：Write/Select/Compress/Isolate 成为 Context Engineering 的共识框架
+- 🏗️ **Harness 需要迭代**：Anthropic 证实 Harness 架构本身需要像软件一样持续重构
+- 🚀 **Superpowers 130K**：Agent 技能框架生态系统持续扩大
+- 🔒 **Approval Policies**：OpenAI Agents SDK 引入工具调用审批机制，安全控制走向细粒度
+
+---
+
 ### 2026-04-01 - LangChain Harness 实战标杆 & Superpowers 跨 Agent 平台扩展
 
 **更新**：

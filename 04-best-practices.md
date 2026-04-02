@@ -981,4 +981,173 @@ observability:
 
 ---
 
-*更新时间：2026-04-01*
+## 22. LangChain Context Engineering 四大策略桶（2026-04-02 更新）
+
+**来源**：[LangChain Blog - Context Engineering for Agents](https://blog.langchain.com/context-engineering-for-agents/)
+
+### 四大策略框架
+
+LangChain 将上下文工程系统化归纳为四个策略桶：
+
+| 策略 | 核心操作 | 生产实践 |
+|------|---------|---------|
+| **Write** | 将信息持久化到上下文窗口外 | 长期记忆存储、知识库写入 |
+| **Select** | 按需检索并注入上下文 | RAG 检索、向量查询、关键词匹配 |
+| **Compress** | 清理工具结果、压缩历史 | Tool result clearing、摘要生成 |
+| **Isolate** | 通过子 Agent 拆分上下文窗口 | 子 Agent 隔离执行、独立上下文 |
+
+### 与 LangGraph 的结合
+
+LangGraph 的长期记忆能力为 Write/Select 策略提供生产级支撑：
+
+```yaml
+context_engineering:
+  write:
+    tool: "langgraph_memory_store"
+    strategy: "cross_session_persistence"
+    
+  select:
+    tool: "langgraph_retrieval"
+    strategy: "hybrid_vector_keyword"
+    
+  compress:
+    tool: "langgraph_summarizer"
+    strategy: "tool_result_clearing"
+    
+  isolate:
+    tool: "langgraph_subgraph"
+    strategy: "independent_context_window"
+```
+
+### 多产品实践案例
+
+文章引用了多个主流 Agent 产品的实际实现，验证四大策略的通用性。
+
+### 实践要点
+
+1. **Write 是基础**：没有持久化，其他策略无法有效运作
+2. **Select 需要精度**：检索相关性比检索数量更重要
+3. **Compress 是日常**：每个工具调用后都应考虑清理
+4. **Isolate 是终极手段**：当上下文窗口接近极限时使用
+
+---
+
+## 23. Context Engineering 2026 关键认知转变（2026-04-02 更新）
+
+**来源**：[The AI Corner - Context Engineering Guide 2026: Prompt Engineering Is Dead](https://www.the-ai-corner.com/p/context-engineering-guide-2026)
+
+### 三大认知颠覆
+
+#### 1. "Think step by step" 对推理模型有害
+- 推理模型（o1/o3、DeepSeek-R1）自带内部推理链
+- 外部 CoT 提示反而干扰模型原生推理能力
+- 📌 **启示**：根据模型类型选择提示策略，不要无脑使用 CoT
+
+#### 2. 长 prompt 超过 3000 token 开始降低推理性能
+- 上下文越长，模型"注意力"越分散
+- 存在明确的性能拐点
+- 📌 **启示**：精简 System Prompt，将详细文档外置到文件系统
+
+#### 3. Few-shot CoT 仅剩格式对齐作用
+- 推理模型不需要通过示例学习推理方式
+- Few-shot 的价值退化为输出格式规范
+- 📌 **启示**：用 1-2 个示例展示格式即可，不要用大量示例教模型"怎么想"
+
+### Prompt-as-Code 方法论
+
+将 Prompt 工程从文本编辑升级为软件工程：
+
+```yaml
+prompt_as_code:
+  architecture:
+    - system_prompt/          # 系统提示（版本化）
+    - few_shots/              # 示例库（分类管理）
+    - context_templates/      # 上下文模板（动态组装）
+    - tool_descriptions/      # 工具描述（精确编写）
+    - evaluation_criteria/    # 评估标准（量化定义）
+    - guardrails/             # 安全边界（强制执行）
+    
+  version_control:
+    tool: "git"
+    strategy: "prompt_changelog"
+    
+  testing:
+    tool: "automated_eval"
+    strategy: "regression_testing"
+```
+
+### 6 组件 Prompt 架构 + 4 层防御策略
+
+```
+┌──────────────────────────────────────────────┐
+│            6-Component Prompt Architecture    │
+│  1. System Instructions                      │
+│  2. Context Injection Points                 │
+│  3. Tool Definitions                         │
+│  4. Output Specifications                    │
+│  5. Guardrails                               │
+│  6. Evaluation Criteria                      │
+├──────────────────────────────────────────────┤
+│            4-Layer Defense Strategy           │
+│  Layer 1: Input Validation (格式校验)         │
+│  Layer 2: Context Window Management          │
+│  Layer 3: Output Verification                │
+│  Layer 4: Feedback Loop Integration          │
+└──────────────────────────────────────────────┘
+```
+
+### Karpathy 类比深化
+
+> **Andrej Karpathy**："LLM 是 CPU、上下文窗口是 RAM、你是操作系统。"
+
+这个类比的核心含义：
+- **CPU（LLM）**：处理能力有限但可升级（换模型）
+- **RAM（上下文窗口）**：容量有限，需要精心管理
+- **OS（你/Harness）**：负责调度、内存管理、I/O 操作
+
+---
+
+## 24. Agent Harness 原型实践（2026-04-02 更新）
+
+**来源**：[htek.dev - Agent Harnesses: Why 2026 Isn't About More Agents](https://htek.dev/articles/agent-harnesses-controlling-ai-agents-2026/)
+
+### 核心论点
+
+> 2026 年的真正工程挑战不是构建更多 Agent，而是构建控制它们的基础设施。
+
+### Harness 原型实现
+
+作者实际构建了一个 Harness 原型，包含以下关键功能：
+
+1. **工具拦截**：在 Agent 调用工具前进行拦截和验证
+2. **预算控制**：限制 token 使用和 API 调用次数
+3. **迭代循环**：支持 Agent 的多轮迭代改进
+
+```yaml
+harness_prototype:
+  tool_interception:
+    enabled: true
+    strategy: "whitelist_with_validation"
+    
+  budget_control:
+    max_tokens_per_task: 50000
+    max_api_calls: 100
+    alert_threshold: 80%
+    
+  iteration_loop:
+    max_iterations: 5
+    exit_condition: "quality_score >= 8 or budget_exhausted"
+```
+
+### 管理的关键维度
+
+| 维度 | 管理方式 | 目的 |
+|------|---------|------|
+| **生命周期** | 启动/暂停/停止/重启 | 长时任务管理 |
+| **上下文窗口** | 压缩/重置/隔离 | 防止信息过载 |
+| **工具访问** | 白名单/拦截/验证 | 安全边界控制 |
+| **安全边界** | 沙箱/权限/审计 | 防止越权操作 |
+
+---
+
+*更新时间：2026-04-02*
