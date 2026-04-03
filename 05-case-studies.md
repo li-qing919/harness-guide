@@ -482,3 +482,38 @@ quality_gates:
 - [langchain-ai/langgraph](https://langchain-ai/langgraph) — **28,160** ⭐（+92）— configurable metadata
 - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) — **20,494** ⭐（+31）— v0.13.4 approval policies
 - [google/adk-python](https://github.com/google/adk-python) — **18,694** ⭐（+7）— gemini-3.1-flash-live-preview
+
+---
+
+## 2026-04-03 补充：Phil Schmid Context Engineering Part 2 & 框架新里程碑
+
+### Phil Schmid Context Engineering Part 2：Context Rot 深度解决方案
+- 📝 来源：[Phil Schmid - Context Engineering Part 2](https://www.philschmid.de/context-engineering-part-2)
+- 🎯 深入探讨 **Context Rot（上下文腐烂）** 问题及解决方案
+- 💡 Manus 的 Peak Ji 分享 Agent Harness 演进经验：
+  - **Context Compaction 可逆化**：压缩后可通过工具读回文件
+  - **子代理上下文隔离**：避免 KV-cache 膨胀和无关信息干扰
+  - **分层路由策略**：简单任务用快模型，复杂任务用强模型
+- 📌 **启示**：上下文腐烂是长时任务 Agent 的核心挑战，可逆压缩和隔离是前沿解决方案
+
+### Anthropic Effective Context Engineering 实践补充
+- 📝 来源：[Anthropic - Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
+- 🎯 Context Engineering 不仅是 Prompt Engineering，而是管理系统指令、工具定义、MCP、外部数据、消息历史的**全部上下文状态**
+- 💡 **Tool Result Clearing** 是最轻量的上下文压缩手段
+- 💡 **基于文件的 Memory 系统** 通过将信息存储在上下文窗口之外解决长对话膨胀
+- 💡 子代理应只接收与其任务相关的上下文，而非共享全局完整历史
+
+### State of Context Engineering 2026：60% 利用率阈值
+- 📝 来源：[State of Context Engineering in 2026 (Medium)](https://medium.com/@kushalbanda/state-of-context-engineering-in-2026-cf92d010eab1)
+- 🎯 提出明确的 **60% 上下文利用率阈值**管理规则
+- 💡 生产系统应分层叠加：Progressive Disclosure + Tool Management → Routing + Compression → Retrieval
+- 📌 **启示**：可量化的阈值管理使 Context Engineering 从定性建议走向定量工程
+
+### 框架生态持续增长（2026-04-03 数据）
+- [obra/superpowers](https://github.com/obra/superpowers) — **132,186** ⭐ 🚀（+1,956）— 突破 132K
+- [bytedance/deer-flow](https://github.com/bytedance/deer-flow) — **56,695** ⭐ 🚀（+677）— 文档站点上线
+- [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) — **47,865** ⭐（+76）— **v1.13.0 正式发布** 🎉
+- [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) — **43,365** ⭐（+136）— CI 质量检查
+- [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) — **28,265** ⭐（+105）— deploy revisions list
+- [openai/openai-agents-python](https://github.com/openai/openai-agents-python) — **20,521** ⭐（+27）— v0.13.4
+- [google/adk-python](https://github.com/google/adk-python) — **18,714** ⭐（+20）— gemini-3.1-flash-live-preview

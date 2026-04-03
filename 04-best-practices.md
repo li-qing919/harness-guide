@@ -1150,4 +1150,122 @@ harness_prototype:
 
 ---
 
-*更新时间：2026-04-02*
+## 25. Phil Schmid Context Engineering Part 2：Context Rot 解决方案（2026-04-03 更新）
+
+**来源**：[Phil Schmid - Context Engineering for AI Agents Part 2](https://www.philschmid.de/context-engineering-part-2)
+
+### Context Compaction 可逆化
+
+传统上下文压缩是不可逆的——压缩后信息丢失。Phil Schmid 引入了 Manus 的 Peak Ji 分享的创新实践：
+
+> 压缩后的信息可以通过工具读回文件，实现"可逆压缩"。
+
+```yaml
+compaction_reversibility:
+  strategy: "compress_but_keep_accessible"
+  
+  steps:
+    - name: "compress"
+      action: "生成上下文摘要"
+      side_effect: "将原始信息写入文件系统"
+      
+    - name: "recall"
+      action: "需要原始信息时，通过工具读取文件"
+      trigger: "agent 需要历史细节"
+```
+
+### 子代理上下文隔离
+
+> 避免子代理继承全局 KV-cache，减少无关信息干扰。
+
+```yaml
+sub_agent_isolation:
+  strategy: "minimal_context_handoff"
+  
+  principles:
+    - "子代理只接收与其任务相关的上下文"
+    - "不共享全局完整历史"
+    - "任务完成后，子代理的中间状态不回传"
+    - "只返回最终结果和关键决策"
+```
+
+### 分层路由策略
+
+不同复杂度的任务应路由到不同配置的子代理：
+
+```yaml
+routing_strategy:
+  simple_tasks:
+    model: "fast-model"
+    context: "minimal"
+    examples: []
+    
+  complex_tasks:
+    model: "reasoning-model"
+    context: "rich"
+    examples: ["relevant_few_shots"]
+    
+  research_tasks:
+    model: "deep-reasoning"
+    context: "full_background"
+    tools: ["web_search", "document_reader"]
+```
+
+### 实践要点
+
+1. **可逆压缩 > 不可逆压缩**：保留文件层面的完整信息，仅在上下文窗口中保留摘要
+2. **隔离是效率的基础**：子代理不需要知道全局上下文
+3. **路由即优化**：简单任务用快模型，复杂任务用强模型
+
+---
+
+## 26. Context Engineering 利用率阈值管理（2026-04-03 更新）
+
+**来源**：[State of Context Engineering in 2026 (Medium)](https://medium.com/@kushalbanda/state-of-context-engineering-in-2026-cf92d010eab1)
+
+### 五大核心模式回顾
+
+| 模式 | 核心目标 | 层级 |
+|------|---------|------|
+| **Progressive Disclosure** | 渐进式加载 | Entry Control |
+| **Compression** | 压缩累积历史 | Runtime Management |
+| **Routing** | 分层路由到专门子代理 | Runtime Management |
+| **Evolved Retrieval** | 按需外部知识获取 | Knowledge Layer |
+| **Tool Management** | 控制能力表面 | Entry Control |
+
+### 关键阈值：60% 利用率规则
+
+> **上下文利用率超过 60% 时**，应按以下优先级处理：
+
+```
+1. 摘要历史 → 释放对话空间
+2. 过滤检索 → 精简 RAG 结果
+3. 动态路由工具 → 隐藏不活跃工具
+4. 压缩步骤结果 → 清理工具返回值
+```
+
+### 生产环境分层叠加策略
+
+```
+┌─────────────────────────────────────────────┐
+│          Progressive Disclosure              │
+│          + Tool Management                   │
+│    → 控制进入上下文窗口的内容                  │
+├─────────────────────────────────────────────┤
+│          Routing + Compression               │
+│    → 管理执行期间的内容                        │
+├─────────────────────────────────────────────┤
+│          Retrieval                           │
+│    → 按需补充外部知识                          │
+└─────────────────────────────────────────────┘
+```
+
+### 实践要点
+
+1. **60% 是警戒线**：不要等到 80%+ 才开始处理，那时已经太晚
+2. **优先级明确**：先压缩历史，再精简工具，最后才考虑隔离
+3. **分层叠加**：不是选一个，而是按需组合
+
+---
+
+*更新时间：2026-04-03*
