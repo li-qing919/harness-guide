@@ -550,6 +550,54 @@ async function verifyUI() {
 
 ---
 
+## 2026-04-04 框架版本迭代速报
+
+### Superpowers (134,026 ⭐)
+- ⭐ 单日增长 +1,840，突破 **134K** 🚀
+- 合并 README 发布公告 PR (#1029)
+- 新增 Discord 社区详细描述
+- 新增 release announcements 链接，整合 Community 部分
+- 📌 **启示**：社区建设和文档完善进一步巩固 134K 里程碑
+
+### DeerFlow (57,301 ⭐)
+- ⭐ 持续增长突破 **57K**
+- 新增 pymupdf4llm PDF 转换器，支持异步卸载和自动降级 (#1727)
+- 上传文件时注入文档大纲到 Agent 上下文 (#1738)
+- 修复 thread_id 回退逻辑 (#1814)
+- 📌 **启示**：文档上下文注入是 Context Engineering 在 SuperAgent 中的前沿实践
+
+### LangGraph (28,356 ⭐)
+- 发布 langgraph 1.1.6 (#7407)
+- 修复 execution info 补丁问题 (#7406)
+- CI 改进：重开 PR 时重新运行 issue 链接检查 (#7403)
+- 📌 **启示**：持续稳定迭代，CI 流程优化提升贡献质量
+
+### CrewAI (47,957 ⭐)
+- 新增 AMP Training Tab 指南文档 (#5083)
+- pyproject.toml 添加 exclude-newer 3 天限制
+- 修复 SEO 索引字段导致阿拉伯语页面渲染问题
+- 📌 **启示**：v1.13.0 正式版后的文档和国际化完善
+
+### OpenAI Agents SDK (20,551 ⭐)
+- 更新翻译文档页面 (#2828)
+- 修复 AnyLLM reasoning 提取对 vLLM/any-llm 可迭代 Reasoning 对象的支持 (#2822)
+- 同步 examples.md 与当前示例目录 (#2827)
+- 📌 **启示**：多 LLM 生态兼容性持续增强
+
+### Google ADK (18,730 ⭐)
+- 新增 Vertex AI Session Service 自定义 session ID 功能
+- ADK CLI 新增 Easy GCP 支持
+- 修复空 events_iterator 赋值问题
+- 📌 **启示**：GCP 集成深度和易用性同步提升
+
+### BMAD-METHOD (43,485 ⭐)
+- quick-dev 模式修复：为 context list paths 指定 {project-root}/ 锚点 (#2200)
+- quick-dev 新增 planning artifact 感知，支持上下文感知的规格说明 (#2185)
+- 修复越南语文档翻译保真度问题 (#2192)
+- 📌 **启示**：context-aware planning 体现 AI 敏捷方法的持续进化
+
+---
+
 ## 2026-04-02 框架版本迭代速报
 
 ### Superpowers (130,230 ⭐)

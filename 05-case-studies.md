@@ -517,3 +517,54 @@ quality_gates:
 - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) — **28,265** ⭐（+105）— deploy revisions list
 - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) — **20,521** ⭐（+27）— v0.13.4
 - [google/adk-python](https://github.com/google/adk-python) — **18,714** ⭐（+20）— gemini-3.1-flash-live-preview
+
+---
+
+## 2026-04-04 补充：行业标准化里程碑 & 上下文瓶颈新认知
+
+### Anthropic 发布《2026 Agentic Coding Trends Report》
+- 📝 来源：[Anthropic - 2026 Agentic Coding Trends Report](https://resources.anthropic.com/hubfs/2026%20Agentic%20Coding%20Trends%20Report.pdf)
+- 🎯 八大趋势涵盖：
+  1. **单 Agent 演化为协调团队** — 从单体 Agent 到多 Agent 协作系统
+  2. **长时运行 Agent 构建完整系统** — Agent 能力从片段编码扩展到端到端交付
+  3. **Agentic QA（AI 审查 AI 代码）成为标准** — 质量控制闭环
+  4. **双用途风险需要安全优先架构** — 安全成为设计约束而非事后检查
+- 💡 核心结论：2025 年 coding agent 已从实验工具转为生产系统，2026 年是工程化和安全化的一年
+- 📌 **启示**：Agentic QA（AI 审查 AI）的标准化标志着 Harness Engineering 中 Evaluator Agent 模式被广泛接受
+
+### Linux Foundation 成立 Agentic AI Foundation (AAIF)
+- 📝 来源：[Linux Foundation - Agentic AI Foundation](https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation)
+- 🔥 Anthropic 的 **MCP**、Block 的 **goose**、OpenAI 的 **AGENTS.md** 作为创始项目入驻
+- 🎯 建立中立组织推动开源 Agentic AI 技术标准化
+- 💡 MCP 被比喻为"**AI 的 USB-C 接口**"——统一 Agent 与工具的连接标准
+- 📌 **启示**：Agent 技术标准化进入新阶段，MCP/AGENTS.md 获得行业基金会级别支持
+
+### OpenAI 发布 Harness Engineering 深度实践博客（Ryan Lopopolo）
+- 📝 来源：[OpenAI Blog - Harness Engineering](https://openai.com/index/harness-engineering/)
+- 🎯 详述团队以"**零手写代码**"为约束，为 Codex 构建完整 Harness 的实践
+- 💡 核心组件：自定义 linter、结构测试、上下文文档、**Agent Reviewer 循环（Ralph Wiggum Loop）**
+- 🔑 核心理念："每次发现 Agent 犯错，就工程化一个方案让它永远不再犯"
+- 📌 **启示**：OpenAI 内部 Harness 实践的公开化，Ralph Wiggum Loop 的详细描述为社区提供了可参考的验证循环模式
+
+### Epsilla：AI 工程三阶段演进论
+- 📝 来源：[Epsilla - Harness Engineering Evolution](https://www.epsilla.com/blogs/harness-engineering-evolution-prompt-context-autonomous-agents)
+- 🎯 AI 工程三个演进阶段：**Prompting → Context Engineering → Harness Engineering**
+- 💡 核心论点："**Agent 不难，Harness 难**" — 通过规则、反馈循环和 linter 约束解空间
+- 💡 结合**语义图谱**实现 Agent-as-a-Service
+- 📌 **启示**：三阶段模型为理解 AI 工程演进提供了清晰的历史框架
+
+### Context is AI Coding's Real Bottleneck in 2026
+- 📝 来源：[The New Stack - Context is AI Coding's Real Bottleneck](https://thenewstack.io/context-is-ai-codings-real-bottleneck-in-2026/)
+- 🎯 AI 编码的真正瓶颈不是模型能力，而是**上下文** — 工程师脑中知识 vs AI 能理解信息的鸿沟
+- 💡 阅读 AI 生成代码需要不同的认知工作：**从输出逆向工程意图**，而非跟随同事的推理过程
+- 💡 成功的团队将形成"**人类做判断和创造性工作，AI 处理重复任务**"的节奏
+- 📌 **启示**：上下文瓶颈不仅是技术问题，更是认知和工作流设计问题
+
+### 框架生态持续增长（2026-04-04 数据）
+- [obra/superpowers](https://github.com/obra/superpowers) — **134,026** ⭐ 🚀（+1,840）— 突破 134K
+- [bytedance/deer-flow](https://github.com/bytedance/deer-flow) — **57,301** ⭐ 🚀（+606）— 文档上下文注入
+- [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) — **47,957** ⭐（+92）— AMP Training Tab
+- [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) — **43,485** ⭐（+120）— context-aware planning
+- [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) — **28,356** ⭐（+91）— v1.1.6
+- [openai/openai-agents-python](https://github.com/openai/openai-agents-python) — **20,551** ⭐（+30）— vLLM 兼容
+- [google/adk-python](https://github.com/google/adk-python) — **18,730** ⭐（+16）— Easy GCP
