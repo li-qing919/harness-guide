@@ -568,3 +568,38 @@ quality_gates:
 - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) — **28,356** ⭐（+91）— v1.1.6
 - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) — **20,551** ⭐（+30）— vLLM 兼容
 - [google/adk-python](https://github.com/google/adk-python) — **18,730** ⭐（+16）— Easy GCP
+
+---
+
+## 2026-04-05 补充：MCP+A2A 双协议时代 & Mem0 记忆驱动 Context Engineering
+
+### 行业动态：MCP+A2A 双协议成为互操作性标准
+
+2026 年 4 月，主要 Agent 框架相继支持 **MCP（Model Context Protocol）** 和 **A2A（Agent-to-Agent Protocol）** 双协议：
+
+| 框架 | MCP 支持 | A2A 支持 | 传输机制 |
+|------|---------|---------|---------|
+| LangGraph | ✅ | ✅（通过 LangSmith） | 标准 MCP |
+| CrewAI | ✅ | ✅（2026-03 新增） | Stdio、SSE、Streamable HTTPS |
+| Google ADK | ✅ | ✅ | 原生集成 |
+| OpenAI Agents SDK | ✅ | 部分 | OpenAI 生态 |
+
+- 📌 **启示**：MCP+A2A 双协议成为 2026 Agent 互操作性的事实标准，框架间协作能力大幅提升
+
+### Mem0：记忆驱动的 Context Engineering 完整指南
+
+- 📝 来源：[Mem0 - Context Engineering for AI Agents: Complete Guide](https://mem0.ai/blog/context-engineering-ai-agents-guide)
+- 🎯 将 Context Engineering 定义为"**结构化上下文和记忆使 AI 系统随时间智能行为的系统方法**"
+- 💡 核心支柱：记忆管理（持久化+语义检索）、RAG 增强（检索+压缩结合）、智能格式化（精确时机精确信息）
+- 🏗️ 记忆压缩引擎：写入持久存储 → 语义搜索 → 智能压缩 → 记忆类型隔离
+- 📌 **启示**：与 Phil Schmid 的信息流架构设计形成互补，从记忆持久化和检索角度完善 Context Engineering 实践
+
+### 框架生态持续增长（2026-04-05 数据）
+
+- [obra/superpowers](https://github.com/obra/superpowers) — **135,171** ⭐ 🚀（+1,145）— 社区生态建设
+- [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) — **48,034** ⭐（+77）— 突破 48K，MCP+A2A 双协议
+- [bytedance/deer-flow](https://github.com/bytedance/deer-flow) — **57,803** ⭐（+502）— 边缘场景健壮性
+- [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) — **43,565** ⭐（+80）— 贡献规范化
+- [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) — **28,419** ⭐（+63）— MCP+A2A 双协议
+- [openai/openai-agents-python](https://github.com/openai/openai-agents-python) — **20,570** ⭐（+19）— flush_traces API
+- [google/adk-python](https://github.com/google/adk-python) — **18,741** ⭐（+11）— 凭证自动刷新

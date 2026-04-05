@@ -550,6 +550,55 @@ async function verifyUI() {
 
 ---
 
+## 2026-04-05 框架版本迭代速报
+
+### Superpowers (135,171 ⭐)
+- ⭐ 单日增长 +1,145，突破 **135K** 🚀
+- 新增发布公告链接、整合社区板块描述
+- 📌 **启示**：社区生态建设与发布流程规范化
+
+### DeerFlow (57,803 ⭐)
+- ⭐ 持续增长，逼近 **58K**
+- 修复并发线程阻塞问题 (#1839)
+- 前端 prompt 附件上传修复 (#1833)
+- 阻止不支持的 .app 文件上传 (#1834)
+- 📌 **启示**：开源 SuperAgent Harness 的边缘场景健壮性持续提升
+
+### LangGraph (28,419 ⭐)
+- ⭐ 稳定增长突破 **28.4K**
+- 持续依赖更新（checkpoint、CLI、prebuilt 模块）
+- **新增 A2A 协议支持**（通过 LangSmith）
+- 与 Google ADK、CrewAI 一同支持 **MCP+A2A 双协议**
+- 📌 **启示**：MCP+A2A 双协议支持成为 2026 Agent 互操作性标准
+
+### CrewAI (48,034 ⭐)
+- ⭐ 突破 **48K**（仓库已迁移至 crewAIInc 组织）
+- 新增 AMP Training Tab 文档指南 (#5083)、依赖管理优化
+- 2026 年 3 月添加 **A2A 协议支持**
+- 拥有三种 MCP 传输机制（Stdio、SSE、Streamable HTTPS）
+- 📌 **启示**：MCP 集成深度在主流框架中领先，A2A 支持完善互操作性
+
+### OpenAI Agents SDK (20,570 ⭐)
+- ⭐ 稳定增长
+- 新增公共 flush_traces API (#2844)
+- 修复 SQLite session 写入的文件锁序列化问题 (#2843)
+- 多语言文档更新
+- 📌 **启示**：可观测性 API 公开化，session 存储可靠性提升
+
+### Google ADK (18,741 ⭐)
+- ⭐ 稳定增长
+- 新增 token 缺失时的凭证自动刷新
+- SecretManagerClient 区域端点支持
+- BashTool 子进程可配置资源限制
+- 📌 **启示**：GCP 认证流程和工具安全配置持续完善
+
+### BMAD-METHOD (43,565 ⭐)
+- ⭐ 稳定增长
+- 新增 BMad Builder 公告横幅、贡献规范文档 (#2207)
+- 📌 **启示**：社区贡献规范化，AI 驱动敏捷方法论持续进化
+
+---
+
 ## 2026-04-04 框架版本迭代速报
 
 ### Superpowers (134,026 ⭐)

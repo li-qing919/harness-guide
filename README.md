@@ -97,6 +97,42 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-04-05 - MCP+A2A 双协议时代 & Mem0 记忆驱动 Context Engineering
+
+**更新**：
+
+1. **MCP+A2A 双协议成为 Agent 互操作性标准**
+   - 🔥 LangGraph、CrewAI、Google ADK 相继支持 MCP+A2A 双协议
+   - 💡 CrewAI 拥有三种 MCP 传输机制（Stdio、SSE、Streamable HTTPS），集成深度领先
+   - 📌 框架间 Agent 协作能力大幅提升，互操作性进入新阶段
+
+2. **Mem0 Context Engineering 完整指南**
+   - 📝 来源：[Mem0 - Context Engineering for AI Agents: Complete Guide](https://mem0.ai/blog/context-engineering-ai-agents-guide)
+   - 🎯 从记忆系统角度定义 Context Engineering：结构化上下文和记忆使 AI 系统随时间智能行为
+   - 💡 核心支柱：记忆管理（持久化+语义检索）、RAG 增强（检索+压缩）、智能格式化（精确时机）
+   - 🏗️ 记忆压缩引擎：写入→语义搜索→智能压缩→记忆类型隔离
+
+3. **框架版本更新**
+   - Superpowers — **135,171** ⭐ 🚀（+1,145）— 突破 135K
+   - DeerFlow — **57,803** ⭐ — 并发线程修复、附件上传修复
+   - CrewAI — **48,034** ⭐ — 突破 48K，MCP+A2A 双协议
+   - BMAD-METHOD — **43,565** ⭐ — 贡献规范化
+   - LangGraph — **28,419** ⭐ — MCP+A2A 双协议支持
+   - OpenAI Agents SDK — **20,570** ⭐ — 公共 flush_traces API
+   - Google ADK — **18,741** ⭐ — 凭证自动刷新、BashTool 资源限制
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-04-05 框架版本迭代速报（7 个框架全部更新，突出 MCP+A2A 双协议）
+- `04-best-practices.md` — 新增 #28 Mem0 Context Engineering 完整指南（记忆压缩引擎架构、与 Phil Schmid 方法对比）
+- `05-case-studies.md` — 新增 2026-04-05 补充（MCP+A2A 双协议时代分析、Mem0 记忆驱动 Context Engineering、框架增长数据）
+
+**关键洞察**：
+- 🔗 **MCP+A2A 双协议标准**：2026 年 Agent 互操作性进入新阶段，框架间协作能力大幅提升
+- 🧠 **记忆即上下文**：Mem0 的记忆压缩引擎与 Phil Schmid 的信息流架构形成互补
+- 🚀 **Superpowers 135K**：继续保持最快增长速度
+
+---
+
 ### 2026-04-04 - 行业标准化里程碑 & 上下文瓶颈新认知
 
 **更新**：
