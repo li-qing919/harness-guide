@@ -550,6 +550,58 @@ async function verifyUI() {
 
 ---
 
+## 2026-04-08 框架版本迭代速报
+
+### Superpowers (139,330 ⭐)
+- ⭐ 单日增长强劲，突破 **139K** 🚀
+- 修复 Discord 邀请链接 (2026-04-06)
+- 添加发布公告链接，整合社区部分 (2026-04-02)
+- 📌 **启示**：社区运营和发布流程持续规范化，逼近 140K 里程碑
+
+### DeerFlow (59,117 ⭐)
+- ⭐ 持续增长突破 **59K**
+- `fix(provider)`: 修复流式 Codex 输出当 `response.completed.output` 为空时的保留问题 (#1928, 2026-04-07)
+- `fix(backend)`: 改进循环检测，使用稳定键对工具调用进行哈希 (#1911, 2026-04-07)
+- `fix(frontend)`: 统一本地设置运行时状态并移除侧边栏布局 (#1879, 2026-04-07)
+- 📌 **启示**：循环检测哈希优化是长周期 Agent 自主运行的稳定性关键
+
+### LangGraph (28,647 ⭐)
+- ⭐ 稳定增长突破 **28.6K**
+- CLI Docker 构建新增原生 uv workspace/lockfile 支持 (#7342, 2026-04-08)
+- langgraph 版本从 1.1.2 升至 1.1.5 (#7435, 2026-04-07)
+- CLI lockfile 相关发布修复 (#7436, 2026-04-08)
+- 📌 **启示**：uv workspace 原生支持提升 Python 依赖管理体验
+
+### CrewAI (48,278 ⭐)
+- ⭐ 突破 **48K**
+- `refactor`: 使用共享 PRINTER 单例 (2026-04-07)
+- `fix`: 移除 FilteredStream stdout/stderr 包装器，解决线程锁定问题 (2026-04-07)
+- `chore`: 移除未使用的 flow/config.py (2026-04-07)
+- 📌 **启示**：代码清理和线程安全修复反映 v1.13 稳定版后的持续打磨
+
+### OpenAI Agents SDK (20,633 ⭐)
+- ⭐ 稳定增长突破 **20.6K**
+- `fix`: 加强 SQLAlchemySession 对 SQLite 临时锁的鲁棒性 (#2854, 2026-04-07)
+- `docs`: 更新翻译文档页面 (#2853, 2026-04-07)
+- `docs(tracing)`: 添加 HoneyHive 到追踪集成列表 (#2851, 2026-04-07)
+- 📌 **启示**：可观测性生态扩展（HoneyHive）和 session 存储鲁棒性持续提升
+
+### Google ADK (18,797 ⭐)
+- ⭐ 稳定增长逼近 **19K**
+- `feat`: 为 ADK Web Server 添加 Trigger 端点 (2026-04-07)
+- `docs`: 清理 remote triggers README，移除内部引用 (2026-04-07)
+- `docs`: 更新 MCP Toolbox 文档站 URL (2026-04-07)
+- 📌 **启示**：Trigger 端点为外部事件驱动的 Agent 编排提供基础设施
+
+### BMAD-METHOD (43,896 ⭐)
+- ⭐ 稳定增长突破 **43K**
+- `refactor(quick-dev)`: 消除 spec-wip.md 单例模式 (#2214, 2026-04-07)
+- `feat(installer)`: 全面改进品牌、版本控制和技能清理 (#2223, 2026-04-07)
+- `chore(install)`: 停止默认复制技能提示到 _bmad 目录 (#2182, 2026-04-07)
+- 📌 **启示**：installer 品牌化和技能清理优化提升用户首次体验
+
+---
+
 ## 2026-04-05 框架版本迭代速报
 
 ### Superpowers (135,171 ⭐)

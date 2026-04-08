@@ -97,6 +97,52 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-04-08 - Anthropic 三 Agent 架构深度解析 & HumanLayer 四杠杆模型
+
+**更新**：
+
+1. **Anthropic 长时运行 Harness 设计深度解析**
+   - 📝 来源：[Anthropic - Harness Design for Long-Running App Development](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+   - 🎯 三 Agent Harness（初始化器 + 编码器 + 上下文交接）官方详解
+   - 💡 Opus 4.6 显著提升规划能力和长上下文检索
+
+2. **OpenAI Harness Engineering 方法论详解**
+   - 📝 来源：[OpenAI Blog - Harness Engineering](https://openai.com/index/harness-engineering/)
+   - 🎯 机器可读制品驱动 Agent 可靠执行
+   - 💡 从空仓库起步、Agent 可读性、执行计划三大关键实践
+
+3. **HumanLayer：Harness 作为 Context Engineering 子集**
+   - 📝 来源：[HumanLayer - Skill Issue](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+   - 🎯 四杠杆模型：系统提示、工具/MCP、子 Agent、钩子
+   - 💡 Claude Code 的 Explore/Bash 子 Agent 上下文封装分析
+
+4. **Sud Shekhar：自主 Agent 的 Context Engineering**
+   - 📝 来源：[Sud Shekhar - From Prompts to Context](https://www.sudshekhar.com/blog/from-prompts-to-context-mastering-context-engineering-for-autonomous-ai-agents)
+   - 🎯 从静态提示到动态上下文到完整 Harness 的演进
+   - 💡 Entry Control → Runtime Management → Knowledge Layer 三层架构
+
+5. **框架版本更新**
+   - Superpowers — **139,330** ⭐ 🚀（+4,159）— 逼近 140K
+   - DeerFlow — **59,117** ⭐ — 循环检测哈希优化
+   - CrewAI — **48,278** ⭐ — 线程安全修复
+   - BMAD-METHOD — **43,896** ⭐ — installer 品牌化
+   - LangGraph — **28,647** ⭐ — uv workspace 支持
+   - OpenAI Agents SDK — **20,633** ⭐ — HoneyHive 追踪集成
+   - Google ADK — **18,797** ⭐ — Trigger 端点
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-04-08 框架版本迭代速报（7 个框架全部更新）
+- `04-best-practices.md` — 新增 #29 HumanLayer 四杠杆模型、#30 Sud Shekhar Context Engineering
+- `05-case-studies.md` — 新增 Anthropic 三 Agent 深度解析、OpenAI 方法论详解、HumanLayer 分析、框架增长数据
+
+**关键洞察**：
+- 🏗️ **三 Agent 架构验证**：Anthropic 的初始化器+编码器+上下文交接模式解决长时运行退化问题
+- 📐 **四杠杆模型**：HumanLayer 提供了 Harness Engineering 的简洁理论框架
+- 🔧 **机器可读制品**：OpenAI 强调将人类知识转化为 Agent 可消费的格式
+- 🚀 **Superpowers 139K**：逼近 140K 里程碑，单周增长超 4K
+
+---
+
 ### 2026-04-05 - MCP+A2A 双协议时代 & Mem0 记忆驱动 Context Engineering
 
 **更新**：

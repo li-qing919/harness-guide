@@ -603,3 +603,56 @@ quality_gates:
 - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) — **28,419** ⭐（+63）— MCP+A2A 双协议
 - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) — **20,570** ⭐（+19）— flush_traces API
 - [google/adk-python](https://github.com/google/adk-python) — **18,741** ⭐（+11）— 凭证自动刷新
+
+---
+
+## 2026-04-08 补充：Anthropic 三 Agent 架构深度解析 & HumanLayer 四杠杆模型
+
+### Anthropic：长时运行应用开发的 Harness 设计深度解析
+
+- 📝 来源：[Anthropic - Harness Design for Long-Running Application Development](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+- 🎯 Anthropic 工程团队正式公开其**三 Agent Harness** 架构：初始化器 + 编码器 + 上下文交接
+- 💡 设计源自 Claude Code 的前端设计技能和早期长时运行编码 Agent 实验
+- 🔑 核心机制：
+  1. **初始化器**：分解产品规格为任务列表
+  2. **编码器**：逐功能实现，每完成一个功能后重置上下文
+  3. **上下文交接**：跨会话传递进度、决策和文件状态
+- 💡 **Opus 4.6** 在此架构基础上显著提升了规划能力和长上下文检索
+- 📌 **启示**：三 Agent 架构解决了单 Agent 长时运行的上下文退化问题，通过上下文重置和制品交接维持质量
+
+### OpenAI：Harness Engineering 方法论官方详解
+
+- 📝 来源：[OpenAI Blog - Harness Engineering](https://openai.com/index/harness-engineering/)
+- 🎯 OpenAI 详细阐述了内部 Harness Engineering 方法论，利用 Codex AI Agent 执行代码编写、测试生成和可观测性管理
+- 🔑 核心思想：将脚手架、反馈循环、文档和架构约束编码为**机器可读制品**，让 Agent 在工程工作流中可靠执行
+- 💡 关键实践：
+  1. 从空 Git 仓库起步，以仓库知识为记录系统
+  2. 追求 Agent 可读性（Agent Legibility）
+  3. 执行计划（Execution Plans）驱动任务分解
+- 📌 **启示**：机器可读制品是 Harness Engineering 的核心输出，将人类知识转化为 Agent 可消费的格式
+
+### HumanLayer：四杠杆模型 —— Harness 作为 Context Engineering 子集
+
+- 📝 来源：[HumanLayer - Skill Issue: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+- 🎯 HumanLayer CTO 将 Harness Engineering 精确定义为 Context Engineering 的子集
+- 💡 四个核心杠杆：系统提示、工具/MCP 选择、子 Agent、钩子
+- 🔑 深度分析了 Claude Code 的 Explore/Bash 子 Agent 如何实现上下文封装
+- 📌 **启示**：提供了一个简洁的理论框架——Harness Engineering 就是通过四个杠杆精确控制 Agent 的上下文窗口
+
+### Sud Shekhar：从 Prompts 到 Context 的自主 Agent 演进
+
+- 📝 来源：[Sud Shekhar - Mastering Context Engineering for Autonomous AI Agents](https://www.sudshekhar.com/blog/from-prompts-to-context-mastering-context-engineering-for-autonomous-ai-agents)
+- 🎯 2026 年可靠 AI 的核心是 Context Engineering——为自主 Agent 架构动态信息环境
+- 💡 从静态提示到动态上下文到完整 Harness 的三阶段演进
+- 🔑 自主 Agent 的关键要素：结构化上下文注入、记忆管理、状态追踪、错误恢复
+- 📌 **启示**：Context Engineering 从定性建议走向结构化工程，Entry Control → Runtime Management → Knowledge Layer 三层架构
+
+### 框架生态持续增长（2026-04-08 数据）
+
+- [obra/superpowers](https://github.com/obra/superpowers) — **139,330** ⭐ 🚀（+4,159）— 社区运营规范化
+- [bytedance/deer-flow](https://github.com/bytedance/deer-flow) — **59,117** ⭐（+1,314）— 循环检测哈希优化
+- [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) — **48,278** ⭐（+244）— 线程安全修复
+- [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) — **43,896** ⭐（+331）— installer 品牌化
+- [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) — **28,647** ⭐（+228）— uv workspace 支持
+- [openai/openai-agents-python](https://github.com/openai/openai-agents-python) — **20,633** ⭐（+63）— HoneyHive 追踪集成
+- [google/adk-python](https://github.com/google/adk-python) — **18,797** ⭐（+56）— Trigger 端点
