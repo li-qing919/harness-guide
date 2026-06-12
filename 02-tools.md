@@ -838,3 +838,52 @@ async function verifyUI() {
 - 新增法语翻译输出路径解析文档 (#2140)
 - quick-dev 模式 one-shot 路由生成 spec trace 文件 (#2121)
 - 修复 party-mode 下 solo 模式响应展示 (#2164)
+
+---
+
+## 2026-06-13 框架版本迭代速报
+
+### Superpowers (225,916 ⭐)
+- `v5.1.0` (2026-05-04)
+- 🚀 Star 数突破 **225K**，遥遥领先所有 Agent 框架
+- 贡献者指南更新：要求披露创作环境和目标开发环境
+- 新 harness PR 需提供会话记录
+
+### DeerFlow (71,051 ⭐)
+- ⭐ 突破 **71K**，持续高速增长
+- 性能优化：为 MemoryRunEventStore 添加索引避免 O(n) 扫描
+- 清理未使用的 completion reminder 计数器
+- 修复 repo-root 解析和共享检测器 CLI shim
+
+### CrewAI (53,367 ⭐)
+- `v1.14.7` (2026-06-12)
+- ⭐ 突破 **53K**
+- 月搜索量 14,800，仅次于 LangGraph
+- 持续迭代多 Agent 协作框架
+
+### BMAD-METHOD (49,020 ⭐)
+- `v6.8.0` (2026-06-12)
+- ⭐ 逼近 **49K**
+- 安装器新增 Python 版本检测（3.11+ tomllib 要求）
+- 修复安装后空 skill-group 目录残留
+- 新增共享规范 memlog 脚本 (src/scripts/memlog.py)
+
+### LangGraph (34,552 ⭐)
+- `v1.2.5` (2026-06-12)
+- ⭐ 突破 **34K**
+- 修复 `lc_versions` 配置元数据合并问题
+- 依赖升级 tornado 至 6.5.6
+- 月搜索量 27,100，仍是最广泛采用的多 Agent 框架
+
+### OpenAI Agents SDK (27,111 ⭐)
+- `v0.17.5` (2026-06-11)
+- ⭐ 突破 **27K**
+- 文档修复：agent loop 描述的主谓一致性、tracing 文档大小写
+- 轻量级多 Agent 工作流框架，基于 Responses API 构建
+
+### Google ADK (20,089 ⭐)
+- `v1.35.0` (2026-06-12)
+- ⭐ 突破 **20K**
+- McpToolset 迁移至 AsyncAuthorizedSession 以支持 mTLS
+- 测试套件通过并行化和去重加速
+- code-first 的 Python Agent 工具包

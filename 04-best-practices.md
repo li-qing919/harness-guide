@@ -1510,3 +1510,104 @@ context_engineering:
 ---
 
 *更新时间：2026-04-08*
+
+---
+
+## 23. Anthropic：有效上下文工程补充实践（2026-06-13 更新）
+
+**来源**：[Anthropic - Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
+
+Anthropic 进一步强调上下文工程是系统性管理整个上下文状态的策略，补充了以下关键实践：
+
+### 工具结果清除是最轻量的上下文压缩
+
+- Agent 完成工具调用后，大体积返回值应及时从上下文中清除
+- 这比复杂的摘要压缩更简单、更可控
+- 防止历史消息无限膨胀挤占系统指令和工具定义空间
+
+### 基于文件的内存系统
+
+- 利用文件系统在上下文窗口之外持久化存储信息
+- Agent 可按需查询，避免一次性加载全部历史
+- Claude Code 使用这种方式对大型数据库执行复杂数据分析
+
+### 上下文感知数据分析
+
+- Claude Code 采用上下文感知方法处理大型数据集
+- 不是将整个数据库塞入上下文，而是按需查询和渐进分析
+- 核心思路：**让 Agent 控制信息流入，而非被动接收**
+
+---
+
+## 24. Sourcegraph：Context Engineering 四大支柱框架（2026-06-13 更新）
+
+**来源**：[Sourcegraph - Context Engineering](https://sourcegraph.com/blog/context-engineering)
+
+### Prompt Engineering vs Context Engineering
+
+> **关键区分**：Prompt Engineering 关注的是**一个句子**怎么写；Context Engineering 关注的是**产生该句子及其周围一切的整个流水线**。
+
+### 四大支柱
+
+| 支柱 | 核心职责 | 实践要点 |
+|------|---------|---------|
+| **上下文收集** | 获取相关信息 | 代码搜索、文档检索、依赖分析 |
+| **上下文过滤** | 去噪提纯 | 相关性评分、优先级排序、冗余剔除 |
+| **上下文组装** | 结构化组织 | 按任务阶段排列、控制信息密度 |
+| **上下文维护** | 动态更新 | 状态追踪、过期清理、增量刷新 |
+
+### 对 Coding Agent 的实践指导
+
+1. **构建可靠的上下文管线**：从代码仓库 → 相关文件 → 精确符号的流水线
+2. **生产环境要求**：上下文质量直接决定代码生成质量，需要严格的质量控制
+3. **可观测性**：监控每次 Agent 调用的上下文构成，定位信息瓶颈
+
+---
+
+## 25. Manus 团队：构建 AI Agent 的上下文工程经验教训（2026-06-13 更新）
+
+**来源**：[Manus - Context Engineering for AI Agents: Lessons from Building Manus](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus)
+
+Manus 团队从生产级 AI Agent 开发中总结的实战经验：
+
+### 1. KV-cache 优化
+
+- 相同前缀的上下文可以大幅降低 TTFT（首 Token 延迟）和推理成本
+- **实践**：将系统指令、工具定义等稳定部分放在上下文前部，动态内容放在后部
+- 这样即使对话历史变化，前缀缓存仍然有效
+
+### 2. 上下文感知状态机
+
+- 使用状态机管理每个阶段可用工具的子集
+- **关键问题**：上下文中残留已失效的工具描述会让模型混淆
+- **解决方案**：根据 Agent 当前状态动态调整工具列表，而非始终暴露全部工具
+
+### 3. 节奏陷阱（Cadence Trap）
+
+> Agent 倾向于重复相似动作，仅仅因为上下文中看到的就是这些——这叫"节奏陷阱"。
+
+- **症状**：Agent 在某个模式上循环，不主动探索新方向
+- **原因**：上下文惯性——模型倾向于延续已有模式
+- **解决方案**：在 harness 中注入多样性信号，如随机采样策略、显式的"打破循环"指令
+
+### 生产环境建议
+
+```yaml
+harness_anti_patterns:
+  kv_cache_optimization:
+    - stable_prefix: "系统指令 + 工具定义放在前部"
+    - dynamic_suffix: "对话历史和中间结果放在后部"
+    
+  tool_state_machine:
+    - per_stage_tools: "按阶段暴露工具子集"
+    - cleanup: "移除已失效工具描述"
+    
+  cadence_breaker:
+    - diversity_signal: "注入随机探索指令"
+    - loop_detection: "检测重复模式并主动干预"
+    - explicit_reset: "定期清理上下文重启节奏"
+```
+
+---
+
+*更新时间：2026-06-13*
