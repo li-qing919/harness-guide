@@ -656,3 +656,36 @@ quality_gates:
 - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) — **28,647** ⭐（+228）— uv workspace 支持
 - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) — **20,633** ⭐（+63）— HoneyHive 追踪集成
 - [google/adk-python](https://github.com/google/adk-python) — **18,797** ⭐（+56）— Trigger 端点
+
+---
+
+## 案例 10：旧金山 Harness Engineering & AI Factories 实地报告（2026-06-14 更新）
+
+**来源**：[Escape.tech - Everything I Learned About Harness Engineering and AI Factories in SF](https://escape.tech/blog/everything-i-learned-about-harness-engineering-and-ai-factories-in-san-francisco-april-2026)
+
+2026 年 3 月最后一周，作者在旧金山与各规模公司的 CTO/CPO/工程领袖交流 AI Agent 实战经验，参加 YC DevTool Day（3/27）和 All Things Dev（3/31），总结了当前行业最前沿的 Harness Engineering 实践模式。
+
+### 核心发现
+
+1. **AI 工厂架构分化**：
+   - 大型企业倾向于自研 Harness 层 + 多模型路由
+   - 中型公司偏好 LangGraph + LangSmith 组合
+   - 初创公司多从 DeerFlow / CrewAI 起步
+
+2. **Harness Engineering 已成为独立角色**：
+   - 从 DevOps / Platform Engineering 中分化出来
+   - 专注于 Agent 上下文管理、工具编排、评估闭环
+   - 需要同时理解 ML 和传统软件工程
+
+3. **生产化关键挑战**：
+   - 评估闭环（Eval Loop）是最耗时但最关键的投资
+   - 上下文文件维护（AGENTS.md 等）需要流程化保障
+   - 多 Agent 协作的调试和可观测性仍是痛点
+
+### 行业阶段判断
+
+> Harness Engineering 正处于从 "前沿实践" 向 "行业标准" 过渡的拐点。2026 年下半年将看到更多标准化工具和最佳实践的出现。
+
+---
+
+*更新时间：2026-06-14*

@@ -364,4 +364,61 @@ handoff_artifact:
 
 ---
 
-*更新时间：2026-06-13*
+---
+
+## VS Code 团队：GitHub Copilot 的 Coding Harness 架构（2026-06-14 补充）
+
+**来源**：[VS Code Blog - Agent Harnesses in GitHub Copilot](https://code.visualstudio.com/blogs/2026/05/15/agent-harnesses-github-copilot-vscode)
+
+VS Code 团队公开了 GitHub Copilot 背后的编码 Harness 架构设计，揭示了工业级 Coding Agent 的内部运作方式。
+
+### 三大核心循环职责
+
+```
+┌─────────────────────────────────────────────────────┐
+│                  Agent Main Loop                    │
+│                                                      │
+│  1. 上下文组装 (Context Assembly)                    │
+│     • 从工作区收集相关文件、符号、定义               │
+│     • 注入用户指令和系统提示                         │
+│     • 管理上下文窗口的 token 预算                    │
+│                                                      │
+│  2. 工具暴露 (Tool Exposure)                         │
+│     • 根据当前模式动态选择可用工具                    │
+│     • 将工具定义序列化为模型可理解的格式              │
+│     • 处理工具描述的优先级和 token 分配              │
+│                                                      │
+│  3. 工具执行 (Tool Execution)                        │
+│     • 安全执行模型选择的工具调用                      │
+│     • 捕获执行结果并格式化为上下文反馈               │
+│     • 处理错误和超时                                 │
+└─────────────────────────────────────────────────────┘
+```
+
+### 多 Provider 模型路由
+
+Copilot Harness 支持多家模型 Provider 的统一抽象：
+
+| Provider | 代表模型 | 特化能力 |
+|----------|---------|----------|
+| Anthropic | Claude Sonnet/Opus | 长上下文推理 |
+| Google | Gemini | 多模态理解 |
+| OpenAI | GPT 系列 | 通用编码 |
+| xAI | Grok | 实时信息 |
+| Mistral | Mistral Large | 欧洲合规 |
+
+### VSC-Bench 评估套件
+
+- VS Code 团队构建了 **VSC-Bench**：一套面向 Coding Agent 的系统化评估基准
+- 每次模型或 Harness 变更都通过 **PR 门控评估** 流程验证
+- 确保新功能不引入回归问题
+
+### 关键架构启示
+
+1. **Harness 是 IDE 级基础设施**：不是简单的插件，而是深度集成到编辑器的核心循环中
+2. **工具暴露需要动态管理**：不同上下文阶段暴露不同工具子集，减少模型混淆
+3. **评估驱动开发**：工业化 Agent 系统需要基准测试门控，类似传统 CI/CD
+
+---
+
+*更新时间：2026-06-14*

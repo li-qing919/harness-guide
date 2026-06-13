@@ -881,9 +881,56 @@ async function verifyUI() {
 - 文档修复：agent loop 描述的主谓一致性、tracing 文档大小写
 - 轻量级多 Agent 工作流框架，基于 Responses API 构建
 
-### Google ADK (20,089 ⭐)
+### Google ADK (20,097 ⭐)
 - `v1.35.0` (2026-06-12)
 - ⭐ 突破 **20K**
 - McpToolset 迁移至 AsyncAuthorizedSession 以支持 mTLS
 - 测试套件通过并行化和去重加速
 - code-first 的 Python Agent 工具包
+
+---
+
+## 2026-06-14 框架版本迭代速报
+
+### Superpowers (226,855 ⭐)
+- ⭐ 持续增长，逼近 **227K**
+- `v5.1.0` (2026-05-04) 为当前稳定版
+- 贡献者环境披露要求延续了 v5.1.0 的透明度策略
+- 以 Skills 为核心抽象的 Agent 驱动软件开发方法论持续巩固
+
+### DeerFlow (71,114 ⭐)
+- ⭐ 突破 **71K**，持续高速增长
+- 新增维护者工作流技能 (maintainer issue and PR workflow, #3554)
+- Discord 频道文件句柄修复 (#3561)
+- 从字节跳动内部工具演化为社区驱动的通用 Agent Harness 平台
+
+### CrewAI (53,464 ⭐)
+- `v1.14.7` (2026-06-12)
+- ⭐ 持续增长突破 **53K**
+- 已被 Fortune 500 60%+ 企业采用
+- 角色定义 + 任务分配的简洁模式成为快速原型和多 Agent 协作首选
+
+### BMAD-METHOD (49,068 ⭐)
+- `v6.8.0` (2026-06-12)
+- ⭐ 逼近 **49K**，接近 5 万里程碑
+- 安装器持续完善：Python 版本检测、空 skill-group 目录清理
+- AI 驱动敏捷方法论需求强劲
+
+### LangGraph (34,647 ⭐)
+- `v1.2.5` (2026-06-12)
+- ⭐ 突破 **34.6K**
+- CI 安全加固：GitHub Actions pin 到 commit SHA (#8065)
+- 文档标准化：统一 package README 结构 (#8066)
+- 被多家评测列为生产环境 Agent 编排首选框架
+
+### OpenAI Agents SDK (27,129 ⭐)
+- `v0.17.5` (2026-06-11)
+- ⭐ 突破 **27K**
+- 配套 OpenAI AgentKit 和 Harness Engineering 指南形成完整工具链
+- Handoff 机制（Agent 间显式传递控制权）为核心特色
+
+### Google ADK (20,097 ⭐)
+- `v1.35.0` (2026-06-12)
+- ⭐ 略有增长
+- 文档对齐 Python 3.10+ 要求，清理内部辅助脚本
+- 与 Gemini 模型深度集成，支持 MCP 协议和 A2A 通信

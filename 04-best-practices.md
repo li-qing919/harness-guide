@@ -1610,4 +1610,51 @@ harness_anti_patterns:
 
 ---
 
-*更新时间：2026-06-13*
+## 26. Packmind：Context Engineering 完整实践指南（2026-06-14 更新）
+
+**来源**：[Packmind - Context Engineering Best Practices](https://packmind.com/context-engineering-ai-coding/context-engineering-best-practices)
+
+Packmind 编译了 30+ 可操作的上下文工程实践，覆盖从编写有效的上下文文件到构建大规模 ContextOps 基础设施的完整链路。
+
+### 行业现状数据
+
+- **91%** 的工程组织已采用至少一种 AI 编码工具
+- **84%** 开发者使用 AI 工具
+- **41%** 代码由 AI 生成或辅助
+
+### 核心问题定位
+
+> **问题不是模型能力不足**——工具很快，但输出不遵循团队的约定、架构决策和构建方式。
+
+上下文工程的目标是让 AI 编码工具产出符合团队标准的代码，而非各自为战的 "AI slop"。
+
+### 实践框架
+
+#### 第一层：上下文文件（Context Files）
+
+- **AGENTS.md 规范**：作为 Agent 的入口文档，描述项目结构、约定和关键约束
+- **分层上下文注入**：根目录 → 模块目录 → 组件目录，逐级细化上下文
+- **约定文件**：编码规范、架构决策记录（ADR）、API 设计指南
+
+#### 第二层：上下文窗口管理（Context Window Management）
+
+- **Token 预算分配**：系统指令 ~20%、工具定义 ~30%、任务上下文 ~40%、生成空间 ~10%
+- **渐进式加载**：先加载摘要，按需展开详情
+- **上下文压缩**：对长对话历史进行结构化摘要
+
+#### 第三层：团队级 ContextOps
+
+- **约定即代码**：将团队编码标准转化为 Agent 可读的规则文件
+- **上下文版本管理**：随代码库演进的上下文文件版本控制
+- **CI 集成验证**：在 CI 中验证上下文文件的新鲜度和一致性
+
+### 与其他最佳实践的关系
+
+本指南与 Anthropic 上下文工程指南（§23）和 Sourcegraph 四大支柱框架（§24）形成互补：
+- Anthropic 侧重**策略和工具**（Memory Tool、文件系统）
+- Sourcegraph 侧重**流程和架构**（收集-过滤-组装-维护）
+- Packmind 侧重**团队落地和规模化**（AGENTS.md、ContextOps、CI 集成）
+
+---
+
+*更新时间：2026-06-14*}
