@@ -97,6 +97,62 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-06-18 - Harness Engineering 方法论体系化 & Terminal Bench 实证
+
+**更新**：
+
+1. **OpenAI 发布 Harness Engineering 官方指南**
+   - 📝 来源：[OpenAI Blog](https://openai.com/index/harness-engineering)
+   - 🎯 Agent Legibility + Repository Knowledge as System of Record
+   - 💡 超百万行代码、零人工编写的生产应用实践
+
+2. **Anthropic 长期运行 Agent 有效 Harness 设计**
+   - 📝 来源：[Anthropic Engineering Blog](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
+   - 🎯 初始化 Agent + 编码 Agent + 上下文交接的多窗口编排
+   - 💡 init.sh / progress.txt / git commit 作为 Agent 间信息传递机制
+
+3. **LangChain Terminal Bench 2.0 实证：Harness > Model**
+   - 📝 来源：[LangChain Blog](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
+   - 🎯 不换模型（gpt-5.2-codex），仅优化 harness → 得分 52.8→66.5，排名 Top 30→Top 5
+   - 💡 「harness 比模型更重要」论点的最强实证
+
+4. **Philipp Schmid（Google DeepMind）Agent Harness 概念框架**
+   - 📝 来源：[Phil Schmid Blog](https://www.philschmid.de/agent-harness-2026)
+   - 🎯 Agent Harness = 包裹 AI 模型管理长期任务的基础设施层
+   - 💡 运行在比 Agent 框架更高的层级
+
+5. **arXiv 论文提出 Natural-Language Agent Harnesses（NLAHs）**
+   - 📝 来源：[arXiv](https://arxiv.org/html/2603.25723v1)
+   - 🎯 harness 控制逻辑外化为可移植自然语言工件
+   - 💡 显式契约 + 持久化工件 + 轻量适配器
+
+6. **Context Engineering 三篇重磅指南**
+   - 📝 来源：[Towards AI](https://pub.towardsai.net/state-of-context-engineering-in-2026-cf92d010eab1) / [Sourcegraph](https://sourcegraph.com/blog/context-engineering) / [Digital Applied](https://www.digitalapplied.com/blog/context-engineering-agent-reliability-playbook-2026)
+   - 🎯 五大模式 + 四大支柱 + 四种失败模式/四个杠杆
+   - 💡 Anthropic 定义：「Context Engineering 是策划和维护最佳 token 集合的策略集合」
+
+7. **框架版本更新**
+   - Superpowers — **224,700+** ⭐ — 787K 安装，较 2 月增长 4 倍
+   - DeerFlow — **66,000+** ⭐ — DeerFlow 2.0 开源，定位 SuperAgent harness
+   - LangGraph — **35,000+** ⭐ — langgraph-cli==0.4.30，548 个 release
+   - CrewAI — **31,500+** ⭐ — CLI 大量增强，安全审计提升
+   - OpenAI Agents SDK — **27,200+** ⭐ — v0.17.5，sandbox 安全强化
+   - Google ADK — ADK 2.0 重大更新，Agent + Workflow 双抽象
+   - BMAD-METHOD — v6.7.0+，双轴契约 + Web Bundles
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-06-18 框架版本迭代速报（7 个框架全部更新）
+- `04-best-practices.md` — 新增 #27 Context Engineering 五大模式、#28 四大支柱、#29 Agent 可靠性手册
+- `05-case-studies.md` — 新增案例 11-15（OpenAI 指南、Anthropic 多窗口编排、LangChain 实证、Phil Schmid 框架、arXiv NLAHs 论文）
+
+**关键洞察**：
+- 🧱 **方法论体系化**：Harness Engineering 从实践走向理论——OpenAI/Anthropic 官方指南 + 学术论文 + 概念框架同步出现
+- 📊 **实证验证**：LangChain Terminal Bench 实验量化证明了 harness 优化的价值（+13.7 分，排名跃升 25 位）
+- 🔬 **学术化**：arXiv NLAHs 论文标志 Harness Engineering 正式成为学术研究对象
+- 🏗️ **Context Engineering 成熟**：五大模式 + 四大支柱 + 四杠杆形成完整理论体系
+
+---
+
 ### 2026-04-08 - Anthropic 三 Agent 架构深度解析 & HumanLayer 四杠杆模型
 
 **更新**：

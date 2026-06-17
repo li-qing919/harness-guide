@@ -688,4 +688,119 @@ quality_gates:
 
 ---
 
-*更新时间：2026-06-14*
+## 案例 11：OpenAI Harness Engineering 官方指南（2026-06-18）
+
+**来源**：[OpenAI - Harness Engineering](https://openai.com/index/harness-engineering)
+
+OpenAI Codex 团队详细阐述了 Harness Engineering 方法论——在超百万行代码、零人工编写的生产应用中，关键不在模型本身，而在围绕模型构建的约束、反馈循环、文档、linter 和生命周期管理系统。
+
+### 核心原则
+
+1. **Agent Legibility（智能体可读性）**：所有项目文档、约定和架构决策必须以 Agent 可消费的格式编写
+2. **Repository Knowledge as System of Record**：代码仓库本身是知识的唯一可信来源，而非外部 wiki 或文档
+3. **约束即自由**：通过 linter、CI 和自动化检查为 Agent 构建安全护栏，使其能在更大范围内自主操作
+
+### 启示
+
+> Harness Engineering 的核心论点：「模型不是瓶颈，harness 才是」。同样的模型，不同的 harness，产出质量天差地别。
+
+---
+
+## 案例 12：Anthropic 长期运行 Agent 的有效 Harness 设计（2026-06-18）
+
+**来源**：[Anthropic - Effective Harnesses for Long-Running Agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
+
+Anthropic 分享了 Claude Agent SDK 在跨上下文窗口运行时的 harness 设计方案。
+
+### 编排架构
+
+- **初始化 Agent（Initializer Agent）**：设置环境——运行 `init.sh` 脚本、创建 `progress.txt` 进度文件、执行初始 git commit
+- **编码 Agent（Coding Agent）**：在增量推进中留下清晰工件（artifact）供下一轮使用
+- **上下文交接**：通过文件系统和 git commit 实现 Agent 间的信息传递
+
+### 关键设计决策
+
+- 每轮 Agent 的输出必须是下一轮的可靠输入
+- 使用文件系统作为持久化层，而非依赖 Agent 的「记忆」
+- git commit 作为检查点（checkpoint），提供回滚能力
+
+### 启示
+
+这是生产级多窗口 Agent 编排的参考实现，解决了「长任务超出单上下文窗口」的核心挑战。
+
+---
+
+## 案例 13：LangChain Terminal Bench 2.0——Harness 优化实证（2026-06-18）
+
+**来源**：[LangChain - Improving Deep Agents with Harness Engineering](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
+
+### 实验
+
+LangChain 团队在 Terminal Bench 2.0 上进行了一项关键实验：**不更换模型**（gpt-5.2-codex），仅通过优化 harness 来提升得分。
+
+### Harness 优化措施
+
+- **自我验证**：Agent 在提交前自动验证输出
+- **Tracing 改进**：更精细的执行追踪，帮助定位失败点
+- **工具调用优化**：减少冗余工具调用，优化工具结果处理
+
+### 结果
+
+| 指标 | 优化前 | 优化后 |
+|------|--------|--------|
+| 得分 | 52.8 | **66.5** |
+| 排名 | Top 30 | **Top 5** |
+
+### 启示
+
+> 这是「harness 比模型更重要」论点的最强实证之一。相同的模型，仅通过 harness 优化，排名从 Top 30 跃升至 Top 5。
+
+---
+
+## 案例 14：Philipp Schmid Agent Harness 概念框架（2026-06-18）
+
+**来源**：[Philipp Schmid - Agent Harness 2026](https://www.philschmid.de/agent-harness-2026)
+
+Philipp Schmid（Google DeepMind）系统定义了 Agent Harness 的概念框架。
+
+### 定义
+
+> Agent Harness 是「包裹 AI 模型以管理长期任务的基础设施层」。
+
+### 核心能力
+
+- Prompt 预设与模板管理
+- 工具调用编排
+- 生命周期 hooks（启动、暂停、恢复、终止）
+- 规划与子 Agent 管理
+- 上下文窗口管理
+
+### 层级定位
+
+> Agent Harness 运行在比 Agent 框架更高的层级——Agent 框架关注单个 Agent 的能力，Agent Harness 关注如何让多个 Agent 协同完成长期任务。
+
+Schmid 强调，Agent Harness Engineering 是 2026 年 Agent 工程的核心学科。
+
+---
+
+## 案例 15：arXiv 论文——自然语言 Agent Harnesses（NLAHs）（2026-06-18）
+
+**来源**：[arXiv - Natural-Language Agent Harnesses](https://arxiv.org/html/2603.25723v1)
+
+### 核心贡献
+
+论文将 harness 控制逻辑外化为可移植的自然语言工件（NLAHs），配合 Intelligent Harness Runtime（IHR）执行。
+
+### 设计模式
+
+1. **显式契约（Explicit Contracts）**：Agent 行为通过明确的自然语言契约定义，而非隐含在代码中
+2. **持久化工件（Persistent Artifacts）**：harness 配置作为可版本控制的工件持久化存储
+3. **轻量适配器（Lightweight Adapters）**：harness 可通过适配器在不同运行时之间迁移
+
+### 学术意义
+
+推动 harness 工程从运行时特定约定走向可迁移、可比较的科学对象。这是首批将 Harness Engineering 作为正式研究对象进行系统分析的学术论文之一。
+
+---
+
+*更新时间：2026-06-18*

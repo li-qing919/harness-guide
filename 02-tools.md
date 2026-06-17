@@ -890,6 +890,60 @@ async function verifyUI() {
 
 ---
 
+## 2026-06-18 框架版本迭代速报
+
+### Superpowers (224,700+ ⭐)
+- 🏆 Anthropic 官方插件市场累计 **787K 安装**
+- ⭐ 较 2 月的 57.5K 增长约 **4 倍**，持续爆发式增长
+- 支持 8 种 harness（Claude Code、Cursor、Codex 等）
+- 核心流程：头脑风暴 → 设计 → 计划 → TDD 实现 → 代码审查
+- 社区评价：「让 Agent 真正遵循工程流程」的突破性项目
+
+### DeerFlow（字节跳动）(66,000+ ⭐)
+- DeerFlow 2.0 于 2026 年 2 月 27 日开源
+- 定位为「SuperAgent harness」框架
+- 提供 Docker 沙箱、完整文件系统和代码执行能力
+- 支持自动编排子 Agent、记忆和沙箱
+- 24 小时内登顶 GitHub Trending
+- 已成为领先的开源深度研究 Agent 框架
+
+### LangGraph (35,000+ ⭐)
+- 最新发布 `langgraph-cli==0.4.30`（2026-06-16）
+- 已累计 **548 个 release**
+- 定位为「构建有状态 Agent 的低层编排框架」，支持图结构工作流
+- 配套发布 Harness Engineering 实战指南（Terminal Bench 验证）
+- 生态持续扩展
+
+### CrewAI (31,500+ ⭐)
+- 仓库已从 `joaomdmoura/crewAI` 迁移至组织账户 `crewAIInc/crewAI`
+- 近期大量 CLI 增强：ZIP 部署回退、JSON crew 项目环境运行
+- 部署锁定安装验证、starlette 安全审计基线提升（PR #6166）
+- 持续在部署可靠性和 CLI 工具体验上投入
+
+### OpenAI Agents SDK (27,200+ ⭐)
+- 最新版本 `v0.17.5`，累计 **102 个 release**
+- 近期重点：sandbox 错误可重试性元数据（#3581）
+- 工具结束 hook 结果类型修复（#3518）
+- sandbox workspace 根路径安全校验（#3422）
+- 禁用工具执行拦截（#3118）
+- Sandbox 和 Realtime 模块持续迭代
+
+### Google ADK（Agent Development Kit）
+- 已发布 **ADK 2.0**，引入重大 API 和事件模型变更
+- 新架构：Agent（定义指令/工具/行为）+ Workflow（图结构编排）
+- 支持嵌套工作流、人在循环中和 Task Agent
+- 推出 ADK Web 开发者 UI（开源）
+- 快速增长的 2026 年新项目
+
+### BMAD-METHOD
+- `v6.7.0+` 重大更新
+- 新规划形态：bmad-ux 用双轴契约（DESIGN.md + EXPERIENCE.md）替换旧 UX skill
+- 推出 Web Bundles 支持 Gemini Gems 和 ChatGPT Custom GPTs
+- 6 个规划模块带到非 IDE 用户
+- bmad-product-brief 从五阶段脚本化工作流重构为单一结果驱动的 SKILL.md
+
+---
+
 ## 2026-06-14 框架版本迭代速报
 
 ### Superpowers (226,855 ⭐)

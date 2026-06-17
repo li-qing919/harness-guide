@@ -1655,6 +1655,76 @@ Packmind 编译了 30+ 可操作的上下文工程实践，覆盖从编写有效
 - Sourcegraph 侧重**流程和架构**（收集-过滤-组装-维护）
 - Packmind 侧重**团队落地和规模化**（AGENTS.md、ContextOps、CI 集成）
 
+## 27. Context Engineering 状态：2026 年五大核心模式
+
+**来源**：[Towards AI - State of Context Engineering in 2026](https://pub.towardsai.net/state-of-context-engineering-in-2026-cf92d010eab1)
+
+### 五大模式
+
+1. **渐进式披露（Progressive Disclosure）**：按需展示信息，避免一次性淹没上下文窗口
+2. **压缩（Compression）**：对长对话历史和工具输出进行结构化摘要
+3. **路由（Routing）**：根据任务类型将请求分发到不同的上下文配置
+4. **演进检索（Evolved Retrieval）**：从简单向量搜索演进到混合检索、重排序等高级策略
+5. **工具管理（Tool Management）**：动态控制工具定义的加载，减少 token 占用
+
+### 技能提取（Skill Extraction）
+
+当 Agent 反复处理同类任务时，可将处理模式提取为新的 skill 文件，动态切换 Agent 身份。这是 Harness Engineering 中「知识沉淀」的关键机制。
+
+### 竞争注意力问题
+
+> 上下文窗口中的每个 token 都在竞争模型注意力——系统指令、工具定义、MCP 资源、检索文档、对话历史和累积操作历史都需纳入管理。
+
 ---
 
-*更新时间：2026-06-14*}
+## 28. Context Engineering 四大支柱（Sourcegraph）
+
+**来源**：[Sourcegraph - Context Engineering](https://sourcegraph.com/blog/context-engineering)
+
+### 定义对比
+
+- **Prompt Engineering** 关注单句——如何措辞一个提示
+- **Context Engineering** 关注产出该句的整个管线——如何为 Agent 组装正确的信息集
+
+### 四大支柱
+
+| 支柱 | 说明 |
+|------|------|
+| **上下文组装（Assembly）** | 收集正确的文件、工具定义、对话历史切片和检索事实 |
+| **上下文压缩（Compaction）** | 防止上下文窗口在自身重量下崩溃，结构化摘要 |
+| **上下文路由（Routing）** | 根据任务类型选择不同的上下文配置策略 |
+| **上下文验证（Verification）** | 验证上下文文件的新鲜度、一致性和正确性 |
+
+### 实践要点
+
+需要为 Agent 提供：正确的文件、工具定义、对话历史切片和检索事实，同时防止上下文窗口在自身重量下崩溃。
+
+---
+
+## 29. Agent 可靠性手册：Context Engineering 工程杠杆
+
+**来源**：[Digital Applied - Context Engineering Agent Reliability Playbook 2026](https://www.digitalapplied.com/blog/context-engineering-agent-reliability-playbook-2026)
+
+### 四种 Agent 特有失败模式
+
+1. **上下文退化（Context Degradation）**：随对话增长，早期关键信息被「遗忘」
+2. **工具结果污染（Tool Result Pollution）**：大量工具输出淹没关键信号
+3. **历史膨胀（History Bloat）**：累积的操作历史占用过多 token 预算
+4. **记忆冲突（Memory Conflicts）**：不同轮次存储的信息相互矛盾
+
+### 四个工程杠杆
+
+1. **Token 预算分配**：为不同类型上下文设定明确的 token 配额
+2. **压缩决策规则**：基于触发条件自动执行上下文压缩
+3. **多 Agent 隔离模式**：用子 Agent 隔离上下文，防止交叉污染
+4. **渐进式上下文加载**：先加载摘要，按需展开详情
+
+### Anthropic 定义引用
+
+> "Context Engineering 是在 LLM 推理过程中策划和维护最佳 token 集合的策略集合。"
+
+有效 Agent 开发需要在*上下文中思考*，而非仅关注系统提示词写得好不好。
+
+---
+
+*更新时间：2026-06-18*}
