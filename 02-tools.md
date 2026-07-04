@@ -944,6 +944,52 @@ async function verifyUI() {
 
 ---
 
+## 2026-07-05 框架版本迭代速报
+
+### Superpowers (246,163 ⭐)
+- `v6.1.1` (latest)
+- ⭐ 突破 **246K**，较 6 月中旬增长约 **20K**（3 周内）🚀
+- 修复 Codex SessionStart Hook 重复注册问题
+- 新增 Codex portal packaging 支持
+- 📌 **启示**：作为最大的 Agentic 技能框架，持续完善与 OpenAI Codex 的集成体验，增速不减
+
+### DeerFlow (ByteDance) (76,092 ⭐)
+- ⭐ 突破 **76K**，较 6 月中旬增长约 **5K** 🚀
+- 新增 **BoxLite micro-VM 沙箱 Provider**（#3940）
+- 基于无守护进程的 OCI 运行时实现更轻量安全的隔离执行环境
+- 📌 **启示**：轻量级沙箱方案是 SuperAgent Harness 走向生产化的关键基础设施
+
+### BMAD-METHOD (50,068 ⭐)
+- ⭐ 突破 **50K** 里程碑 🎉
+- 新增 **verification-gap reviewer** 作为第三层代码审查层（#2535）
+- 通过检查验证逻辑的覆盖缺口来增强代码质量保障
+- 📌 **启示**：三层审查模式（编码→审查→验证缺口检测）体现了 Agentic QA 的持续深化
+
+### CrewAI (54,899 ⭐)
+- ⭐ 突破 **54K**
+- 新增 **Repository-backed Agents**（#6437）
+- 支持在 Flow 定义中直接使用仓库中的 Agent 定义，无需重复 role、goal 和 backstory
+- 📌 **启示**：大幅简化多 Agent 工作流的配置复杂度，DRY 原则在 Agent 定义中的实践
+
+### LangGraph (36,479 ⭐)
+- ⭐ 突破 **36K**，较 6 月中旬增长约 **2K**
+- 持续依赖维护和 CLI 工具更新
+- 保持稳定迭代节奏
+- 📌 **启示**：核心定位为「构建弹性 Agent」的基础框架，稳定性是生产环境的关键优势
+
+### OpenAI Agents SDK (27,647 ⭐)
+- ⭐ 增长至 **27.6K**
+- 更新 runtime-behavior-probe skill 以支持 request_user_input
+- 持续完善 Agent 运行时行为探测和用户交互能力
+- 📌 **启示**：运行时行为探测是 Harness 可观测性的前沿方向
+
+### Google ADK (Agent Development Kit) (20,451 ⭐)
+- ⭐ 增长至 **20.5K**
+- 修复 telemetry 模块：确保实验性语义规范启用时 Agent Engine 日志始终输出到 stdout
+- 📌 **启示**：可观测性是 Agent 生产化的基础需求，telemetry 可靠性持续改善
+
+---
+
 ## 2026-06-14 框架版本迭代速报
 
 ### Superpowers (226,855 ⭐)

@@ -97,6 +97,53 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-07-05 - 框架生态大爆发 & 行业架构趋同
+
+**更新**：
+
+1. **Anthropic 与 OpenAI Agent 架构趋同**
+   - 📝 来源：[Medium](https://medium.com/@rajasekar-venkatesan/anthropic-and-openai-just-shipped-the-same-answer-to-ai-agents-seven-days-apart-c19f2dc03244)
+   - 🎯 七天内独立发布几乎相同的架构（沙箱、检查点、凭据隔离、端到端追踪）
+   - 💡 生产级 Agent 需求已形成行业共识
+
+2. **四年 AI Agent 模式演进史**
+   - 📝 来源：[Bits-Bytes-NN Blog](https://bits-bytes-nn.github.io/insights/agentic-ai/2026/04/05/evolution-of-ai-agentic-patterns-en.html)
+   - 🎯 Prompt Engineering → Context Engineering → Harness Engineering 三次范式迁移
+   - 💡 工程严谨性没有消失，只是转移了位置
+
+3. **InfoQ 演讲：从 Autocomplete 到 Agent**
+   - 📝 来源：[InfoQ/YouTube](https://www.youtube.com/watch?v=_R83pFpUWyM)
+   - 🎯 Thoughtworks 企业级实践：MCP 集成、模块化 Context、成本现实（$380/天/开发者）
+   - 💡 AI 安全「致命三要素」：能力、自主性、上下文丰富度
+
+4. **ClickHouse 12 框架 MCP 集成对比**
+   - 📝 来源：[ClickHouse Blog](https://clickhouse.com/blog/how-to-build-ai-agents-mcp-12-frameworks)
+   - 🎯 MCP 已成为 Agent 集成 de facto 标准
+   - 💡 Claude Agent SDK 安全优先、OpenAI Agents SDK 委托模式、CrewAI 多 Agent 深度集成
+
+5. **框架版本重大里程碑**
+   - Superpowers — **246,163** ⭐ 🚀（+20K，3 周内！）— v6.1.1，Codex portal packaging
+   - DeerFlow — **76,092** ⭐ 🚀（+5K）— 新增 BoxLite micro-VM 沙箱 Provider
+   - BMAD-METHOD — **50,068** ⭐ 🎉 突破 50K — 新增 verification-gap reviewer 三层审查
+   - CrewAI — **54,899** ⭐ — Repository-backed Agents，简化多 Agent 配置
+   - LangGraph — **36,479** ⭐（+2K）— 稳定迭代
+   - OpenAI Agents SDK — **27,647** ⭐ — runtime-behavior-probe 支持 request_user_input
+   - Google ADK — **20,451** ⭐ — telemetry 可观测性改善
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-07-05 框架版本迭代速报（7 个框架全部更新，多个重大里程碑）
+- `04-best-practices.md` — 新增 #31 Anthropic/OpenAI 架构趋同分析、#32 四年模式演进史、#33 ClickHouse 12 框架 MCP 对比
+- `05-case-studies.md` — 新增案例 16-18（架构趋同、模式演进史、InfoQ 企业实践）
+
+**关键洞察**：
+- 🤝 **行业架构趋同**：Anthropic 和 OpenAI 七天内独立发布相同架构，生产级 Agent 需求形成共识
+- 📈 **框架大爆发**：Superpowers 3 周增长 20K stars，BMAD 突破 50K——Agent 工程生态加速成熟
+- 🔧 **沙箱轻量化**：DeerFlow BoxLite micro-VM 标志着沙箱方案从重量级 Docker 向轻量级 OCI 运行时演进
+- 🔍 **三层审查模式**：BMAD verification-gap reviewer 体现 Agentic QA 持续深化
+- 💰 **成本重识**：$380/天/开发者的成本现实要求企业建立清晰的 AI 编码 ROI 模型
+
+---
+
 ### 2026-06-18 - Harness Engineering 方法论体系化 & Terminal Bench 实证
 
 **更新**：

@@ -803,4 +803,103 @@ Schmid 强调，Agent Harness Engineering 是 2026 年 Agent 工程的核心学�
 
 ---
 
-*更新时间：2026-06-18*
+## 案例 16：Anthropic 与 OpenAI 的 Agent 架构趋同（2026-07-05）
+
+**来源**：[Medium - Anthropic and OpenAI Just Shipped the Same Answer](https://medium.com/@rajasekar-venkatesan/anthropic-and-openai-just-shipped-the-same-answer-to-ai-agents-seven-days-apart-c19f2dc03244)
+
+### 背景
+
+2026 年 4 月，Anthropic 发布 Managed Agents，OpenAI 发布 Agents SDK 的重大更新——两者在七天内独立发布了几乎相同的 Agent 架构。
+
+### 共同架构
+
+两家公司不约而同地采用了相同的架构要素：
+
+```
+┌─────────────────────────────────────────────┐
+│              Control Plane                    │
+│  • 任务编排和生命周期管理                       │
+│  • 检查点和状态持久化                           │
+│  • 凭据隔离和安全管理                           │
+└──────────────────┬──────────────────────────┘
+                   │
+┌──────────────────┴──────────────────────────┐
+│            Compute Plane                      │
+│  • 沙箱执行环境                               │
+│  • 工具调用和结果返回                           │
+│  • 端到端追踪                                 │
+└─────────────────────────────────────────────┘
+```
+
+### 行业意义
+
+> 两家顶级 AI 公司在七天内独立发布几乎相同的架构，说明生产级 Agent 的需求已经形成了行业共识——问题空间的客观约束决定了架构选择。
+
+### 启示
+
+- Agent 架构正在从「百花齐放」走向「行业共识」
+- 生产级需求（安全、隔离、追踪、持久化）是架构趋同的驱动力
+- 框架选型风险降低：主流方案越来越相似，切换成本在下降
+
+---
+
+## 案例 17：四年 AI Agent 模式演进史（2026-07-05）
+
+**来源**：[Bits-Bytes-NN - Evolution of AI Agentic Patterns](https://bits-bytes-nn.github.io/insights/agentic-ai/2026/04/05/evolution-of-ai-agentic-patterns-en.html)
+
+### 演进时间线
+
+```
+2022  ────  2023  ────  2024  ────  2025  ────  2026
+  │           │           │           │           │
+  ▼           ▼           ▼           ▼           ▼
+Prompt     Prompt     Context    Context    Harness
+Engineering Engineering Engineering Engineering Engineering
+                                              ▲
+                                    当前阶段 ──┘
+```
+
+### 关键拐点
+
+| 时间 | 拐点 | 触发因素 |
+|------|------|--------|
+| 2023 中 | Prompt → Context | 推理模型兴起，单一 prompt 不够 |
+| 2025 中 | Context → Harness | Agent 需要在生产环境长时间运行 |
+| 2026 初 | Harness 标准化 | OpenAI/Anthropic 发布官方指南 |
+
+### 核心发现
+
+> 工程严谨性没有消失，只是转移了位置——2026 年的关键指标不是 prompt 质量，而是 KV-cache 命中率和 harness 复杂度。
+
+### 启示
+
+这四年演进的最重要的教训是：**每一层范式都没有消失，而是被上层封装和自动化**。Prompt Engineering 仍然重要，但它已经成为 Context Engineering 的子集；Context Engineering 仍然重要，但它已经成为 Harness Engineering 的子集。
+
+---
+
+## 案例 18：InfoQ 演讲——从 Autocomplete 到 Agent 的工程实践（2026-07-05）
+
+**来源**：[InfoQ/YouTube - Birgitta Böckeler (Thoughtworks)](https://www.youtube.com/watch?v=_R83pFpUWyM)
+
+### 背景
+
+Thoughtworks 的 Birgitta Böckeler 在 InfoQ 演讲中探讨了从 Prompt Engineering 到 Harness Engineering 的转变，分享了企业级 AI 编码的实践经验。
+
+### 核心议题
+
+1. **MCP 集成实践**：如何将 MCP 标准化地集成到企业工具链中
+2. **模块化 Context**：将上下文模块化，按需组装，而非一次性加载
+3. **成本现实**：AI 编码的成本约为 **$380/天/开发者**——需要量化 ROI
+4. **子 Agent 研究流程**：通过子 Agent 进行前期研究，再由主 Agent 综合
+5. **AI 安全的「致命三要素」**：
+   - 模型能力越强，风险越大
+   - 自主性越高，控制越难
+   - 上下文越丰富，泄露面越广
+
+### 启示
+
+> 企业级 AI 编码不是技术问题，而是系统工程问题。Thoughtworks 的实践表明，成功的关键在于建立完整的 Harness 层——而非追求单个模型的性能。
+
+---
+
+*更新时间：2026-07-05*

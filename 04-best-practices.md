@@ -1727,4 +1727,104 @@ Packmind 编译了 30+ 可操作的上下文工程实践，覆盖从编写有效
 
 ---
 
-*更新时间：2026-06-18*}
+## 31. Anthropic 与 OpenAI Agent 架构趋同分析（2026-07-05 更新）
+
+**来源**：[Medium - Anthropic and OpenAI Just Shipped the Same Answer to AI Agents Seven Days Apart](https://medium.com/@rajasekar-venkatesan/anthropic-and-openai-just-shipped-the-same-answer-to-ai-agents-seven-days-apart-c19f2dc03244)
+
+### 行业共识里程碑
+
+2026 年 4 月，Anthropic 和 OpenAI 在七天内独立发布了几乎相同的 Agent 架构方案——这是 Agent 工程领域的重要趋同信号。
+
+### 共同架构要素
+
+| 要素 | Anthropic Managed Agents | OpenAI Agents SDK |
+|------|------------------------|-------------------|
+| **沙箱执行** | ✅ 安全隔离执行环境 | ✅ Sandbox 模块 |
+| **检查点** | ✅ 状态持久化 | ✅ Session 管理 |
+| **凭据隔离** | ✅ 安全凭据管理 | ✅ 凭据作用域控制 |
+| **端到端追踪** | ✅ 全链路可观测 | ✅ Tracing 集成 |
+| **控制/计算平面分离** | ✅ 编排与执行解耦 | ✅ Handoff 机制 |
+
+### 关键洞察
+
+> 两家顶级 AI 公司在七天内独立发布几乎相同的架构，说明生产级 Agent 需求已经形成了行业共识——这不是偶然巧合，而是问题空间的客观约束决定了架构选择。
+
+### 实践要点
+
+1. **沙箱不再是可选项**：生产级 Agent 必须有安全隔离的执行环境
+2. **检查点驱动可靠性**：通过状态持久化实现故障恢复和长时任务管理
+3. **凭据隔离是安全底线**：Agent 不应直接接触用户凭据
+4. **全链路追踪是调试基础**：没有可观测性就没有生产可靠性
+
+---
+
+## 32. 从 Prompt 到 Context 到 Harness：四年 AI Agent 模式演进（2026-07-05 更新）
+
+**来源**：[Bits-Bytes-NN - Evolution of AI Agentic Patterns](https://bits-bytes-nn.github.io/insights/agentic-ai/2026/04/05/evolution-of-ai-agentic-patterns-en.html)
+
+### 三次范式迁移（2022-2026）
+
+```
+2022-2023: Prompt Engineering
+  └─ 核心技能：写好提示词
+  └─ 关键产物：System Prompt、Few-shot Examples
+  └─ 评价指标：Prompt 质量
+
+2024-2025: Context Engineering
+  └─ 核心技能：管理上下文状态
+  └─ 关键产物：RAG、记忆系统、工具定义
+  └─ 评价指标：检索精度、上下文利用率
+
+2026: Harness Engineering
+  └─ 核心技能：构建完整运行时基础设施
+  └─ 关键产物：沙箱、子 Agent 编排、生命周期管理、评估闭环
+  └─ 评价指标：KV-cache 命中率、harness 复杂度、任务成功率
+```
+
+### 核心发现
+
+> 工程严谨性没有消失，只是转移了位置——2026 年的关键指标不是 prompt 质量，而是 KV-cache 命中率和 harness 复杂度。
+
+### 实践要点
+
+1. **Prompt 质量不再是关键瓶颈**：在推理模型时代，prompt 的边际价值在下降
+2. **上下文管理成为核心能力**：如何为 Agent 提供正确的信息集比如何写提示更重要
+3. **Harness 是新的竞争壁垒**：完整的运行时基础设施决定了 Agent 的生产可靠性
+4. **能力栈在升高**：每一层范式都没有消失，而是被上层封装和自动化
+
+---
+
+## 33. ClickHouse：12 框架 MCP 集成对比（2026-07-05 更新）
+
+**来源**：[ClickHouse - How to Build AI Agents with MCP: 12 Frameworks Compared](https://clickhouse.com/blog/how-to-build-ai-agents-mcp-12-frameworks)
+
+### MCP 已成为 Agent 集成的事实标准
+
+ClickHouse 对 12 个主流框架的 MCP 集成方式进行了系统对比，覆盖 OpenAI、Gemini、Vertex AI 等平台。
+
+### 关键框架对比
+
+| 框架 | MCP 集成特点 | 最佳场景 |
+|------|-------------|--------|
+| **Claude Agent SDK** | 安全优先，生产环境导向 | Anthropic 生态、安全敏感场景 |
+| **OpenAI Agents SDK** | 委托模式（Delegation Pattern） | OpenAI 生态、快速原型 |
+| **CrewAI** | 多 Agent 工作流深度集成 | 角色协作、多 Agent 编排 |
+| **LangChain** | 生态广度，最多连接器 | 异构系统集成 |
+
+### 关键发现
+
+1. **MCP 标准已确立**：GitHub、AWS、ClickHouse 等大型平台均构建了各自的 MCP Server
+2. **集成深度差异显著**：从简单的工具调用到完整的工作流集成，各框架差异很大
+3. **安全模型不统一**：不同框架对认证、授权和沙箱的处理方式差异大
+4. **生态碎片化风险**：虽然 MCP 统一了协议，但实现细节碎片化
+
+### 实践要点
+
+1. **选择框架时评估 MCP 集成深度**：不仅看是否支持，还要看集成方式
+2. **安全优先**：生产环境优先选择 Claude Agent SDK 等安全导向框架
+3. **生态匹配**：选择与现有技术栈匹配的框架降低集成成本
+4. **关注 MCP Server 质量**：MCP Server 的实现质量直接影响 Agent 效果
+
+---
+
+*更新时间：2026-07-05*}
