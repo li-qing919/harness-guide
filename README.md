@@ -97,6 +97,50 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-07-06 - Addy Osmani 量化洞察 & SDK 架构分离
+
+**更新**：
+
+1. **Addy Osmani：98% 是 Harness，而非模型**
+   - 📝 来源：[Addy Osmani Blog](https://addyosmani.com/blog/agent-harness-engineering/)
+   - 🎯 Claude Code 拆解发现约 98% 复杂度在 harness 层，模型仅占 2%
+   - 💡 两层 Harness 模型：单会话 AI 层 + 多代理编排层
+   - 🔧 HumanLayer 诊断：大多数代理失败是配置问题而非模型问题
+
+2. **OpenAI Agents SDK 下一代：Harness 与计算分离**
+   - 📝 来源：[OpenAI Blog](https://openai.com/index/the-next-evolution-of-the-agents-sdk)
+   - 🎯 原生沙箱执行 + harness/计算平面分离
+   - 💡 MCP 原生集成、Skills 渐进式披露、AGENTS.md 自定义指令
+
+3. **Context Engineering 2026 完整指南 & Gartner 宣告**
+   - 📝 来源：[Taskade Blog](https://www.taskade.com/blog/context-engineering/)
+   - 🎯 Gartner 宣布 2026 为「The Year of Context」
+   - 📊 82% 的 IT 领导者认为仅 prompt engineering 已不足
+   - 💡 五大上下文层：Instructions → Retrieval → Memory → Tools → State
+
+4. **框架版本补充更新**（07-05 基础上的增量数据和细节）
+   - Superpowers — **246,810** ⭐（+647）— 11 平台支持，招聘社区工程师
+   - DeerFlow — **76,170** ⭐（+78）— BytePlus InfoQuest 集成
+   - BMAD-METHOD — **50,096** ⭐（+28）— bmad-loop 无人值守循环模块
+   - CrewAI — **54,961** ⭐（+62）— crewAI-examples 归档，重心转向 AMP Suite
+   - LangGraph — **36,547** ⭐（+68）— Durable Execution，langgraph-codeact 归档
+   - OpenAI Agents SDK — **27,665** ⭐（+18）— Sandbox Agents + Realtime Agents
+   - Google ADK — **20,475** ⭐（+24）— Workflow Runtime + Task API
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-07-06 框架版本迭代速报（7 个框架增量数据和补充细节）
+- `04-best-practices.md` — 新增 #34 Addy Osmani 两层架构、#35 OpenAI SDK Harness/计算分离、#36 Context Engineering 五大层
+- `05-case-studies.md` — 新增案例 19（Addy Osmani 量化分析）、案例 20（OpenAI SDK 下一代架构）
+
+**关键洞察**：
+- 📊 **98% 量化发现**：Addy Osmani 对 Claude Code 的拆解为「harness 比模型重要」提供了最强量化证据
+- 🏗️ **控制/计算分离趋同**：OpenAI SDK 的架构升级与 Anthropic Managed Agents 趋同，行业共识进一步巩固
+- 📅 **Gartner 宣告**：2026 正式成为「上下文之年」，行业焦点从提示词转向系统化上下文管理
+- 🔁 **bmad-loop**：BMAD 的无人值守开发循环模块代表 Harness 自动化闭环的前沿实践
+- 🎙️ **Realtime Agents**：OpenAI SDK 从文本编码扩展到语音代理，多模态 Agent 时代开启
+
+---
+
 ### 2026-07-05 - 框架生态大爆发 & 行业架构趋同
 
 **更新**：

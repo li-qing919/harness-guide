@@ -1827,4 +1827,145 @@ ClickHouse 对 12 个主流框架的 MCP 集成方式进行了系统对比，覆
 
 ---
 
-*更新时间：2026-07-05*}
+*更新时间：2026-07-06*
+
+---
+
+## 34. Addy Osmani：Agent Harness Engineering 深度拆解（2026-07-06 更新）
+
+**来源**：[Addy Osmani - Agent Harness Engineering](https://addyosmani.com/blog/agent-harness-engineering/)
+
+Google 工程师 Addy Osmani 对 Harness Engineering 做了系统性拆解，提供了多个关键量化洞察。
+
+### 核心发现：「98% 是 Harness，而非模型」
+
+> 一个 Claude Code 的拆解发现：**约 98% 是 harness，只有 2% 是模型**。
+
+这个发现量化了「harness 比模型更重要」的直觉判断——模型的推理能力只是整个系统的一小部分，绝大多数复杂度在于上下文管理、工具编排、错误恢复和验证循环。
+
+### Harness 的两个层次
+
+| 层次 | 关注点 | 组件 |
+|------|--------|------|
+| **单会话 AI 层** | 单次编码会话的质量 | 规则、技能、钩子、子代理 |
+| **多代理编排层** | 多个会话的组合工作流 | 任务分解、会话交接、进度追踪 |
+
+### HumanLayer 的「Skill Issues」诊断
+
+引用 HumanLayer 的发现：**大多数代理失败归因于「skill issues」**——即配置问题而非模型权重问题。
+
+这意味着：
+1. 模型能力已足够强大，瓶颈在配置
+2. 改进方向应优先优化 harness 配置，而非等待更强模型
+3. 代理失败是可诊断和可修复的工程问题
+
+### 自动化 Ralph Loop
+
+> 钩子拦截 Agent 的退出意图，重新注入改进 prompt，形成自动化审查循环。
+
+这是 LangChain Terminal Bench 实验中验证有效的 Ralph Wiggum Loop 的通用化描述——通过钩子机制实现自动化质量闭环。
+
+### 实践要点
+
+1. **量化认知**：98% harness 的比例意味着投资 harness 优化的 ROI 远超投资模型选择
+2. **两层思维**：单会话质量和多会话编排需要不同的 harness 设计
+3. **失败归因**：遇到 Agent 问题时首先检查配置，而非归咎于模型能力
+4. **自动化闭环**：Ralph Loop 是可通用的钩子模式，适用于任何编码 Agent
+
+---
+
+## 35. OpenAI Agents SDK 下一代升级：Harness 与计算分离（2026-07-06 更新）
+
+**来源**：[OpenAI - The Next Evolution of the Agents SDK](https://openai.com/index/the-next-evolution-of-the-agents-sdk)
+
+OpenAI 为 Agents SDK 引入了更强大的 model-native harness，标志着 SDK 架构的重大演进。
+
+### 原生沙箱执行（Native Sandbox Execution）
+
+新架构将 harness 与计算层分离：
+
+```
+┌───────────────────────────────────────┐
+│          Harness Layer (控制平面)       │
+│  • Agent 指令和行为边界                  │
+│  • 工具编排和 MCP 协议                  │
+│  • AGENTS.md 自定义指令                 │
+│  • Skills 渐进式披露                    │
+└──────────────────┬────────────────────┘
+                   │
+┌──────────────────┴────────────────────┐
+│       Compute Layer (计算平面)          │
+│  • 原生沙箱执行环境                      │
+│  • 安全性、持久性和可扩展性              │
+│  • Shell 和 Apply Patch 工具            │
+└───────────────────────────────────────┘
+```
+
+### 关键新特性
+
+| 特性 | 说明 |
+|------|------|
+| **MCP 工具协议** | 原生集成 Model Context Protocol |
+| **Skills 渐进式披露** | 按需加载技能，控制上下文窗口 |
+| **AGENTS.md** | 通过自定义指令文件定义 Agent 行为 |
+| **Shell 工具** | 原生 Shell 命令执行 |
+| **Apply Patch 工具** | 结构化代码修改 |
+
+### Harness/计算分离的意义
+
+1. **安全性**：沙箱隔离防止 Agent 越权访问
+2. **持久性**：执行状态独立于 harness 配置
+3. **可扩展性**：harness 可独立于计算层演进
+4. **可移植性**：同一 harness 可适配不同计算后端
+
+### 实践要点
+
+1. **控制/计算分离是架构趋势**：与 Anthropic 的 Managed Agents 架构趋同
+2. **MCP 原生集成**：OpenAI SDK 确认 MCP 作为 Agent-Tool 标准协议
+3. **AGENTS.md 事实标准**：OpenAI 采纳 AGENTS.md 进一步巩固其作为 Agent 指令标准的地位
+
+---
+
+## 36. Context Engineering 2026 完整实战指南：五大上下文层（2026-07-06 更新）
+
+**来源**：[Taskade - Context Engineering 2026 Complete Guide](https://www.taskade.com/blog/context-engineering/)
+
+### Gartner 宣布 2026 为「The Year of Context」
+
+> 行业调查：**82% 的 IT 和数据领导者认为仅 prompt engineering 已不足以支撑大规模 AI**。
+
+Gartner 正式宣布 2026 年为「上下文之年」，标志行业焦点从提示词优化转向系统化上下文管理。
+
+### 五大上下文层模型
+
+```
+┌──────────────────────────────────────┐
+│  Layer 5: State (运行状态)            │
+│  → Agent 当前处于任务的哪个阶段         │
+├──────────────────────────────────────┤
+│  Layer 4: Tools (工具)                │
+│  → 可用工具和 API（日趋标准化为 MCP）  │
+├──────────────────────────────────────┤
+│  Layer 3: Memory (记忆)               │
+│  → 短期对话 + 长期持久状态              │
+├──────────────────────────────────────┤
+│  Layer 2: Retrieval (检索)            │
+│  → RAG 和外部知识搜索                  │
+├──────────────────────────────────────┤
+│  Layer 1: Instructions (指令)         │
+│  → 系统提示和行为框架                  │
+└──────────────────────────────────────┘
+```
+
+### 核心论断
+
+> Context engineering 从「如何提问」转向「工程化 AI 模型可访问的数据和上下文」。
+
+这个转变与 Phil Schmid 的权威定义一致：「设计和构建动态系统，在正确的时间、以正确的格式提供正确的信息和工具」。
+
+### 实践要点
+
+1. **State 是被忽视的层**：Agent 需要始终知道自己处于任务的哪个阶段
+2. **Memory 分层管理**：短期（会话内）和长期（跨会话）需要不同策略
+3. **Tools 标准化**：MCP 正在将工具定义从框架特定变为跨平台标准
+4. **Retrieval 精度 > 数量**：返回太多无关结果比不返回更糟}

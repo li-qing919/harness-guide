@@ -944,6 +944,71 @@ async function verifyUI() {
 
 ---
 
+## 2026-07-06 框架版本迭代速报（补充细节）
+
+### Superpowers (246,810 ⭐)
+- `v6.1.1` (2026-07-02)
+- ⭐ 较 07-05 增长约 **+647**，逼近 **247K**
+- 定位为「完整的软件开发方法论」，支持 **11 个编码代理平台**（Claude Code、Codex、Cursor、Copilot 等）
+- **子代理驱动开发（Subagent-Driven Development）**：代理可自主工作数小时不偏离计划
+- 强调真正的红/绿 TDD、YAGNI、DRY 原则
+- 🆕 正在招聘全职社区工程师
+- 📌 **启示**：从技能框架演化为完整开发方法论，11 平台支持体现跨 Agent 标准化
+
+### DeerFlow (ByteDance) (76,170 ⭐)
+- `v2.0.0` (2026-06-25)
+- ⭐ 较 07-05 增长约 **+78**
+- DeerFlow 2.0 是完全重写版本，定位为「开源长周期 SuperAgent harness」
+- 编排子代理、持久化记忆、沙箱执行和可扩展技能系统
+- 🆕 集成 **BytePlus InfoQuest** 智能搜索和爬虫工具集
+- 🆕 支持 workspace 变更审查、OpenAI 兼容网关模型 thinking 支持
+- 📌 **启示**：BytePlus InfoQuest 集成扩展了 SuperAgent 的信息获取边界
+
+### BMAD-METHOD (50,096 ⭐)
+- `v6.10.0` (2026-07-03)
+- ⭐ 较 07-05 增长约 **+28**
+- 🆕 **bmad-loop** 作为可安装模块上线——无人值守开发循环编排、对抗性审查、延迟工作扫描
+- V6 引入 **Scale-Domain-Adaptive 智能**（从 bug 修复到企业系统自动调整规划深度）
+- 12+ 专业领域代理（PM、Architect、Developer、UX 等）
+- **Party Mode**：多代理人格在同一会话中协作讨论
+- 📌 **启示**：bmad-loop 无人值守循环是 Harness Engineering「自动化闭环」的前沿实践
+
+### CrewAI (54,961 ⭐)
+- `v1.15.2a2` (2026-07-01)
+- ⭐ 较 07-05 增长约 **+62**
+- **双轨架构**：Crews（自治协作）+ Flows（事件驱动自动化）
+- 超 **100,000 开发者**通过社区课程认证
+- 🆕 crewAI-examples 仓库于 2026-04-20 归档，重心转向企业版 **AMP Suite**
+- 📌 **启示**：examples 仓库归档标志着重心从社区示例转向企业级产品
+
+### LangGraph (36,547 ⭐)
+- `v1.2.7` (2026-06-30)
+- ⭐ 较 07-05 增长约 **+68**
+- 定位调整为「低层级编排框架」，专注于构建持久化、有状态的代理
+- 🆕 新增 **Durable Execution**（持久执行，故障后自动恢复）
+- 🆕 **langgraph-codeact 仓库已于 2026-02-25 归档**
+- 推荐配合 **Deep Agents** 高层包使用
+- 📌 **启示**：Durable Execution 是长时 Agent 故障恢复的关键基础设施
+
+### OpenAI Agents SDK (27,665 ⭐)
+- `v0.17.7` (2026-06-24)
+- ⭐ 较 07-05 增长约 **+18**
+- 🆕 **Sandbox Agents**（预配置容器，支持长时间运行任务）
+- 🆕 **Realtime Agents** 语音代理（gpt-realtime-2）
+- 支持 **100+ 其他 LLM**，provider-agnostic
+- 新增可配置 websocket max_size limit、buffered Chat Completions tool-call streaming
+- 📌 **启示**：Sandbox Agents 和 Realtime Agents 代表 SDK 从文本编码扩展到多模态
+
+### Google ADK (20,475 ⭐)
+- `v2.3.0` (2026-06-18)
+- ⭐ 较 07-05 增长约 **+24**
+- 🆕 **Workflow Runtime**：基于图的执行引擎，支持路由、fan-out/fan-in、循环、重试、状态管理、人在环中、嵌套工作流
+- 🆕 **Task API**：结构化代理间委托，多轮任务模式
+- 双周发布节奏
+- 📌 **启示**：Workflow Runtime 使 ADK 从 SDK 演进为完整编排平台
+
+---
+
 ## 2026-07-05 框架版本迭代速报
 
 ### Superpowers (246,163 ⭐)

@@ -902,4 +902,83 @@ Thoughtworks 的 Birgitta Böckeler 在 InfoQ 演讲中探讨了从 Prompt Engin
 
 ---
 
-*更新时间：2026-07-05*
+*更新时间：2026-07-06*
+
+---
+
+## 案例 19：Addy Osmani——Agent Harness Engineering 的两层架构（2026-07-06）
+
+**来源**：[Addy Osmani - Agent Harness Engineering](https://addyosmani.com/blog/agent-harness-engineering/)
+
+Google 工程师 Addy Osmani 对 Harness Engineering 做了系统性拆解，提供了多个关键洞察。
+
+### 「98% 是 Harness」的量化发现
+
+对 Claude Code 的拆解发现约 98% 的复杂度在 harness 层，模型本身只占 2%。这是对「harness 比模型更重要」论点的最强量化支撑。
+
+### 两层 Harness 模型
+
+```
+┌─────────────────────────────────────┐
+│     多代理编排层 (Multi-Agent)       │
+│  • 将多个编码会话组合为工作流         │
+│  • 任务分解和会话交接                │
+│  • 进度追踪和状态管理                │
+└──────────────────┬──────────────────┘
+                   │
+┌──────────────────┴──────────────────┐
+│      单会话 AI 层 (Single Session)   │
+│  • 规则和技能 (Rules, Skills)        │
+│  • 生命周期钩子 (Hooks)              │
+│  • 子代理 (Sub-agents)               │
+│  • 上下文窗口管理                    │
+└─────────────────────────────────────┘
+```
+
+### HumanLayer 的诊断：失败原因是配置而非模型
+
+> **大多数代理失败归因于「skill issues」（配置问题）而非模型权重问题。**
+
+这个诊断意味着代理失败是可诊断和可修复的工程问题——改进方向是优化 harness 配置，而非等待更强模型。
+
+### 启示
+
+- 98% 的比例意味着 harness 优化的 ROI 远超模型选择
+- 两层架构提供了 harness 设计的分解策略
+- 配置问题的诊断需要系统化的可观测性支撑
+
+---
+
+## 案例 20：OpenAI Agents SDK 下一代——Harness 与计算平面分离（2026-07-06）
+
+**来源**：[OpenAI - The Next Evolution of the Agents SDK](https://openai.com/index/the-next-evolution-of-the-agents-sdk)
+
+### 架构升级
+
+OpenAI 为 Agents SDK 引入了 model-native harness，核心创新是将 harness（控制平面）与计算层（沙箱执行）分离：
+
+```
+┌────────────────────────────────────┐
+│       Harness (Control Plane)       │
+│  • Agent 指令、MCP 集成              │
+│  • Skills、AGENTS.md                │
+│  • 编排逻辑                          │
+└───────────────┬────────────────────┘
+                │
+┌───────────────┴────────────────────┐
+│      Compute Plane (Sandbox)        │
+│  • 安全隔离执行                      │
+│  • 持久性和可扩展性                  │
+│  • Shell / Apply Patch              │
+└────────────────────────────────────┘
+```
+
+### 与 Anthropic 架构的趋同
+
+这与 Anthropic 的 Managed Agents 架构高度一致——两家公司独立趋同于控制/计算平面分离的架构模式。
+
+### 关键意义
+
+1. **MCP 原生集成**确认 MCP 作为 Agent-Tool 标准协议
+2. **AGENTS.md** 被 OpenAI 采纳，进一步巩固其作为 Agent 指令标准的地位
+3. **Harness/计算分离**使 harness 可独立演进，适配不同计算后端
