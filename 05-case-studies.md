@@ -982,3 +982,57 @@ OpenAI 为 Agents SDK 引入了 model-native harness，核心创新是将 harnes
 1. **MCP 原生集成**确认 MCP 作为 Agent-Tool 标准协议
 2. **AGENTS.md** 被 OpenAI 采纳，进一步巩固其作为 Agent 指令标准的地位
 3. **Harness/计算分离**使 harness 可独立演进，适配不同计算后端
+
+---
+
+## 案例 21：Faros.ai——Harness Engineering 成熟度模型与五层架构（2026-07-07）
+
+**来源**：[Faros.ai - Harness Engineering](https://www.faros.ai/blog/harness-engineering)
+
+### 核心贡献：AI 工程三阶段成熟度模型
+
+Faros.ai 提供了一个清晰的成熟度演进框架：
+
+| 阶段 | 名称 | 核心活动 | 产出 |
+|------|------|----------|------|
+| Stage 1 | Prompt Engineering | 写好提示词 | 更好的单次输出 |
+| Stage 2 | Context Engineering | 管理上下文窗口 | 减少 hallucination |
+| Stage 3 | Harness Engineering | 构建运行时基础设施 | 生产级可靠性 |
+
+### 五层 Harness 架构
+
+Faros.ai 将生产级 Harness 拆解为五层，每层解决不同的可靠性问题：
+
+```
+┌──────────────────────────────────┐
+│  Layer 5: 可观测性 (Observability)│
+│  监控、日志、调用链追踪             │
+├──────────────────────────────────┤
+│  Layer 4: 护栏 (Guardrails)       │
+│  安全边界、行为约束、权限控制        │
+├──────────────────────────────────┤
+│  Layer 3: 上下文与记忆 (Context)   │
+│  信息传递、持久化、跨会话状态        │
+├──────────────────────────────────┤
+│  Layer 2: 验证循环 (Verification)  │
+│  输出质量检查、错误检测和纠正        │
+├──────────────────────────────────┤
+│  Layer 1: 工具编排 (Tooling)      │
+│  Agent 与工具的交互、失败恢复        │
+└──────────────────────────────────┘
+```
+
+### 基线指标驱动的投入决策
+
+Faros.ai 建议先量化再决定投入方向：
+
+- 每个 merged PR 的成本
+- Agent 辅助 PR vs 纯人工 PR 的合并时间
+- 审查速度（PR 创建到 merge 的周期）
+- 每开发者算力支出
+
+### 启示
+
+- **五层模型**提供了 Harness 完备性的系统化检查框架
+- **先量化再投入**避免了盲目建设的常见陷阱
+- **成熟度演进**为团队提供了清晰的升级路径

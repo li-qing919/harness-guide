@@ -1968,4 +1968,122 @@ Gartner 正式宣布 2026 年为「上下文之年」，标志行业焦点从提
 1. **State 是被忽视的层**：Agent 需要始终知道自己处于任务的哪个阶段
 2. **Memory 分层管理**：短期（会话内）和长期（跨会话）需要不同策略
 3. **Tools 标准化**：MCP 正在将工具定义从框架特定变为跨平台标准
-4. **Retrieval 精度 > 数量**：返回太多无关结果比不返回更糟}
+4. **Retrieval 精度 > 数量**：返回太多无关结果比不返回更糟
+
+---
+
+## 37. Faros.ai：Harness Engineering 五层成熟度模型（2026-07-07 更新）
+
+**来源**：[Faros.ai - Harness Engineering](https://www.faros.ai/blog/harness-engineering)
+
+### AI 工程成熟度三阶段
+
+Faros.ai 将 Harness Engineering 定义为 AI 工程成熟度的第三阶段：
+
+```
+Stage 1: Prompt Engineering  →  写好提示词
+Stage 2: Context Engineering  →  管理上下文窗口
+Stage 3: Harness Engineering  →  构建完整运行时基础设施
+```
+
+### 生产级 Harness 五层架构
+
+| 层级 | 职责 | 关键问题 |
+|------|------|----------|
+| **工具编排** | Agent 与工具的交互管理 | 工具调用失败时如何恢复？ |
+| **验证循环** | Agent 输出的质量检查 | 如何防止错误累积？ |
+| **上下文与记忆** | 信息传递和持久化 | Agent 如何记住历史决策？ |
+| **护栏** | 安全边界和行为约束 | 如何防止 Agent 越界？ |
+| **可观测性** | 监控、日志和追踪 | Agent 做了什么？为什么？ |
+
+### 基线指标建议
+
+Faros.ai 建议工程领导者在投入前先建立基线指标：
+
+- **每个合并 PR 的成本**（算力 + 人工审查时间）
+- **Agent 辅助 PR 的合并时间**（vs 纯人工 PR）
+- **审查速度**（从 PR 创建到合并的周期）
+- **每开发者算力支出**（月度/季度趋势）
+
+### 实践要点
+
+1. **先量化再投入**：不要盲目建设 harness，先建立基线指标确定哪层最需要投入
+2. **五层缺一不可**：生产级 harness 需要完整的五层覆盖，缺失任一层都会导致可靠性问题
+3. **成熟度演进路径**：从 Prompt 到 Context 到 Harness 是工程化程度递增的路径
+
+---
+
+## 38. Packmind：面向 AI 驱动开发团队的 ContextOps（2026-07-07 更新）
+
+**来源**：[Packmind - Context Engineering Best Practices](https://packmind.com/context-engineering-ai-coding/context-engineering-best-practices)
+
+### 行业现状数据
+
+- **91%** 的工程组织已采用至少一种 AI 编码工具
+- **84%** 的开发者使用 AI 工具（Stack Overflow 2025）
+- **41%** 的代码由 AI 生成或辅助（Index.dev 2026）
+- 但多数团队发现 AI 输出不符合团队约定和架构决策
+
+### ContextOps 概念
+
+> ContextOps = 让 AI 辅助开发在规模上可治理的工程实践
+
+**核心目标**：
+- 统一的上下文文件管理（AGENTS.md、CLAUDE.md 等）
+- 团队约定和编码标准自动注入 Agent 上下文
+- 架构决策记录（ADR）自动传递给 Agent
+
+### 30+ 条可操作实践
+
+Packmind 编译了从入门到高级的 30+ 条实践：
+
+**入门级**：
+- 编写第一个有效的上下文文件
+- 在 AGENTS.md 中定义项目结构
+- 为关键工作流创建 Skills
+
+**进阶级**：
+- 构建 ContextOps 基础设施
+- 自动化上下文新鲜度检查
+- 建立团队级的上下文模板系统
+
+### 实践要点
+
+1. **约定注入是关键痛点**：AI 生成的代码不符合团队规范是最大痛点，需要系统化解决
+2. **ContextOps 是治理框架**：不仅仅是技术实践，更是组织级的 AI 编码治理
+3. **41% 代码由 AI 生成**：这个比例要求团队重新思考代码审查和架构决策流程
+
+---
+
+## 39. Sourcegraph：Context Engineering 四大支柱（2026-07-07 更新）
+
+**来源**：[Sourcegraph - Context Engineering: A Practical Guide](https://sourcegraph.com/blog/context-engineering)
+
+### 四大支柱模型
+
+| 支柱 | 说明 | 关键技术 |
+|------|------|----------|
+| **指令 (Instructions)** | 系统提示和行为框架 | 系统提示工程、角色定义 |
+| **检索 (Retrieval)** | RAG 和 grounded search | 语义检索、代码库搜索 |
+| **记忆 (Memory)** | 短期对话 + 长期持久状态 | 结构化笔记模式、记忆压缩 |
+| **可用工具 (Tools)** | 函数调用面，MCP 标准化 | MCP (JSON-RPC 2.0) |
+
+### Anthropic 结构化笔记模式
+
+Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
+- 模型将草稿本（scratchpad）写到上下文窗口**外**的文件作为持久记忆
+- 需要时重新读取这些文件
+- 实现跨上下文窗口的信息持久化
+
+### MCP 标准化
+
+> MCP（Model Context Protocol）是连接任意检索源到任意 MCP 兼容客户端的标准化方式（JSON-RPC 2.0）。
+
+- MCP 正在将工具定义从框架特定变为跨平台标准
+- Prompt Engineering 仍然重要（写指令和工具描述），但在复杂 Agent 中，提示只是更大上下文管道的一个输入
+
+### 实践要点
+
+1. **四大支柱是完备性检查**：任何 Context Engineering 方案都应覆盖这四个方面
+2. **结构化笔记是跨窗口持久化的关键**：将状态写到外部文件 > 依赖上下文窗口
+3. **MCP 是标准化连接层**：不是唯一选项，但已成为事实标准
