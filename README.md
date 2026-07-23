@@ -97,6 +97,52 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-07-24 - 「模型是商品，Harness 是护城河」& Vercel 少即是多 & 框架全线增长
+
+**更新**：
+
+1. **「模型是商品，Harness 是护城河」——Harness Engineering 完整指南**
+   - 📝 来源：[Harness Engineering Blog](https://harness-engineering.ai/blog/agent-harness-complete-guide/)
+   - 🎯 定义 Harness 六大核心组件，提出「模型是商品，Harness 是护城河」论断
+   - 📊 管道乘法效应：20 步管道 × 95% 每步 = 仅 36% 端到端完成率
+   - 💡 Manus 六个月五次重写才达到生产就绪
+
+2. **Vercel「少即是多」实践**
+   - 📝 来源：[Phil Schmid Blog](https://www.philschmid.de/agent-harness-2026)（引用 Vercel v0 实践）
+   - 🎯 删除 80% 的工具反而获得更好的结果
+   - 💡 精心策划的工具集 > 丰富工具集，与 Bitter Lesson 呼应
+
+3. **OpenAI Agents SDK 重大更新——Manifest 抽象与多沙箱支持**
+   - 📝 来源：[OpenAI Blog](https://openai.com/index/the-next-evolution-of-the-agents-sdk/)
+   - 🎯 SandboxAgent、Manifest 工作区抽象、可配置内存系统
+   - 💡 支持 7+ 沙箱提供商（Blaxel、Cloudflare、Daytona、E2B、Modal、Runloop、Vercel）
+
+4. **Google ADK v2.5.0 重大里程碑**
+   - 🎯 全新图执行引擎（Workflow Runtime）+ Task API
+   - 💡 从 SDK 演进为完整编排平台
+
+5. **框架版本全线更新**（07-07 基础上的增量）
+   - Superpowers — **260,027** ⭐（+12K+）— 招聘全职社区工程师
+   - DeerFlow — **77,701** ⭐（+1.4K）— 工具授权执行、流式自定义事件
+   - BMAD-METHOD — **51,033** ⭐（+886）— 技能整合为 8 核心集
+   - CrewAI — **56,037** ⭐（+1K）— v1.15.5，10 万开发者认证
+   - LangGraph — **37,951** ⭐（+1.3K）— v1.2.9，TracePolicy 支持
+   - OpenAI Agents SDK — **28,121** ⭐（+400）— v0.18.3，Manifest 抽象
+   - Google ADK — **20,858** ⭐（+357）— v2.5.0，图执行引擎
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-07-24 框架版本迭代速报（7 个框架全部更新）
+- `04-best-practices.md` — 新增 #40 Vercel「少即是多」实践、#41「模型是商品，Harness 是护城河」
+
+**关键洞察**：
+- 📊 **管道乘法效应**：20 步 × 95% = 36%——每增加一个步骤都在降低整体可靠性
+- 🔧 **少即是多**：Vercel、BMAD 的实践一致证明精简工具/技能集优于堆砌
+- 🏰 **护城河转移**：模型能力趋同使 Harness 成为真正的竞争优势
+- 📦 **Manifest 可移植性**：OpenAI SDK 的 Manifest 抽象标志 Agent 环境从单一向可移植演进
+- ⚙️ **ADK 平台化**：Google ADK v2.5.0 的图执行引擎标志其从 SDK 演进为完整编排平台
+
+---
+
 ### 2026-07-07 - Faros.ai 五层成熟度模型 & ContextOps 治理框架 & 框架全线更新
 
 **更新**：

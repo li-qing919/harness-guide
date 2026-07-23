@@ -1513,6 +1513,87 @@ context_engineering:
 
 ---
 
+## 40. Vercel「少即是多」——精心策划的工具集胜过丰富工具集（2026-07-24 更新）
+
+**来源**：[Phil Schmid - Agent Harness 2026](https://www.philschmid.de/agent-harness-2026)（引用 Vercel 实践）
+
+### 核心发现
+
+> Vercel 在构建 v0 编码代理时发现，**删除 80% 的工具反而获得更好的结果**——更多工具意味着模型更多困惑。
+
+这是 Harness Engineering 的核心教训之一：**精心策划的工具集比丰富的工具集更有效**。
+
+### 理论解释
+
+与 Rich Sutton 的「The Bitter Lesson」呼应——通用方法胜过手工编码的知识，过度工程化的约束反而降低性能。
+
+### 量化洞察：管道乘法效应
+
+> 一个 20 步管道即使每步 95% 成功率，端到端完成率仅 **36%**（0.95²⁰ ≈ 0.36）。
+
+这意味着：
+- 每增加一个步骤，整体可靠性都在下降
+- 工具数量越多，模型选择错误的概率越大
+- 精简工具集直接提升每步的成功率
+
+### 实践建议
+
+```yaml
+tool_management:
+  principle: "less_is_more"
+  
+  strategy:
+    - 定期审查工具使用率，移除使用频率低于 5% 的工具
+    - 按任务阶段动态暴露工具子集（而非全量加载）
+    - 合并功能重叠的工具
+    - 工具描述力求精确而非详尽
+    - 用评估驱动工具增减决策（而非直觉）
+```
+
+### 实践要点
+
+1. **工具数量不是能力标志**：80% 的工具可能只增加噪音
+2. **动态暴露 > 静态全量**：根据 Agent 当前阶段切换工具集
+3. **评估驱动增减**：用 A/B 测试验证工具增减的效果
+4. **与 Bitter Lesson 一致**：通用方法 + 更少硬编码 > 专用工具堆砌
+
+---
+
+## 41. 「模型是商品，Harness 是护城河」（2026-07-24 更新）
+
+**来源**：[Harness Engineering Blog - Agent Harness Complete Guide](https://harness-engineering.ai/blog/agent-harness-complete-guide/)
+
+### 核心论点
+
+> 随着模型能力趋同和开源模型的普及，**模型本身不再是竞争优势，Harness 才是**。
+
+### 六大核心组件定义
+
+该文章定义了 Harness 的六大核心组件：
+
+| 组件 | 职责 | 护城河价值 |
+|------|------|------------|
+| **上下文管理** | 管理信息流入和流出 Agent | 直接决定 Agent 决策质量 |
+| **工具编排** | 工具选择、调用和结果处理 | 积累领域特定工具链 |
+| **生命周期管理** | Agent 启动、暂停、恢复、终止 | 长时任务可靠性 |
+| **子代理调度** | 任务分解和并行执行 | 复杂任务编排能力 |
+| **验证循环** | 输出质量检查和纠正 | 防止错误累积 |
+| **可观测性** | 监控、日志和追踪 | 持续优化基础 |
+
+### Manus 的经验佐证
+
+- Manus 花了 **六个月和五次完整重写** 才达到生产就绪
+- LangChain 的 Open Deep Research 一年内重写了三次架构
+- 这些案例证明：构建可靠 Harness 的时间远超选择模型的努力
+
+### 实践要点
+
+1. **竞争优势在于积累**：Harness 的护城河来自持续优化的领域知识、工具链和验证循环
+2. **模型可替换，Harness 不可替换**：切换模型只需改配置，重建 Harness 需要数月
+3. **投资回报率**：Harness 优化的 ROI 随时间增长，模型选择的 ROI 随新模型发布递减
+
+---
+
 ## 23. Anthropic：有效上下文工程补充实践（2026-06-13 更新）
 
 **来源**：[Anthropic - Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)

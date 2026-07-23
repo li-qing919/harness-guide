@@ -1160,3 +1160,62 @@ async function verifyUI() {
 - 无人值守开发循环编排、对抗性审查和延迟工作扫描
 - 替代了之前的 automator，可通过安装器选择器直接选择
 - 📌 **启示**：bmad-loop 模块化安装降低了无人值守开发循环的采用门槛
+
+---
+
+## 2026-07-24 框架版本迭代速报
+
+### Superpowers (260,027 ⭐)
+- `v6.1.1` (2026-07-02)
+- ⭐ 较 07-07 增长约 **+12K+**，突破 **260K** 🚀
+- 🆕 修复 v6.1.0 中 Codex SessionStart Hook 重复注册问题（hooks 字段移除后 Codex 仍自动发现 hooks 目录）
+- 支持 **10+ 编码代理平台**（Claude Code、Antigravity、Codex、Cursor、Factory Droid、GitHub Copilot CLI 等）
+- 📌 正在招聘全职社区工程师，标志从社区项目向专业化运营转变
+
+### DeerFlow (ByteDance) (77,701 ⭐)
+- `v2.0.0` (2026-06-25)
+- ⭐ 较 07-07 增长约 **+1.4K**
+- 🆕 工具授权执行、子图流帧修复、流式自定义事件暴露
+- DeerFlow 2.0 定位为 **SuperAgent Harness**，支持子代理编排、记忆系统、沙箱、技能系统和消息网关
+- 📌 曾登顶 GitHub Trending #1
+
+### LangGraph (LangChain) (37,951 ⭐)
+- `v1.2.9` (2026-07-10)
+- ⭐ 较 07-07 增长约 **+1.3K**
+- 🆕 新增 **TracePolicy** 支持（`add_node` 上暴露 `trace_policy`）、标签管理
+- 定位为**低级编排框架**，专注构建弹性、长时间运行的有状态 Agent
+- 推荐配合 **Deep Agents**（更高级封装）使用
+- 📌 TracePolicy 支持体现可观测性的细粒化控制
+
+### CrewAI (56,037 ⭐)
+- `v1.15.5` (2026-07-20)
+- ⭐ 较 07-07 增长约 **+1K**，突破 **56K**
+- 🆕 json-repair 安全升级、执行结束钩子修复（覆盖 crew 和 flow 失败场景）、异步 agent 加载修复
+- 区分 **Crews**（自主协作）和 **Flows**（事件驱动自动化）
+- 📌 超 **10 万开发者**通过社区课程获得认证
+
+### OpenAI Agents SDK (28,121 ⭐)
+- `v0.18.3` (2026-07-17)
+- ⭐ 较 07-07 增长约 **+400**，突破 **28K**
+- 🆕 **SandboxAgent**（沙箱代理）、**Manifest** 工作区抽象、**可配置内存系统**
+- 支持 UnixLocalSandboxClient、DockerSandboxClient 等多种沙箱环境
+- 支持 Blaxel、Cloudflare、Daytona、E2B、Modal、Runloop、Vercel 等多种沙箱提供商
+- 通过 **Manifest 抽象**实现环境可移植性
+- 近期修复：strict_schema 空映射校验、MCP 服务器取消时清理、tool 装饰器别名
+- 📌 Manifest 抽象和多种沙箱提供商支持标志 SDK 从单一环境向可移植架构演进
+
+### Google ADK (20,858 ⭐)
+- `v2.5.0` (2026-07-16)
+- ⭐ 较 07-07 增长约 **+357**
+- 🆕 **全新图执行引擎（Workflow Runtime）**——支持路由、扇出/扇入、循环、重试、状态管理和动态节点
+- 🆕 **Task API** 实现代理间结构化委派
+- 近期修复：transfer_to_agent 循环、Anthropic 模型 finish_reason、嵌套 agent 路径解析
+- 📌 v2.5.0 是 ADK 2.x 的重大里程碑——从 SDK 演进为完整编排平台
+
+### BMAD-METHOD (51,033 ⭐)
+- `v6.10.0` (2026-07-03)
+- ⭐ 较 07-07 增长约 **+886**，突破 **51K**
+- 🆕 将研究三件套整合为 **bmad-deep-recon**，精简核心为 **8 技能集**
+- 合并审查和编辑技能，降低技能数量提升单技能质量
+- V6 支持 **Party Mode**（多代理协作讨论）和 **规模自适应智能**
+- 📌 技能整合体现「少即是多」趋势——与 Vercel 实践一致
