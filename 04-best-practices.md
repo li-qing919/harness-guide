@@ -1908,7 +1908,143 @@ ClickHouse 对 12 个主流框架的 MCP 集成方式进行了系统对比，覆
 
 ---
 
-*更新时间：2026-07-06*
+## 42. Phil Schmid：编写 Agent Skills 的 8 条建议（2026-07-29 更新）
+
+**来源**：[Phil Schmid - 8 Tips for Writing Agent Skills](https://www.philschmid.de/agent-skills-tips)（2026-04-13）
+
+Google DeepMind 工程师 Phil Schmid 基于实践经验总结了编写 SKILL.md 文件的 8 条核心建议。
+
+### 核心原则
+
+#### 1. Description 是触发器，不是描述
+
+> SKILL.md 的 frontmatter description 决定何时激活技能。仅优化 description 就能看到 **50% 性能提升**。
+
+```yaml
+# ❌ 太模糊
+description: "Helps with files"
+
+# ❌ 太宽泛
+description: "Does everything you need"
+
+# ✅ 精确触发
+description: "Read and write Feishu/Lark documents via API. Activate when user mentions Feishu docs, cloud docs, or docx links."
+```
+
+#### 2. 写指令，不写散文
+
+- 用祈使句（"Always use X()"），而非描述性语言
+- 5 行代码示例胜过 5 段解释
+- Agent 遵循指令比理解概念更可靠
+
+#### 3. 保持精简：500 行上限
+
+> SKILL.md body 控制在 **500 行以内**；超出部分拆分到 `references/` 供按需加载，节省 context。
+
+```markdown
+my-skill/
+├── SKILL.md          # ≤500 行，核心指令
+├── references/       # 按需加载的详细文档
+│   ├── api-spec.md
+│   └── examples.md
+└── scripts/         # 可执行脚本
+```
+
+#### 4. 给自由，不给步骤
+
+> 描述**目标**而非**步骤**，让 Agent 自适应错误和发现更好方案。
+
+```markdown
+# ❌ 过度规定步骤
+1. First call API X
+2. Then parse result
+3. Then write to file Y
+
+# ✅ 描述目标
+Create a document in the specified folder. Handle errors gracefully and retry if needed.
+```
+
+### 实践要点
+
+1. **description 是最重要的字段**：50% 性能提升仅来自优化 description
+2. **精简是纪律**：500 行硬上限，超出即拆分
+3. **指令式 > 描述式**：Agent 更擅长遵循命令而非理解散文
+4. **目标导向 > 步骤导向**：给 Agent 自由度反而效果更好
+
+---
+
+## 43. Anthropic：长时运行 Harness 最佳实践精要（2026-07-29 更新）
+
+**来源**：[Anthropic - Effective Harnesses for Long-Running Agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)（2025-11-26）
+
+Anthropic 在长时运行 Agent Harness 设计方面的核心实践总结，与之前已有的 §10 互补，此处聚焦四个关键设计决策。
+
+### 两段式 Harness 设计
+
+> 初始化 Agent 负责首次环境搭建，Coding Agent 负责后续增量开发——不同模式、不同提示词。
+
+```yaml
+harness:
+  initializer_agent:
+    target: "首次运行"
+    outputs:
+      - init.sh              # 环境初始化脚本
+      - claude-progress.txt  # 进度文件
+      - initial_git_commit   # 基线代码
+    prompt_focus: "项目设置和结构"
+    
+  coding_agent:
+    target: "后续运行"
+    prompt_focus: "增量开发和功能实现"
+    behavior: "读取进度文件 → 做一个增量改进 → 更新进度文件 → git commit"
+```
+
+### 结构化进度文件作为 Agent 间信息传递机制
+
+灵感来自优秀工程师的日常实践——每日进度记录和 git history。
+
+```markdown
+# claude-progress.txt
+
+## Session 1 (2026-07-29)
+- Set up project structure with Vite + React
+- Created base components (Layout, Header, Footer)
+- Configured ESLint + Prettier
+- Next: Implement authentication module
+
+## Session 2 (2026-07-29)
+- Implemented JWT-based login
+- Added protected route middleware
+- Next: Add role-based permission system
+```
+
+**关键**：新 session 通过阅读进度文件 + git log 快速理解工作状态，无需完整对话历史。
+
+### 增量优先原则
+
+> 每个 session 只做增量进步，结束后保持「可合并到 main 分支」的干净状态。
+
+- 不追求单个 session 完成大功能
+- 每个 session 结束时代码必须可运行
+- git commit 作为天然的检查点
+
+### Context Reset > Compaction
+
+对于表现出强烈 context anxiety 的模型（如 Sonnet 4.5），**完全清除 context 并通过 artifact 交接比压缩总结更有效**。
+
+| 方案 | 适用场景 | 效果 |
+|------|---------|------|
+| **Compaction** | 轻度 context anxiety | 保持连续性，但可能残留噪音 |
+| **Context Reset** | 强 context anxiety | 干净开始，通过 artifact 完整交接 |
+
+**推荐**：当模型出现以下症状时切换到 Context Reset：
+- 过早结束任务
+- 重复已完成的工作
+- 丢失关键约束信息
+
+---
+
+*更新时间：2026-07-29*
 
 ---
 
