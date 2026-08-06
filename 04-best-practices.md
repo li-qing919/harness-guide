@@ -1328,6 +1328,99 @@ routing_strategy:
 
 ---
 
+## 44. Sourcegraph：Context Engineering 实战指南（2026-08-07 更新）
+
+**来源**：[Sourcegraph - Context Engineering: A Practical Guide for AI Agents](https://sourcegraph.com/blog/context-engineering)
+
+### 核心命题
+
+> Context Engineering 的本质是「**如何在有限 token 预算和注意力预算下为 Agent 提供正确的上下文**」。
+
+### 关键实践洞察
+
+#### 第 47 步决策残留问题
+
+> Agent 在第 47 步决策时，前 1-46 步的残留信息仍在上下文窗口中——必须主动管理。
+
+这量化说明：上下文不是「过去就过去了」，而是**累积污染**。每一步操作都会在后续决策中产生噪音。
+
+#### Sourcegraph 7.0 = 开发者和 Agent 的共享智能层
+
+Sourcegraph 7.0 将代码智能平台重新定位为「开发者和 AI Agent 的共享智能层」——
+解决 Agent 和人类共同面临的挑战，即：
+- 跨仓库依赖理解
+- 历史决策的上下文追溯
+- 未记录的架构模式发现
+
+> **关键认知**：企业代码库中 Agent 和人类面临完全相同的上下文挑战——解决一端即解决两端。
+
+### 实践要点
+
+1. **上下文是累积的**：不是每步独立，而是历史累积影响当前决策
+2. **共享智能层思维**：为 Agent 构建的上下文基础设施同时惠及人类工程师
+3. **跨仓库上下文是核心挑战**：单体仓库内的搜索不够，需要跨仓库依赖和历史决策追踪
+
+---
+
+## 45. Packmind/Stanford ACE：上下文增量更新实证（2026-08-07 更新）
+
+**来源**：[Packmind - Context Engineering Best Practices for AI-Powered Dev Teams](https://packmind.com/context-engineering-ai-coding/context-engineering-best-practices)（基于 Stanford/SambaNova ACE 论文，2025 年 10 月）
+
+### 实证研究核心发现
+
+基于 Stanford/SambaNova ACE 论文的量化数据，为 Context Engineering 实践提供了实证支撑：
+
+#### 1. 上下文是可编程、可治理的智能层
+
+> 上下文文件可以版本化、审计、协作演进——应视为生产代码来管理。
+
+这意味着 Context Engineering 不再是「写得好不好」的艺术问题，而是**可工程化、可治理的系统问题**。
+
+#### 2. 增量更新 >> 全量重写
+
+| 指标 | 增量更新 | 全量重写 |
+|------|---------|--------|
+| 漂移率 | ↓ 86% | 基线 |
+| 延迟 | ↓ 86% | 基线 |
+
+> **关键发现**：增量更新上下文文件比全量重写减少 **86%** 的漂移和延迟。
+
+#### 3. 结构化上下文推升开源模型表现
+
+> 结构化维护的上下文在准确率上显著优于静态提示，可将**开源模型推至接近前沿模型**的表现。
+
+这与 Faros.ai 的 211 任务评测结论一致：优化的 Harness 可以让开源模型达到甚至超过昂贵的前沿模型。
+
+### 实践建议
+
+```yaml
+context_management:
+  principle: "treat_as_production_code"
+  
+  version_control:
+    - "上下文文件纳入 Git 版本控制"
+    - "变更需要 Code Review"
+    - "维护 CHANGELOG"
+    
+  update_strategy:
+    - "增量更新优先，避免全量重写"
+    - "定期审计上下文新鲜度"
+    - "CI 集成验证一致性"
+```
+
+### 实践要点
+
+1. **上下文文件 = 生产代码**：需要版本控制、Code Review、CI 验证
+2. **增量更新减少 86% 漂移**：不要每次全量重写上下文，而是做精确的增量修改
+3. **开源模型 + 好上下文 ≈ 前沿模型**：投资上下文质量的 ROI 可能高于购买更贵的模型
+4. **可审计性**：上下文的每次变更都应可追溯、可回滚
+
+---
+
+*更新时间：2026-08-07*
+
+---
+
 ## 28. Mem0 Context Engineering 完整指南：记忆系统的系统化方法（2026-04-05 更新）
 
 **来源**：[Mem0 - Context Engineering for AI Agents: Complete Guide](https://mem0.ai/blog/context-engineering-ai-agents-guide)

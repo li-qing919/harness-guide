@@ -97,6 +97,55 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-08-07 - Harness Engineering 90 天回顾 & 框架全线持续增长
+
+**更新**：
+
+1. **Harness Engineering：从概念到工程学科的 90 天**
+   - 📝 来源：[Viral Article / Industry Synthesis](https://youmind.com/landing/x-viral-articles/harness-engineering-ai-agent-guide)
+   - 🎯 总结了 HE 从 2025 年底到 2026 年初的 90 天内成为独立工程学科的历程
+   - 📊 **OpenAI Sora Android 案例**：4 名工程师 + 完善 Harness + AI Agent → 28 天交付 100 万行生产代码，Play Store #1
+   - 🏗️ Anthropic 连发 3 篇 Harness 论文；ThoughtWorks 正式化为框架
+   - 📐 **5 大 Harness 工件**：AGENT.md 文件、CI/CD 管道集成、依赖流程、验证循环、评估器
+   - 💡 标志性案例证明完善 Harness 可让小团队实现大规模生产输出
+
+2. **Philipp Schmid：The Importance of Agent Harness in 2026**
+   - 📝 来源：[Philipp Schmid Blog (Hugging Face)](https://www.philschmid.de/agent-harness-2026)
+   - 🎯 提出 HE 领域最具影响力的技术框架定义：**Model = CPU、Context Window = RAM、Harness = Operating System**
+   - 💡 Harness 是实现 Context Engineering 策略（压缩、状态卸载、子代理隔离）的核心载体
+   - 🔮 预言 Harness 将成为解决 "model drift" 和 "context durability" 瓶颈的主要工具
+   - 📌 训练与推理环境正在走向趋同
+
+3. **ai-boost/awesome-harness-engineering：HE 资源合集**
+   - 📝 来源：[GitHub Awesome List](https://github.com/ai-boost/awesome-harness-engineering)
+   - 🎯 汇集 HE 领域核心资源
+   - 📦 **Microsoft Agent Framework 1.0**（2026 年 4 月正式发布）——统一 Semantic Kernel 和 AutoGen
+   - 🔍 **deepset 失败分类框架**：context/constraint/verification/planning 四类失败
+   - 📊 **2026 Agent 评估框架**：AgentBench、Terminal Bench 2.0、SWE-bench Verified
+   - 🛡️ Anthropic 可信代理五原则
+
+4. **框架版本全线更新**（07-29 基础上的增量）
+   - Superpowers — **268,026** ⭐（+5.4K）— 深度用户开始探索 Compound Engineering (CE) 迁移
+   - DeerFlow — **79,422** ⭐（+1.7K）— 2.0 进化为 SuperAgent Harness，Orchestrator-Reporter 多代理并行架构
+   - CrewAI — **56,703** ⭐（+466）— A2A 协议 v1.0 stable，跨框架代理发现
+   - BMAD-METHOD — **51,584** ⭐（+349）— 企业级 Scaled BMAD 扩展
+   - LangGraph — **39,051** ⭐（+1.1K）— v1.2.10，原生 Trace Policy 系统
+   - OpenAI Agents SDK — **28,443** ⭐（+198）— GA Realtime API 原生语音代理集成
+   - Google ADK — **21,024** ⭐（+127）— v2.6.1，GCP Skill Registry
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-08-07 框架版本迭代速报（7 个框架全部更新）
+- `04-best-practices.md` — 新增 #44 Sourcegraph 上下文工程实践指南、#45 Packmind/Stanford ACE 上下文增量更新实证
+
+**关键洞察**：
+- 🚀 **Sora 案例**：4 人团队 28 天 100 万行代码 = 完善 Harness 价值的标志性证明
+- 📐 **5 大工件**：AGENT.md + CI/CD + 依赖流程 + 验证循环 + 评估器构成 HE 的核心工件集
+- 🧠 **Model=CPU/RAM/Harness=OS**：Philipp Schmid 的三层类比成为 HE 领域的标准心智模型
+- 📦 **Microsoft Agent Framework 1.0**：统一 Semantic Kernel + AutoGen，标志大厂 Agent 框架进入整合期
+- 📈 **Superpowers 268K**：持续爆发式增长，部分深度用户开始探索下一代框架（CE）
+
+---
+
 ### 2026-07-29 - Anthropic 安全隔离架构 & Managed Agents 解耦 & 框架全线增长
 
 **更新**：
