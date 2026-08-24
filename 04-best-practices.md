@@ -1606,6 +1606,34 @@ context_engineering:
 
 ---
 
+## 46. Agent Harness 安全新前沿：运行时层成为攻击面（2026-08-25 更新）
+
+**来源**：
+- [Forkast - AWS AgentCore Harness Bypass](https://forkast.news/aws-agentcore-harness-bypass-exposed-a-cross-platform-vulnerability-class-in-agent-runtimes/)（2026-08-22）
+- [Forkast - The Agent Harness Emerges as the New Security Frontier](https://forkast.news/the-agent-harness-emerges-as-the-new-security-frontier/)（2026-08-18）
+- 关联：[CoreBreak 绕过 agent guardrail（管道层攻击）](https://forkast.news/corebreak-bypasses-ai-agent-guardrails-at-the-plumbing-layer-and-model-level-defenses-cannot-help/)
+
+### 核心发现
+
+> 针对 AWS AgentCore 的 harness bypass 研究揭示了一类存在于 agent 运行时层的**跨平台漏洞类**——harness 本身成为攻击面，**模型级防御无法兜底**。
+
+- 攻击面从模型层转移到 harness/运行时层
+- 与同期 CoreBreak（在"管道层"绕过 agent guardrail）共同指向：harness/运行时安全正在成为独立攻防领域
+
+### Harness 安全治理三支柱
+
+1. **权限**：harness 持有的工具权限需最小化，变更需审计
+2. **隔离**：沙箱与运行时边界需独立验证，不能依赖模型自我约束
+3. **可观测性**：harness 层操作需完整日志与可追溯，异常行为可回溯定位
+
+### 实践要点
+
+1. **把 harness 当作攻击面做威胁建模**：评估 agent 方案时将 runtime 安全列为独立维度
+2. **guardrail 部署在管道层而非仅模型层**：CoreBreak 证明仅靠模型级防御无法拦截管道层攻击
+3. **权限-隔离-可观测三支柱检查清单**：任何 harness 选型/自建方案都应逐项过检
+
+---
+
 ## 40. Vercel「少即是多」——精心策划的工具集胜过丰富工具集（2026-07-24 更新）
 
 **来源**：[Phil Schmid - Agent Harness 2026](https://www.philschmid.de/agent-harness-2026)（引用 Vercel 实践）

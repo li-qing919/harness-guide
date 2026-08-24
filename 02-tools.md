@@ -1163,6 +1163,53 @@ async function verifyUI() {
 
 ---
 
+## 2026-08-25 框架版本迭代速报
+
+> 数据：GitHub 未认证 API，2026-08-25 05:30 GMT+8 拉取。Star 变化为相对 08-24 同口径采集的 1 天净增。CrewAI 已迁移至 crewAIInc 组织。
+
+### Superpowers (277,068 ⭐)
+- `v6.3.0` (2026-08-12)
+- ⭐ 较 08-24 净增 **+424**/天，突破 **277K** 🚀 — 监控仓库中增速最快，约为第二名 DeerFlow 的 4 倍
+- 🆕 v6.3.0：Devin CLI 与 Hermes Agent 支持、brainstorming 三路径路由、SDD/Codex 效率修复
+- 距 v6.2.0 引入 SDD plan-scoped workspace、resume 修复循环、skills 压缩清扫
+- 📌 **启示**：技能框架生态仍在爆发式扩张，社区规模与成熟度仍是最大护城河
+
+### DeerFlow / ByteDance (80,799 ⭐)
+- ⭐ 较 08-24 净增 **+105**/天，突破 **80K**
+- 08-24 当日 12+ 提交（本周最活跃）：🆕 **managed subagents 与 delegation scopes**（#4887）；sandbox:execute 授权在沙箱获取时强制执行（#4063 Phase 3 / #4911）；ACP workspace 创建移出事件循环（#4965）；scheduler 忙时任务入队（#4918）；moderation scanner 解析 Responses API content blocks（#4936）；前端 streamdown 消毒链修复（#4987）
+- 官方定位 "long-horizon SuperAgent harness"（沙箱/记忆/技能/子代理/消息网关）
+- 📌 **启示**：子代理委派 + 沙箱授权强制执行，代表 SuperAgent harness 的权限化演进方向
+
+### CrewAI (57,560 ⭐)
+- ⭐ 较 08-24 净增 **+44**/天
+- 仓库已迁移至 crewAIInc 组织（链接：github.com/crewAIInc/crewAI）
+- 🆕 `Agent.kickoff` 带会话时保留消息角色（#7065）；Flow router 可声明 response format（#7063）；chat flow 自定义 state shape（#7061）；GPT-5.6 系列映射官方 1.05M 上下文窗口（#7012）；conversational flow 文档与 API 增强（#7104）
+
+### BMAD-METHOD (52,228 ⭐)
+- ⭐ 较 08-24 净增 **+34**/天
+- 🆕 resolve_config 与 brainstorming（brain.py）控制台流强制 UTF-8（#2693、#2578），修复 Windows/非英文环境编码崩溃
+
+### LangGraph / LangChain (40,371 ⭐)
+- ⭐ 较 08-24 净增 **+80**/天，突破 **40K**
+- 默认分支最新提交 08-20（checkpoint-postgres 3.1.1 依赖升级）
+- 🆕 08-19：langgraph-sdk==0.4.3（#8657）、decrypt replacement result 特性（#8598）；08-18：字节码级子图检测（#8569）；08-11：langgraph==1.2.11 + `add_node` 暴露 `trace_policy`（#8523）
+
+### OpenAI Agents SDK (28,930 ⭐)
+- ⭐ 较 08-24 净增 **+34**/天
+- 🆕 08-23/24：序列化 approval resume 所有权保留修复（#4613）；沙箱取消时完成依赖清理（#4607）；max_turns 不再吞掉已触发 input guardrail 异常（#4606）；strict_schema 报错信息与 REPL 修复（#4600）；自定义 output guardrail 拦截消息（#4594）
+
+### Google ADK (21,263 ⭐)
+- ⭐ 较 08-24 净增 **+28**/天
+- 08-24 当日 12+ 提交：🆕 为 ContextCacheConfig 发射 Anthropic prompt cache 断点；Runner 从 session history 恢复 invocation_context.branch；并行子代理失败上抛调用方；workflow JoinNode 以 START 为满足前驱；browser runtime 遥测；id-pairing providers 一次性解析性能优化
+
+### TrueForge / TrueFoundry (4,059 ⭐)【新增监控】
+- 建仓 2026-07-23，约一个月即达 **4K** star；pushed 2026-08-24
+- 开源、厂商中立的 agent harness，定位 "the runtime layer that turns an LLM into a working agent"，自称 Claude Managed Agents 的开源替代，宣称任务完成成本降低 30%-75%
+- 官方博客：《TrueForge: Open-Source Alternative to Claude Managed Agents》（2026-08-18）；InfoWorld（08-20）/Forbes（08-19）报道
+- 📌 **启示**：harness runtime 层赛道迎来新玩家，开源 vs 托管之争升温
+
+---
+
 ## 2026-08-07 框架版本迭代速报
 
 ### Superpowers (268,026 ⭐)

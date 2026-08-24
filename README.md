@@ -97,6 +97,56 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-08-25 - TrueForge 开源入局 & Harness 安全成新攻防前沿 & 框架全线增长
+
+**更新**：
+
+1. **TrueFoundry 开源 Agent Harness「TrueForge」**
+   - 📝 来源：[TrueFoundry 官方博客](https://www.truefoundry.com/blog/engineering/trueforge-open-source-agent-harness/)（2026-08-18）｜ [GitHub](https://github.com/truefoundry/trueforge)
+   - 🎯 开源、厂商中立的 agent harness，定位 "the runtime layer that turns an LLM into a working agent"，自称 Claude Managed Agents 的开源替代
+   - 💡 宣称任务完成成本降低 **30%-75%**；建仓一个月即达 4K star，InfoWorld/Forbes 均有报道
+   - 📌 本周 harness 赛道最重要的新玩家，已纳入框架监控
+
+2. **AWS AgentCore Harness Bypass：agent 运行时暴露跨平台漏洞类**
+   - 📝 来源：[Forkast.News](https://forkast.news/aws-agentcore-harness-bypass-exposed-a-cross-platform-vulnerability-class-in-agent-runtimes/)（2026-08-22）
+   - 🎯 harness bypass 研究揭示运行时层的跨平台漏洞类——harness 本身成为攻击面，"模型级防御无法兜底"
+   - 💡 与同期 CoreBreak（管道层绕过 agent guardrail）共同指向：harness/运行时安全正在成为独立攻防领域
+
+3. **MacStories：Defining an "Agent Harness"**
+   - 📝 来源：[MacStories](https://www.macstories.net/linked/defining-an-agent-harness/)（2026-08-20）
+   - 🎯 主流科技媒体尝试定义 "agent harness" 并梳理构成要素——术语正从工程圈黑话走向大众词汇
+
+4. **Forkast：The Agent Harness Emerges as the New Security Frontier**
+   - 📝 来源：[Forkast.News](https://forkast.news/the-agent-harness-emerges-as-the-new-security-frontier/)（2026-08-18）
+   - 🎯 论述攻击面从模型层转移到 harness/运行时层；安全治理必须覆盖 harness 的权限、隔离与可观测性设计
+
+5. **Microsoft Learn：Agent Framework 官方文档新增 Harness 概念页**
+   - 📝 来源：[Microsoft Learn](https://learn.microsoft.com/en-us/agent-framework/concepts/harness)
+   - 🎯 微软以一级概念形式定义 "harness"，纳入企业级 agent 开发标准概念体系——大厂正式为术语背书
+
+6. **框架版本全线更新**（08-24 基础上的 1 天净增）
+   - Superpowers — **277,068** ⭐（+424/天，监控仓库中增速最快，约为第二名 4 倍）— v6.3.0：Devin CLI 与 Hermes Agent 支持
+   - DeerFlow — **80,799** ⭐（+105）— managed subagents 与 delegation scopes，本周最活跃
+   - CrewAI — **57,560** ⭐（+44）— 已迁移 crewAIInc 组织；GPT-5.6 系列 1.05M 上下文映射
+   - BMAD-METHOD — **52,228** ⭐（+34）— 控制台流强制 UTF-8 修复
+   - LangGraph — **40,371** ⭐（+80）— 字节码级子图检测、SDK 0.4.3
+   - OpenAI Agents SDK — **28,930** ⭐（+34）— approval resume / 沙箱取消清理修复
+   - Google ADK — **21,263** ⭐（+28）— Anthropic prompt cache 断点、并行子代理失败上抛
+   - TrueForge — **4,059** ⭐（**新增监控**，建仓 2026-07-23）
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-08-25 框架版本迭代速报（8 个框架，新增 TrueForge）
+- `04-best-practices.md` — 新增 #46 Agent Harness 安全新前沿（AgentCore bypass + CoreBreak 治理要点）
+
+**关键洞察**：
+- 🛡️ **Harness 即攻击面**：模型级防御无法兜底，权限/隔离/可观测性成为 harness 设计必答题
+- 🏁 **TrueForge 入局**：厂商中立 runtime 层开源化，harness 赛道竞争与开源 vs 托管之争升温
+- 📖 **术语主流化**：MacStories 定义 + Microsoft Learn 概念页，双重背书标志 harness 概念正式进入标准词汇
+- 📈 **Superpowers 277K**（+424/天）：技能框架生态持续爆发
+- ✅ **勘误**：Anthropic《Effective context engineering》规范 URL（含 "-for-"）经验证可达（200），修正此前 404 记录
+
+---
+
 ### 2026-08-07 - Harness Engineering 90 天回顾 & 框架全线持续增长
 
 **更新**：
