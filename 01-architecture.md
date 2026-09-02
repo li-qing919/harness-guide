@@ -519,4 +519,36 @@ Anthropic 分享了 claude.ai、Claude Code、Claude Cowork 三条产品线的 A
 
 ---
 
-*更新时间：2026-07-29*
+## RUCAIBox 学术综述：Harness Engineering 首入学术正典（2026-09-03 补充）
+
+**来源**：
+- [Medium AI News Vol. 18 - Harness Engineering Gets a Canon and Agents Get a Meter](https://medium.com/@richardhightower/ai-news-volume-18-harness-engineering-gets-a-canon-and-agents-get-a-meter-74e7e79d896b)
+- 配套仓库：[RUCAIBox/awesome-agent-harness](https://github.com/RUCAIBox/awesome-agent-harness)
+
+### 四大支柱（500+ 篇论文归纳）
+
+中国人民大学 RUCAIBox 团队发布综述《Agent Systems with Harness Engineering》及配套 GitHub 仓库，覆盖 500+ 篇论文，将 harness 设计归纳为四大支柱：
+
+| 支柱 | 覆盖内容 |
+|------|----------|
+| **Agent 工作流** | 任务规划、执行循环、失败恢复 |
+| **记忆系统** | 短期/长期记忆、跨会话状态 |
+| **技能库** | skill 的组织、检索与复用 |
+| **多智能体编排** | 子代理调度、协作拓扑 |
+
+- harness 设计知识首次被系统化学术整理——从工程实践博客走向「正典」（canon）
+
+### 同期行业动态（AI News Vol. 18）
+
+- **loop engineering 进入课程体系**：harness 相邻概念开始教学化
+- **Microsoft 与 Google 推出托管 agent 运行时**：runtime 层托管化竞争升温
+- **Anthropic/OpenAI 为 agent 计量计费**（metered billing）：agent 成为可计量商品
+
+### 架构启示
+
+1. **四大支柱是新的完备性检查框架**：与 Faros 五层模型（工具编排/验证循环/上下文与记忆/护栏/观测）互补，可交叉验证 harness 方案覆盖度
+2. **学术正典化 + 大厂托管化 + 计量计费**：三重信号标志 harness 从工程概念走向产业基础设施
+
+---
+
+*更新时间：2026-09-03*

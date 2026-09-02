@@ -1163,6 +1163,50 @@ async function verifyUI() {
 
 ---
 
+## 2026-09-03 框架版本迭代速报
+
+> 数据：GitHub 未认证 API，2026-09-03 05:30 GMT+8 拉取。Star 变化为相对 09-02 05:33 同口径采集的 1 天净增。CrewAI 使用迁移后仓库 crewAIInc/crewAI。
+
+### Superpowers (280,817 ⭐)
+- `v6.3.0` (2026-08-12)，最近 push 2026-08-31
+- ⭐ 较 09-02 净增 **+414**/天，突破 **280K** 🚀 — 监控仓库中增速最快
+- 9/2-9/3 无新提交，仍处 v6.3.0（Devin CLI 与 Hermes Agent 支持、brainstorming 三路径路由）后稳定期
+- 📌 **启示**：技能框架生态持续爆发，社区规模护城河依旧
+
+### DeerFlow / ByteDance (81,274 ⭐)
+- ⭐ 较 09-02 净增 **+42**/天
+- 最新 release `v2.0.0` (2026-06-25)，push 2026-09-02（持续高频更新）
+- 🆕 09-02：fix(ci) 缩减沙箱内 AGENTS.md 体积（#5146）；改进本地环境检测引导（#5111）
+- 官方定位已改为 "long-horizon SuperAgent harness"（沙箱/记忆/技能/子代理/消息网关），明确拥抱 harness 叙事
+
+### CrewAI (58,011 ⭐)
+- ⭐ 较 09-02 净增 **+52**/天
+- 最新 release `1.15.18` (2026-08-27)，push 2026-09-02
+- 🆕 09-02：CI 忽略 nltk 未修补漏洞 GHSA-8mgp-746c-j5xp（#7215）；fix(memory) 保留可复用的 scope 配置（#7068）
+- ⚠️ 仓库已从 joaomdmoura/crewAI 迁移至 crewAIInc 组织（旧地址 API 返回空）
+
+### BMAD-METHOD (52,606 ⭐)
+- ⭐ 较 09-02 净增 **+47**/天
+- 最新 release `v6.11.0` (2026-08-10)，push 2026-09-02
+- 🆕 09-02：fix(skills) 收窄 bmad-build 维护触发条件（#2820）；feat(review) "blind hunter" 的 finding 下限随 diff 规模缩放（#2818）
+
+### LangGraph / LangChain (40,942 ⭐)
+- ⭐ 较 09-02 净增 **+70**/天
+- push 2026-09-02；langgraph-sdk `0.4.4` (08-27)
+- 🆕 09-02：例行依赖升级（browserslist 4.28.8、@humanfs/node 0.16.8，#8797/#8798）；此前一周已有 checkpoint `Store.put` 类型放宽、子图字节码检测、`trace_policy` 等实质改进，本周进入维护节奏
+
+### OpenAI Agents SDK (29,146 ⭐)
+- ⭐ 较 09-02 净增 **+25**/天
+- 最新 release `v0.22.0` (2026-08-19)，主分支最新提交 2026-08-28
+- 🆕 08-28：fix(core) 拒绝变长工具参数的定长 tuple 注解（#4735）；fix(chat-completions) 流式回合消息并入 pending tool-call 消息（#4728）
+
+### Google ADK (21,378 ⭐)
+- ⭐ 较 09-02 净增 **+11**/天
+- 最新 release `v1.39.1` (2026-08-27)，push 2026-09-02
+- 🆕 09-02：feat: 工具轨迹评估新增 ignore_args 选项；fix: SQL Server (mssql) 下 DatabaseSessionService 微秒级时间戳安全处理
+
+---
+
 ## 2026-08-25 框架版本迭代速报
 
 > 数据：GitHub 未认证 API，2026-08-25 05:30 GMT+8 拉取。Star 变化为相对 08-24 同口径采集的 1 天净增。CrewAI 已迁移至 crewAIInc 组织。

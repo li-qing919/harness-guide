@@ -97,6 +97,46 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-03 - Harness Engineering 首获学术正典 & 框架稳态增长
+
+**更新**：
+
+1. **人大 RUCAIBox 发布 500 篇论文综述，Harness Engineering 首获学术「正典」**
+   - 📝 来源：[Medium AI News Vol. 18](https://medium.com/@richardhightower/ai-news-volume-18-harness-engineering-gets-a-canon-and-agents-get-a-meter-74e7e79d896b) ｜ 配套仓库：[awesome-agent-harness](https://github.com/RUCAIBox/awesome-agent-harness)
+   - 🎯 综述《Agent Systems with Harness Engineering》覆盖 500+ 篇论文，将 harness 设计归纳为四大支柱：agent 工作流、记忆系统、技能库、多智能体编排
+   - 💡 同期动态：loop engineering 进入课程体系；Microsoft/Google 推托管 agent 运行时；Anthropic/OpenAI 为 agent 计量计费
+
+2. **Phil Schmid：Recursive Self-Improvement（自递归改进）**
+   - 📝 来源：[philschmid.de](https://www.philschmid.de/recursive-self-improvement)（2026-08-21）
+   - 🎯 agent 回顾自身历史轨迹实现自我改进；轨迹的记录/检索/回放是 harness 记忆系统的职责，而非模型自身能力
+
+3. **OvalEdge：Context Engineering 落地八技**
+   - 📝 来源：[OvalEdge Blog](https://www.ovaledge.com/blog/context-engineering-techniques)
+   - 🎯 核心两招 **Select**（只取相关）+ **Write**（中间结果外置）；检索用元数据（认证/归属/新鲜度）做治理排序
+
+4. **框架版本稳态增长**（09-02 基础上的 1 天净增）
+   - Superpowers — **280,817** ⭐（**+414**/天，突破 280K，增速最快）— v6.3.0 后稳定期
+   - DeerFlow — **81,274** ⭐（+42）— push 09-02 持续高频，沙箱内 AGENTS.md 瘦身
+   - CrewAI — **58,011** ⭐（+52）— 1.15.18；memory scope 配置保留修复
+   - BMAD-METHOD — **52,606** ⭐（+47）— blind hunter finding 下限随 diff 规模缩放
+   - LangGraph — **40,942** ⭐（+70）— sdk 0.4.4，本周进入维护节奏
+   - OpenAI Agents SDK — **29,146** ⭐（+25）— v0.22.0，定长 tuple 注解修复
+   - Google ADK — **21,378** ⭐（+11）— v1.39.1，轨迹评估 ignore_args
+
+**更新文件**：
+- `01-architecture.md` — 新增 RUCAIBox 学术综述四大支柱与行业动态（学术正典化）
+- `02-tools.md` — 新增 2026-09-03 框架版本迭代速报（7 个框架）
+- `04-best-practices.md` — 新增 #47 Phil Schmid 自递归改进、#48 OvalEdge Select/Write 八技
+
+**关键洞察**：
+- 📚 **学术正典化**：500 篇论文综述标志 harness engineering 从工程博客走向学科化，四大支柱可作为完备性检查新框架
+- 🔁 **自递归改进**：轨迹复盘是 harness 时代自我优化的核心机制，依赖 harness 记忆系统而非模型能力
+- ✂️ **Select/Write 原语**：上下文预算管理的最小操作集，与 Anthropic 结构化笔记模式同构
+- 📈 **Superpowers 280K**（+414/天）：技能框架生态持续领跑
+- ♻️ **存量文章复检**：LangChain Deep Agents、HumanLayer Skill Issue、Faros AI、Taskade、Sourcegraph 均已收录，未重复新增
+
+---
+
 ### 2026-08-25 - TrueForge 开源入局 & Harness 安全成新攻防前沿 & 框架全线增长
 
 **更新**：

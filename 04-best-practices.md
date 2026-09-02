@@ -1634,6 +1634,51 @@ context_engineering:
 
 ---
 
+## 47. Phil Schmid：Recursive Self-Improvement——Agent 回顾自身轨迹实现自我改进（2026-09-03 更新）
+
+**来源**：[Phil Schmid - Recursive Self-Improvement](https://www.philschmid.de/recursive-self-improvement)（2026-08-21）
+
+### 核心机制
+
+> Agent 通过回顾自身历史轨迹（trajectory）实现自我改进——把做过的事变成下一次做得更好的输入。
+
+- 与其「Model = CPU、Context Window = RAM、Harness = OS」心智模型一脉相承：harness 是承载自改进回路（轨迹存储→复盘→提炼→固化）的基础设施
+- 同期博客还有《Controlling Android with Gemini 3.7 Flash and 150 lines of Python》（08-17）等轻量 agent 实操文，文章直接归入 Agents / Education / Harness 类别
+
+### 实践要点
+
+1. **历史轨迹是可复用资产**：复盘→提炼→固化为 skill/规则，而非一次性丢弃
+2. **自改进依赖 harness 能力**：轨迹的记录、检索与回放是 harness 记忆系统的职责，而非模型自身能力
+3. **轻量起步可行**：150 行 Python 即可搭建可用的 agent 外设，自改进回路不必一步到位
+
+---
+
+## 48. OvalEdge：Context Engineering 落地八技——Select 与 Write 为核心（2026-09-03 更新）
+
+**来源**：[OvalEdge - Context Engineering Techniques: Why AI Gets It Wrong](https://www.ovaledge.com/blog/context-engineering-techniques)
+
+### 核心两招
+
+| 原语 | 含义 | 作用 |
+|------|------|------|
+| **Select** | 只拉取与当前任务相关的信息 | 控制入口，避免噪声占用预算 |
+| **Write** | 通过 scratchpad、记忆库、任务状态把重要中间结果写到上下文窗口之外 | 控制留存，避免重复消耗 token |
+
+- Write 与 Anthropic 结构化笔记模式同构：草稿本写到窗口外、需要时重读
+
+### 元数据驱动的检索治理
+
+- 检索时用元数据（认证状态、归属、新鲜度）做排序与治理：例如优先返回财务部认证过的收入定义，而非过时的非正式版本
+- 兼顾准确性与合规审计——检索治理不只是相关性排序
+
+### 实践要点
+
+1. **Select/Write 是上下文预算管理的最小操作集**：先管入口、再管留存
+2. **检索要带治理维度**：认证、归属、新鲜度与相关性同等重要
+3. **与既有框架互补**：可与 Sourcegraph 四大支柱（#39）、Taskade 五层模型（#36）交叉验证方案完备性
+
+---
+
 ## 40. Vercel「少即是多」——精心策划的工具集胜过丰富工具集（2026-07-24 更新）
 
 **来源**：[Phil Schmid - Agent Harness 2026](https://www.philschmid.de/agent-harness-2026)（引用 Vercel 实践）
