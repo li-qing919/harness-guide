@@ -97,6 +97,46 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-04 - 失败可读性方法论补全 & ACE 三角色架构 & 框架稳态增长
+
+**更新**：
+
+1. **Addy Osmani：Agent 失败是「可读的」——症状 → 修复映射**
+   - 📝 来源：[addyosmani.com](https://addyosmani.com/blog/agent-harness-engineering)（2026-04-19，存量文章复检补充）
+   - 🎯 不知道约定 → 写进 AGENTS.md；误跑破坏性命令 → 加 hook 拦截；40 步任务迷路 → 拆 planner/executor；总提交坏代码 → 接入 typecheck 反压
+   - 💡 文中引用 Viv Trivedy《Anatomy of an Agent Harness》为最清晰的 harness 组成推导；顶级编码 agent（Claude Code、Cursor、Codex、Aider、Cline）已收敛到相似 harness 模式
+
+2. **ACE（Agentic Context Engineering）：Generator / Reflector / Curator 三角色循环**
+   - 📝 来源：[Cruxdigits - Context Engineering 2026 Playbook](https://cruxdigits.nl/blog/context-engineering-ai-agents-2026)（基于 Stanford/SambaNova/UC Berkeley 论文）
+   - 🎯 教训回写进持续演化的结构化上下文 playbook，agent 自管上下文预算；补全 #45 已收录实证（漂移 ↓86%）之外的三角色架构
+   - 💡 研究共识：前沿模型在窗口填满之前就已劣化，解法是更聪明的 token 分配而非更大窗口
+
+3. **State of Context Engineering：混合滑动窗口战术补充**
+   - 📝 来源：[Towards AI](https://pub.towardsai.net/state-of-context-engineering-in-2026-cf92d010eab1)（存量文章复检补充）
+   - 🎯 长任务压缩：最近 N 轮保留原文 + 更早内容 LLM 摘要；多域路由：先关键词规则、后 LLM 分类
+
+4. **框架版本稳态增长**（09-03 基础上的 1 天净增）
+   - Superpowers — **281,293** ⭐（**+476**/天，增速最快）— 默认分支仍处 v6.3.0 稳定期
+   - DeerFlow — **81,317** ⭐（+43）— 沙箱 AIO 1.11 FOWNER 权限修复（#5163）
+   - CrewAI — **58,056** ⭐（+45）— Gemini provider 末尾 user turn 修复（#6973）
+   - BMAD-METHOD — **52,649** ⭐（+43）— build 完成交接流程缩短（#2822）
+   - LangGraph — **41,002** ⭐（+60）— slogan 收敛为 "Build resilient agents."
+   - OpenAI Agents SDK — **29,179** ⭐（+33）— PyPI 发布加固（#4726）
+   - Google ADK — **21,397** ⭐（+19）— **MCP 连接器双版本支持（SDK 2.x + 1.x）**
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-09-04 框架版本迭代速报（7 个框架）
+- `04-best-practices.md` — #34 补充 Addy Osmani 失败可读性映射与 Viv Trivedy 引用；#27 补充混合滑动窗口战术；新增 #49 ACE 三角色循环
+
+**关键洞察**：
+- 🔍 **失败可读性**：harness 优化的方法论基础是「读失败」——每种反复出现的失败模式都对应一个可工程化修复
+- 🔁 **ACE 闭环**：上下文管理从人工静态维护走向 agent 自演化（执行→反思→回写），与 Phil Schmid 自递归改进（#47）同构
+- 🔌 **ADK MCP 双版本兼容**：MCP SDK 1.x→2.x 迁移期的兼容层设计是协议演进期的参考模式
+- 📈 **Superpowers 281K**（+476/天）：无新版本发布情况下日增近 500，社区护城河效应显著
+- ♻️ **存量复检**：OpenAI、LangChain、Phil Schmid、Faros、Sourcegraph 相关文章均已收录，未重复新增
+
+---
+
 ### 2026-09-03 - Harness Engineering 首获学术正典 & 框架稳态增长
 
 **更新**：

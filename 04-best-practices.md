@@ -1679,6 +1679,50 @@ context_engineering:
 
 ---
 
+## 49. Agentic Context Engineering（ACE）：Generator / Reflector / Curator 三角色循环（2026-09-04 更新）
+
+**来源**：[Cruxdigits - Context Engineering: The 2026 Playbook for AI Agents](https://cruxdigits.nl/blog/context-engineering-ai-agents-2026)
+
+### 研究共识：模型在窗口填满之前就已劣化
+
+2025-2026 年研究证实：**所有前沿模型在上下文窗口填满之前性能就已劣化**（"lost in the middle" / "needle in a haystack"）。
+
+- 解法不是更大的窗口，而是**更聪明的 token 分配**
+- 配套战术见 #27 补充：长任务上混合滑动窗口压缩，多域先关键词规则路由再 LLM 分类
+
+### ACE 三角色循环
+
+Stanford / SambaNova / UC Berkeley 论文提出的 Agentic Context Engineering（ACE）架构：
+
+```
+任务 → Generator 生成推理轨迹
+     → Reflector 提炼成败教训
+     → Curator 把教训回写进结构化上下文「playbook」
+     → playbook 持续演化，agent 自管上下文预算
+     ↺（闭环）
+```
+
+| 角色 | 职责 |
+|------|------|
+| **Generator** | 生成推理轨迹执行任务 |
+| **Reflector** | 从轨迹中提炼成败教训 |
+| **Curator** | 将教训回写进持续演化的结构化上下文 playbook |
+
+核心思想：上下文不再由人静态维护，而是由 agent 通过「执行 → 反思 → 回写」闭环自主演化。
+
+### 与既有条目的关系
+
+- #45 已收录同一 ACE 论文的实证数据（增量更新使漂移率 ↓86%、延迟 ↓86%）——本条补全其三角色架构，合起来构成对 ACE 的完整记录
+- 三角色循环与 #47 Phil Schmid 自递归改进同构：一个作用于轨迹复盘，一个作用于上下文资产
+
+### 实践要点
+
+1. **Playbook 是活的上下文**：把「教训回写」做成机制，而非依赖人工周期性重写 AGENTS.md
+2. **先压缩后路由**：长任务先上混合滑动窗口，多域场景再加路由层
+3. **预算自主权是前沿方向**：把上下文预算管理交给 agent 闭环，人工只设计回写机制与护栏
+
+---
+
 ## 40. Vercel「少即是多」——精心策划的工具集胜过丰富工具集（2026-07-24 更新）
 
 **来源**：[Phil Schmid - Agent Harness 2026](https://www.philschmid.de/agent-harness-2026)（引用 Vercel 实践）
@@ -1921,6 +1965,13 @@ Packmind 编译了 30+ 可操作的上下文工程实践，覆盖从编写有效
 ### 竞争注意力问题
 
 > 上下文窗口中的每个 token 都在竞争模型注意力——系统指令、工具定义、MCP 资源、检索文档、对话历史和累积操作历史都需纳入管理。
+
+### 混合滑动窗口与路由战术（2026-09-04 补充）
+
+复检该文补充两条落地战术：
+
+- **长任务 agent 优先加压缩**：混合滑动窗口——最近 N 轮保留原文，更早内容用 LLM 摘要替代
+- **多域 agent 优先加路由**：先用关键词规则削减上下文膨胀，再上 LLM 分类（规则先行降低成本）
 
 ---
 
@@ -2214,7 +2265,7 @@ harness:
 
 ---
 
-## 34. Addy Osmani：Agent Harness Engineering 深度拆解（2026-07-06 更新）
+## 34. Addy Osmani：Agent Harness Engineering 深度拆解（2026-07-06 更新，2026-09-04 补充）
 
 **来源**：[Addy Osmani - Agent Harness Engineering](https://addyosmani.com/blog/agent-harness-engineering/)
 
@@ -2248,12 +2299,27 @@ Google 工程师 Addy Osmani 对 Harness Engineering 做了系统性拆解，提
 
 这是 LangChain Terminal Bench 实验中验证有效的 Ralph Wiggum Loop 的通用化描述——通过钩子机制实现自动化质量闭环。
 
+### 失败是可读的：症状 → 修复映射（2026-09-04 补充）
+
+原文（2026-04-19）进一步指出 **agent 失败通常是「可读的」**——每种反复出现的失败模式都对应一个可工程化的 harness 修复：
+
+| 反复出现的症状 | 对应修复 |
+|------|------|
+| 不知道项目约定 | 把约定写进 AGENTS.md |
+| 误跑破坏性命令 | 加 hook 拦截 |
+| 40 步长任务中途迷路 | 拆成 planner / executor 两阶段 |
+| 总提交坏代码 | 接入 typecheck 作为反压信号 |
+
+- 文中引用 Viv Trivedy 的《Anatomy of an Agent Harness》为对 harness 组成「最清晰的推导」
+- 观察到顶级编码 agent（Claude Code、Cursor、Codex、Aider、Cline）已收敛到相似的 harness 模式——与 §31 的架构趋同分析互为印证
+
 ### 实践要点
 
 1. **量化认知**：98% harness 的比例意味着投资 harness 优化的 ROI 远超投资模型选择
 2. **两层思维**：单会话质量和多会话编排需要不同的 harness 设计
 3. **失败归因**：遇到 Agent 问题时首先检查配置，而非归咎于模型能力
 4. **自动化闭环**：Ralph Loop 是可通用的钩子模式，适用于任何编码 Agent
+5. **读失败是方法论基础**（2026-09-04 补充）：harness 优化从「诊断反复失败模式」开始，每种症状都有对应工件（AGENTS.md / hook / 双阶段拆分 / typecheck）
 
 ---
 
