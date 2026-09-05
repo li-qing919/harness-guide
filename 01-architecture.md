@@ -549,6 +549,64 @@ Anthropic 分享了 claude.ai、Claude Code、Claude Cowork 三条产品线的 A
 1. **四大支柱是新的完备性检查框架**：与 Faros 五层模型（工具编排/验证循环/上下文与记忆/护栏/观测）互补，可交叉验证 harness 方案覆盖度
 2. **学术正典化 + 大厂托管化 + 计量计费**：三重信号标志 harness 从工程概念走向产业基础设施
 
+## Temporal Agent Harness：持久化执行进入 Harness 基础设施（2026-09-06 补充）
+
+**来源**：[Temporal Blog - Temporal Agent Harness: An early look at durable agent infrastructure](https://temporal.io/blog/temporal-agent-harness-durable-agent-infrastructure)（2026-08-20，Cornelia Davis）
+
+### 核心定位
+
+- Temporal 发布 **Temporal Agent Harness** 早期预览：包裹现有 agent SDK，提供生产级 agent 所需的**持久化执行**（durable execution）
+- **turn 级编排**：agent 与用户多轮交互状态持久化，长任务中途崩溃/重启不丢状态
+- 不锁定上下文与流程：允许自带业务上下文与工作流，harness 只负责可靠性层
+
+### 核心观点
+
+> "给 AI agent 能力很容易，给它责任很难。"（It's easy to give an agent capabilities; it's hard to give it responsibilities.）
+
+harness 正是解决**可靠性/责任层**（reliability & accountability）的方案。
+
+### 架构启示
+
+1. **工作流引擎厂商入局**：Temporal（durable execution 老牌厂商）把 harness 视为自然延伸，印证「2026年新架构趋势」中 runtime 层基础设施化的判断
+2. 与 Microsoft/Google 托管 agent 运行时（见 RUCAIBox 同期动态）同向：**harness 基建化/托管化**是 2026 下半年主旋律
+3. 长时任务选型提示：DeerFlow 的 long-horizon 叙事与 Temporal 的 turn 级持久化指向同一痛点——**状态不丢是生产 agent 的第一道门槛**
+
 ---
 
-*更新时间：2026-09-03*
+## Databricks：Agent = Model + Harness 官方定义（2026-09-06 补充）
+
+**来源**：[Databricks Blog - What is an AI Agent Harness?](https://www.databricks.com/blog/ai-harness)
+
+### 核心论点
+
+- 公式化定义：**Agent = Model + Harness**——harness（工具、记忆、执行环境、护栏）把模型推理转化为可靠行动
+- **harness 设计对性能的影响可媲美底层模型本身**
+- 把 harness engineering 定位为继 prompt engineering、context engineering 之后的**第三阶段**
+
+### 架构启示
+
+1. 「第三阶段」表述与指南既有脉络一致：Prompt → Context → Harness（README 核心概念层次图、#32 四年演进）
+2. 大数据平台（Databricks）下场写 harness 科普长文，标志概念完成**从工程圈到数据平台的渗透**
+3. "harness 影响力 ≈ 模型"与 Terminal Bench 2.0 实证（52.8→66.5，案例 13）互为呼应——先有实证，后有平台方背书
+
+---
+
+## Preprints 学术综述：Harness 六组件形式化（2026-09-06 补充）
+
+**来源**：[Preprints.org - Agent Harness for Large Language Model Agents: A Survey](https://www.preprints.org/manuscript/202604.0428/v1)（2026-04 预印本）
+
+### 要点
+
+- 将 harness 形式化为**六组件整体**，梳理 harness engineering 演进谱系
+- 引用两条实证支撑「纯 harness/context 改动 ≈ 换模型收益」：
+  - LangChain DeepAgents 在 Terminal Bench 2.0 上 **52.8% → 66.5%**（+26%）——已收录于案例 13，此处仅作交叉引用
+  - OpenAI Codex 团队「5 个月、3-7 名工程师、百万行代码」——已收录，仅作交叉引用
+
+### 与 RUCAIBox 综述的关系
+
+- RUCAIBox（四大支柱，2026-09-03 补充）重在设计知识体系化；本篇重在**组件形式化与实证汇编**
+- 两篇综述接连出现，标志 harness 研究从单点论文进入**综述密度上升期**
+
+---
+
+*更新时间：2026-09-06*

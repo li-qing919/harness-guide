@@ -1723,6 +1723,49 @@ Stanford / SambaNova / UC Berkeley 论文提出的 Agentic Context Engineering�
 
 ---
 
+## 50. deepset：Harness 失败分类框架——把失败模式映射到 Harness 组件（2026-09-06 更新）
+
+**来源**：[deepset - Harness Engineering: How to Build Reliable AI Agents by Engineering the System, Not the Model](https://github.com/ai-boost/awesome-harness-engineering)（2026-05，经 awesome-harness-engineering 清单收录）
+
+### 四类失败 × 对应 Harness 组件
+
+deepset 提出核心论点：agent 失败不应归咎于模型，而应按类别映射到 harness 对应组件去修复：
+
+| 失败类别 | 典型症状 | 对应 Harness 组件 |
+|----------|----------|-------------------|
+| **Context 失败** | 缺少关键信息、上下文被污染 | 上下文组装、检索、压缩 |
+| **Constraint 失败** | 越权操作、违反约束 | 权限系统、hooks、护栏 |
+| **Verification 失败** | 错误结果未被拦截 | 验证循环、测试、评估器 |
+| **Planning 失败** | 长任务迷路、步骤失控 | planner/executor 拆分、子代理编排 |
+
+### 实证效果
+
+- 仅靠 harness 改动（不动模型）即可让 agent 在排行榜前进 **20+ 名次**
+- 与 #34 Addy Osmani「失败是可读的：症状 → 修复映射」互为印证：一个从症状出发、一个从组件出发，合起来构成故障排查的双向索引
+
+📌 **收录说明**：失败四分类此前仅记录于 README 2026-09-03 更新日志，本条补全正文条目（含失败→组件映射表与实证数据）。
+
+---
+
+## 51. Victor Dibia：Context Engineering 101——Compaction 与子代理的工程实现（2026-09-06 更新）
+
+**来源**：[Victor Dibia Newsletter - Context Engineering 101: How Agents Can Use Compaction and Sub-Agents to Manage Context](https://newsletter.victordibia.com/p/context-engineering-101-how-agents)
+
+### Compaction 的触发工程
+
+- 在 agentic loop 中、LLM 调用前**按条件触发**：如窗口占用达 **80%** 或 **100K token 硬上限**
+- 示例 **HeadTailCompaction**：头尾保留原文 + 中间摘要——同时保住系统提示/早期指令与最近对话的高信号
+- 与 #23 Anthropic「临近窗口上限时高保真摘要重启」同一策略，本条补足可落地的触发阈值与代码形态
+
+### 子代理的上下文最小化
+
+- 每个子代理只持有任务所需的**最小上下文**，主对话只做编排——避免上下文污染
+- **可复用模式**：把 compaction 配置好的子代理包装成工具，供 coordinator 按需调用
+
+📌 **定位**：#23（Anthropic 方法论）讲「为什么」，本条讲「怎么建」——阈值触发、头尾压缩、子代理工具化三件套可直接落地。
+
+---
+
 ## 40. Vercel「少即是多」——精心策划的工具集胜过丰富工具集（2026-07-24 更新）
 
 **来源**：[Phil Schmid - Agent Harness 2026](https://www.philschmid.de/agent-harness-2026)（引用 Vercel 实践）

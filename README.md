@@ -97,6 +97,66 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-06 - 持久化 Harness 基建入局 & Pydantic AI v2 harness-first & deepset 失败分类入正文
+
+**更新**：
+
+1. **Temporal Agent Harness：持久化执行进入 Harness 基础设施**
+   - 📝 来源：[Temporal Blog](https://temporal.io/blog/temporal-agent-harness-durable-agent-infrastructure)（2026-08-20）
+   - 🎯 包裹现有 agent SDK 提供 turn 级编排与长任务状态持久化；"给 AI agent 能力很容易，给它责任很难"——harness 即可靠性/责任层
+   - 💡 工作流引擎老牌厂商入局，与 Microsoft/Google 托管运行时同向：harness 基建化是 2026 下半年主旋律
+
+2. **Databricks：What is an AI Agent Harness?**
+   - 📝 来源：[Databricks Blog](https://www.databricks.com/blog/ai-harness)
+   - 🎯 Agent = Model + Harness；harness 设计对性能的影响可媲美底层模型；HE 是 prompt → context 之后的第三阶段
+   - 💡 大数据平台下场背书，与 Terminal Bench 2.0 实证（52.8→66.5）互证
+
+3. **Pydantic AI v2.0.0——首个「harness-first」版本宣言 + Winder.AI 框架对比**
+   - 📝 来源：[Winder.AI - A Comparison of AI Agent Harnesses in 2026](https://winder.ai/ai-agent-harness-comparison)
+   - 🎯 2026-06-23 breaking v2："harness-first design with capabilities as a core primitive"，50+ 可组合能力（工具+hooks+指令+模型设置捆绑为单一单元）
+   - 💡 "框架组合 agent，harness 运行 agent"——新增监控框架
+
+4. **Preprints 学术综述：Harness 六组件形式化**
+   - 📝 来源：[Preprints.org Survey](https://www.preprints.org/manuscript/202604.0428/v1)（2026-04 预印本）
+   - 🎯 harness 形式化为六组件；其引用的 Terminal Bench（52.8→66.5）与 Codex 百万行证据均已收录，仅作交叉引用未重复
+
+5. **deepset 失败分类框架补全正文条目（#50）**
+   - 📝 来源：[awesome-harness-engineering 清单](https://github.com/ai-boost/awesome-harness-engineering)（deepset，2026-05）
+   - 🎯 context/constraint/verification/planning 四类失败 → 对应 harness 组件映射；实测仅靠 harness 改动排行榜前进 20+ 名次
+   - 💡 此前仅记录于 09-03 更新日志，本次补全 04-best-practices 正文（含映射表）
+
+6. **Victor Dibia：Context Engineering 101——compaction 与子代理工程实现（#51）**
+   - 📝 来源：[Victor Dibia Newsletter](https://newsletter.victordibia.com/p/context-engineering-101-how-agents)
+   - 🎯 compaction 按条件触发（80% 窗口 / 100K 硬上限）、HeadTailCompaction 头尾保留+中间摘要、子代理最小上下文 + 包装成工具供 coordinator 调用
+   - 💡 Anthropic #23 讲「为什么」，本条补「怎么建」
+
+7. **框架版本全线更新**（09-04 基础上的 2 天净增）
+   - Superpowers — **282,076** ⭐（**+783**/2天，周内涨势最猛）— 主线仍处 v6.3.0 稳定期
+   - DeerFlow — **81,421** ⭐（+104）— MindIE 模拟流式 usage_metadata 修复（#5195）、可观测层持久化延迟工具晋升（#5183）
+   - CrewAI — **58,121** ⭐（+65）— v1.15.20 发布；Bedrock 流式 tool-call 修复（#6150）
+   - BMAD-METHOD — **52,708** ⭐（+59）— v6.12.0；PR #2768 npx 分发技能，打磨 6.13.0
+   - LangGraph — **41,101** ⭐（+99）— 维护节奏，无新主线提交
+   - OpenAI Agents SDK — **29,211** ⭐（+32）— 技能测试迁移专用 CI（#4881）
+   - Google ADK — **21,420** ⭐（+23）— state 序列化 fallback 容错
+
+**维护**：
+- 🔗 修正 `CONTRIBUTING.md` 中 CrewAI 旧仓库链接（joaomdmoura/crewAI → crewAIInc/crewAI，301 迁移）
+- ♻️ **去重复检**：Anthropic《Effective context engineering》、Comet Context Engineering、Terminal Bench 2.0 实证、Codex 百万行案例均已在册，未重复新增
+
+**更新文件**：
+- `01-architecture.md` — 新增 Temporal Agent Harness、Databricks Agent=Model+Harness、Preprints 六组件综述三节
+- `02-tools.md` — 新增 2026-09-06 框架版本迭代速报；新增监控条目 Pydantic AI v2.0.0（harness-first）
+- `04-best-practices.md` — 新增 #50 deepset 失败分类映射、#51 Victor Dibia compaction 工程实现
+- `CONTRIBUTING.md` — CrewAI 链接迁移修正
+
+**关键洞察**：
+- 🏗️ **Harness 基建化三连**：Temporal（持久化执行）+ Databricks（平台定义）+ Pydantic AI（框架原语）同一周入册——可靠性层成为各方共同主战场
+- 🧭 **「第三阶段」成为共识表述**：prompt → context → harness 演进叙事获平台方与学术侧双重确认
+- 📈 **Superpowers 282K**（+783/2天）：无主线发版仍断层第一，社区护城河效应
+- 🔁 **失败分类 ↔ 组件映射**：deepset 四分类与 Addy Osmani 症状映射构成故障排查双向索引
+
+---
+
 ### 2026-09-04 - 失败可读性方法论补全 & ACE 三角色架构 & 框架稳态增长
 
 **更新**：

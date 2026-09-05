@@ -171,7 +171,7 @@ git tag -a v1.2.0 -m "Week 3: Added case studies"
 ### 关键项目
 - [DeerFlow](https://github.com/bytedance/deer-flow)
 - [LangGraph](https://github.com/langchain-ai/langgraph)
-- [CrewAI](https://github.com/joaomdmoura/crewAI)
+- [CrewAI](https://github.com/crewAIInc/crewAI)
 - [OpenAI Agents SDK](https://github.com/openai/openai-agents-python)
 - [Google ADK](https://github.com/google/adk-python)
 

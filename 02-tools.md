@@ -1163,6 +1163,69 @@ async function verifyUI() {
 
 ---
 
+## 2026-09-06 新增监控：Pydantic AI v2.0.0——「harness-first design」
+
+**来源**：[Winder.AI - A Comparison of AI Agent Harnesses in 2026](https://winder.ai/ai-agent-harness-comparison)（2026-09 检索）
+
+### 为什么纳入监控
+
+- Pydantic AI 于 2026-06-23 发布 breaking **v2.0.0**，官方定位为 **"harness-first design with capabilities as a core primitive"**
+- **Capability** 是单一可组合单元：捆绑工具、hooks、指令与模型设置；官方文档列出 **50+ 可组合能力**
+- 主流框架中首个把 "harness-first" 写进版本定位宣言的案例——框架与 harness 的边界正在消失
+
+### Winder.AI 的框架 vs Harness 定义
+
+> "框架组合 agent，harness 运行 agent。"（Frameworks compose agents; harnesses run agents.）
+
+该对比综述同时给出 2026 年主流 agent harness 横向图谱，可作为选型参考底稿。
+
+📌 **启示**：Pydantic AI 把 harness 概念下沉为框架原语（capability），与 DeerFlow 拥抱 "SuperAgent harness" 叙事、LangGraph 收敛 "Build resilient agents." slogan 相互印证——2026 年框架竞争主轴已从「编排能力」转向「运行时可靠性」。
+
+---
+
+## 2026-09-06 框架版本迭代速报
+
+> 数据：GitHub 未认证 API，2026-09-06 拉取。Star 变化为相对 09-04 同口径采集的 2 天净增。
+
+### Superpowers (282,076 ⭐)
+- `v6.3.0` (2026-08-12) 仍为默认分支最新可见提交
+- ⭐ 较 09-04 净增 **+783**/2天，周内涨势最猛 — 监控仓库中增速断层第一
+- 仓库 09-04 有推送（非默认分支），主线延续 v6.3.0 后稳定期
+- 📌 **启示**：连续多周无主线发版仍保持 ~390/天增速，「技能框架生态 + 社区护城河」飞轮效应显著
+
+### DeerFlow / ByteDance (81,421 ⭐)
+- ⭐ 较 09-04 净增 **+104**/2天
+- push 2026-09-05（持续高频更新）
+- 🆕 09-05：fix 修复 MindIE tool-mode 模拟流式下 usage_metadata 丢失（#5195）；observability 层持久化延迟工具晋升（#5183）
+
+### CrewAI (58,121 ⭐)
+- ⭐ 较 09-04 净增 **+65**/2天
+- 最新 release `1.15.20` (2026-09-04)，push 2026-09-04
+- 🆕 09-04：skill 安装文档改用组织 UUID（#7273，仓库迁移后的配套清理）；fix 修复 Bedrock 流式 tool-call 参数在 contentBlockStop 丢失（#6150）
+
+### BMAD-METHOD (52,708 ⭐)
+- ⭐ 较 09-04 净增 **+59**/2天
+- 最新 release `v6.12.0` (2026-09-04)，主分支已 bump 至 `6.13.0-next`，push 2026-09-05
+- 🆕 09-05：合并 PR #2768 —— **npx 分发技能**（skills distribution），正在打磨 6.13.0
+- 📌 **启示**：npx 一键分发是「技能即安装包」趋势的又一例证，与各大技能市场方向一致
+
+### LangGraph / LangChain (41,101 ⭐)
+- ⭐ 较 09-04 净增 **+99**/2天
+- push 2026-09-03；`langgraph-sdk 0.4.4` (08-27) 仍为最新 release
+- 无新提交记录（#8596 / #8804 已于 09-04 速报收录）——延续维护节奏
+
+### OpenAI Agents SDK (29,211 ⭐)
+- ⭐ 较 09-04 净增 **+32**/2天
+- 最新 release `v0.22.0` (2026-08-19)，push 2026-09-05
+- 🆕 09-05：引入路由验证变更并要求确认的 docs-only 推送（#4880）；仓库技能测试改在专用 CI 运行（#4881）
+
+### Google ADK (21,420 ⭐)
+- ⭐ 较 09-04 净增 **+23**/2天
+- 最新 release `v1.39.1` (2026-08-27)，push 2026-09-05
+- 🆕 09-05：state 序列化 fallback 按值容错；模型返回多 candidate 时记录错误日志
+
+---
+
 ## 2026-09-04 框架版本迭代速报
 
 > 数据：GitHub 未认证 API，2026-09-04 拉取。Star 变化为相对 09-03 05:30 同口径采集的 1 天净增。
