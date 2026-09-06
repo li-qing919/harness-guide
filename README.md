@@ -97,6 +97,50 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-07 - Harness 均衡器实证 & 框架 release 细节补录 & 三层记忆架构
+
+**更新**：
+
+1. **Faros.ai「伟大的均衡器」实证补强（#37 补充）**
+   - 📝 来源：[Faros.ai - Harness Engineering](https://www.faros.ai/blog/harness-engineering)
+   - 🎯 211 真实工程任务：优化 harness 下开源模型（GLM-5.2、Kimi K2.6）追平 Opus 4.8 / GPT-5.5；方法论源自 Mitchell Hashimoto「agent 每犯一次错，就工程化一个让它永不再犯的方案」
+   - 💡 与 deepset 四分类（#50）、Osmani 症状映射（#34）同谱系：失败→工程化修复
+
+2. **Phil Schmid Part 2 后续补充（#25 补充）**
+   - 📝 来源：[philschmid.de](https://www.philschmid.de/context-engineering-part-2)（含 [X thread](https://x.com/_philschmid/status/2008175408923959574)）
+   - 🎯 Peak Ji webinar 超越原版文章：Context Rot 之外转向多 agent 协调与 action space 管理；训练与推理环境走向融合
+
+3. **Vikas Sah：Agent Harness Engineering 权威实操指南（新增 #52）**
+   - 📝 来源：[Medium (engineeratheart)](https://engineeratheart.medium.com/the-definitive-guide-to-agent-harness-engineering-5f5edf25fd73)
+   - 🎯 「1% 排行榜优势在 50 次工具调用后消失」+ HumanLayer「模型没问题，是 harness 技能问题」；实践三支柱：上下文一致性/工具清晰度/约束架构
+
+4. **karozieminski：产品构建者的上下文工程运营纪律（新增 #53）**
+   - 📝 来源：[Substack](https://karozieminski.substack.com/p/context-engineering-product-builders-guide-2026)
+   - 🎯 prompt/上下文不对称性；情景/语义/程序三层记忆架构；Gartner：2026 底 40% 企业应用用任务级 agent
+
+5. **框架版本速报（相对 09-06 的 1 天净增，含 release 细节补录）**
+   - Superpowers — **282,378** ⭐（**+302**，涨势最猛）— v6.3.0 细节补录：Devin CLI/Hermes loader、子代理冲突不卡死（曹堵 9 小时级修复）、微任务合并 dispatch、实现者/审查者禁派生子代理
+   - DeerFlow — **81,583** ⭐（+162，第二快）— 2.x 主攻 run hydration / RunStore 持久化，与 Temporal 持久化执行同向
+   - CrewAI — **58,160** ⭐（+39）— 1.15.20：legacy platform tool alias discovery 修复
+   - BMAD-METHOD — **52,729** ⭐（+21）— v6.12.0：ceremony 按变更复杂度自适应；⚠️ 多项破坏性变更（persistent_facts 默认空、{diff_output}→{diff_file}、CK→WT）
+   - LangGraph — **41,137** ⭐（+36）— sdk 0.4.4 补录：thread streams→LangSmith traces 路由（#8723）+安全修复
+   - OpenAI Agents SDK — **29,224** ⭐（+13）— v0.22.0 补录：guardrail 拦截输出脱敏进持久化状态（#4507）、RunState usage 隔离
+   - Google ADK — **21,427** ⭐（+7）— ⚠️ 版本口径存疑：本次 releases/latest 返回 v2.8.0 (08-26)，与此前 v1.39.1 (08-27) 冲突，待下次交叉验证（若属实则含 A2A task mode、Model Armor）
+
+**维护**：
+- ♻️ **去重复检**：Winder.AI 横评、Schmid Part 2 主体、Anthropic 三 agent harness（InfoQ）、Sourcegraph 实操指南（#44）、cruxdigits Playbook/ACE（#49）、CrewAI 仓库迁移均已在册，本次仅做细节增量不重复新增
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-09-07 框架版本迭代速报（含各仓 release 内容补录与 ADK 版本矛盾标注）
+- `04-best-practices.md` — #25/#37 追加 2026-09-07 补充小节；新增 #52 Vikas Sah 实操指南、#53 karozieminski 三层记忆架构
+
+**关键洞察**：
+- ⚖️ **均衡器叙事闭环**：开源模型+好 harness 追平前沿模型，与「模型是商品，harness 是护城河」（#41）互为正反面
+- 🏗️ **持久化成主战场**：DeerFlow run hydration / RunStore、OpenAI SDK 状态脱敏、Temporal 持久化执行——三家同周同向
+- 🪜 **流程重量参数化**：BMAD ceremony 自适应与 Superpowers brainstorming 分级裁剪同构，重流程框架均在「按变更规模缩放 ceremony」
+
+---
+
 ### 2026-09-06 - 持久化 Harness 基建入局 & Pydantic AI v2 harness-first & deepset 失败分类入正文
 
 **更新**：

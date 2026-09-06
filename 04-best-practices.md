@@ -1217,6 +1217,11 @@ routing_strategy:
 2. **隔离是效率的基础**：子代理不需要知道全局上下文
 3. **路由即优化**：简单任务用快模型，复杂任务用强模型
 
+### 2026-09-07 补充
+
+- Peak Ji 后续 webinar 分享了**超越原版文章**的内容：Context Rot 之外，重点转向多 agent 协调与 action space 管理
+- Schmid 2026 主线判断再确认：harness 是解决 model drift 的首要工具，新瓶颈为 **context durability**；训练与推理环境正在走向融合（另见 X thread：https://x.com/_philschmid/status/2008175408923959574）
+
 ---
 
 ## 26. Context Engineering 利用率阈值管理（2026-04-03 更新）
@@ -1763,6 +1768,51 @@ deepset 提出核心论点：agent 失败不应归咎于模型，而应按类别
 - **可复用模式**：把 compaction 配置好的子代理包装成工具，供 coordinator 按需调用
 
 📌 **定位**：#23（Anthropic 方法论）讲「为什么」，本条讲「怎么建」——阈值触发、头尾压缩、子代理工具化三件套可直接落地。
+
+---
+
+## 52. Vikas Sah：Agent Harness Engineering 权威实操指南（2026-09-07 收录）
+
+**来源**：[Medium (engineeratheart) - The Definitive Guide to Agent Harness Engineering](https://engineeratheart.medium.com/the-definitive-guide-to-agent-harness-engineering-5f5edf25fd73)
+
+### 两条引述定调
+
+> 「1% 的排行榜优势在 50 次工具调用后就会消失。」—— Phil Schmid
+
+> 「模型没问题，是 harness 的技能问题。」—— HumanLayer 团队调试数十个生产 agent 失败后的结论
+
+### 实践路径三支柱
+
+1. **上下文一致性**：长会话中保持相关信息可见、剔除噪声
+2. **工具清晰度**：工具描述与返回结构面向模型优化，而非面向人
+3. **约束架构**：把边界条件工程化进 harness，而非堆进 prompt
+
+📌 **定位**：面向新手的系统入门长文，与 #34（Osmani 深度拆解）构成深浅搭配。
+
+---
+
+## 53. karozieminski：产品构建者的上下文工程运营纪律（2026-09-07 收录）
+
+**来源**：[Substack (karozieminski) - Context Engineering for Product Builders: The 2026 Operating Discipline](https://karozieminski.substack.com/p/context-engineering-product-builders-guide-2026)
+
+### 核心不对称性
+
+> 「精心写的 prompt 配上糟糕的上下文照样失败；糟糕的 prompt 配上良好工程的上下文往往成功。」
+
+这一不对称性是 context engineering 成为一等学科的理由。
+
+### 三层记忆架构
+
+| 层 | 内容 | 回答的问题 |
+|----|------|-----------|
+| **情景记忆（episodic）** | 具体交互/事件历史 | 「上次发生了什么」 |
+| **语义记忆（semantic）** | 提炼的事实与知识 | 「我们知道什么」 |
+| **程序记忆（procedural）** | 操作技能与流程 | 「怎么做」 |
+
+- 底座沿用 LangChain 四策略（Write / Select / Compress / Isolate），与 cruxdigits 2026 Playbook（#49）同一通用底座
+- Gartner 预测 2026 年底 40% 企业应用使用任务级 agent，每一个都取决于上下文工程质量
+
+📌 **启示**：三层记忆拆解为 agent 记忆系统选型（见「02-tools.md Memory System」类目）提供直接分类骨架。
 
 ---
 
@@ -2502,6 +2552,11 @@ Faros.ai 建议工程领导者在投入前先建立基线指标：
 1. **先量化再投入**：不要盲目建设 harness，先建立基线指标确定哪层最需要投入
 2. **五层缺一不可**：生产级 harness 需要完整的五层覆盖，缺失任一层都会导致可靠性问题
 3. **成熟度演进路径**：从 Prompt 到 Context 到 Harness 是工程化程度递增的路径
+
+### 2026-09-07 补充：Harness 是「伟大的均衡器」
+
+- 该文核心实证：211 个真实工程任务评测显示，配优化 harness 后**开源模型（GLM-5.2、Kimi K2.6）可追平 Opus 4.8 / GPT-5.5 等前沿模型**——harness 是「伟大的均衡器」
+- 方法论源自 Mitchell Hashimoto：**「agent 每犯一次错，就工程化一个让它永不再犯的方案」**——与 deepset 失败分类（#50）、Osmani「失败是可读的」（#34）同属一个谱系
 
 ---
 

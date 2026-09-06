@@ -1163,6 +1163,51 @@ async function verifyUI() {
 
 ---
 
+## 2026-09-07 框架版本迭代速报
+
+> 数据：GitHub 未认证 API，2026-09-07 05:30 GMT+8 拉取。Star 变化为相对 09-06 同口径采集的 1 天净增。CrewAI 使用迁移后仓库 crewAIInc/crewAI。
+
+### Superpowers (282,378 ⭐)
+- `v6.3.0` (2026-08-12) 仍为最新 release
+- ⭐ 较 09-06 净增 **+302**/天 — 监控仓库中涨势最猛
+- 🆕 v6.3.0 细节补录：Devin CLI 一键安装 `devin plugins install obra/superpowers` 且技能会话启动自动触发（#1995）；Hermes Agent 原生 loader 支持（#1922/#2025）；brainstorming 仪式按 spike/bounded/architectural 分级裁剪（#2063）；子代理控制器遇非灾难性冲突不再卡死（曾堵塞近 9 小时）；微任务合并单次 dispatch 降本（#2077/#2078）；实现者/审查者禁止再派生子代理（#2059）；计划携带 Spec: 指针（#2086）
+- 📌 **启示**：「子代理不得再生子代理」+「冲突降级不卡死」是长时程技能框架稳定性的两条硬约束
+
+### DeerFlow / ByteDance (81,583 ⭐)
+- ⭐ 较 09-06 净增 **+162**/天，7 仓中第二快；Open Issues：886
+- push 2026-09-06（持续高频更新）
+- 定位已明确为「开源长时程 SuperAgent harness」（研究/编码/创作；沙箱、记忆、工具、技能、子代理与消息网关）；v2.0.0 (2026-06-25) 为完全重写（1.x 留在 main-1.x 分支，合并 182 个 PR）
+- 🆕 2.x 线在做 **run hydration / RunStore 持久化**与跨 worker 取消等破坏性调整——harness 运行时持久化基建成主攻方向
+- 📌 **启示**：run hydration 与 Temporal 式持久化执行（09-06 入册）同向，再证「harness 基建化」趋势
+
+### CrewAI (58,160 ⭐)
+- ⭐ 较 09-06 净增 **+39**/天
+- 最新 release `1.15.20` (2026-09-04)，release 内容补录：修复 legacy platform tool alias discovery；push 2026-09-04
+- 组织化运营（crewAIInc）后进入平稳维护期，核心贡献者仍为 joaomdmoura 与 vinibrsl
+
+### BMAD-METHOD (52,729 ⭐)
+- ⭐ 较 09-06 净增 **+21**/天；Open Issues：30
+- 🆕 `v6.12.0` (2026-09-04) release 内容补录：**ceremony 按变更复杂度自适应**（简单变更两段式 spec 单会话完成）；review triage 为每条 finding 记录裁决与证据
+- ⚠️ 破坏性变更：persistent_facts 默认为空、`{diff_output}` 改名 `{diff_file}`、checkpoint-preview 改为 bmad-walkthrough（CK→WT）、不再自动发布 llms.txt；bmad-project-context 直接采用手写 AGENTS.md；新增韩文翻译
+- 📌 **启示**：ceremony 自适应 = 把「流程重量」变成随变更规模缩放的参数，与 Superpowers brainstorming 分级裁剪（#2063）同构
+
+### LangGraph / LangChain (41,137 ⭐)
+- ⭐ 较 09-06 净增 **+36**/天；Open Issues：752
+- push 2026-09-06，开发节奏稳定
+- 🆕 `langgraph-sdk 0.4.4` (2026-08-27) release 内容补录：从 thread streams 路由 LangSmith traces（#8723）+ 合入一处安全修复（merge commit from fork）
+
+### OpenAI Agents SDK (29,224 ⭐)
+- ⭐ 较 09-06 净增 **+13**/天；Open Issues：75
+- 🆕 `v0.22.0` (2026-08-19) release 内容补录（运行时加固主题）：guardrail 拦截的工具输出从可重放/持久化状态中脱敏（#4507）；terminal status 为 failed/incomplete 的非流式 Response 抛 ModelBehaviorError；拒绝 OpenAIProvider 显式 client 与 org/project 配置冲突（#4497）；隔离独立 RunState checkpoint 间的 usage 计量
+- 📌 **启示**：脱敏随持久化状态传播 + usage 计量隔离——安全属性必须进入「可重放状态」设计，而非仅停留在调用边界
+
+### Google ADK (21,427 ⭐)
+- ⭐ 较 09-06 净增 **+7**/天；Open Issues：502；push 2026-09-06
+- ⚠️ **版本口径存疑待复核**：本次 releases/latest 返回 `v2.8.0` (2026-08-26)，与 09-05/09-06 速报记录的 `v1.39.1` (2026-08-27) 冲突。若 2.x 属实，意味着 ADK 已进入 2.x 大版本线：RemoteA2aAgent 原生 task mode（A2A 协议深化）、新增 Model Armor 护栏插件、ADK_MAX_LLM_CALLS 环境变量调用上限、data_agent 工具集补齐 CRUD（create/delete/update/list）
+- 📌 下次采集以 releases 列表交叉验证 1.x→2.x 切换时间线后再回填
+
+---
+
 ## 2026-09-06 新增监控：Pydantic AI v2.0.0——「harness-first design」
 
 **来源**：[Winder.AI - A Comparison of AI Agent Harnesses in 2026](https://winder.ai/ai-agent-harness-comparison)（2026-09 检索）
