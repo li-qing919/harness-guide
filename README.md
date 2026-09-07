@@ -97,6 +97,42 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-08 - 全面去重日 & Google ADK 版本口径核销 & star 快照
+
+**更新**：
+
+1. **Google ADK 版本口径核销（09-07 待办销号）**
+   - ✅ 09-08 采集再次确认 releases/latest 返回 `v2.8.0` (2026-08-26)，ADK 确认进入 2.x 大版本线（RemoteA2aAgent A2A task mode、Model Armor 护栏插件、ADK_MAX_LLM_CALLS 调用上限）；此前 v1.39.1 记录判定为口径错误，09-07 标注的「待交叉验证」已移除
+
+2. **Taskade #36 小幅补充：反模式与 system prompt 预算**
+   - 🎯 常见反模式是把所有可能需要的东西全塞进 system prompt；最佳实践 system prompt ≤ **2,000 token**，其余信息按层归位；与 #44/#49 构成「预算纪律」三方印证
+
+3. **Winder.AI 名称辨析补录（02-tools）**
+   - 🎯 "OpenHarness" 一名已被至少 4 个不相关项目占用，多数人说的开源 harness 其实是 OpenHands——检索选型注意去歧义
+
+4. **框架版本速报（相对 09-07 的 1 天净增，今日无新 release）**
+   - Superpowers — **282,807** ⭐（**+429**，涨势最猛）— v6.3.0 后稳定期
+   - DeerFlow — **81,803** ⭐（+220，第二快）— 主分支 09-07 仍活跃；仓库 description 自我定位 "open-source long-horizon SuperAgent harness"
+   - LangGraph — **41,198** ⭐（+61）— sdk 0.4.4 仍为最新
+   - CrewAI — **58,205** ⭐（+45）— v1.15.20 已在册
+   - OpenAI Agents SDK — **29,250** ⭐（+26）— v0.22.0 已在册
+   - BMAD-METHOD — **52,764** ⭐（+35）— v6.12.0 已在册
+   - Google ADK — **21,445** ⭐（+18）— v2.8.0 口径确认（见第 1 条）
+
+**维护**：
+- ♻️ **去重复检（本次为纯去重日，零新增条目）**：Temporal 早期预览、Winder.AI 横评主体（含 Pydantic v2.0.0）、Phil Schmid Part2、Faros.ai 实证、Databricks 定义、Superpowers v6.3.0、BMAD v6.12.0、OpenAI SDK v0.22.0、CrewAI 迁移+v1.15.20、Sourcegraph #44、cruxdigits #49、Taskade #36 五层模型（区别于 #53 三层记忆架构）、DeerFlow v2.0.0、LangGraph sdk 0.4.4 均已 grep 验证在册——今日仅做 3 处小幅补充与 1 处核销
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-09-08 速报（star 快照 + ADK 核销）；09-07 ADK 块改标已核销；Winder 节补 OpenHarness/OpenHands 辨析
+- `04-best-practices.md` — #36 追加 2026-09-08 补充小节（反模式 + 2,000 token 预算）
+- `README.md` — 追加本日志；09-07 条目内 ADK 待验证字样改为已核销
+
+**关键洞察**：
+- 🧹 **资讯平台期**：高频源（Temporal/Winder/Schmid/Faros/Databricks）连续多日零新增，信息增量已从「概念文章」转向「release 细节」——追踪重心应继续放在版本补录与口径核销
+- 🏷️ **命名去歧义**：OpenHarness 撞名 4+ 项目、多数实指 OpenHands——命名混乱本身是 harness 概念火热的副产品
+
+---
+
 ### 2026-09-07 - Harness 均衡器实证 & 框架 release 细节补录 & 三层记忆架构
 
 **更新**：
@@ -125,7 +161,7 @@ Harness Engineering (最上层)
    - BMAD-METHOD — **52,729** ⭐（+21）— v6.12.0：ceremony 按变更复杂度自适应；⚠️ 多项破坏性变更（persistent_facts 默认空、{diff_output}→{diff_file}、CK→WT）
    - LangGraph — **41,137** ⭐（+36）— sdk 0.4.4 补录：thread streams→LangSmith traces 路由（#8723）+安全修复
    - OpenAI Agents SDK — **29,224** ⭐（+13）— v0.22.0 补录：guardrail 拦截输出脱敏进持久化状态（#4507）、RunState usage 隔离
-   - Google ADK — **21,427** ⭐（+7）— ⚠️ 版本口径存疑：本次 releases/latest 返回 v2.8.0 (08-26)，与此前 v1.39.1 (08-27) 冲突，待下次交叉验证（若属实则含 A2A task mode、Model Armor）
+   - Google ADK — **21,427** ⭐（+7）— ⚠️ 版本口径存疑：v2.8.0 (08-26) vs v1.39.1 (08-27) 冲突 → ✅ 09-08 已核销：确认 v2.8.0（2.x 线，含 A2A task mode、Model Armor）
 
 **维护**：
 - ♻️ **去重复检**：Winder.AI 横评、Schmid Part 2 主体、Anthropic 三 agent harness（InfoQ）、Sourcegraph 实操指南（#44）、cruxdigits Playbook/ACE（#49）、CrewAI 仓库迁移均已在册，本次仅做细节增量不重复新增

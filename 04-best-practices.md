@@ -2512,6 +2512,12 @@ Gartner 正式宣布 2026 年为「上下文之年」，标志行业焦点从提
 3. **Tools 标准化**：MCP 正在将工具定义从框架特定变为跨平台标准
 4. **Retrieval 精度 > 数量**：返回太多无关结果比不返回更糟
 
+### 反模式与 System Prompt 预算（2026-09-08 补充）
+
+- **常见反模式**：把所有可能需要的信息全部塞进 system prompt——既挤占 token 预算，又稀释指令信噪比
+- **最佳实践**：system prompt 控制在 **2,000 token 以内**，其余信息按层归位（工具定义进 Tools 层、会话状态进 State/Memory 层），而非堆积在指令层
+- 📌 **交叉印证**：与 #44（Sourcegraph「进入窗口前砍掉低信号」）、#49（cruxdigits 四策略）构成同一「预算纪律」的三方印证——分层归位本质上是 Write/Select 策略在 prompt 维度的投影
+
 ---
 
 ## 37. Faros.ai：Harness Engineering 五层成熟度模型（2026-07-07 更新）

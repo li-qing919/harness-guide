@@ -1163,6 +1163,36 @@ async function verifyUI() {
 
 ---
 
+## 2026-09-08 框架版本迭代速报
+
+> 数据：GitHub 未认证 API，2026-09-08 晨拉取。Star 变化为相对 09-07 同口径采集的 1 天净增。今日无新 release（各仓最新版本均已在 09-06/09-07 速报补录），本节为 star 快照 + ADK 口径核销。
+
+### Superpowers (282,807 ⭐)
+- ⭐ 较 09-07 净增 **+429**/天，7 仓中涨势最猛
+- `v6.3.0` (2026-08-12) 仍为最新 release，无新版本，v6.3.0 细节见 09-07 速报
+
+### DeerFlow / ByteDance (81,803 ⭐)
+- ⭐ 较 09-07 净增 **+220**/天，第二快；主分支 09-07 仍有活跃提交
+- 仓库 description 已自我定位为 "open-source long-horizon SuperAgent harness"——2.0 重写叙事（见 2026-03-30 速报）延续
+
+### CrewAI (58,205 ⭐)
+- ⭐ 较 09-07 净增 **+45**/天；`v1.15.20` (2026-09-04) 已在册，09-07 仍有提交
+
+### BMAD-METHOD (52,764 ⭐)
+- ⭐ 较 09-07 净增 **+35**/天；`v6.12.0` (2026-09-04) 已在册
+
+### LangGraph / LangChain (41,198 ⭐)
+- ⭐ 较 09-07 净增 **+61**/天；`langgraph-sdk 0.4.4` (2026-08-27) 已在册，push 09-06
+
+### OpenAI Agents SDK (29,250 ⭐)
+- ⭐ 较 09-07 净增 **+26**/天；`v0.22.0` (2026-08-19) 已在册
+
+### Google ADK (21,445 ⭐)
+- ⭐ 较 09-07 净增 **+18**/天
+- ✅ **版本口径核销**：09-08 采集再次确认 releases/latest 返回 `v2.8.0` (2026-08-26)，ADK 口径定为 **2.x 线**（详见 09-07 速报 ADK 节的已核销标注）
+
+---
+
 ## 2026-09-07 框架版本迭代速报
 
 > 数据：GitHub 未认证 API，2026-09-07 05:30 GMT+8 拉取。Star 变化为相对 09-06 同口径采集的 1 天净增。CrewAI 使用迁移后仓库 crewAIInc/crewAI。
@@ -1203,8 +1233,7 @@ async function verifyUI() {
 
 ### Google ADK (21,427 ⭐)
 - ⭐ 较 09-06 净增 **+7**/天；Open Issues：502；push 2026-09-06
-- ⚠️ **版本口径存疑待复核**：本次 releases/latest 返回 `v2.8.0` (2026-08-26)，与 09-05/09-06 速报记录的 `v1.39.1` (2026-08-27) 冲突。若 2.x 属实，意味着 ADK 已进入 2.x 大版本线：RemoteA2aAgent 原生 task mode（A2A 协议深化）、新增 Model Armor 护栏插件、ADK_MAX_LLM_CALLS 环境变量调用上限、data_agent 工具集补齐 CRUD（create/delete/update/list）
-- 📌 下次采集以 releases 列表交叉验证 1.x→2.x 切换时间线后再回填
+- ✅ **版本口径已核销（2026-09-08）**：09-08 采集再次确认 releases/latest 返回 `v2.8.0` (2026-08-26)，确认 ADK 已进入 2.x 大版本线：RemoteA2aAgent 原生 task mode（A2A 协议深化）、新增 Model Armor 护栏插件、ADK_MAX_LLM_CALLS 环境变量调用上限、data_agent 工具集补齐 CRUD（create/delete/update/list）。此前 09-05/09-06 记录的 `v1.39.1` (2026-08-27) 判定为口径错误，后续速报以 2.x 线为准
 
 ---
 
@@ -1223,6 +1252,7 @@ async function verifyUI() {
 > "框架组合 agent，harness 运行 agent。"（Frameworks compose agents; harnesses run agents.）
 
 该对比综述同时给出 2026 年主流 agent harness 横向图谱，可作为选型参考底稿。
+- 🆕 名称辨析补录（2026-09-08）：该横评提醒 "OpenHarness" 一名已被至少 4 个不相关项目占用，多数人说的开源 harness 其实是 **OpenHands**——检索与选型时注意去歧义
 
 📌 **启示**：Pydantic AI 把 harness 概念下沉为框架原语（capability），与 DeerFlow 拥抱 "SuperAgent harness" 叙事、LangGraph 收敛 "Build resilient agents." slogan 相互印证——2026 年框架竞争主轴已从「编排能力」转向「运行时可靠性」。
 
