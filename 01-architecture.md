@@ -609,4 +609,75 @@ harness 正是解决**可靠性/责任层**（reliability & accountability）的
 
 ---
 
-*更新时间：2026-09-06*
+## OpenAI：解锁 Codex Harness——App Server 与 thread/turn 协议（2026-09-11 补充）
+
+**来源**：[OpenAI Blog - Unlocking the Codex harness: how we built the App Server](https://openai.com/index/unlocking-the-codex-harness)
+
+### 架构要点
+
+- 拆解 Codex harness 内部：核心为 **agent loop**（用户-模型-工具交互编排）+ **App Server** 两层
+- App Server 通过 **JSON-RPC** 向第一方客户端（Desktop / TUI / Web）与第三方集成（JetBrains、VS Code、Xcode）暴露统一的 **thread / turn 协议**
+- 关键设计：把「交互协议」从「产品形态」中剥离——任何 IDE/客户端都能以同一协议接入同一 harness
+
+### 架构启示
+
+1. thread/turn 协议与 MCP（JSON-RPC 2.0，见 04 #16）同族——harness 对外边界正在**协议化**
+2. App Server 让 harness 从「单体 CLI」走向「可组合服务」，并与下节 Symphony 构成官方「harness + 编排」组合
+3. 自建 harness 的团队可借鉴：先稳定 agent loop 与对外协议，再扩客户端面
+
+---
+
+## OpenAI 开源 Symphony：Codex 编排极简参考实现（2026-09-11 补充）
+
+**来源**：[OpenAI Blog - An open-source spec for Codex orchestration: Symphony](https://openai.com/index/open-source-codex-orchestration-symphony)
+
+### 要点
+
+- 基于 Codex App Server 的**极简编排层**：轮询 Linear → 派发子代理执行任务
+- 定位 reference implementation：展示「harness + 工作流工具」组合拳；**不作为独立产品维护**，供社区参考其 spec
+
+### 架构启示
+
+1. OpenAI 示范「编排层做薄」：不重造调度系统，只在 harness 之上加事件轮询与任务派发
+2. 与 DeerFlow（编排子代理）、OpenAI Agents SDK（handoff 委派）互相印证：**薄编排 + 强 harness** 是当前主流分层
+
+---
+
+## LangChain：The Anatomy of an Agent Harness——Agent = Model + Harness 解剖定义（2026-09-11 补充）
+
+**来源**：[LangChain Blog - The Anatomy of an Agent Harness](https://www.langchain.com/blog/the-anatomy-of-an-agent-harness)
+
+### 核心定义
+
+- 正式定义 **Agent = Model + Harness**：harness 是包裹模型的基础设施层（工具、记忆、编排、护栏）
+- 配套 harness 构建库 **deepagents**——其 TerminalBench 2.0 实战见案例 13 / 04 #20
+
+### 三个开放研究问题
+
+1. **并行编排**：上百个 agent 共享同一代码库如何协作
+2. **自我诊断**：agent 分析自身 trace 修复 harness 级失败模式（与 #47 Recursive Self-Improvement 同向）
+3. **按需组装（just-in-time）**：工具与上下文按任务动态组装，而非预配置
+
+### 与 Databricks 定义的关系
+
+- Viv Trivedy 的解剖推导（已被 #34 Addy Osmani 引用为「最清晰的 harness 组成推导」）与 Databricks「Agent = Model + Harness」（2026-09-06 补充）口径一致——两大平台收敛，该公式进入行业共识期
+
+---
+
+## OpenReview《Agent Harness Engineering: A Survey》：年内第三篇学界综述（2026-09-11 补充）
+
+**来源**：[OpenReview - Agent Harness Engineering: A Survey](https://openreview.net/pdf?id=eONq7FdiHa)（2026 年，已被引 15+；另见 [arXiv 2604.21003 - The Last Harness You'll Ever Build](https://arxiv.org/html/2604.21003v2)）
+
+### 要点
+
+- 将 Anthropic 的 harness 方法论总结为三板斧：**预加载必用内容 + 按需检索（just-in-time）+ 压缩（compaction）**
+- 相关论文发现：自然语言 harness 优于脆弱的 Python 代码实现；自动化 harness 端到端优化（Meta-Harness）等
+
+### 与前两篇综述的关系
+
+- RUCAIBox（四大支柱，09-03）→ Preprints（六组件形式化，09-06）→ 本篇（方法论提炼）：**年内第三篇综述**，「综述密度上升期」判断进一步坐实
+- 三板斧与 04 #14（Anthropic 官方 context engineering）、#51（compaction 工程实现）互为印证
+
+---
+
+*更新时间：2026-09-11*

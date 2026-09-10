@@ -2640,3 +2640,19 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 1. **四大支柱是完备性检查**：任何 Context Engineering 方案都应覆盖这四个方面
 2. **结构化笔记是跨窗口持久化的关键**：将状态写到外部文件 > 依赖上下文窗口
 3. **MCP 是标准化连接层**：不是唯一选项，但已成为事实标准
+
+---
+
+## 54. SurePrompts：Context Window 管理 12 点清单（2026-09-11 收录）
+
+**来源**：[SurePrompts - Context Engineering Best Practices (2026): A 12-Point Checklist](https://sureprompts.com/blog/context-engineering-best-practices-2026)
+
+### 定位
+
+- 面向**生产环境 LLM 应用**的 context window 管理操作清单：截断、摘要、滑动窗口、优先级排序等 12 项策略及各自适用场景
+- 特点是实操性强：每条策略对应明确的适用场景，可直接作为工程参考
+
+### 与既有条目的关系
+
+- #14（Anthropic 官方原则）→ #44（Sourcegraph 实战指南）→ 本条（可执行 checklist）：构成「原则 → 实战 → 清单」三层递进
+- 策略族（截断 / 摘要 / 滑动窗口 / 优先级排序）与 #36（五大上下文层）、#51（compaction 工程实现）互补，定位为运维速查表

@@ -97,6 +97,45 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-11 - OpenAI 双篇新收录 & LangChain 官方定义 & ADK v2.9.0 当日发版
+
+**更新**：
+
+1. **01-architecture 新增 4 节（全新收录）**
+   - 🆕 OpenAI《Unlocking the Codex harness》——App Server 通过 JSON-RPC 暴露统一 thread/turn 协议，harness 对外边界协议化
+   - 🆕 OpenAI 开源 Symphony——基于 Codex App Server 的极简编排参考实现（轮询 Linear、派发子代理），「薄编排 + 强 harness」
+   - 🆕 LangChain《The Anatomy of an Agent Harness》——Agent = Model + Harness 定义 + deepagents + 三个开放问题（并行编排 / trace 自诊断 / JIT 组装）
+   - 🆕 OpenReview《Agent Harness Engineering: A Survey》（被引 15+）——Anthropic 方法论总结为「预加载 + JIT 检索 + compaction」三板斧；年内第三篇综述
+
+2. **框架速报（2026-09-11）**
+   - Google ADK — **21,490** ⭐ — 🆕 `v2.9.0` 当日发版：模型故障自动 failover、LiveKit 原生语音、MCP SDK 2.x
+   - Superpowers — **284,660** ⭐（相对 09-04 基线 7 天 **+3,336**，增长最快）— v6.3.0 已在册
+   - CrewAI — **58,343** ⭐ — 🆕 `v1.15.21`：checkpoint 运行时 + 多项修复
+   - OpenAI Agents SDK — **29,332** ⭐ — 🆕 `v0.22.2`：图像生成工具选项 + compaction 修复
+   - BMAD-METHOD — **52,868** ⭐（7 天 **+212**）— v6.12.0 已在册
+   - DeerFlow — **82,217** ⭐ / LangGraph — **41,409** ⭐ — 无新 release，当前快照
+   - ⚠️ 差值口径：本地仅 BMAD/Superpowers 有 09-04 基线，其余只记当前值
+
+3. **04-best-practices 新增 #54**
+   - SurePrompts context window 管理 12 点清单——与 #14/#44 构成「原则 → 实战 → 清单」三层
+
+**维护**：
+- ♻️ 去重检查（grep 验证均在册，不重复收录）：Phil Schmid Agent Harness 2026（05 案例 + #12/#53 引用）、OpenAI《Harness Engineering》（01 核心概念节 + #8 + 05）、Anthropic GAN harness design（01 03-26 节 + #10 + 05）、Anthropic context engineering（#14）、Sourcegraph 实战（#28/#44）——今日 5 项新增均为全新条目，零重复
+
+**更新文件**：
+- `01-architecture.md` — 新增 OpenAI App Server、OpenAI Symphony、LangChain Anatomy、OpenReview 综述 4 节
+- `02-tools.md` — 新增 2026-09-11 速报（ADK v2.9.0 当日发版 + CrewAI/OpenAI SDK 新版本 + star 快照）
+- `04-best-practices.md` — 新增 #54 SurePrompts 12 点清单
+- `README.md` — 追加本日志
+
+**关键洞察**：
+- 🔌 **harness 边界协议化**：Codex App Server 的 thread/turn JSON-RPC 协议与 MCP 同族——harness 对内对外接口都在标准化，自建 harness 应先稳协议再扩客户端
+- 🛡️ **韧性进框架主线**：ADK v2.9.0 把模型 failover 做成一等公民，容错从「最佳实践」（01 设计原则）下沉为「框架默认」
+- 📚 **综述密度持续上升**：RUCAIBox（09-03）→ Preprints（09-06）→ OpenReview（09-11），harness 研究系统化加速
+- 🏛️ **Agent = Model + Harness 共识期**：LangChain 与 Databricks 先后给出同一公式，定义之争基本落幕
+
+---
+
 ### 2026-09-08 - 全面去重日 & Google ADK 版本口径核销 & star 快照
 
 **更新**：

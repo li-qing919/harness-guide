@@ -1163,6 +1163,41 @@ async function verifyUI() {
 
 ---
 
+## 2026-09-11 框架版本迭代速报
+
+> 数据：GitHub 未认证 API，2026-09-11 05:30 GMT+8 拉取。⚠️ 差值口径说明：本地基线文件（github-reports/fetch-20260904.json）仅含 BMAD-METHOD 与 superpowers 两仓，故仅这两仓可计算 7 天净增；其余仓库仅记当前快照，不拼凑差值。
+
+### Google ADK (21,490 ⭐)
+- 🆕 **`v2.9.0`（2026-09-10，当日发版）**：聚焦韧性与生态——主模型故障时**自动 failover 到备份模型**；经 LiveKit 的**原生语音支持**；兼容 **MCP SDK 2.x**
+- 📌 模型级 failover 进框架主线，呼应 01「容错设计」；2.x 线保持快节奏（v2.8.0 → v2.9.0 间隔约半月）
+
+### Superpowers (284,660 ⭐)
+- ⭐ 相对 09-04 基线（281,324）7 天净增 **+3,336**，7 仓中增长最快
+- `v6.3.0` (2026-08-12) 仍为最新 release（已在册）；Brainstorming 仪式感开始按任务规模伸缩
+
+### CrewAI (58,343 ⭐，已迁移 crewAIInc/crewAI)
+- 🆕 `v1.15.21` (2026-09-09)：新增 checkpoint 运行时与 CLI 使用遥测；修复 HTTP 200 内嵌 gateway 错误、Oxylabs 集成抓取失败上报、DashScope 走原生 provider、JSON checkpoint 以 UTF-8 持久化
+- 当前快照（无本地基线，不算差值）
+
+### OpenAI Agents SDK (29,332 ⭐)
+- 🆕 `v0.22.2` (2026-09-09)：支持当前图像生成工具选项；修复 sandbox UnixLocal 文件 API 符号链接竞态；修复 **sessions compaction 后 response chain 未重置**
+- 📌 compaction 修复与 #51 互为印证——session 级 compaction 已成 SDK 级特性
+- 当前快照（无本地基线，不算差值）
+
+### BMAD-METHOD (52,868 ⭐)
+- ⭐ 相对 09-04 基线（52,656）7 天净增 **+212**
+- `v6.12.0` (2026-09-04) 已在册，无新版本
+
+### DeerFlow / ByteDance (82,217 ⭐)
+- push 2026-09-10，持续活跃；`v2.0.0` (2026-06-25) 重写叙事已在册
+- 当前快照（无本地基线，不算差值）
+
+### LangGraph / LangChain (41,409 ⭐)
+- push 2026-09-10（当日有提交）；`langgraph-sdk 0.4.4` (2026-08-27) 已在册，无新 release
+- 当前快照（无本地基线，不算差值）
+
+---
+
 ## 2026-09-08 框架版本迭代速报
 
 > 数据：GitHub 未认证 API，2026-09-08 晨拉取。Star 变化为相对 09-07 同口径采集的 1 天净增。今日无新 release（各仓最新版本均已在 09-06/09-07 速报补录），本节为 star 快照 + ADK 口径核销。
