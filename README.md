@@ -97,6 +97,38 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-12 - 去重为主日 & 全仓 1 天差值口径恢复 & NLAHs 传播量化补录
+
+**更新**：
+
+1. **框架速报（2026-09-12）——首次 7 仓全口径 1 天净增**
+   - Superpowers — **285,329** ⭐（1 天 **+669**，增速断层第一；相对 09-04 基线 8 天累计 +4,005）— 修复 systematic-debugging 技能 find-polluter.sh 匹配问题（#2011）；v6.3.0 已在册
+   - DeerFlow — **82,286** ⭐（+69）— Responses API 文档补充 `use_previous_response_id` 说明
+   - LangGraph — **41,477** ⭐（+68）— 修复 CLI 缺失 deploy 配置报错提示（#8854）
+   - BMAD-METHOD — **52,916** ⭐（+48；8 天累计 +260）— planner 流程文档修复（#2833）
+   - OpenAI Agents SDK — **29,366** ⭐（+34）— v0.22.2 已在册，无新 release
+   - CrewAI — **58,373** ⭐（+30）— OpenRouter 工具规格说明更新（#7387）
+   - Google ADK — **21,502** ⭐（+12）— v2.9.0 已在册；重构 workflow 模块统一 DynamicNodeState run_id 生成
+   - 📐 口径升级：09-11 同口径快照在手，7 仓 1 天净增全部可算，摆脱「仅 BMAD/Superpowers 有基线」限制
+
+2. **05-case-studies 案例 15（NLAHs）小幅补充**
+   - 🆕 传播量化：PY 频道解读视频（15.7 万播放）——同一模型同一 benchmark 下 harness 差异可造成 6 倍性能差距，优化 harness 回报高于等待下一代模型；与 #37「伟大的均衡器」实证互证
+
+**维护**：
+- ♻️ 去重检查（grep 验证均在册，不重复收录）：Phil Schmid Recursive Self-Improvement（#47）、Faros.ai Terminal Bench 榜单口径 Top 30→Top 5（案例 13 结果表已有）、Winder.AI 横评含 Pydantic v2（02-tools 09-06 速报）、Epsilla 三阶段演进论（05 案例 + README 04-05 条）、NLAHs/Meta-Harness 两论文（案例 15 + 01 架构注）、Anthropic just-in-time context（01 OpenReview 综述「预加载 + JIT + compaction」）、Sourcegraph 实战（#28/#39/#44）、Karo Zieminski 四策略与三层记忆（#53）、ACE 三角色（#49）——今日仅 1 处小幅补充 + 1 节新速报
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-09-12 速报（全仓 1 天差值 + 提交级细节）
+- `05-case-studies.md` — 案例 15 追加 2026-09-12 补充（6 倍性能差距传播数据）
+- `README.md` — 追加本日志
+
+**关键洞察**：
+- 📊 **信息周期信号**：新闻/最佳实践源连续两日零新增（09-08 去重日 + 今日），增量持续集中在框架 release 细节与提交级维护——追踪重心维持版本补录 + 口径核销
+- 🏆 **Superpowers 飞轮固化**：无主线发版状态下日增 +669、8 天 +4,005，技能生态护城河效应从「现象」变「稳态」
+- 🔁 **口径资产化**：连续同口径日采样使 7 仓差值全部可算——后续保持每日 05:30 快照即可持续产出全口径增速对比
+
+---
+
 ### 2026-09-11 - OpenAI 双篇新收录 & LangChain 官方定义 & ADK v2.9.0 当日发版
 
 **更新**：

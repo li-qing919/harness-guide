@@ -801,6 +801,12 @@ Schmid 强调，Agent Harness Engineering 是 2026 年 Agent 工程的核心学�
 
 推动 harness 工程从运行时特定约定走向可迁移、可比较的科学对象。这是首批将 Harness Engineering 作为正式研究对象进行系统分析的学术论文之一。
 
+### 2026-09-12 补充：传播量化数据
+
+- PY 频道深度解读视频（2026-04-14，15.7 万播放）同时覆盖本文与 Stanford《Meta-Harness: Automated Optimization of Agent Harnesses End-to-End》（自动优化 harness 的端到端方法，另见 01-architecture Meta-Harness 引注）
+- 视频给出的量化对比：**同一模型同一 benchmark 下，harness 差异可造成 6 倍性能差距**——优化 harness 的回报高于等待下一代基础模型
+- 与「伟大的均衡器」实证（#37 2026-09-07 补充：开源模型追平前沿模型）互为印证，均为「harness 投入产出比高于模型等待」提供数据支撑
+
 ---
 
 ## 案例 16：Anthropic 与 OpenAI 的 Agent 架构趋同（2026-07-05）
