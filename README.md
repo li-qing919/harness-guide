@@ -97,6 +97,49 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-14 - OpenAI Agents API 公测（harness-as-a-service 里程碑）& 7 仓 7 日口径速报 & 生产实践三连收录
+
+**更新**：
+
+1. **OpenAI Agents API 公测（01-architecture 新增，2026-09-10）**
+   - Codex 同款 harness（上下文管理、工具调用、子代理协调、自动 compaction）作为托管 API 开放，沙箱可选 OpenAI 托管 / 自建 / Cloudflare、Daytona、E2B、Modal 等 9 家伙伴
+   - 官方明确 "harness 由 OpenAI 托管维护并随模型持续升级"——harness 从自建基础设施变为可采购服务，与 LangGraph/DeerFlow 等开源 harness 正面竞争
+   - 另补术语脉络：Haverin Substack「Agent Harness Lexicon」（Hashimoto 2026-02 结晶提法，TheAgentCompany 2024-12 已流通）
+
+2. **框架速报（2026-09-14）—— 7 仓 1 天净增 + 7 日累计双口径**
+   - Superpowers — **286,229** ⭐（1 天 **+77**，7 日 **+3,851** 断层第一）；push 09-12 为 README 级维护，发布节奏放缓但增长惯性不减
+   - DeerFlow — **82,370** ⭐（+13；7 日 +787）— 安全加固 gateway 输入过滤绕过（#5375）、流式工具调用只完整发一次（#5408）、复用 Claude Code OAuth token（#5411）
+   - CrewAI — **58,482** ⭐（+9；7 日 +322）— 平台化三连：crew setup 平台集成校验（#7385）、JSON crew 向导平台工具（#7384）、暴露 Platform 应用目录（#7383）
+   - BMAD-METHOD — **52,978** ⭐（+4；7 日 +249）— renderer 将 skill 源码渲染为 Jinja2 模板（#2857）、build auto oneshot 路由（#2853）
+   - LangGraph — **41,585** ⭐（+8；7 日 +448）— 漏洞开发依赖修复（#8449）、httpx2 升级（#8863）
+   - OpenAI Agents SDK — **29,410** ⭐（+4；7 日 +186）— delete_branch 精确 ID（#4980）、codex tool 子进程回收（#4804）等细节修复
+   - Google ADK — **21,525** ⭐（+1；7 日 +98）— v2.9.0 后续：重复边校验、after_agent_callback、Context unit 指南、OpenAPI basic auth
+
+3. **最佳实践三连收录（04）**
+   - #55 MarkTechPost（09-12）：harness 对抗上下文溢出与目标丢失的 4 大机制（compaction / offloading / todo-state / memory）
+   - #56 Microsoft Azure：Agent 优化经济学——上下文策略是「省钱」与「变强」的正和博弈
+   - #57 Oracle（09-03）：构建能在生产环境存活的 Agent Harness
+
+4. **案例二连收录（05）**
+   - 案例 22 The Edge Singapore（09-11）：harness engineering 治理 AI 编码隐性成本，术语首入主流商业媒体
+   - 案例 23 英格兰银行（09-02）：监管机构正面介入 harness 设计话题
+
+**去重说明**：Phil Schmid Recursive Self-Improvement（#47 在册）、Anthropic harness-design-long-running（#43/案例 12 在册）、Phil Schmid context-engineering（案例 14 在册）均不重复收录。
+
+**更新文件**：
+- `01-architecture.md` — 新增 OpenAI Agents API 公测 + 术语脉络两节
+- `02-tools.md` — 新增 2026-09-14 速报（1 天 + 7 日双口径）
+- `04-best-practices.md` — 新增 #55/#56/#57
+- `05-case-studies.md` — 新增案例 22/23
+- `README.md` — 追加本日志
+
+**关键洞察**：
+- 🏭 **harness-as-a-service 元年信号**：OpenAI 把 harness 从框架层（SDK）推进到托管服务层（API），开源 harness 的差异化价值被迫向「可控、可审计、可自托管」收敛——后续重点观察 LangGraph/DeerFlow 的应对
+- 📊 **传播三层递进完成**：Oracle（工程）→ The Edge（商业媒体）→ 英格兰银行（监管），9 月上旬两周内三层全部入局，领域成熟度从社区共识走向公共议题
+- 🏆 **Superpowers 惯性增长**：7 日 +3,851、无发版状态下日增 +77，技能生态护城河进入惯性阶段
+
+---
+
 ### 2026-09-12 - 去重为主日 & 全仓 1 天差值口径恢复 & NLAHs 传播量化补录
 
 **更新**：

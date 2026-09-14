@@ -1042,3 +1042,35 @@ Faros.ai 建议先量化再决定投入方向：
 - **五层模型**提供了 Harness 完备性的系统化检查框架
 - **先量化再投入**避免了盲目建设的常见陷阱
 - **成熟度演进**为团队提供了清晰的升级路径
+
+---
+
+## 案例 22：The Edge Singapore——Harness Engineering 治理 AI 编码的隐性成本（2026-09-14 收录）
+
+**来源**：[The Edge Singapore - Harness Engineering Takes On AI Coding's Hidden Costs](https://www.theedgesingapore.com/amp/digitaledge/focus/harness-engineering-takes-ai-codings-hidden-costs)（2026-09-11）
+
+### 核心内容
+
+- 探讨 AI 编码 agent 的隐性成本——token 消耗、维护负担、失败重试——如何通过 harness engineering 系统治理
+- 标志性意义：该术语首次进入**主流商业科技媒体**视野（此前传播集中在工程博客与学术圈）
+
+### 与既有条目的关系
+
+- 与 #56（Azure 经济学）、案例 21（Faros 基线指标）共同支撑「harness 投入需成本量化」的论述线
+- 传播链路：Hashimoto 结晶术语（2026-02）→ 学术综述（09 月三连）→ 商业媒体（本条）——领域外溢的媒体层信号
+
+---
+
+## 案例 23：英格兰银行——监管机构视角的 Harness Engineering（2026-09-14 收录）
+
+**来源**：[Bank of England - Frontier AI: Harness Engineering](https://www.bankofengland.co.uk/research/fintech/frontier-ai-information-sharing-forum/frontier-ai-harness-engineering)（2026-09-02）
+
+### 核心内容
+
+- 英格兰银行 Frontier AI 信息共享论坛发布 harness engineering 专题，官方摘要："概述设计 harness 时涉及的实际考量——以受控、可用的方式将前沿 AI 能力应用于网络防御"
+- **监管机构正面介入 harness 设计话题**，是该领域走向成熟的标志性信号
+
+### 与既有条目的关系
+
+- 与案例 22（商业媒体）、#57（Oracle 生产实践）构成 9 月「工程界 → 商业界 → 监管界」三层递进：harness engineering 从工程方法论升级为跨行业公共议题
+- 「受控、可用」的表述与 #43（Anthropic 安全封顶爆炸半径）、案例 12（长时运行 harness 设计）的安全主线一致——监管层关注点与工程前沿收敛于同一批机制

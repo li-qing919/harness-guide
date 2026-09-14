@@ -680,4 +680,37 @@ harness 正是解决**可靠性/责任层**（reliability & accountability）的
 
 ---
 
-*更新时间：2026-09-11*
+## OpenAI Agents API 公测：Harness-as-a-Service 里程碑（2026-09-14 补充）
+
+**来源**：[OpenAI Blog - Introducing the Agents API](https://openai.com/index/introducing-the-agents-api/)（2026-09-10）
+
+### 核心内容
+
+- OpenAI 推出 Agents API 公测，将驱动 Codex 的**同一套 agent harness**（上下文管理、工具调用、子代理协调、自动 compaction）通过 API 开放给开发者
+- 一条 API 调用即可创建生产级 agent；沙箱三选一：OpenAI 托管沙箱 / 自有基础设施 / 生态伙伴沙箱（Cloudflare、Daytona、E2B、Modal 等 9 家）
+- 官方明确表态："harness 由 OpenAI 托管维护并随模型持续升级"
+
+### 架构意义
+
+1. **harness 从「自建基础设施」变为「可采购服务」**——此前案例 20（Agents SDK 控制平面/计算平面分离）是框架层面的铺垫，本条将其推进为商业产品：harness 细节对用户黑盒化，模型与 harness 绑定升级
+2. **与开源 harness 正面竞争**：LangGraph（deepagents）、DeerFlow、BMAD-METHOD 等的价值主张从「提供 harness」转向「提供可控、可审计、可自托管的 harness」
+3. **自动 compaction 进 API**：与 04 #51（compaction 工程实现）、MarkTechPost 四机制（04 #55，2026-09-14 收录）互相印证——上下文治理已从最佳实践沉淀为平台默认能力
+
+### 与既有条目的关系
+
+- 案例层面是案例 20（SDK 下一代）的直接延续：SDK → API → 托管服务三步演进
+- 与 09-11 补充的 LangChain「Agent = Model + Harness」定义并读：当 harness 可由模型厂商托管，「Model + Harness」的解耦优势（harness 独立演进）是否被削弱，是后续观察重点
+
+---
+
+## 术语脉络补充：Agent Harness Lexicon（2026-09-14 补充）
+
+**来源**：[Haverin Substack - What if Pandora Had Found a Harness](https://haverin.substack.com/p/what-if-pandora-had-found-a-harness)（2026 年中；延伸：[Medium - The Rise of Agent Harness Engineering](https://medium.com/@lmpo/the-rise-of-agent-harness-engineering-navigating-long-term-ai-autonomy-f8396bdbda7e)）
+
+- 系统梳理 "harness engineering" 术语史：Mitchell Hashimoto 2026-02-05 博客文章结晶了这一提法，但 "agent harness" 一词早在 2024-12（TheAgentCompany 论文）已在专业圈流通
+- 整理了 harness 前缀衍生词的完整词汇表（词源学角度的领域地图）
+- 为 README「核心概念」与案例 17（四年模式演进史）提供术语考古层面的补充证据
+
+---
+
+*更新时间：2026-09-14*

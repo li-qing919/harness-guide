@@ -2656,3 +2656,67 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 - #14（Anthropic 官方原则）→ #44（Sourcegraph 实战指南）→ 本条（可执行 checklist）：构成「原则 → 实战 → 清单」三层递进
 - 策略族（截断 / 摘要 / 滑动窗口 / 优先级排序）与 #36（五大上下文层）、#51（compaction 工程实现）互补，定位为运维速查表
+
+---
+
+## 55. MarkTechPost：Harness 内 Context Engineering——战胜长时程任务上下文溢出与目标丢失的 4 大机制（2026-09-14 收录）
+
+**来源**：[MarkTechPost - Context Engineering Inside the Harness: 4 Mechanisms That Beat Context Overflow and Goal Loss on Long-Horizon Tasks](https://www.marktechpost.com/2026/09/12/context-engineering-inside-the-harness-4-mechanisms-that-beat-context-overflow-and-goal-loss-on-long-horizon-tasks/)（2026-09-12）
+
+### 四大机制
+
+| 机制 | 作用 |
+|------|------|
+| **Compaction（压缩）** | 对长历史做摘要/折叠，释放上下文空间 |
+| **Offloading（卸载）** | 将中间产物写入外部存储，按需取回 |
+| **Todo-state（任务状态追踪）** | 显式维护任务清单，对抗目标漂移 |
+| **Memory（持久记忆）** | 跨会话/跨窗口保留关键事实与偏好 |
+
+### 核心论点
+
+- 长时程任务失败主因**不是模型能力不足**，而是上下文溢出与目标漂移——这四类机制应作为 harness 标配
+- 与 OpenAI Agents API 公测（01-architecture 09-14 补充）的自动 compaction 能力互相印证：上下文治理已从最佳实践沉淀为平台默认能力
+
+### 与既有条目的关系
+
+- 四机制分类与 #14（Anthropic 官方原则）、#36（五大上下文层）、#39（Sourcegraph 四支柱）互补：前三者面向「怎么建」，本条面向「为什么必须有」
+- todo-state 一项与 Claude Code 的 TodoWrite/任务清单实践、#29（可靠性手册工程杠杆）同源
+
+---
+
+## 56. Microsoft Azure：Agent 优化的经济学——企业级 Agent 的 Context Engineering（2026-09-14 收录）
+
+**来源**：[Microsoft Azure Blog - The Economics of Agent Optimization: Context Engineering for Enterprise AI Agents](https://azure.microsoft.com/en-us/blog/the-economics-of-agent-optimization-context-engineering-for-enterprise-ai-agents/)
+
+### 核心要点
+
+- 以**成本视角**论证 context engineering 的商业价值：精准检索、记忆管理、按需注入可在**降低 token 成本**的同时提升 agent 质量与响应速度
+- 好的上下文策略是「省钱」与「变强」的**正和博弈**，而非权衡取舍
+- 企业应把上下文管线当作一等公民运营（与 #38 Packmind ContextOps 的组织级治理视角呼应）
+
+### 实践要点
+
+1. **用经济学语言向管理层汇报 harness 投入**：token 成本、重试成本、失败成本可直接量化，与案例 22（The Edge 隐性成本报道）形成互证
+2. **精准检索 > 长上下文堆料**：注入越精准，成本越低、质量越高
+3. **云厂商正式入场**：Azure 以官方博客背书 context engineering，与 AWS/Google 的同类内容一起标志「harness 教育期」进入云厂商渠道
+
+---
+
+## 57. Oracle：构建能在生产环境存活的 Agent Harness（2026-09-14 收录）
+
+**来源**：[Oracle Developer Blog - Building an Agent Harness That Survives Production](https://blogs.oracle.com/developers/building-an-agent-harness-that-survives-production)（2026-09-03）
+
+### 定位
+
+- 面向**真实生产负载**的 agent harness 构建指南：可靠性设计、失败重试、资源治理等生存性主题
+- 与 #43（Anthropic 长时运行最佳实践）、#37（Faros 成熟度模型）同属「生产化」主线，云厂商视角提供落地工程细节
+
+### 与既有条目的关系
+
+- 与案例 23（英格兰银行专题）、案例 22（The Edge 隐性成本）共同构成 9 月上旬「生产化/治理化」内容集群：工程界（Oracle）→ 监管界（BoE）→ 商业媒体（The Edge）三层递进
+- 「survives production」的提法与 #34 Addy Osmani「harness 是工程学科不是提示词技巧」的论断一致
+
+### 实践要点
+
+1. **以「存活」为设计目标**：生产环境的失败模式（超时、重试风暴、资源泄漏）应在 harness 层系统化处理，而非依赖模型鲁棒性
+2. **云厂商官方内容线**：继 Microsoft Azure（#56）之后 Oracle 也入局 harness 工程内容，三大云厂商全部站位
