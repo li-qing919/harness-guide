@@ -1163,6 +1163,54 @@ async function verifyUI() {
 
 ---
 
+## 2026-09-15 框架版本迭代速报
+
+> 数据：GitHub 未认证 API，2026-09-15 05:30 GMT+8 拉取。当日净增相对 09-14 10:32 快照，7 日累计相对 09-07 采集（7 仓全口径）。今日无新 release（全部已在册），本节为 star 动态 + 提交级细节补录。CrewAI 旧地址 joaomdmoura/crewAI 已确认 301，本文档全部链接均指向迁移后的 crewAIInc/crewAI。
+
+### Superpowers (286,642 ⭐)
+- ⭐ 当日 **+413**/天，7 日累计 **+4,264**（09-07 基线 282,378），**7 仓中断层第一**，单日增速较昨日（+77）放大约 5 倍
+- push 2026-09-14 18:42，仍为 README/文档级维护；`v6.3.0` (2026-08-12) 仍为最新 release（已在册）
+- 📌 **启示**：无发版状态下日增 +413——增长驱动完全来自方法论传播（BMAD v6、Claude Code skills 生态吸收）而非产品迭代，「技能生态护城河」进入纯惯性阶段
+
+### DeerFlow / ByteDance (82,433 ⭐)
+- ⭐ 当日 **+63**/天，7 日累计 **+850**（09-07 基线 81,583）
+- push 2026-09-14 13:23；`v2.0.0` (2026-06-25) 已在册
+- 🆕 09-14：修复 skill review gate 两处 SkillScan 绕过（#5431）；JSONL 事件记录保留 Unicode 分隔符（#5429）；允许自定义 agent 关闭 memory（#5167）；Human Input Card 回复视作当前用户请求（#5426）
+- 📌 **启示**：skill review gate 连续两日出现绕过修复（09-13 #5375 → 09-14 #5431），安全审核面仍是 DeerFlow 最活跃的加固前线；「自定义 agent 可关闭 memory」呼应 04 章记忆分层「按需最小化」原则
+
+### CrewAI (58,544 ⭐，crewAIInc/crewAI)
+- ⭐ 当日 **+62**/天，7 日累计 **+384**（09-07 基线 58,160）
+- push 2026-09-14 19:14；`v1.15.21` (2026-09-09) 已在册
+- 🆕 向所有 OpenAI 推理模型发送 reasoning_effort（#7187）；run TUI 流式输出含字面 [...] 时不再崩溃（#7435）；存储任务不一致时拒绝 replay（#7155）；Windows 下 mypy 通过（#7401）
+- 📌 **启示**：reasoning_effort 全量透传说明推理模型适配层持续跟进；replay 一致性校验是把「可重放」从功能升级为契约
+
+### BMAD-METHOD (53,006 ⭐)
+- ⭐ 当日 **+28**/天，7 日累计 **+277**（09-07 基线 52,729）
+- push 2026-09-11 22:45；`v6.12.0` (2026-09-04) 已在册（`6.13.0-next` 打磨中）
+- 🆕 09-11 后续提交：renderer 将 skill 源码渲染为 Jinja2 模板（#2857）、README banner 刷新（#2854）——本周节奏转向发布打磨
+- 📌 **启示**：ceremony 自适应（v6.12.0）+ 路由自动化（6.13.0-next）方向未变，等待下一个 release 节点
+
+### LangGraph / LangChain (41,638 ⭐)
+- ⭐ 当日 **+53**/天，7 日累计 **+501**（09-07 基线 41,137）
+- push 2026-09-14 19:45；`langgraph-sdk 0.4.4` (2026-08-27) 已在册
+- 🆕 docs 改为发布生成的 llms.txt 而非手写副本（#8922）——文档管线对齐 AI 代理消费场景；此前依赖加固提交（#8449、#8863）已在册
+- 📌 **启示**：llms.txt 自动生成是把「文档即 agent 上下文」落到 CI 的低成本实践，可直接借鉴
+- 另见其官方博客新文《How to Build a Custom Agent Harness》（03-implementation 09-15 补充）
+
+### OpenAI Agents SDK (29,431 ⭐)
+- ⭐ 当日 **+21**/天，7 日累计 **+207**（09-07 基线 29,224）
+- push 2026-09-14 00:24；`v0.22.2` (2026-09-09) 已在册
+- 🆕 session limit 不再作为 Conversations page size 转发（#4961）；AdvancedSQLiteSession.delete_branch 保留精确 ID（#4980）；Windows 宿主保持 POSIX 命令路径（#4958）
+- 📌 **启示**：Agents API 公测（01 章 09-14 补充）导流效应下 SDK 保持稳定节奏，提交以细节修复为主
+
+### Google ADK (21,533 ⭐)
+- ⭐ 当日 **+8**/天，7 日累计 **+106**（09-07 基线 21,427）
+- push 2026-09-14 20:57；`v2.9.0` (2026-09-10) 已在册
+- 🆕 workflow 修复子节点 isolation_scope 泄漏到父节点（_reconstruct_node_states）；PreloadMemoryTool 使用完整查询文本与独立 logger；BaseNode 单元指南收录进文档
+- 📌 **启示**：isolation_scope 泄漏修复直指多代理上下文隔离的正确性——与 04 章子代理隔离上下文（Anthropic 主线）互为工程注脚
+
+---
+
 ## 2026-09-14 框架版本迭代速报
 
 > 数据：GitHub 未认证 API，2026-09-14 10:32 GMT+8 拉取。当日净增相对今晨 05:38 同口径快照，7 日累计相对 09-07 采集（7 仓全口径）。今日无新 release（ADK v2.9.0、OpenAI SDK v0.22.2、CrewAI v1.15.21 均已在册），本节为 star 动态 + 提交级细节补录。

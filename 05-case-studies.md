@@ -1074,3 +1074,20 @@ Faros.ai 建议先量化再决定投入方向：
 
 - 与案例 22（商业媒体）、#57（Oracle 生产实践）构成 9 月「工程界 → 商业界 → 监管界」三层递进：harness engineering 从工程方法论升级为跨行业公共议题
 - 「受控、可用」的表述与 #43（Anthropic 安全封顶爆炸半径）、案例 12（长时运行 harness 设计）的安全主线一致——监管层关注点与工程前沿收敛于同一批机制
+
+---
+
+## 案例 24：Latent Space 双篇——OpenAI Dark Factory 与「为人类注意力搭 Harness」（2026-09-15 收录）
+
+**来源**：[Latent Space - Extreme Harness Engineering for Token Billionaires](https://www.latent.space/p/harness-eng)（2026-08-30）、[The Evolution of the Agent Harness](https://www.latent.space/p/attention-interface)（2026-09-09，Dan McAteer）
+
+### 核心事实与论点
+
+- **Dark Factory**（OpenAI 内部）：1M 行代码、日烧 10 亿 token、**0% 人工代码、0% 人工审查**——harness 极限压榨的标杆案例，自动化程度超过所有公开案例（含案例 12/20 的长时运行实践）
+- **注意力 harness** 论点：模型正在把 harness 能力吸收进权重，harness 的终局不是「为模型搭脚手架」，而是「**为人类注意力搭 harness**」——人机界面从控制模型转向过滤与调度人的关注点
+
+### 案例启示
+
+1. 0% 人工审查成立的前提是 eval 基建（04 #58 Google 视角）+ 护栏（#43）足够厚——审查没有消失，而是从人工转移到 harness 层
+2. 「注意力 harness」为 harness-as-a-service（01 章 09-14 补充）之后的下一阶段提供想象空间：当模型自管上下文成为默认，harness 的差异化价值转向人的体验层
+3. 与案例 21（成熟度模型）对照：Dark Factory 相当于成熟度顶格（全自动 + 无审查），可作为组织自评的极限参照系

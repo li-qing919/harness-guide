@@ -97,6 +97,57 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-15 - 定义三部曲收官 & Superpowers 周增 4,264 断层第一 & 方法论工件化收录
+
+**更新**：
+
+1. **tej.as 定义级长文（01-architecture 新增，2026-09-14）**
+   - 「agent harness 是让 AI 模型扎根于现实的一切：工具、上下文、护栏、循环与验证」——当前传播中口径最干净的定义表述；与 Databricks（09-06）、LangChain Anatomy（09-11）构成定义三部曲
+
+2. **Latent Space 双篇（01 + 05 案例 24）**
+   - Dark Factory 首次披露（08-30）：OpenAI 内部 1M 行代码、日烧 10 亿 token、0% 人工代码 0% 人工审查
+   - 「为人类注意力搭 harness」论点（09-09）：模型吸收 harness 能力后，harness 价值向人类注意力治理收敛
+
+3. **DAIR.AI Harness Engineering 论文集（01，2026-09-08）**：领域从博客话语走向学术沉淀的标志，附 MiniDSH 最小 harness 等社区动态
+
+4. **LangChain 官方构建指南（03-implementation 新增，2026-09-13）**：何时用现成/何时自建 + 自建组件清单（状态管理、工具注册、人机关口）——03 章自 3 月底以来首次增量更新
+
+5. **Google 开发者博客 eval 视角（04 #58，2026-09-09）**：behavioral evals 构建 evaluation harness，云厂商内容线再加一角（Azure #56 / Oracle #57 / Google #58）
+
+6. **最佳实践工件化二连（04 #59/#60）**
+   - #59 Termdock：CLAUDE.md/AGENTS.md 实战，「口头惯例 → 文件化 → Skills 化」渐进路径
+   - #60 NeoLabHQ context-engineering-kit：可安装的 Claude Code 技能包（分层记忆/渐进披露/上下文压缩）——最佳实践从文章 → checklist → 可安装技能包三级跳
+
+7. **框架速报（2026-09-15）—— 7 仓 1 天净增 + 7 日累计双口径**
+   - Superpowers — **286,642** ⭐（1 天 **+413**，7 日 **+4,264** 断层第一，无发版状态下增速较昨日放大约 5 倍）
+   - DeerFlow — **82,433** ⭐（+63；7 日 +850）— skill review gate 两处 SkillScan 绕过修复（#5431）、自定义 agent 可关闭 memory（#5167）
+   - CrewAI — **58,544** ⭐（+62；7 日 +384）— reasoning_effort 全量透传（#7187）、replay 一致性拒绝（#7155）
+   - BMAD-METHOD — **53,006** ⭐（+28；7 日 +277）— 发布打磨期（6.13.0-next）
+   - LangGraph — **41,638** ⭐（+53；7 日 +501）— docs 改用生成的 llms.txt（#8922）
+   - OpenAI Agents SDK — **29,431** ⭐（+21；7 日 +207）— 细节修复确认合入
+   - Google ADK — **21,533** ⭐（+8；7 日 +106）— workflow isolation_scope 泄漏修复、PreloadMemoryTool 完整查询文本
+
+**勘误与维护**：
+- ♻️ CrewAI 仓库迁移核查：文档内所有链接均已指向 crewAIInc/crewAI，无遗留旧地址 live link（joaomdmoura 字样仅存于历史迁移说明，保留）
+
+**去重说明**：Anthropic《Effective context engineering》（#14 在册）以基线文献身份在 #59 交叉引用，未重复新增。
+
+**更新文件**：
+- `01-architecture.md` — 新增 tej.as 定义文 / Latent Space 注意力 harness / DAIR.AI 论文集三节
+- `02-tools.md` — 新增 2026-09-15 速报（1 天 + 7 日双口径）
+- `03-implementation.md` — 新增 LangChain 官方构建指南一节
+- `04-best-practices.md` — 新增 #58/#59/#60
+- `05-case-studies.md` — 新增案例 24（Dark Factory）
+- `README.md` — 追加本日志
+
+**关键洞察**：
+- 📖 **定义竞争白热化**：三周内 Databricks → LangChain → tej.as 三篇定义文，谁的定义被团队采纳为内部术语，谁就在 harness 话语权上占位
+- 🏭 **Dark Factory 重设天花板**：0% 人工代码 + 0% 人工审查公开化，把 harness 成熟度天花板从「少人工」改写为「零人工」；eval 与护栏成为零审查的唯一地基
+- 🧩 **方法论工件化**：context-engineering-kit 把最佳实践做成可安装技能包——最佳实践的终局不是文档而是依赖项
+- 🏆 **Superpowers 无版胜有版**：v6.3.0 后零 release，周增 4,264 仍断层第一——增长引擎已完全从产品迭代切换到方法论传播
+
+---
+
 ### 2026-09-14 - OpenAI Agents API 公测（harness-as-a-service 里程碑）& 7 仓 7 日口径速报 & 生产实践三连收录
 
 **更新**：

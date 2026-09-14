@@ -2720,3 +2720,52 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 1. **以「存活」为设计目标**：生产环境的失败模式（超时、重试风暴、资源泄漏）应在 harness 层系统化处理，而非依赖模型鲁棒性
 2. **云厂商官方内容线**：继 Microsoft Azure（#56）之后 Oracle 也入局 harness 工程内容，三大云厂商全部站位
+
+---
+
+## 58. Google 开发者博客：Harness 工程的解剖学——评估、迭代与护栏（2026-09-15 收录）
+
+**来源**：[Google Developers Blog - The Anatomy of Harness Engineering: How to Evaluate, Iterate, and Guard AI Coding Agents](https://developers.googleblog.com/the-anatomy-of-harness-engineering-how-to-evaluate-iterate-and-guard-ai-coding-agents/)（2026-09-09）
+
+### 核心要点
+
+- 聚焦 harness 工程的「评测」环节：用**行为评测（behavioral evals）**为 AI 编码 agent 构建稳健的 evaluation harness——测试具体工具调用、自动化 prompt 迭代、上线前建立信心
+- 把 harness 与 eval 基建深度绑定：没有 eval 的 harness 无法安全迭代，评测是护栏的前提
+
+### 与既有条目的关系
+
+- 云厂商内容线再加一角：Microsoft Azure（#56）、Oracle（#57）之后 Google 官方博客入局；叠加 tej.as/LangChain 定义与构建视角，构成定义 → 构建 → 评测三视角
+- 「测试具体工具调用」与 02 章测试工具分类呼应；评测先行与 #43（安全封顶爆炸半径）的护栏主线一致
+
+---
+
+## 59. Termdock：用 Context Engineering 优化工作流——CLAUDE.md + AGENTS.md 实战（2026-09-15 收录）
+
+**来源**：[Termdock - Context Engineering Workflow Optimization](https://www.termdock.com/blog/context-engineering-workflow-optimization)
+
+### 核心要点
+
+- 把项目知识编码进 **CLAUDE.md / AGENTS.md / Skills**，让 agent 对你的特定流程「永久变聪明」，而不是每个会话重复解释一遍
+- 给出从**口头惯例 → 文件化 → Skills 化**的渐进路径——context engineering 从概念落到日常操作的操作化模板
+
+### 与既有条目的关系
+
+- 与 #14（Anthropic《Effective context engineering》，领域基线文献）互补：Anthropic 讲「为什么与什么」，Termdock 给「怎么逐步做」
+- 渐进路径与本指南 03 章阶段二「工作流优化」（把流程沉淀为 SKILL.md）完全同构
+
+---
+
+## 60. NeoLabHQ context-engineering-kit：可安装的 Context Engineering 技能包（2026-09-15 收录）
+
+**来源**：[NeoLabHQ/context-engineering-kit](https://github.com/NeoLabHQ/context-engineering-kit)（HN 2026-09-04，44 points）
+
+### 核心要点
+
+- 把高级 context engineering 技术（**分层记忆、渐进披露、上下文压缩**等）做成即装即用的 Claude Code skills
+- 亮点是把「最佳实践」从文章变成**可执行工件**：安装后 agent 自动应用这些模式，无需人工照文章改造 prompt
+- 同期参考：Corneldj/context-engineering 免费课程（[链接](https://github.com/Corneldj/context-engineering)，09-09 起 HN 热度上升）覆盖 compaction / memory / sub-agent 三板斧的动手教程
+
+### 与既有条目的关系
+
+- 最佳实践载体三级跳：文章（#14/#55）→ checklist（#44 等）→ **可安装技能包（本条）**——与 Superpowers 的技能生态路径一致，是「方法论工件化」趋势的代表作
+- 渐进披露、分层记忆与 #36（五大上下文层）、#51（compaction 工程实现）一一对应

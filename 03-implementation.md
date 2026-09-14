@@ -408,4 +408,21 @@ htop
 
 ---
 
-*更新时间：2026-03-25*
+## LangChain 官方构建指南：How to Build a Custom Agent Harness（2026-09-15 补充）
+
+**来源**：[LangChain Blog - How to Build a Custom Agent Harness](https://www.langchain.com/blog/how-to-build-a-custom-agent-harness)（2026-09-13）
+
+### 核心内容
+
+- 回答「什么时候直接用现成 harness、什么时候值得自建」：现成 harness 覆盖通用场景；当状态结构、工具协议或人机协同流程有强领域约束时，自建收益凸显
+- 自建时需要覆盖的组件清单：**状态管理、工具注册、人机关口（human-in-the-loop gate）**等——与本指南 03 章四阶段实施路径（基础设施 → 工作流 → 并行开发 → 持续优化）同构
+- 这是继 Anatomy（01 章 09-11 补充，Agent = Model + Harness 定义）之后，LangChain 把 harness 术语落到产品叙事的第二篇：先定义、再教自建
+
+### 与既有条目的关系
+
+- 组件清单与 03 章阶段一（记忆/检索/配置）+ 阶段二（工作流与人工关口）互相印证；「何时自建」的判断框架可反哺 01 章 harness 选型讨论
+- 定义 → 构建 → 评测三视角成型：tej.as 定义文（01 章 09-15 补充）、本条构建指南、Google eval 视角（04 #58）
+
+---
+
+*更新时间：2026-09-15*

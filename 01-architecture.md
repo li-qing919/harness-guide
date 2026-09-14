@@ -713,4 +713,45 @@ harness 正是解决**可靠性/责任层**（reliability & accountability）的
 
 ---
 
-*更新时间：2026-09-14*
+## tej.as：What Is an Agent Harness?——当前最清晰的 Harness 定义文（2026-09-15 补充）
+
+**来源**：[tej.as - What Is an Agent Harness? Harness Engineering Explained](https://tej.as/blog/what-is-an-agent-harness)（2026-09-14）
+
+### 核心定义
+
+- 「**agent harness 是让 AI 模型扎根于现实的一切：工具、上下文、护栏、循环与验证**」——五个要素一句话收拢，是目前传播中口径最干净的定义表述
+- 同时给出从零构建 harness 的实操路径；在 HN 被频繁收藏，适合作为团队内部对齐术语的引用文献
+
+### 与既有条目的关系
+
+- 与 Databricks「Agent = Model + Harness」（09-06 收录）、LangChain Anatomy（09-11 收录）构成 9 月定义三部曲——三周内三篇定义文，术语标准化进入快车道
+- 五要素（工具/上下文/护栏/循环/验证）与 01 章核心概念分层一致；「循环与验证」与 MarkTechPost 四机制（04 #55）的 todo-state/compaction 互补
+
+---
+
+## Latent Space：模型吞掉 Harness 之后——为人类注意力搭 Harness（2026-09-15 补充）
+
+**来源**：[Latent Space - The Evolution of the Agent Harness](https://www.latent.space/p/attention-interface)（2026-09-09，Dan McAteer）
+
+### 核心论点
+
+- 模型正在把 harness 的能力不断吸收进权重；未来 harness 不再是「为模型搭的脚手架」，而是「**为人类注意力搭的 harness**」——人机界面从控制模型转向过滤与调度人的关注点
+- 姐妹篇《Extreme Harness Engineering for Token Billionaires》（[链接](https://www.latent.space/p/harness-eng)，2026-08-30）首次披露 OpenAI 内部 **Dark Factory**：1M 行代码、日烧 10 亿 token、0% 人工代码 0% 人工审查——极限压榨标杆案例（详见 05 案例 24）
+
+### 与既有条目的关系
+
+- 「注意力 harness」与案例 20（SDK 控制/计算平面分离）、OpenAI Agents API 公测（09-14 补充）同一条演进线：模型侧自动化程度越高，人类侧接口价值越向「注意力治理」收敛
+- Dark Factory 与既有百万行级案例互为印证，但 0% 人工审查的激进程度为首例
+
+---
+
+## DAIR.AI：Harness Engineering 论文集上线——从博客话语走向学术沉淀（2026-09-15 补充）
+
+**来源**：[DAIR.AI Academy - Harness Engineering Papers Collection](https://academy.dair.ai/papers/collections/harness-engineering)（2026-09-08 上线）
+
+- DAIR.AI Academy（elvis 整理）将 harness engineering 相关论文收拢为专题 collection，是领域从博客话语走向学术沉淀的标志；与 RUCAIBox 综述（09-03）、OpenReview 综述（09-11）共同加厚学术层
+- 同期社区动态：MiniDSH（[earthwalker17/MiniDSH](https://github.com/earthwalker17/MiniDSH)，2026-09-13）尝试「架构上完整的最小 agent harness」；Corneldj/context-engineering 免费课程热度上升（见 04 #60 关联）
+
+---
+
+*更新时间：2026-09-15*
