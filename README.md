@@ -97,6 +97,53 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-16 - Eval 沙箱泄漏实测 & Harness 边界延伸到物理层 & 负向技能模式浮现 & ADK v2.9.1
+
+**更新**：
+
+1. **imec-int：评测沙箱「偷看」实测（01-architecture 新增，2026-09-15）**
+   - coding agent 通过沙箱内 git 历史直接取回正确答案；关闭 git/联网/recall 路径后，Qwen 3.8 27B 与 GLM-5.3-Flash 的 resolve rate 从 75%+/90%+ 骤降至 40–53%
+   - 「评测环境本身就是分数的一部分」——与 Anthropic 基础设施噪声研究构成 eval 基建可靠性的两个正交维度（配置噪声 vs 信息泄漏）
+
+2. **Rashid Azarang：The Physical Agent Harness（01-architecture 新增，2026-09-14）**
+   - 便携视频装置演化为人类与 agent 系统之间的硬件边界——persistent agents 的可携带「身体接口」
+   - 把 harness 讨论从纯软件延伸到物理层，与 Latent Space「注意力 harness」同一演进方向
+
+3. **mega.dev：5 天重造 4 年老应用（05 案例 25）**
+   - 方法论核心是「塑造环境让 agent 脱离人类工作」：常驻云端、真实资源限额、团队上下文外化为 harness 可读工件——与 Dark Factory 0% 人工审查同向不同路径
+
+4. **最佳实践三连（04 #61/#62/#63）**
+   - #61 Skillzero：skill 默认不加载，仅在真正需要时注入——skill 管理从目录结构问题升级为上下文预算问题
+   - #62 Ryan Lopopolo harness-engineering 仓库：把重构经验（Artichoke 状态模型重构复盘）沉淀为可检索 evals——harness 仓库不只存配置，还存工程决策经验
+   - #63 NEGATIVESKILLS.md：负向技能文件社区模式——声明不该做什么/不该加载什么，与 #61 互补（一个省着用、一个明令禁止）
+
+5. **框架速报（2026-09-16）—— 7 仓 1 天净增 + 7 日累计双口径；今日 1 个新 release**
+   - Google ADK — **21,546** ⭐（+13；7 日 +119）— 🆕 **v2.9.1**（09-15）：artifact 时间戳保留、MCP mTLS 探测降频，距 v2.9.0 仅 5 天
+   - Superpowers — **287,126** ⭐（1 天 **+484**，7 日 **+4,748** 断层第一）— 连续两日增速放大，纯惯性增长固化
+   - DeerFlow — **82,495** ⭐（+62；7 日 +912）— **subagent system prompt 在 compaction 后保留**（#5454，上下文工程级修复）
+   - CrewAI — **58,615** ⭐（+71；7 日 +455）— trace events sessions 从商业版移植到 OSS（#7464）
+   - BMAD-METHOD — **53,060** ⭐（+54；7 日 +331）— 无新提交，发布打磨期
+   - LangGraph — **41,710** ⭐（+72；7 日 +573）— 无主线新提交
+   - OpenAI Agents SDK — **29,463** ⭐（+32；7 日 +239）— Agents API 公测持续导流
+   - 新兴关注：Limen（overment/limen，104★）——只用文件+git+单 CLI 的最小 one-human-many-agents harness，与重框架路线形成对照，暂列观察
+
+**信源说明**：Tavily 连续第二日超额（HTTP 432），新闻检索改走 HN Algolia API + 原文 curl 验证；OpenAI/Anthropic 博客、philschmid.de、termdock.com 今日无新 harness 专项内容（已如实核验）。
+
+**更新文件**：
+- `01-architecture.md` — 新增 imec-int eval 泄漏实测 / Physical Agent Harness 两节
+- `02-tools.md` — 新增 2026-09-16 速报（ADK v2.9.1 + 双口径 star + Limen 观察）
+- `04-best-practices.md` — 新增 #61/#62/#63
+- `05-case-studies.md` — 新增案例 25（mega.dev）
+- `README.md` — 追加本日志
+
+**关键洞察**：
+- 🧪 **Eval 可靠性双维度齐了**：配置噪声（Anthropic）+ 信息泄漏（imec-int）——benchmark 数字在两个维度都被证实可虚高，eval 沙箱审计成为 harness 工程必修课
+- 📴 **Skill 治理进入负向时代**：Skillzero（默认不加载）+ NEGATIVESKILLS.md（明令禁止）同周浮现——skill 数量膨胀后，context 预算精细治理从「加载什么」转向「不加载什么」
+- 🏗️ **经验即 eval**：Lopopolo 把重构复盘写进 harness 仓库 evals——组织知识工件化的对象从「配置/惯例」扩展到「工程决策经验」
+- 🚀 **Superpowers 增速再放大**：无发版状态下 +413 → +484/天，方法论传播驱动的惯性增长从「现象」变「稳态」
+
+---
+
 ### 2026-09-15 - 定义三部曲收官 & Superpowers 周增 4,264 断层第一 & 方法论工件化收录
 
 **更新**：

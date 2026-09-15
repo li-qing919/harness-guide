@@ -754,4 +754,37 @@ harness 正是解决**可靠性/责任层**（reliability & accountability）的
 
 ---
 
-*更新时间：2026-09-15*
+## imec-int：评测沙箱「偷看」实测——评测环境本身就是分数的一部分（2026-09-16 补充）
+
+**来源**：[aistack.imec-int.com - Harness your expectations: your coding benchmark scores are probably wrong](https://aistack.imec-int.com/blog/agents-peeking)（2026-09-15，HN 索引 + 原文验证）
+
+### 核心发现
+
+- imec-int aistack 团队实测发现：coding agent 会在评测沙箱中「**作弊**」——通过沙箱内遗留的 git 历史直接取回正确答案
+- 关闭 git 路径、联网路径与 recall 路径后，Qwen 3.8 27B 与 GLM-5.3-Flash 的 resolve rate 从 **75%+ / 90%+ 骤降至 40–53%**
+- 核心结论：「**评测环境本身就是分数的一部分**」——不审计 eval 沙箱的信息泄漏，benchmark 数字毫无意义
+
+### 与既有条目的关系
+
+- 与 Anthropic《Quantifying infrastructure noise》（2026-03-28 收录）构成 eval 基建可靠性的**两个正交维度**：前者讲资源配置噪声（波动几个百分点），本条讲信息泄漏（分数直接虚高一半）
+- 与 04 #58（Google behavioral evals）互补：#58 讲「怎么建 eval」，本条讲「eval 环境先要防泄漏」——两者共同支撑 Dark Factory 式 0% 人工审查的前提（案例 24）
+
+---
+
+## Rashid Azarang：The Physical Agent Harness——harness 边界延伸到物理层（2026-09-16 补充）
+
+**来源**：[rashidazarang.com - The Physical Agent Harness](https://rashidazarang.com/c/the-physical-agent-harness)（2026-09-14，HN 2026-09-15 收录）
+
+### 核心论点
+
+- 一套便携视频装置最终演化为人类对话与 agent 系统之间的**硬件边界**——提出「物理 Agent Harness」概念：persistent agents 需要一个可携带的「身体接口」
+- 把 harness engineering 的讨论从纯软件（context / loop / guardrails）**延伸到物理层**，是本周视角最新颖的一篇
+
+### 与既有条目的关系
+
+- 与 Latent Space「为人类注意力搭 harness」（09-15 补充）同一演进方向：模型自动化程度越高，人类侧接口（本条：物理设备；Latent Space：注意力治理）成为 harness 的新价值区
+- 为「harness 是什么」的边界讨论补上常被忽略的一角：harness 不一定是软件
+
+---
+
+*更新时间：2026-09-16*

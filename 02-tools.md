@@ -1163,6 +1163,49 @@ async function verifyUI() {
 
 ---
 
+## 2026-09-16 框架版本迭代速报
+
+> 数据：GitHub 未认证 API，2026-09-16 05:30 GMT+8 拉取。当日净增相对 09-15 快照，7 日累计相对 09-07 采集（7 仓全口径）。今日 1 个新 release（Google ADK v2.9.1）。Tavily 连续第二日超额（HTTP 432），新闻检索改走 HN Algolia + 原文 curl 验证。
+
+### Google ADK (21,546 ⭐) ⭐ 今日新 release
+- 🆕 `v2.9.1`（2026-09-15）发布，距 v2.9.0（09-10，模型自动 failover / LiveKit 原生语音 / MCP SDK 2.x）仅 5 天
+- ⭐ 当日 **+13**/天，7 日累计 **+119**（09-07 基线 21,427）
+- 本期修复：文件 artifact 创建时间戳保留、MCP session 不再每次探测 mTLS 凭据、VertexAiSearchTool bypass 缺 gcp 依赖时抛明确 ImportError、App.root_agent 类型化为 BaseNode
+- 📌 **启示**：v2.9.0 后 5 天即出修复版，说明 failover/语音主线已进入快速打磨期；mTLS 探测降频对企业内网部署是实打实的性能优化
+
+### Superpowers / obra (287,126 ⭐)
+- ⭐ 当日 **+484**/天，7 日累计 **+4,748**（09-07 基线 282,378），**7 仓中断层第一**
+- 最后 push 2026-09-14 18:42（README/文档级维护）；`v6.3.0` (2026-08-12) 仍为最新 release（已在册）
+- 📌 **启示**：连续两日日增 +413 → +484，无发版状态下增速仍在放大——方法论传播（BMAD v6、Claude Code skills 生态吸收）驱动的纯惯性增长进一步固化
+
+### DeerFlow / ByteDance (82,495 ⭐)
+- ⭐ 当日 **+62**/天，7 日累计 **+912**（09-07 基线 81,583）；`v2.0.0` (2026-06-25) 已在册
+- push 2026-09-15 14:22。🆕 guard 剥离 tool-call 后清理残留 provider 块（#5447）；**subagent system prompt 在 context compaction 后保留**（#5454）；设置对话框视口修复（#5458）；tool-progress 阶段转换持久化（#5214）
+- 📌 **启示**：#5454 是上下文工程级修复——compaction 后保留 subagent system prompt，直接关系长任务中子代理身份不漂移，与 04 章子代理隔离主线同向
+
+### CrewAI (58,615 ⭐，crewAIInc/crewAI)
+- ⭐ 当日 **+71**/天，7 日累计 **+455**（09-07 基线 58,160）；`v1.15.21` (2026-09-09) 已在册
+- push 2026-09-15 20:09。🆕 **trace events sessions 能力从商业版移植到 OSS**（#7464）；CLI 以 UTF-8 读取 JSON checkpoint（#7491）；Windows poetry.lock 备份覆盖修复（#7463）
+- 📌 **启示**：商业能力反哺 OSS（trace sessions）是少见方向——可观测性正在成为多 agent 框架的竞争底线而非付费差异点
+
+### BMAD-METHOD (53,060 ⭐)
+- ⭐ 当日 **+54**/天，7 日累计 **+331**（09-07 基线 52,729）；`v6.12.0` (2026-09-04) 已在册
+- 仓库活动至 09-15，main 分支最新提交仍为 09-11（#2857 Jinja2 模板渲染、#2853 auto oneshot 路由，均已在册）
+
+### LangGraph / LangChain (41,710 ⭐)
+- ⭐ 当日 **+72**/天，7 日累计 **+573**（09-07 基线 41,137）；`langgraph-sdk 0.4.4` (2026-08-27) 已在册
+- push 2026-09-15 16:04，无主线新提交（llms.txt 自动生成 #8922 已在册）
+
+### OpenAI Agents SDK (29,463 ⭐)
+- ⭐ 当日 **+32**/天，7 日累计 **+239**（09-07 基线 29,224）；`v0.22.2` (2026-09-09) 已在册
+- push 2026-09-15 04:57，最新提交（09-13/09-14 细节修复）已在册；09-10 发布的 Agents API 公测（harness-as-a-service，01 章在册）持续为 SDK 导流
+
+### 新兴关注：Limen——最小可用 one-human-many-agents harness
+- [overment/limen](https://github.com/overment/limen)（HN 2026-09-14，104★，created 2026-08-14）：极简「一人多 agent」harness，全部构建块只有**文件、git 与单个 CLI**，无重型框架依赖
+- 📌 与 DeerFlow/Superpowers 的重框架路线形成对照，代表「最小可用 harness」的社区探索方向；星数向早，暂列观察不入监控主表
+
+---
+
 ## 2026-09-15 框架版本迭代速报
 
 > 数据：GitHub 未认证 API，2026-09-15 05:30 GMT+8 拉取。当日净增相对 09-14 10:32 快照，7 日累计相对 09-07 采集（7 仓全口径）。今日无新 release（全部已在册），本节为 star 动态 + 提交级细节补录。CrewAI 旧地址 joaomdmoura/crewAI 已确认 301，本文档全部链接均指向迁移后的 crewAIInc/crewAI。

@@ -2769,3 +2769,53 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 - 最佳实践载体三级跳：文章（#14/#55）→ checklist（#44 等）→ **可安装技能包（本条）**——与 Superpowers 的技能生态路径一致，是「方法论工件化」趋势的代表作
 - 渐进披露、分层记忆与 #36（五大上下文层）、#51（compaction 工程实现）一一对应
+
+---
+
+## 61. Skillzero：默认不进上下文的 skill——把 skill 管理升级为上下文预算问题（2026-09-16 收录）
+
+**来源**：[kurtextrem/skillzero](https://github.com/kurtextrem/skillzero)（HN 2026-09-14，尚早期）
+
+### 核心要点
+
+- 渐进披露（progressive disclosure）的下一步：不是「按需加载 skill」，而是**默认不加载**——以可控方式把 skill 从 agent 上下文中省略，仅在真正需要时注入
+- 直接收益：节省 token + 降低 skill 互相干扰；把 skill 管理从「目录结构问题」升级为「**上下文预算问题**」
+- 适合 skill 数量膨胀（数十上百个）后的团队
+
+### 与既有条目的关系
+
+- 与 #60（context-engineering-kit，可安装技能包）构成渐进披露的两端：#60 解决「怎么把最佳实践装进来」，本条解决「装进来之后怎么省着用」
+- 与 #36 反模式（全塞 system prompt ≤ 2,000 token）同源：skill 越多，默认不加载的收益越大
+
+---
+
+## 62. Ryan Lopopolo harness-engineering 仓库：把重构经验写进 evals（2026-09-16 收录）
+
+**来源**：[lopopolo/harness-engineering - Future Regret in Artichoke's State Refactor](https://github.com/lopopolo/harness-engineering/blob/v1.0.0/evals/artichoke-state-modeling.md)（HN 2026-09-13）
+
+### 核心要点
+
+- OpenAI harness engineering 布道者 Ryan Lopopolo 的个人 harness 仓库新增 eval 文章：复盘 Artichoke（Rust 实现 Ruby）状态模型重构——首次全树重构 114 文件、±2100 行、从未编译通过
+- 真正的能力提炼：「选择一串**独立可合并**的变更流，在正常开发流量持续的同时降低后续大改的成本与风险，并在运行时证据推翻路线时果断重规划」
+- 方法论要点：**harness 仓库不只存配置，还要把工程决策经验沉淀为可检索的 evals/案例**
+
+### 与既有条目的关系
+
+- 作者即 OpenAI《Harness Engineering》官方博客文的主要实践者（05 案例在册），本条是其个人仓库的延伸产物，与官方文不重复
+- 「经验沉淀为 evals」与 #47（Phil Schmid 自递归改进）、案例 15（NLAHs 外化工件）同构：知识从人脑 → 可检索工件，供 agent 与人复用
+
+---
+
+## 63. NEGATIVESKILLS.md：负向技能文件的社区模式浮现（2026-09-16 收录）
+
+**来源**：[Hacker News 讨论](https://news.ycombinator.com/item?id=49688861)（2026-09-13）
+
+### 核心要点
+
+- 仿照 CLAUDE.md / AGENTS.md，用 NEGATIVESKILLS.md 之类文件声明**不该做什么、不该加载什么**——负向指令与正向 skill 清单同样重要
+- 目前仍是社区讨论阶段，无标准实现，但方向值得关注
+
+### 与既有条目的关系
+
+- 与 #61（Skillzero）互补：一个管「省着用」（默认不加载），一个管「明令禁止」（负向清单）——共同指向 context 预算的精细治理
+- 与 #59（Termdock「口头惯例 → 文件化」）同一文件化路径：负向惯例同样需要从口头约定升为机器可读工件
