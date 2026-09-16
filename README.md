@@ -97,6 +97,54 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-17 - 「七权」定义框架与 fleet-OS 之争 & isolated/fork 双模式 & 治理层工具化落地
+
+**更新**：
+
+1. **Charles Holloway「七权」定义框架（01-architecture 新增）**
+   - agent = model + harness，harness 由七个权威构成（context/state、tools、execution、orchestration、verification、observability、governance with recovery），每权各拥有一个「模型无法安全自证的事实」
+   - 核心检验法：「模型说做完了，必须有模型之外的东西确认它做完了」——定义竞争从「一句话」进入「分权清单」阶段，可直接用作自建 harness 的设计 checklist
+
+2. **Pentad Labs：fleet 需要 agent OS 而非更大 harness（01-architecture 新增）**
+   - harness 是「单 agent 单任务」控制平面，200 agent 并发时权威归属质变——本周概念层面最值得读的一篇，与 Latent Space 注意力 harness 同一演进线的另一面
+
+3. **Adnan Masood 双篇（01 + 04 #66）**
+   - 《There Is No Wall. There Is a Harness.》：所谓能力墙多是 harness 缺失误读为模型极限（01 新增）
+   - 《The Price of Done》：提出 Cost per Accepted Task 替代 token 单价作为 harness 时代核心经济指标（04 #66）
+
+4. **MarkTechPost 三层分工地图（01-architecture 新增）**
+   - harness / framework / MCP 三层各自的 loop、state、tools、permissions、recovery 职责归属——团队术语对齐的引用文献，与七权正交互补
+
+5. **最佳实践二连（04 #64/#65）**
+   - #64 LangChain 官方：multi-agent harness 上下文组织的 **isolated / fork** 双模式——隔离防污染、复用省成本，按任务性质选 mode（落地 deepagents context modes）
+   - #65 Blue：多编码 agent CLI 的统一治理层——治理权从各家配置外置到统一 harness，「七权」中 governance/recovery 权的可用工具化实现
+
+6. **框架速报（2026-09-17）—— 7 仓双口径；今日无新 release，ADK v2.9.1 补录细节**
+   - Superpowers — **287,596** ⭐（+470；7 日 +3,627 断层第一）— push 仍停 09-14，零发版惯性增长稳态化
+   - DeerFlow — **82,545** ⭐（+50；7 日 +409）— read_file 行边界截断 + 隔离粒度细化到数据/agent 级（#5474/#5483/#5451）
+   - CrewAI — **58,662** ⭐（+47；7 日 +367）— tracing 采集人工反馈与暂停事件，HITL 信号纳入可观测（#7499）
+   - BMAD — **53,106** ⭐（+46；7 日 +272）— review lever/lens sets 移植进 bmad-build（#2875）
+   - LangGraph — **41,776** ⭐（+66；7 日 +441）— 分支/CI 活动，main 无新提交
+   - OpenAI Agents SDK — **29,496** ⭐（+33；7 日 +191）— 依赖维护为主
+   - Google ADK — **21,554** ⭐（+8；7 日 +84）— v2.9.1 补录：Claude adaptive thinking 可见性 + eval 侧连修
+   - 新兴关注：Cayu（cayu-dev/cayu，66★）—— long-horizon agent runtime，与 Limen 极简路线相反的重基础设施一极，暂列观察
+
+**信源说明**：Tavily 连续第三日超额（HTTP 432），新闻检索改走 Google News RSS + HN Algolia + 原文抓取验证；未能收录：BCG 新文（Akamai 反爬）、The New Stack（Cloudflare 拦截）、Sierra（自本机不可达），均如实记录。
+
+**更新文件**：
+- `01-architecture.md` — 新增七权定义 / Pentad fleet-OS / Masood 能力墙反驳 / MarkTechPost 三层分工四节
+- `02-tools.md` — 新增 2026-09-17 速报（ADK v2.9.1 补录 + Cayu 观察）
+- `04-best-practices.md` — 新增 #64/#65/#66
+- `README.md` — 追加本日志
+
+**关键洞察**：
+- 🏛️ **定义竞争进入「分权」阶段**：从 Databricks/LangChain/tej.as 的「一句话定义」到 Holloway「七权清单」——定义的用途从传播话语变为可核对的设计清单，MarkTechPost 三层地图再把七权映射到现实技术栈
+- 🏗️ **治理权率先工具化**：概念侧（Pentad agent OS）与工具侧（Blue 统一治理层）同周出现——七权中 governance/recovery 率先从论文话语进入可用实现
+- 🔀 **子 agent 上下文模式精细化**：LangChain isolated/fork 双模式 + DeerFlow 连续隔离提交——「一刀切隔离」被「按任务性质选模式」取代，上下文边界从架构问题变为策略问题
+- 📊 **经济度量转向验收口径**：Cost per Accepted Task 与 Dark Factory / mega.dev 的验收治理同底座——harness 质量差异只有按「被接受产出」计价时才显性化
+
+---
+
 ### 2026-09-16 - Eval 沙箱泄漏实测 & Harness 边界延伸到物理层 & 负向技能模式浮现 & ADK v2.9.1
 
 **更新**：

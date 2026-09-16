@@ -1163,6 +1163,49 @@ async function verifyUI() {
 
 ---
 
+## 2026-09-17 框架版本迭代速报
+
+> 数据：GitHub 未认证 API，2026-09-17 05:30 GMT+8 拉取。当日净增相对 09-16 快照，7 日累计相对 09-10 采集（7 仓全口径）。今日无新 release（ADK v2.9.1 已在 09-16 速报在册，本期补录其发布细节与后续修复）。Tavily 连续第三日超额（HTTP 432），新闻检索改走 Google News RSS + HN Algolia API + 原文抓取验证。
+
+### Superpowers / obra (287,596 ⭐)
+- ⭐ 当日 **+470**/天，7 日累计 **+3,627**（09-10 基线 283,969），**7 仓中断层第一**；`v6.3.0` (2026-08-12) 仍为最新 release（已在册）
+- pushed_at 仍为 2026-09-14 18:42（README/文档级维护），无新代码提交
+- 📌 **启示**：发布节奏放缓（08-12 后零 release）但社区增速不减（日增 +470）——方法论传播驱动的惯性增长从「现象」国固为「稳态」
+
+### DeerFlow / ByteDance (82,545 ⭐)
+- ⭐ 当日 **+50**/天，7 日累计 **+409**（09-10 基线 82,136）；`v2.0.0` (2026-06-25) 已在册
+- push 2026-09-16 15:57。🆕 sandbox read_file 输出在行边界截断并标注下一 start_line（#5474）；gateway 的 edit/regenerate 辅助回退按数据身份隔离（#5483）；前端 skill 建议按 agent 隔离（#5451）
+- 📌 **启示**：read_file 行边界截断 + start_line 标注是长文件读取的上下文预算实践；「按数据身份隔离」「按 agent 隔离」两连提交说明隔离粒度从进程级细化到数据/agent 级
+
+### CrewAI (58,662 ⭐，crewAIInc/crewAI)
+- ⭐ 当日 **+47**/天，7 日累计 **+367**（09-10 基线 58,295）；`v1.15.21` (2026-09-09) 已在册
+- push 2026-09-16 19:24。🆕 支持别名作为连接标识符（#7519）；CLI 记录 deployment 创建失败原因（#7451）；tracing 采集人工反馈与暂停事件（#7499）
+- 📌 **启示**：tracing 采集「人工反馈与暂停事件」把 human-in-the-loop 信号纳入可观测性——与上一期 trace sessions 移植 OSS 同线，多 agent 框架的可观测竞争延伸到人机交互信号
+
+### BMAD-METHOD (53,106 ⭐)
+- ⭐ 当日 **+46**/天，7 日累计 **+272**（09-10 基线 52,834）；`v6.12.0` (2026-09-04) 已在册
+- push 2026-09-15 晚间（昨日快照之后）。🆕 **review lever 与 lens sets 移植进 bmad-build**（#2875）；build-auto 与 code-review 同步获得 lever/lens 集（#2861）；docs 站点修复 Astro AVIF 安全公告（#2876）
+- 📌 **启示**：lever/lens 从独立能力下沉为 build 与 code-review 流程的通用审查原语——审查配置化后可在多流程间复用
+
+### LangGraph / LangChain (41,776 ⭐)
+- ⭐ 当日 **+66**/天，7 日累计 **+441**（09-10 基线 41,335）；`langgraph-sdk 0.4.4` (2026-08-27) 已在册
+- pushed_at 2026-09-16 20:20（分支/CI 活动），main 最新提交仍为 09-14 的 llms.txt 自动生成（#8922，已在册）
+- 另见其官方博客新文《Organizing Context in a Multi-Agent Harness》（04 #64）
+
+### OpenAI Agents SDK (29,496 ⭐)
+- ⭐ 当日 **+33**/天，7 日累计 **+191**（09-10 基线 29,305）；`v0.22.2` (2026-09-09) 已在册
+- push 2026-09-16 04:18，以依赖维护为主：starlette 升至 ≥1.6.0（#5032/#5038）、runloop-api-client 升至 1.31.0（#5037）；09-10 发布的 Agents API 公测持续导流
+
+### Google ADK (21,554 ⭐)
+- ⭐ 当日 **+8**/天，7 日累计 **+84**（09-10 基线 21,470）；`v2.9.1` (2026-09-15) 已在册，本期补录：主打 **Claude adaptive thinking 逐步推理过程可见性**；09-16 当日继续修复：request_confirmation 接受默认 hint、evaluate 空 case 显式报错、eval 保存忽略 UI-only 字段
+- 📌 **启示**：eval 侧连修（空 case 报错、UI-only 字段剔除）与 imec-int eval 泄漏实测同月出现——eval 基建的严谨性正在成为框架竞争的新战场
+
+### 新兴关注：Cayu——面向长时程 agent 的开源运行时
+- [cayu-dev/cayu](https://github.com/cayu-dev/cayu)（Show HN 2026-09-16，66★，created 2026-07-16，持续活跃至 09-16）：定位为 **long-horizon agent runtime**，主张显式环境、持久会话、受控工具、secrets 边界、evals 与 replay 是长任务的必备底座
+- 📌 与 Limen（09-16 观察，极简路线）相反，代表「重基础设施」一极的社区探索；长时程专用 runtime 是新切入角度，暂列观察不入监控主表
+
+---
+
 ## 2026-09-16 框架版本迭代速报
 
 > 数据：GitHub 未认证 API，2026-09-16 05:30 GMT+8 拉取。当日净增相对 09-15 快照，7 日累计相对 09-07 采集（7 仓全口径）。今日 1 个新 release（Google ADK v2.9.1）。Tavily 连续第二日超额（HTTP 432），新闻检索改走 HN Algolia + 原文 curl 验证。

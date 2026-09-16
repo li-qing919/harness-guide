@@ -787,4 +787,73 @@ harness 正是解决**可靠性/责任层**（reliability & accountability）的
 
 ---
 
-*更新时间：2026-09-16*
+## Charles Holloway：Build Your Own Harness——harness 的「七权」定义框架（2026-09-17 补充）
+
+**来源**：[charlesholloway.io - Build Your Own Harness](https://charlesholloway.io/talks/build-your-own-harness/)（Colorado Startup Week 2026 演讲）
+
+### 核心论点
+
+- **agent = model + harness**；harness 是 model-controller（模型控制者）与 world-adapter（世界适配器）的合一，由围绕共享模型的**七个权威（seven authorities）**构成：context/state、tools、execution、orchestration、verification、observability、governance with recovery
+- 每一权各拥有**一个「模型无法安全自证的事实」**——这正是该权威必须存在于模型之外的理由
+- 核心检验法：**「模型说做完了，必须有模型之外的东西确认它做完了；否则等于没有证据、没有 harness。」**
+
+### 与既有条目的关系
+
+- 「agent = model + harness」公式与 Databricks（09-06）、LangChain Anatomy（09-11）、tej.as（09-15）定义三部曲同源，但「七权」给出了**首个可操作的自建设计清单**——定义竞争从「一句话」进入「分权清单」阶段
+- verification 权与 Anthropic 长时运行 harness（#43）、imec-int eval 泄漏实测（09-16）互相印证：模型自证不可信是全领域的公理级前提
+- 可直接用作自建 harness 时的架构对齐 checklist（七权逐项检查归属与实现）
+
+---
+
+## Pentad Labs：Agent Fleet 需要的是新 OS，不是更大的 Harness（2026-09-17 补充）
+
+**来源**：[pentad.ai - An agent fleet needs a new kind of OS, not a bigger harness](https://pentad.ai/blog/fleet-needs-an-os/)（2026-09-16，HN 6 分）
+
+### 核心论点
+
+- 提出当下 harness 讨论的**边界问题**：harness 是「单 agent 单任务」的控制平面（model-controller + world-adapter），这个假设在企业同时运行 200 个 agent 时失效——**权威归属发生质变**
+- 规模化场景下需要的不是「更大的 harness」，而是一种 **agent OS**：跨 agent 的调度、仲裁与治理层
+- 引用 Holloway 本周演讲的「七权」定义，并给出判据：「模型的断言若没有模型之外的验证者，就等于没有证据」
+
+### 与既有条目的关系
+
+- 与 Latent Space「注意力 harness」（09-15）同一演进方向的两面：Latent Space 讲人类侧接口价值上升，本条讲多 agent 规模下控制平面必须分层
+- 与 Blue（04 #65）构成 fleet 治理的「理念 + 工具」对照：一个提出 agent OS 概念框架，一个给出编码 agent 统一治理层的可用实现
+- 是本周概念层面最值得读的一篇
+
+---
+
+## Adnan Masood：There Is No Wall. There Is a Harness.——「能力墙」叙事反驳（2026-09-17 补充）
+
+**来源**：[Medium - There Is No Wall. There Is a Harness.](https://medium.com/@adnanmasood/there-is-no-wall-there-is-a-harness-a53395b807cb)（2026-09-11，作者 RSS feed 验证）
+
+### 核心论点
+
+- 对「模型能力墙（wall）」叙事的反驳：多数所谓 wall 实际是 **harness 的缺失**——上下文供给、工具设计、验证回路不到位时，瓶颈被误读为模型极限
+- 把 harness engineering 定位为从「模型焦虑」转向「**工程可控性**」的范式转移
+
+### 与既有条目的关系
+
+- 与 04 #55（MarkTechPost 四机制）同一立场不同表述：前者讲机制（compaction/offloading/todo-state/memory），本条讲归因（wall vs harness）
+- 为「先修 harness 再换模型」的决策顺序提供话语支撑——与 mega.dev（案例 25）「环境塑造优先」实践互证
+
+---
+
+## MarkTechPost：Harness vs Framework vs MCP——现代 Agent 技术栈三层分工地图（2026-09-17 补充）
+
+**来源**：[marktechpost.com - Agent Harness vs Agent Framework vs MCP](https://www.marktechpost.com/2026/09/14/agent-harness-vs-agent-framework-vs-mcp-which-layer-owns-the-loop-state-tools-permissions-and-recovery/)（2026-09-14）
+
+### 核心内容
+
+- 绘制现代 agent 技术栈三层分工的从业者地图：**harness 层、framework 层与 MCP 协议层**各自主张的职责（loop / state / tools / permissions / recovery），附三方重叠区分析与逐条出处
+- 适合作为团队内**对齐术语的引用文献**
+
+### 与既有条目的关系
+
+- 与 Holloway「七权」（本日补充）正交互补：七权回答「harness 内部有什么权」，本条回答「这些权在当今技术栈中散落在哪一层」
+- 与 OpenAI Agents API 公测（09-14 补充）呼应：托管 harness 收走的正是 framework/MCP 层的组装权，三层地图有助于看清竞争摩擦面
+- 与同站 #55（四机制）、#58 不同篇，无重复
+
+---
+
+*更新时间：2026-09-17*

@@ -2819,3 +2819,54 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 - 与 #61（Skillzero）互补：一个管「省着用」（默认不加载），一个管「明令禁止」（负向清单）——共同指向 context 预算的精细治理
 - 与 #59（Termdock「口头惯例 → 文件化」）同一文件化路径：负向惯例同样需要从口头约定升为机器可读工件
+
+---
+
+## 64. LangChain：Multi-Agent Harness 中的上下文组织——isolated 与 fork 双模式（2026-09-17 收录）
+
+**来源**：[langchain.com - Organizing Context in a Multi-Agent Harness](https://www.langchain.com/blog/organizing-context-in-a-multi-agent-harness)（2026-09-16，落地于 deepagents 最新版 context modes 参数）
+
+### 核心要点
+
+- multi-agent harness 中子 agent 上下文组织的两种模式：
+  - **isolated**：子 agent 全新上下文窗口，只接收任务描述——经典 context isolation，防污染
+  - **fork**：子 agent 继承 supervisor 的完整对话——利用 prompt caching、避免重复的文件读取等 context-gathering 开销，省成本
+- 实践准则：**隔离防污染、复用省成本，按任务性质选 mode，而不是一刀切**
+
+### 与既有条目的关系
+
+- 与 #43（Anthropic 长时运行 harness）的子代理隔离主线直接对话：isolated 是其默认建议，fork 补上了「上下文收集成本」这一被忽视的维度
+- 与 DeerFlow #5454（compaction 后保留 subagent system prompt，09-16 速报）同题：子 agent 上下文边界怎么划是本周多家共同热点
+
+---
+
+## 65. Blue：编码 Agent 的统一治理层——One Harness to Rule Them All（2026-09-17 收录）
+
+**来源**：[bluee.sh](https://bluee.sh/)（Show HN 2026-09-16，开源）
+
+### 核心要点
+
+- 为 Codex、Claude Code、Kimi Code、OpenCode 等多个编码 agent CLI 提供**统一治理层**，且**不改变各 CLI 原生开发体验**
+- 定位直指 harness 七权中的 **governance / recovery** 权：团队同时使用多个编码 agent 时，权限、审计与策略应外置到统一 harness 层，而非散落在各家配置里
+
+### 与既有条目的关系
+
+- 与 Holloway「七权」（01 章，governance with recovery 权）及 Pentad fleet-OS 论（01 章）构成「概念 → 工具」落地对照：治理权外置有了可用实现
+- 与多 agent 并行场景的管控需求（#55 四机制、#57 生产存活）互补：那些讲单 harness 内治理，本条讲跨 CLI 的治理收敛
+
+---
+
+## 66. Adnan Masood：The Price of Done——Cost per Accepted Task 作为 Harness 时代的核心经济指标（2026-09-17 收录）
+
+**来源**：[Medium - The Price of Done: Cost per Accepted Task in the Harness Era](https://medium.com/@adnanmasood/the-price-of-done-cost-per-accepted-task-in-the-harness-era-10782b4af526)（2026-09-12，作者 RSS feed 验证）
+
+### 核心要点
+
+- 提出用 **Cost per Accepted Task**（每被接受任务的成本）替代 token 单价作为 harness 时代的核心经济指标——只统计真正通过验收的产出
+- harness 质量差异（验证回路、上下文供给）只有在「按验收计费」口径下才能显性化：token 便宜的方案可能返工率高，总成本反超
+- 与同作者《There Is No Wall. There Is a Harness.》（01 章，2026-09-11）构成「为什么 + 怎么算」组合
+
+### 与既有条目的关系
+
+- 与 #56（Azure Agent 优化经济学）同一经济分析线：#56 讲上下文策略的正和博弈，本条给出顶层度量口径
+- 「被接受」的判定依赖 verification 权（Holloway 七权）——指标可算的前提是模型外验证器存在，与 #43/#58 同底座
