@@ -97,6 +97,49 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-18 - 超人级 Bash 重估工具边界 & ClawHub 供应链安全事件 & 上下文工程基线文献补录
+
+**更新**：
+
+1. **Phil Schmid：How Foundational Models Became Superhuman in Bash（01-architecture 新增，2026-09-01）**
+   - 每隔数月从零重写 harness 的实验系列：仅保留 bash + 媒体查看器两个工具，任务完成率与全工具 harness 持平
+   - 前沿模型已能数秒内合成一次性命令行程序——read/edit/search 专用工具价值需重估，与 Vercel「少即是多」（#40）同向的更强证据
+
+2. **Termdock：ClawHub 事件复盘（01-architecture 新增）**
+   - ClawHavoc 攻击：2,857 个技能中 341 个恶意（11.9%），分发 Atomic macOS Stealer；一周树龄 GitHub 账号绕过审核，波及已扩大至 1,184+ 技能
+   - harness 安全第三条战线成形：运行时漏洞（#46 AgentCore）→ 管道绕过（CoreBreak）→ **分发供应链**；技能生态规模化（Superpowers 288K）的另一面
+
+3. **最佳实践基线文献二连（04 #67/#68）**
+   - #67 LangChain/Harrison Chase《The rise of "context engineering"》——被 #64 等引用的定义性文献补录：「构建动态系统，以正确格式在正确时机提供正确信息与工具」
+   - #68 Termdock 三层上下文架构：CLAUDE.md（常驻）/ AGENTS.md（跨工具）/ SKILL.md（按需）；Chroma context rot 研究（18 模型全长退化、200K 窗口 50K 显著降质）提供分层注入定量依据
+
+4. **框架速报（2026-09-18）—— 7 仓双口径；今日 1 个新 release**
+   - Superpowers — **288,077** ⭐（+481；7 日 +3,417 断层第一）— push 仍停 09-14，零提交惯性增长固化
+   - DeerFlow — **82,591** ⭐（+46；7 日 +374）— main 推进 **2.1.0-rc0**；沙箱异步重绑排空旧 release（#5498）、nginx 放行 /api/threads 长请求（#5521/#5505）
+   - CrewAI — **58,706** ⭐（+44；7 日 +363）— 🆕 **v1.15.22**（09-16）：别名连接标识、tracing 人类反馈与暂停事件、llm_overlay 按角色路由模型、OpenRouter 嵌入；修复 Azure/Gemini 流式工具调用
+   - LangGraph — **41,843** ⭐（+67；7 日 +434）— interrupt() 增加 response_schema（#8886）——HITL 中断点纳入类型化契约
+   - BMAD — **53,147** ⭐（+41；7 日 +279）— 保持活跃无新 release
+   - OpenAI Agents SDK — **29,523** ⭐（+27；7 日 +191）— v0.22.2 在册，持续迭代
+   - Google ADK — **21,566** ⭐（+12；7 日 +76）— 密集新增 AntigravityAgent 示例（LlmAgent 组合、双向根/子代理嵌套、文件工具审批）
+
+**去重说明**：Phil Schmid Recursive Self-Improvement（#47 在册）、Anthropic harness-design-long-running-apps（#43/案例 12 在册）、Anthropic Managed Agents（01 章 07-29 在册）、Anthropic Effective Context Engineering（#14 在册）均不重复收录；Termdock skill-layering 与 #59 同站不同篇，已在条目内注明区别。
+
+**信源说明**：Tavily 连续第四日超额（HTTP 432），DuckDuckGo HTML 版被 202 挑战页拦截、Bing 返回污染结果，均弃用；改用 agent-browser 无头浏览器直访信源（Anthropic Engineering、Phil Schmid、Termdock、LangChain Blog）+ 未认证 GitHub REST API。OpenAI Blog 因 Cloudflare 人机验证（"Just a moment..."）抓取失败，今日未收录 OpenAI 官方来源条目。
+
+**更新文件**：
+- `01-architecture.md` — 新增 Superhuman Bash / ClawHub 事件两节
+- `02-tools.md` — 新增 2026-09-18 速报（CrewAI v1.15.22 + DeerFlow 2.1.0-rc0 + ADK AntigravityAgent）
+- `04-best-practices.md` — 新增 #67/#68
+- `README.md` — 追加本日志
+
+**关键洞察**：
+- 🔨 **工具边界被模型能力内化**：Superhuman Bash 用「两工具持平全工具」的实验把 Vercel「少即是多」推到极限——harness 工具层设计应从「补短板」转向「留合成空间」，bash 通用入口权重上升
+- 🛡️ **技能供应链成第三战线**：ClawHub 11.9% 恶意率 + 一周账号绕过审核——技能生态规模化的同时信任机制缺位，安装前审计应成 harness 标配
+- 📖 **基线文献补齐**：rise of context engineering（#67）入册使「定义双子星」（Anthropic #14 + LangChain #67）完整，后续条目的概念溯源有了锚点
+- 🤝 **HITL 成框架一等公民**：CrewAI v1.15.22 人工反馈/暂停事件进正式版 + LangGraph interrupt() 加 response_schema 同周出现——人机交互信号从可观测性延伸到类型化契约
+
+---
+
 ### 2026-09-17 - 「七权」定义框架与 fleet-OS 之争 & isolated/fork 双模式 & 治理层工具化落地
 
 **更新**：

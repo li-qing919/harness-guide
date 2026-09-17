@@ -1163,6 +1163,46 @@ async function verifyUI() {
 
 ---
 
+## 2026-09-18 框架版本迭代速报
+
+> 数据：GitHub 未认证 API，2026-09-18 采集。当日净增相对 09-17 快照，7 日累计相对 09-11 采集（7 仓全口径）。今日 1 个新 release：CrewAI `v1.15.22`。采集方式：Tavily 连续第四日超额（HTTP 432），DuckDuckGo HTML 版被 202 挑战页拦截、Bing 返回污染结果，均弃用；改用 agent-browser 无头浏览器直访信源（Anthropic Engineering、Phil Schmid、Termdock、LangChain Blog）+ 未认证 GitHub REST API。OpenAI Blog 因 Cloudflare 人机验证（"Just a moment..."）抓取失败，今日未收录 OpenAI 官方来源条目。
+
+### Superpowers / obra (288,077 ⭐)
+- ⭐ 当日 **+481**/天，7 日累计 **+3,417**（09-11 基线 284,660），**7 仓中断层第一**；`v6.3.0` (2026-08-12) 仍为最新 release（已在册，细节 09-07 补录）
+- pushed_at 仍为 2026-09-14，连续多日零新提交，纯惯性增长延续
+- 📌 **启示**：发布节奏放缓（08-12 后零 release）但日增 +481——方法论传播驱动的惯性增长从「现象」固化为「稳态」
+
+### DeerFlow / ByteDance (82,591 ⭐)
+- ⭐ 当日 **+46**/天，7 日累计 **+374**（09-11 基线 82,217）；`v2.0.0` (2026-06-25) 已在册
+- push 2026-09-17。🆕 main 分支正推进 **2.1.0-rc0 版本号更新**；落地沙箱异步重绑时排空旧 release（#5498）、nginx 放行模型绑定的 /api/threads 长请求（#5521）等修复（另见 #5505）
+- 📌 **启示**：2.1.0 线进入 rc 阶段；「异步重绑排空旧 release」与「放行长轮询请求」均为多 agent 并发下的会话连续性加固，与 2.x 的 run hydration / RunStore 主线同向
+
+### CrewAI (58,706 ⭐，crewAIInc/crewAI)
+- ⭐ 当日 **+44**/天，7 日累计 **+363**（09-11 基线 58,343）；`v1.15.21` (2026-09-09) 已在册
+- 🆕 **`v1.15.22`** (2026-09-16)：支持**别名作为连接标识**；tracing 中**收集人类反馈与暂停事件**（#7499 特性随版正式发布）；新增 **llm_overlay 上下文变量按角色路由模型**；OpenRouter 嵌入支持、平台集成校验；修复 Azure/Gemini 流式工具调用、Windows poetry.lock 等大重问题
+- pushed_at 2026-09-17
+- 📌 **启示**：v1.15.21→.22 一周内连发；llm_overlay（按角色路由模型）是「一个 crew 多模型分工」的上下文工程级能力；HITL 信号进正式版与 09-17 速报观察同线
+
+### BMAD-METHOD (53,147 ⭐)
+- ⭐ 当日 **+41**/天，7 日累计 **+279**（09-11 基线 52,868）；`v6.12.0` (2026-09-04) 已在册
+- pushed_at 2026-09-17，保持活跃，无新 release；09-17 补录的 review lever/lens sets 移植（#2875）为最新主线动态
+
+### LangGraph / LangChain (41,843 ⭐)
+- ⭐ 当日 **+67**/天，7 日累计 **+434**（09-11 基线 41,409），当日增速第二；`langgraph-sdk 0.4.4` (2026-08-27) 已在册
+- push 2026-09-17。🆕 **interrupt() 增加 response_schema**（#8886，09-17 合入）——人机中断的返回结构可约束；llms.txt 自动生成（#8922）、高危开发依赖修复与 httpx2 升级（#8449/#8863）已在册
+- 📌 **启示**：interrupt() 加 schema 把 HITL 中断点纳入类型化契约，与 CrewAI 采集暂停事件同周出现——HITL 正在成为框架一等公民
+
+### OpenAI Agents SDK (29,523 ⭐)
+- ⭐ 当日 **+27**/天，7 日累计 **+191**（09-11 基线 29,332）；`v0.22.2` (2026-09-09) 已在册
+- push 2026-09-17，持续活跃迭代；定位轻量级多智能体工作流框架（handoffs、guardrails、sessions、tracing）
+
+### Google ADK (21,566 ⭐)
+- ⭐ 当日 **+12**/天，7 日累计 **+76**（09-11 基线 21,490）；`v2.9.1` (2026-09-15) 已在册
+- push 2026-09-17。🆕 密集新增 **AntigravityAgent 相关示例**：ADK Workflow 中组合 LlmAgent 与 AntigravityAgent 节点、双向根/子代理嵌套结构、内置文件工具审批样例
+- 📌 **启示**：示例先行是 Google 新一代 agentic 能力集成的信号——新 agent 类型先以 workflow 示例落地，显示其正快速集成新一代 agentic 能力
+
+---
+
 ## 2026-09-17 框架版本迭代速报
 
 > 数据：GitHub 未认证 API，2026-09-17 05:30 GMT+8 拉取。当日净增相对 09-16 快照，7 日累计相对 09-10 采集（7 仓全口径）。今日无新 release（ADK v2.9.1 已在 09-16 速报在册，本期补录其发布细节与后续修复）。Tavily 连续第三日超额（HTTP 432），新闻检索改走 Google News RSS + HN Algolia API + 原文抓取验证。

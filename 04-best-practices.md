@@ -2870,3 +2870,38 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 - 与 #56（Azure Agent 优化经济学）同一经济分析线：#56 讲上下文策略的正和博弈，本条给出顶层度量口径
 - 「被接受」的判定依赖 verification 权（Holloway 七权）——指标可算的前提是模型外验证器存在，与 #43/#58 同底座
+
+---
+
+## 67. LangChain / Harrison Chase：The Rise of Context Engineering——术语的定义性文献补录（2026-09-18 收录）
+
+**来源**：[LangChain Blog - The rise of "context engineering"](https://blog.langchain.dev/the-rise-of-context-engineering/)（2025-06-23，Harrison Chase）
+
+### 核心要点
+
+- 给出被广泛引用的定义：context engineering 是**「构建动态系统，以正确的格式在正确的时机提供正确的信息与工具，使 LLM 能合理完成任务」**——context engineering 一词流行的重要源头
+- 根因诊断：多数 agent 表现不佳的根因**不是 prompt 措辞，而是上下文供给系统失灵**——修 prompt 不如修系统
+- 阐述 LangGraph / LangSmith 如何支撑此类动态上下文系统（持久化、可观测）
+
+### 与既有条目的关系
+
+- 作为**基线文献**补录：本指南 #64（isolated/fork 双模式）与「四策略桶 Write/Select/Compress/Isolate」（2026-04-02 收录）等后续条目均建立在此文的概念地基上
+- 与 #14（Anthropic Effective Context Engineering）构成「Anthropic 实践版 + LangChain 系统版」的定义双子星；与 Karpathy「LLM 是新内核进程」类比（2026-03-30 收录）同期塑造了领域话语
+
+---
+
+## 68. Termdock：CLAUDE.md + AGENTS.md + SKILL.md 三层上下文架构——分层注入的定量依据（2026-09-18 收录）
+
+**来源**：[termdock.com - Context Engineering: CLAUDE.md + AGENTS.md Layer](https://www.termdock.com/blog/context-engineering-skill-layering)（Termdock 博客）
+
+### 核心要点
+
+- 提出三层上下文架构：**常驻层 CLAUDE.md（always-on）、跨工具层 AGENTS.md（cross-tool）、按需层 SKILL.md（on-demand）**——按加载时机分层控制注入量
+- 引用 Chroma 的 context rot 研究：**18 个前沿模型全部随输入变长而退化，200K 窗口在 50K 时即可显著降质**
+- 核心原则：「上下文窗口中的**每个 token 都在与推理能力竞争**」——分层不是为了整洁，而是保护推理预算
+
+### 与既有条目的关系
+
+- 与 #59（同站 Termdock CLAUDE.md/AGENTS.md 实战）**同站不同篇**：#59 讲「口头惯例 → 文件化 → Skills 化」演进路径，本条给出三层分层模型与 context rot 定量依据，二者互为表里
+- 与 #61（Skillzero：skill 默认不加载）互证：SKILL.md 作为按需层的具体实现即「默认不加载、真正需要时注入」
+- context rot 定量结论与 #14（Anthropic 最小高保真 token 集）、#34（Osmani 失败可读性）同底座：输入越长推理越弱是分层注入的物理理由

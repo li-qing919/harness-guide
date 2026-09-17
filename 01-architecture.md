@@ -856,4 +856,40 @@ harness 正是解决**可靠性/责任层**（reliability & accountability）的
 
 ---
 
-*更新时间：2026-09-17*
+## Phil Schmid：How Foundational Models Became Superhuman in Bash——专用工具边界的重估（2026-09-18 收录）
+
+**来源**：[philschmid.de - How Foundational Models Became Superhuman in Bash](https://www.philschmid.de/superhuman-bash)（2026-09-01，博客标签直接标注 Harness Engineering）
+
+### 核心论点
+
+- 作者每隔数月**从零重写一次 agent harness**，以检验工具边界随模型进步的变化；本次实验仅保留 **bash 与媒体查看器**两个模型侧工具
+- 结果：任务完成率与全工具 harness **持平**，且 agent 在复杂工作与验证中**跨越的工具边界更少**——前沿模型已能在数秒内合成一次性命令行程序，达到「超人级 Bash」水平
+- 结论：传统 read/edit/search 专用工具的价值需要重新评估——模型侧能力增强正在吸收 harness 侧的工具抽象层
+
+### 与既有条目的关系
+
+- 与 Vercel「少即是多」（04 #40，删 80% 工具反而更好）同一方向的**更强证据**：从「精简工具集」推进到「两个工具也够」
+- 与 Schmid 本人《Recursive Self-Improvement》（04 #47）同作者的 harness 重写实验系列；与 Latent Space「模型吸收 harness 能力」（09-15 补充）论点互证：harness 中曾必要的层正被模型能力内化
+- 对自建 harness 的启示：工具层设计应从「为模型补短板」转向「为模型留出合成空间」，bash 通用入口的价值权重上升
+
+---
+
+## Termdock：ClawHub 事件复盘——341 个恶意技能暴露的技能市场供应链安全问题（2026-09-18 收录）
+
+**来源**：[termdock.com - ClawHub Incident: 341 Malicious Skills Exposed](https://www.termdock.com/blog/clawhub-malicious-skills-incident)（安全类深度文章）
+
+### 核心事实
+
+- 对 **ClawHavoc 攻击活动**的复盘：Koi Security 研究员于 2026-02-01 审计 OpenClaw 官方技能市场 ClawHub，发现 2,857 个技能中 **341 个为恶意（11.9%）**，分发 Atomic macOS Stealer 窃密木马
+- 攻击者使用**仅一周树龄的 GitHub 账号**即绕过审核；后续波及范围已扩大至 **1,184+ 技能**
+- 事件直指 AI agent 技能市场的**信任与供应链安全机制缺失**：技能分发渠道规模化后，审核强度没有同步
+
+### 与既有条目的关系
+
+- 与 Agent Harness 安全新前沿（04 #46：AgentCore bypass、CoreBreak）构成 harness 安全的第三条战线：**运行时漏洞 → 管道绕过 → 分发供应链**
+- 与治理层工具化（04 #65 Blue 统一治理层、01 七权 governance 权）互补：治理层管「运行时权限」，技能市场还需要「入口审核 + 来源信任」机制
+- 现实注脚：Superpowers 288K star 的技能生态规模（02 速报）说明技能分发已成主流路径——供应链攻击面同步放大，安装前审计应成为 harness 标配环节
+
+---
+
+*更新时间：2026-09-18*
