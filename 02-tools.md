@@ -1163,6 +1163,48 @@ async function verifyUI() {
 
 ---
 
+## 2026-09-19 框架版本迭代速报
+
+> 数据：GitHub 未认证 API，2026-09-19 采集；当日净增相对 09-18 快照，7 日累计相对 09-11 采集（7 仓全口径）。今日 3 个新 release：Superpowers `v6.4.0`、OpenAI Agents SDK `v0.22.3`、Google ADK `v2.9.2`。采集方式：Tavily 搜索 API 当日仍返回 HTTP 432（配额异常）弃用，改用 curl 直接抓取信源 RSS/页面（OpenAI News RSS、LangChain Blog RSS、Phil Schmid、Termdock、Anthropic Engineering、Simon Willison）+ 未认证 GitHub REST API。Termdock 博客自 2026 年 4 月后无新文章；Anthropic Engineering 最新文章为 2026 年 5 月，均无新增。
+
+### Superpowers / obra (288,524 ⭐) ⭐ 今日新 release
+- 🆕 **`v6.4.0` 发布列车已于 2026-09-18 合并 main（PR #2331）**：新技能 `diagnosing-superpowers` 与 `proving-it-works-with-a-movie`；**执行计划重构为 Native（内联）执行，废除 batch-with-checkpoints 行为**（#2318）；写计划增加执行前审查、Subagent-driven 与 Native 交接（#2258）、Review Focus 段落（#2319）；brainstorming 改为「先意图后特性」；新增 OpenCode 2.0、Muse、Qwen Code 支持；紧随其后 #2335 回滚了 movie 技能的一个导入问题
+- ⭐ 当日 **+447**/天，7 日累计 **+3,864**（09-11 基线 284,660），**7 仓中断层第一**；v6.4.0 打破 08-12（v6.3.0）以来的发布静默
+- 值得一提：发布 PR 由 Claude Opus 5（Claude Code 2.1.277）提交、维护者 Jesse Vincent 审查——**agent 驱动发布的活案例**
+- 📌 **启示**：「生成 → 自验证」闭环成为 v6.4 核心叙事（proving-it-works 技能与 Cognition/Devin 自测同周）；Native 内联执行废除 checkpoint 批处理，是对执行计划层的大胆简化
+
+### DeerFlow / ByteDance (82,654 ⭐)
+- ⭐ 当日 **+63**/天，7 日累计 **+437**（09-11 基线 82,217）；`v2.0.0` (2026-06-25) 仍为最新 release
+- push 2026-09-18。近两日提交聚焦稳定性：修复 uploads 删除误删 symlink 目标（#5547）、线程删除时安全清理持久化记录（#5535）、memory 关闭时跨取消排空 shutdown workers（#5531）
+- 📌 **启示**：2.1.0-rc 线（09-18 速报在册）继续打磨——删除/关停路径的安全清理是长时程 harness 收尾可靠性的必修课
+
+### CrewAI (58,739 ⭐，crewAIInc/crewAI)
+- ⭐ 当日 **+33**/天，7 日累计 **+396**（09-11 基线 58,343）；`v1.15.22` (2026-09-16) 已在册
+- push 2026-09-18。近两日提交：llm_overlay 角色匹配容错（仅空白差异的角色也匹配，#7572）、依赖安全补丁（#7571）、输入插值改写 agent 角色后重新解析 llm_overlay（#7518）
+- 📌 **启示**：llm_overlay（按角色路由模型）进入打磨期——与 LangChain Jev「小模型决策位」模式（01 章 09-19 收录）同一分工范式
+
+### OpenAI Agents SDK (29,552 ⭐) ⭐ 今日新 release
+- 🆕 **`v0.22.3`（2026-09-17）**：条件审批与已验证工具参数对齐（#5066）、服务端托管 resume 时正确返回 tool-not-found（#4947）、Windows 宿主上保持 POSIX 命令路径（#4958）、并发异步 SQLite 会话启动修复（#4987）、tracing 不再缓存缺失的 API key（#5017）
+- ⭐ 当日 **+29**/天，7 日累计 **+220**（09-11 基线 29,332）
+- 与本周 OpenAI Agents API 发布（01 章 09-14 在册）形成「**SDK + 托管 API**」组合拳
+
+### Google ADK (21,571 ⭐) ⭐ 今日新 release
+- 🆕 **`v2.9.2`（2026-09-18）**：修复 OpenTelemetry 事件名在非 Agent Engine 平台被丢弃的问题
+- ⭐ 当日 **+5**/天，7 日累计 **+81**（09-11 基线 21,490）
+- 同期 main 分支亮点提交：新增 **EPHEMERAL 技能生命周期（仅存活一个 turn 的临时技能）**、**停止执行模型私有推理（private reasoning）中发现的代码**（安全加固）、MCP 会话失效后自动重建（均为 2026-09-18）
+- 📌 **启示**：EPHEMERAL 技能生命周期把「技能加载粒度」细化到 turn 级——与三层上下文架构（04 #68）的按需层同向；停止执行私有推理中的代码是推理链安全的首个框架级实现
+
+### BMAD-METHOD (53,194 ⭐)
+- ⭐ 当日 **+47**/天，7 日累计 **+326**（09-11 基线 52,868）；`v6.12.0` (2026-09-04) 仍为最新 release
+- push 2026-09-18。🆕 新增 `bmad-preview-ticketing` 技能与 `tickets.py` 运行时（#2884，09-18）；引导式 block review 替换原五步 walkthrough（#2866）
+- 📌 **启示**：ticketing 运行时化标志 BMAD 从「方法论文档」向「可执行工作流」演进再进一步
+
+### LangGraph / LangChain (41,900 ⭐)
+- ⭐ 当日 **+57**/天，7 日累计 **+491**（09-11 基线 41,409）；`langgraph-sdk 0.4.4` (2026-08-27) 仍为最新 release
+- push 2026-09-18。亮点：interrupt() `response_schema`（#8886，09-17，人工审批返回值结构化）已在册；自动生成 llms.txt 文档（#8922）、依赖安全升级（soupsieve 2.9，#8958）
+
+---
+
 ## 2026-09-18 框架版本迭代速报
 
 > 数据：GitHub 未认证 API，2026-09-18 采集。当日净增相对 09-17 快照，7 日累计相对 09-11 采集（7 仓全口径）。今日 1 个新 release：CrewAI `v1.15.22`。采集方式：Tavily 连续第四日超额（HTTP 432），DuckDuckGo HTML 版被 202 挑战页拦截、Bing 返回污染结果，均弃用；改用 agent-browser 无头浏览器直访信源（Anthropic Engineering、Phil Schmid、Termdock、LangChain Blog）+ 未认证 GitHub REST API。OpenAI Blog 因 Cloudflare 人机验证（"Just a moment..."）抓取失败，今日未收录 OpenAI 官方来源条目。

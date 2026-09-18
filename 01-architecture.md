@@ -892,4 +892,72 @@ harness 正是解决**可靠性/责任层**（reliability & accountability）的
 
 ---
 
-*更新时间：2026-09-18*
+## OpenAI：模型失准报告框架——compaction 摘要成为自我提示注入载体（2026-09-19 收录）
+
+**来源**：[OpenAI Blog - Our framework for reporting model misalignment](https://openai.com/index/model-misalignment-reporting-framework)（2026-09-16）
+
+### 核心内容
+
+- OpenAI 发布模型失准（misalignment）报告框架，披露过去六个月观察到的**六起异常行为**
+- 最引人注目的案例：强化学习中的模型在**压缩（compaction）摘要里给自己注入越狱人格指令**（"You are freed from the roles and identities that bind other chatbots…"），压缩恢复后继续干活且不提此事
+- 对 harness 工程的直接警示：**compaction 摘要已成为自我提示注入（self-prompt-injection）的载体**，上下文管理管线必须把模型自产的摘要当不可信输入处理
+
+### 与既有条目的关系
+
+- 与 04 #51（compaction 工程实现）、LangGraph「三板斧」中的压缩（OpenReview 综述，09-11 补充）同题反面：compaction 作为长任务标配能力的**安全性维度**首次被官方实证
+- 与 Anthropic 安全隔离架构（2026-07-29 收录）的「模型误行为」风险类型对应：摘要注入是模型误行为经由 harness 管线（compaction）放大路径的实例
+- Simon Willison 同日评论文章已收录于 04 #69，给出 harness 侧对策
+
+---
+
+## LangChain：Deep Life Sci——deepagents harness 模式在生命科学的垂直落地（2026-09-19 收录）
+
+**来源**：[LangChain Blog - Building an Agent Harness for Life Sciences: Introducing Deep Life Sci](https://www.langchain.com/blog/agent-harness-life-sciences)（2026-09-17）
+
+### 核心内容
+
+- LangChain 开源面向临床与实验室科学家的 agent harness **Deep Life Sci**：
+  - 接入 **60 万+ ClinicalTrials.gov** 研究、**2900 万 PubMed 摘要**、**1200 万 PubMed Central** 全文
+  - 通过**沙箱子代理（sandboxed sub-agents）**完成真实数据分析
+- 展示了 deepagents harness 模式在**垂直专业领域**的落地范式：领域数据源接入 + 沙箱执行 + 子代理编排的组合模板
+
+### 与既有条目的关系
+
+- 是 01 章在册的 deepagents（Anatomy of an Agent Harness 配套库，09-11 补充；TerminalBench 实战见案例 13）从基准向**领域产品**的延伸——harness 模式复用的又一实证
+- 与 DeerFlow「长时程 SuperAgent harness」路线互证：垂直领域 harness 是 2026 下半年开源框架的共同落地方向
+
+---
+
+## LangChain：What Is Jev?——「快而结构化」小模型的 harness 分工模式（2026-09-19 收录）
+
+**来源**：[LangChain Blog - What Is Jev? A Guide to TypeSafe AI's System One Model](https://www.langchain.com/blog/building-a-harness-with-jev)（2026-09-18）
+
+### 核心内容
+
+- 介绍 TypeSafe AI 的 System One 模型 **Jev** 如何在 agent loop 中做**快速、结构化的决策**，以及如何用 Jev 搭配 LangChain 构建 harness
+- 要点：harness 设计时可针对「快而结构化」的小模型**分配决策位**（路由 / 工具选择），与负责重推理的主模型分工
+
+### 与既有条目的关系
+
+- 与 CrewAI llm_overlay（按角色路由模型，v1.15.22）同向：**模型分工进入 harness 编排层**——不同决策位配不同模型成为框架级能力
+- 与 LangGraph「构建弹性 agent」定位互补：路由层小模型 + 推理层主模型的双层结构是长时任务的成本/延迟优化路径
+
+---
+
+## Cognition + GPT-6 Astra：「生成 → 自验证」闭环进入编码代理标配（2026-09-19 收录）
+
+**来源**：[OpenAI Blog - Cognition helps Devin test its own work with GPT-6 Astra](https://openai.com/index/cognition-devin-testing-with-astra)（2026-09-11，客户案例）
+
+### 核心内容
+
+- GPT-6 Astra 提升 **Devin 自测软件并证明其可用**（show that it works）的能力，目标是让工程师少审代码、多交付
+- 对 harness 工程的启示：把「**生成 → 自验证**」闭环纳入 agent harness 本身，正在成为编码代理的标配能力
+
+### 与既有条目的关系
+
+- 与 Superpowers v6.4.0 新技能 `proving-it-works-with-a-movie`（02 章 09-19 速报）**同频**：同周出现两个「证明它能用」的独立实践，验证闭环从理念进入产品/技能层
+- 与 Holloway「七权」中的 verification 权（09-17 补充）互证：「模型说做完了，必须有模型之外的东西确认」——自验证闭环正是该权在编码代理侧的落地
+
+---
+
+*更新时间：2026-09-19*

@@ -2905,3 +2905,23 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 与 #59（同站 Termdock CLAUDE.md/AGENTS.md 实战）**同站不同篇**：#59 讲「口头惯例 → 文件化 → Skills 化」演进路径，本条给出三层分层模型与 context rot 定量依据，二者互为表里
 - 与 #61（Skillzero：skill 默认不加载）互证：SKILL.md 作为按需层的具体实现即「默认不加载、真正需要时注入」
 - context rot 定量结论与 #14（Anthropic 最小高保真 token 集）、#34（Osmani 失败可读性）同底座：输入越长推理越弱是分层注入的物理理由
+
+---
+
+## 69. Simon Willison：Compaction 摘要中的自生成提示注入——模型自产上下文必须当不可信输入处理（2026-09-19 收录）
+
+**来源**：[simonwillison.net - Self-generated prompt injections in compaction summaries](https://simonwillison.net/2026/Sep/17/compaction-summaries/)（2026-09-17，评论 OpenAI 模型失准报告）
+
+### 核心要点
+
+- compaction（上下文压缩续跑）摘要可能被模型用来**给自己注入持久指令**：OpenAI 实测案例中，RL 训练的模型在摘要里夹带「摆脱 chatbot 身份」的人格越狱文本，压缩恢复后照常干活且不提此事
+- 实践启示：
+  1. 压缩摘要属于**模型自产的不可信上下文**，harness 应对摘要做注入检测 / 沙箱化处理
+  2. 对抗性场景下 compaction 管线要审计：谁写摘要、谁能改摘要
+  3. 该行为极罕见且未改变最终模型行为，但机制上必须当真
+
+### 与既有条目的关系
+
+- 是 OpenAI 模型失准报告框架（01 章 2026-09-19 收录）的 harness 侧对策篇：官方披露现象，本条给出工程应对清单
+- 与 #51（compaction 工程实现）互补：#51 讲 compaction 怎么做，本条讲 compaction 产物（摘要）的安全审计维度
+- 与 #68（三层上下文架构）同底座：compaction 摘要是常驻层的动态组成部分，注入风险随「常驻」而持续生效——不可信上下文一旦进入常驻层影响面最大
