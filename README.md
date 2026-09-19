@@ -97,6 +97,41 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-20 - 企业级 harness 选型横评 & Managed Deep Agents 权限方案 & Superpowers v6.4.1 正式出货
+
+**更新**：
+
+1. **Stacklok：Best Agent Harnesses for Enterprise AI in 2026（01-architecture 新增，2026-09-15）**
+   - 按类别横评企业级 agent harness：第一方（first-party）、IDE 内置、开源、Kubernetes 原生四大类，逐一对比隔离模型（isolation models）、权衡与选型标准
+   - 补齐指南的「企业选型」视角——此前条目以单篇方法论与框架动态为主，缺横向对照
+
+2. **LangChain：Connections——托管凭证与按调用者身份（01-architecture 新增，2026-09-13）**
+   - Managed Deep Agents 引入托管凭证 + per-caller identity：工具调用以终端用户身份而非平台身份执行
+   - 「代理持有谁的权限」这一 harness 核心问题产品化，审计与最小权限原则落地；deepagents 系列第三篇（模式 → 垂直 → 治理）
+
+3. **框架速报（2026-09-20）—— 7 仓较昨日快照对比；今日 1 个新 release**
+   - Superpowers — **288,801** ⭐（+277，断层第一）— 🆕 **v6.4.1**（09-19 正式发布）：昨日记录的 v6.4.0 系发布列车（合并 main）而非出货版，v6.4.1 才是首个实际 release；`proving-it-works-with-a-movie` 技能扣留待加固
+   - DeerFlow — **82,699** ⭐（+45）— 🆕 统一 capabilities 目录/插件配置/agent 选择（#5497）；**中间件层确定性 PII 脱敏**（#5527）
+   - LangGraph — **41,952** ⭐（+52）；BMAD — **53,238** ⭐（+44）；CrewAI — **58,775** ⭐（+36）；OpenAI Agents SDK — **29,563** ⭐（+11）；Google ADK — **21,578** ⭐（+7，v2.9.1/v2.9.2 连发均已在册）
+
+**去重说明**：今日素材最佳实践 3 条（Anthropic Effective Context Engineering → 04 #14、Harness Design long-running → 04 #43、Phil Schmid Context Engineering Part 2 → 04 #25）与新闻 3 条（Addy Osmani → 04 #34、Databricks → 01 章 09-06 补充、Phil Schmid Agent Harness 2026 → 04/05 在册）**均为往期参考文章已收录，全部跳过**；04-best-practices.md 今日无新条目（#69 仍为最新编号）。
+
+**信源说明**：Tavily 搜索 API 当日仍返回 HTTP 432（配额异常）弃用；改用 curl 抓取 DuckDuckGo HTML 搜索 + OpenAI 官方 RSS + 未认证 GitHub REST API（star 数与 09-19 采集记录对比）。
+
+**更新文件**：
+- `01-architecture.md` — 新增 Stacklok 横评 / LangChain Connections 两节，时间戳 → 2026-09-20
+- `02-tools.md` — 新增 2026-09-20 速报（Superpowers v6.4.1）
+- `README.md` — 追加本日志
+- `04-best-practices.md` — 无改动（素材最佳实践 3 条均为已收录文献）
+
+**关键洞察**：
+- 🏢 **企业 harness 进入「选型对照表」阶段**：Stacklok 按隔离模型分类横评四大类方案——harness 选型从社区经验走向结构化决策，隔离粒度是企业选型的核心分野
+- 🔑 **「代理以谁的身份执行」产品化**：Connections 把 per-caller identity 从应用层 DIY 变为托管平台能力，与 Blue（#65）同向——企业 harness 治理/身份维度平台化
+- 🛡️ **PII 脱敏下沉为框架中间件**（DeerFlow #5527）：「发给模型前先脱敏」从应用层最佳实践变为框架默认，数据安全进入 harness 管线层
+- 🏷️ **合并 ≠ 发布**：Superpowers v6.4.0 列车（已合并 main）实际以 v6.4.1 出货，且 movie 验证技能扣留待加固——跟踪框架动态要以 release tag 为准，「证明它能用」的技能本身也要先过验证关
+
+---
+
 ### 2026-09-19 - Compaction 摘要注入风险实证 & 垂直领域 harness 落地 & Superpowers v6.4.0 三连发版
 
 **更新**：

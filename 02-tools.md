@@ -1163,6 +1163,43 @@ async function verifyUI() {
 
 ---
 
+## 2026-09-20 框架版本迭代速报
+
+> 数据：GitHub 未认证 API，2026-09-20 采集；当日净增相对 09-19 快照，累计相对 09-11 基线（7 仓全口径，口径较前期顺延一日）。今日 1 个新 release：Superpowers `v6.4.1`（昨日记录的 v6.4.0 系发布列车，实际出货版为 v6.4.1）。采集方式：Tavily 搜索 API 当日仍返回 HTTP 432（配额异常）弃用，改用 curl 抓取 DuckDuckGo HTML 搜索 + OpenAI 官方 RSS + 未认证 GitHub REST API。
+
+### Superpowers / obra (288,801 ⭐) ⭐ 今日新 release
+- 🆕 **`v6.4.1` 正式发布（2026-09-19）**——v6.4.0 从未出货，v6.4.1 是该发布列车的首个实际 release：新技能 `diagnosing-superpowers`（诊断会话哪里出了问题）；**计划执行重构为 Native 内联执行，废除 batch-with-checkpoints**（昨日速报在册的 #2318 随版落地）；新增 OpenCode 2.0 与 Muse harness 支持；`proving-it-works-with-a-movie` 技能**被扣留，待加固后回归**
+- ⭐ 当日 **+277**/天，较 09-11 基线累计 **+4,141**（284,660），连续多日高涨幅、7 仓中断层第一；上一版本 v6.3.0（08-12）
+- 📌 **启示**：昨日「v6.4.0 合并 main」实为发布列车而非出货版本——**合并 ≠ 发布**，跟踪框架动态需以 release tag 为准；movie 技能扣留待加固，说明「证明它能用」的验证技能本身也要先过验证关
+
+### DeerFlow / ByteDance (82,699 ⭐)
+- ⭐ 当日 **+45**/天，较 09-11 基线累计 **+482**（82,217）；`v2.0.0` (2026-06-25) 仍为最新 release
+- push 2026-09-19，近两日提交密集：🆕 **统一 capabilities 目录、插件配置与 agent 选择**（#5497）；🆕 **中间件层新增确定性 PII 脱敏（面向模型绑定上下文）**（#5527）；RAGFlow 大文档批量校验修复（#5572）、extensions 服务跨取消的排空关闭修复（#5549）
+- 📌 **启示**：**PII 脱敏下沉为中间件层能力**——「发给模型前先脱敏」从应用层可选变为框架级默认；capabilities/插件/agent 选择三统一则是生态膨胀后的收敛动作，与 2.1.0-rc 线（09-18 速报在册）呼应
+
+### CrewAI (58,775 ⭐，crewAIInc/crewAI)
+- ⭐ 当日 **+36**/天，较 09-11 基线累计 **+432**（58,343）；`v1.15.22` (2026-09-16) 已在册
+- push 2026-09-19；v1.15.22 细节（别名连接标识、tracing 人类反馈与暂停事件、llm_overlay 按角色路由模型）见 09-18 速报
+
+### OpenAI Agents SDK (29,563 ⭐)
+- ⭐ 当日 **+11**/天，较 09-11 基线累计 **+231**（29,332）；`v0.22.3` (2026-09-17) 已在册
+- push 2026-09-18；与 09-10 发布的 Agents API（Codex harness 产品化）形成「SDK + 托管 API」组合
+
+### Google ADK (21,578 ⭐)
+- ⭐ 当日 **+7**/天，较 09-11 基线累计 **+88**（21,490）；素材再确认 **v2.9.2（09-18）/ v2.9.1（09-15）连发**，均已在册（09-19、09-16 速报）
+- push 2026-09-19；main 分支亮点（EPHEMERAL 技能生命周期、停止执行模型私有推理中的代码、MCP 会话失效自动重建）已在 09-19 速报在册
+
+### BMAD-METHOD (53,238 ⭐)
+- ⭐ 当日 **+44**/天，较 09-11 基线累计 **+370**（52,868）；`v6.12.0` (2026-09-04) 仍为最新 release
+- push 2026-09-18；bmad-preview-ticketing 技能与 tickets.py 运行时（#2884）、引导式 block review（#2866）已在册；另有 docs-site 依赖升级与 Astro AVIF 安全通告修复
+
+### LangGraph / LangChain (41,952 ⭐)
+- ⭐ 当日 **+52**/天，较 09-11 基线累计 **+543**（41,409）；`langgraph-sdk 0.4.4` (2026-08-27) 仍为最新 release
+- push 2026-09-18；interrupt() response_schema（#8886）、llms.txt 自动生成（#8922）已在册
+- 官方博客 Connections 新文（Managed Deep Agents 托管凭证与按调用者身份，01 章 2026-09-20 收录）——托管平台层的权限能力与开源 SDK 层的 HITL 契约同步演进
+
+---
+
 ## 2026-09-19 框架版本迭代速报
 
 > 数据：GitHub 未认证 API，2026-09-19 采集；当日净增相对 09-18 快照，7 日累计相对 09-11 采集（7 仓全口径）。今日 3 个新 release：Superpowers `v6.4.0`、OpenAI Agents SDK `v0.22.3`、Google ADK `v2.9.2`。采集方式：Tavily 搜索 API 当日仍返回 HTTP 432（配额异常）弃用，改用 curl 直接抓取信源 RSS/页面（OpenAI News RSS、LangChain Blog RSS、Phil Schmid、Termdock、Anthropic Engineering、Simon Willison）+ 未认证 GitHub REST API。Termdock 博客自 2026 年 4 月后无新文章；Anthropic Engineering 最新文章为 2026 年 5 月，均无新增。

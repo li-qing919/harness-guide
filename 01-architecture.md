@@ -960,4 +960,39 @@ harness 正是解决**可靠性/责任层**（reliability & accountability）的
 
 ---
 
-*更新时间：2026-09-19*
+## Stacklok：企业级 Agent Harness 横评——第一方 / IDE / 开源 / K8s 原生四类选型对照（2026-09-20 收录）
+
+**来源**：[Stacklok Blog - Best Agent Harnesses for Enterprise AI in 2026: Compared](https://stacklok.com/blog/best-agent-harnesses-for-enterprise-ai-in-2026/)（2026-09-15）
+
+### 核心内容
+
+- 按类别横评企业级 agent harness：**第一方（first-party）、IDE 内置、开源、Kubernetes 原生**四大类，逐一对比
+- 对比维度落在**隔离模型（isolation models）**、各方案权衡（trade-offs）与选型标准（selection criteria）
+- 对正在做 harness 技术选型的团队是一份**直接可用的对照表**
+
+### 与既有条目的关系
+
+- 补齐指南的「企业选型」视角：此前条目以单篇方法论（Anthropic/OpenAI/Phil Schmid）与框架动态（02 章速报）为主，缺横向对照——本条与 MarkTechPost 三层分工地图（09-17 补充）构成「分类学 + 选型」组合
+- 隔离模型维度与 Git Worktree 并行隔离（02 章）、DeerFlow 沙箱数据/agent 级隔离（09-17 速报）、Anthropic 安全隔离架构（07-29 收录）的实践可交叉参考：隔离粒度是企业选型的核心分野
+
+---
+
+## LangChain：Connections——托管凭证与按调用者身份传递，Managed Deep Agents 的权限边界方案（2026-09-20 收录）
+
+**来源**：[LangChain Blog - Connections: managed credentials and per-caller identity for Managed Deep Agents](https://www.langchain.com/blog/connections-managed-credentials-and-per-caller-identity-for-managed-deep-agents)（2026-09-13）
+
+### 核心内容
+
+- LangChain 为 Managed Deep Agents（deepagents 托管版）引入 **Connections**：托管凭证（managed credentials）+ **按调用者身份（per-caller identity）**传递
+- 解决 harness 工程的核心问题：**「代理持有谁的权限」**——工具调用不再以平台身份执行，而是以终端用户身份执行
+- 直接落点是**审计与最小权限原则**：每个动作可归因到真实用户，凭证不落地到代理侧
+
+### 与既有条目的关系
+
+- deepagents 系列第三篇：Anatomy of an Agent Harness（09-11 补充，模式）→ Deep Life Sci（09-19 收录，垂直落地）→ 本条（企业权限模型）——从模式到领域到治理的产品化路径完整
+- 与 Blue「One Harness 统一治理层」（04 #65）同向：企业级 harness 的治理/身份维度正在从应用层 DIY 变为**平台托管能力**
+- 与 Holloway 七权（09-17 补充）中的 verification 权互补：Connections 把「以谁的身份执行、谁能授权」这层身份权也纳入 harness 托管范围
+
+---
+
+*更新时间：2026-09-20*
