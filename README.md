@@ -97,6 +97,41 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-21 - harness 成本工程实证 & Superpowers 执行模式拐点 & 微软官方 harness 课程
+
+**更新**：
+
+1. **Notch：Cutting our agent's harness cost 10x（04 #70 新增，2026-09-18）**
+   - harness LLM（编排/路由/工具选择层）占总 AI 成本 **40%**；换便宜模型前先建三道评估门（离线回归集/金样本比对/线上灰度），任何一道不过即回滚
+   - 单视频处理成本近 10x 下降且产品行为未回归——给 harness 工程补上「成本工程」一课
+
+2. **Superpowers v6.4.1 执行模式拐点（01-architecture 新增，2026-09-19）**
+   - Native 内联执行取代子代理驱动开发（SDD），废除 batch-with-checkpoints——内联更省 token，执行拓扑成为 harness 最活跃的演进层
+
+3. **微软 .NET「用 C# 自建 Agent Harness」直播系列（01-architecture 新增，2026-09-17）**
+   - 平台厂商下场教「自建 harness 而非套框架」，harness 工程正式进入主流厂商课程体系
+
+4. **框架速报（2026-09-21）—— 7 仓较昨日快照对比；今日无新 release（7 仓最新 release 均已在册）**
+   - Superpowers — **289,220** ⭐（+419，断层第一，v6.4.1 出货次日持续发酵）；LangGraph — **42,027** ⭐（+75，AnyIO/anyio 依赖安全整肃）
+   - DeerFlow — **82,757** ⭐（+58，持久化层跨取消排空系列修复）；CrewAI — **58,824** ⭐（+49，tracing 可观测性增强）；BMAD — **53,278** ⭐（+40）；OpenAI Agents SDK — **29,583** ⭐（+20，shell 交互式审批写入文档）；Google ADK — **21,581** ⭐（+3，main 分支重构密集）
+
+**去重说明**：最佳实践 3 条中 2 条为已收录文献跳过——LangChain《Organizing Context in a Multi-Agent Harness》→ 04 #64（2026-09-17 收录，同 URL 同主题）、Anthropic Effective Context Engineering → 04 #14；新增 Notch 成本 10x 一条（#70）。新闻 5 条中 Limen（115 ⭐）与 Forcefield（6 ⭐）为早期项目，暂不收录（宁缺毋滥）。02 章链接 grep 无 joaomdmoura/crewAI 旧 URL 残留（全部已为 crewAIInc/crewAI）。
+
+**信源说明**：Tavily 搜索 API 返回 HTTP 432（配额耗尽）、内置 web_search 同样走 Tavily 亦失败，均弃用；改用 HN Algolia API + curl 直抓博客 + 未认证 GitHub REST API（star 数与 09-20 采集记录对比）。
+
+**更新文件**：
+- `01-architecture.md` — 新增 Superpowers 执行模式拐点 / 微软 C# harness 课程两节，时间戳 → 2026-09-21
+- `02-tools.md` — 新增 2026-09-21 速报（无新 release，7 仓 star 动态 + 提交级细节）
+- `04-best-practices.md` — 新增 #70（Notch harness 降本 10x 三道评估门）
+- `README.md` — 追加本日志
+
+**关键洞察**：
+- 💸 **harness 降本从「省 token」进入「换模型」阶段**：Notch 证明 harness 层可用便宜模型，前提是三道评估门——回归评估成为激进降本的前置设施
+- 🔀 **执行拓扑成为 harness 最活跃的演进层**：Superpowers 用 release 投票「内联取代 SDD」，与 LangChain isolated/fork 双参数同题——上下文隔离的收益开始被上下文复制的成本反超
+- 🏫 **harness 工程被平台厂商正规化**：微软官方直播教「自建 harness」，与 Stacklok 选型横评共同标志领域进入主流工程课程体系
+
+---
+
 ### 2026-09-20 - 企业级 harness 选型横评 & Managed Deep Agents 权限方案 & Superpowers v6.4.1 正式出货
 
 **更新**：

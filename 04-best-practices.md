@@ -2925,3 +2925,21 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 是 OpenAI 模型失准报告框架（01 章 2026-09-19 收录）的 harness 侧对策篇：官方披露现象，本条给出工程应对清单
 - 与 #51（compaction 工程实现）互补：#51 讲 compaction 怎么做，本条讲 compaction 产物（摘要）的安全审计维度
 - 与 #68（三层上下文架构）同底座：compaction 摘要是常驻层的动态组成部分，注入风险随「常驻」而持续生效——不可信上下文一旦进入常驻层影响面最大
+
+---
+
+## 70. Notch：harness 层降本 10x——三道评估门验证后的模型降级（2026-09-21 收录）
+
+**来源**：[Notch Blog - Cutting our agent's harness cost 10x without breaking the product](https://www.usenotch.ai/blog/cutting-our-agent-s-harness-cost-10x-without-breaking-the-product)（2026-09-18）
+
+### 核心要点
+
+- **harness LLM（负责编排、路由与工具选择的那层）占总 AI 成本 40%**——降本第一刀应砍向编排层而非任务层
+- 方法：**harness 层与任务层模型解耦**，harness 换更便宜模型；但换模型前必须先建立**三道评估门**——离线回归集、金样本（golden traces）比对、线上灰度——任何一道不过即回滚
+- 实践结果：单个视频处理总成本下降近 **10x**，且产品行为可验证地未回归
+
+### 与既有条目的关系
+
+- 给 harness 工程补上「成本工程」维度：#66（Cost per Accepted Task）定义了 harness 时代的经济指标，本条给出执行手段——「换便宜模型」的安全流程
+- 三道评估门与 #62（把重构经验写进 evals）同构：**回归评估是一切激进变更（换模型/重构执行模式）的前置设施**
+- 与 Superpowers v6.4.1 Native 内联执行（01 章 09-21 收录）互为印证：token/成本压力正同时驱动「执行模式重构」与「模型降级」两条降本路线

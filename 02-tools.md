@@ -1163,6 +1163,47 @@ async function verifyUI() {
 
 ---
 
+## 2026-09-21 框架版本迭代速报
+
+> 数据：GitHub 未认证 API，2026-09-21 采集；当日净增相对 09-20 快照，累计相对 09-11 基线（7 仓全口径）。**今日无新 release**（7 仓最新 release 均已在册：Superpowers v6.4.1、OpenAI Agents SDK v0.22.3、Google ADK v2.9.2、CrewAI v1.15.22、BMAD v6.12.0、DeerFlow v2.0.0、LangGraph sdk 0.4.4）。采集方式：Tavily 搜索 API 当日返回 HTTP 432（配额耗尽）弃用，改用 HN Algolia API + curl 直抓博客 + 未认证 GitHub REST API。CrewAI 旧地址 joaomdmoura/crewAI 再确认 301，本文档链接已全部为 crewAIInc/crewAI（grep 无残留旧 URL）。
+
+### Superpowers / obra (289,220 ⭐)
+- ⭐ 当日 **+419**/天（连续多日全列表最高增幅），较 09-11 基线累计 **+4,560**（284,660）；`v6.4.1` (2026-09-19) 已在册
+- push 2026-09-19；发布次日主分支进入整理期（最新提交即 release commit #2338），v6.4.1 出货持续发酵——Native 内联执行、诊断技能与 OpenCode 2.0/Muse 支持细节见 09-19/09-20 速报
+- 📌 **启示**：执行模式重构（SDD → Native 内联）成为增长叙事核心——单日 +419 再创近期新高，用户用 star 为「更省 token 的执行路径」投票（架构分析见 01 章 09-21 收录）
+
+### DeerFlow / ByteDance (82,757 ⭐)
+- ⭐ 当日 **+58**/天，较 09-11 基线累计 **+540**（82,217）；`v2.0.0` (2026-06-25) 仍为最新 release
+- push 2026-09-20，当日 4 个修复：🆕 **持久化层跨取消的排空（drain）系列**——postgres bootstrap unlock 与 schema connection close 均改为可跨取消安全完成（#5573/#5617）；前端 web_fetch 标题解析兼容空行/缩进开头的非法 HTML（#5560）；子代理远程验收识别空常规文件（#5559）
+- 📌 **启示**：修复集中在「取消/中断后的资源回收」——harness 可靠性的深水区不在正常路径而在取消路径，排空语义（drain）正在成为持久化层标配
+
+### CrewAI (58,824 ⭐，crewAIInc/crewAI)
+- ⭐ 当日 **+49**/天，较 09-11 基线累计 **+481**（58,343）；`v1.15.22` (2026-09-16) 已在册
+- push 2026-09-19：🆕 **tracing 可观测性大幅增强**——task span 同时记录声明输出格式与实际产出、agent span 携带 prompt 与答案、tool span 标注缓存命中状态；trace 结束后确保展示链接（#7593）；`llm_overlay` 角色/键匹配容忍空白差异（#7572）；soupsieve 安全补丁（#7571）
+- 📌 **启示**：tracing span 从「记录发生了什么」升级为「声明 vs 实际可对照」——可观测性开始校验输出契约，与 LangGraph 的 LangSmith trace 路由同向
+
+### OpenAI Agents SDK (29,583 ⭐)
+- ⭐ 当日 **+20**/天，较 09-11 基线累计 **+251**（29,332）；`v0.22.3` (2026-09-17) 已在册
+- push 2026-09-20：🆕 **文档新增宿主 shell 命令需交互式审批的要求**（#5107）；voice 场景 `_wait_for_event` 在 Python 3.10 正确抛出内置 TimeoutError（#5075）；agent 工具流式回调积压设上限防泄漏（#5106）
+- 📌 **启示**：「宿主 shell 需交互式审批」从社区最佳实践写进官方文档要求——人工在环正在成为 SDK 层的默认契约而非可选配置
+
+### Google ADK (21,581 ⭐)
+- ⭐ 当日 **+3**/天，较 09-11 基线累计 **+91**（21,490）；`v2.9.2` (2026-09-18) 已在册
+- push 2026-09-19；main 分支本周重构密集：`BaseLlmFlow._call_llm_async` 统一收敛到 `_with_caller_context`、工具解析步骤抽取为 tool_request_processors、指令中美元花括号/转义模式不再误匹配、恢复 `_BranchPath.parent` 辅助属性；v2.9.0 的模型自动故障转移与 LiveKit 语音见 09-16 速报
+- 📌 **启示**：无新 release 的重构周——flow 层收敛与工具解析抽取是在为下一个功能窗口铺内部地基，跟踪 main 分支比只盯 release 更能预判方向
+
+### BMAD-METHOD (53,278 ⭐)
+- ⭐ 当日 **+40**/天，较 09-11 基线累计 **+410**（52,868）；`v6.12.0` (2026-09-04) 仍为最新 release
+- push 2026-09-18，无新增提交（延续本周 `bmad-preview-ticketing` 技能 + `tickets.py` 运行时落地，#2884）
+- 📌 **启示**：发布后静默周，票券化工作流（preview-ticketing）仍在从方法论走向代码——方法论项目的价值兑现滞后于 star 增长
+
+### LangGraph / LangChain (42,027 ⭐)
+- ⭐ 当日 **+75**/天（7 仓中常规涨幅最高），较 09-11 基线累计 **+618**（41,409）；`langgraph-sdk 0.4.4` (2026-08-27) 仍为最新 release
+- push 2026-09-20：🆕 **依赖安全整肃**——CLI 示例 lockfile 中 AnyIO 漏洞修复（#9022），anyio 全线从 4.13/4.14 升至 4.15.1（#8996-#8998）；同期官方博客《Organizing Context in a Multi-Agent Harness》方法论文章已在册（04 #64）
+- 📌 **启示**：供应链整肃下沉到**示例 lockfile**——harness 框架的安全面从自身代码扩展到教学物料，示例即攻击面的意识开始普及
+
+---
+
 ## 2026-09-20 框架版本迭代速报
 
 > 数据：GitHub 未认证 API，2026-09-20 采集；当日净增相对 09-19 快照，累计相对 09-11 基线（7 仓全口径，口径较前期顺延一日）。今日 1 个新 release：Superpowers `v6.4.1`（昨日记录的 v6.4.0 系发布列车，实际出货版为 v6.4.1）。采集方式：Tavily 搜索 API 当日仍返回 HTTP 432（配额异常）弃用，改用 curl 抓取 DuckDuckGo HTML 搜索 + OpenAI 官方 RSS + 未认证 GitHub REST API。

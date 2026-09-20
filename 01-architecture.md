@@ -995,4 +995,37 @@ harness 正是解决**可靠性/责任层**（reliability & accountability）的
 
 ---
 
-*更新时间：2026-09-20*
+## Superpowers v6.4.1：Native 内联执行取代子代理驱动开发——执行模式的成本拐点（2026-09-21 收录）
+
+**来源**：[GitHub Release - obra/superpowers v6.4.1](https://github.com/obra/superpowers/releases/tag/v6.4.1)（2026-09-19）
+
+### 核心内容
+
+- v6.4.1（该发布列车首个实际出货版）把**计划执行重构为 Native 内联执行**，作为子代理驱动开发（SDD）的更廉价替代，并废除 batch-with-checkpoints 模式
+- 架构含义：执行同一份计划时，harness 可在「主上下文内联跑」与「派发子代理跑」两种拓扑间选择——superpowers 的实测结论是**内联更省 token**，SDD 的隔离收益不再总能覆盖其上下文复制的成本
+- 同版新增 `diagnosing-superpowers` 诊断技能（诊断会话哪里出了问题）与 OpenCode 2.0、Muse 两个 harness 平台支持
+
+### 与既有条目的关系
+
+- 与 #64（LangChain isolated/fork 双模式，04 章）同题反向：LangChain 在「隔离 vs 复用」间给出双参数，superpowers 直接用 release 投票「内联」——上下文拓扑选择正从理念争论变为可切换的产品决策
+- 289K star 规模的技能框架主动替换自己的核心执行模式，说明**执行拓扑是 harness 最活跃的演进层**；与 Stacklok 企业横评（09-20 收录）的「隔离模型」选型维度互相补充
+
+---
+
+## 微软 .NET：官方直播系列「用 C# 自建 Agent Harness」——harness 工程进入平台厂商课程体系（2026-09-21 收录）
+
+**来源**：[Microsoft .NET Blog - Build Your Own AI Agent Harness in C#: The MAF + Claw Live Series](https://devblogs.microsoft.com/dotnet/build-your-own-ai-agent-harness-in-csharp-the-maf-claw-live-series/)（2026-09-17）
+
+### 核心内容
+
+- 微软 .NET 团队推出 4 部分 Microsoft Reactor 直播系列，从「围绕 IChatClient 的单次调用」现场构建到**生产就绪、可观测、受治理的 agent**，全程基于 Microsoft Agent Framework harness
+- 信号意义：平台厂商下场教「自建 harness 而非套框架」——harness 工程从社区经验正式进入主流厂商的官方课程体系
+
+### 与既有条目的关系
+
+- 与 Anthropic《Anatomy of an Agent Harness》（09-11 补充）同为「拆解 harness 结构」教学线，但视角从框架团队转为**平台厂商的产品化布道**
+- 与 Stacklok 企业横评（09-20 收录）互补：横评回答「选哪个」，微软系列回答「自己怎么造」——采用与自建两条路径被同时正规化
+
+---
+
+*更新时间：2026-09-21*
