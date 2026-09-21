@@ -97,6 +97,18 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-22 - 概念科普主流化 & 环境侧 harness 分化 & 上下文工程方法论三连
+
+**更新**：
+
+1. **四条新闻收录（01-architecture 新增）**：Built In 概念科普登上主流工程媒体（模型智能不再是关键指标）；Google 开源 EnvHarness——环境侧 harness（训练/评估基础设施）成为独立工程分支（VentureBeat 正文为空，摘要基于标题）；AWS Strands 只交付 harness 层、模型大脑留白；HackerNoon 学科边界之辩。MarkTechPost「Harness vs Framework vs MCP」经核查为 09-17 已收录同一篇，跳过
+
+2. **三条最佳实践新增（04 #71-#73）**：Context is King——prompt 技巧被吸收为上下文工程的方法论谱系；TDS 意图连续性——压缩的对象是意图而非历史（付费墙，要点基于标题）；Atlassian 设计系统上下文 CLI——企业知识到 agent 上下文的供给侧管道
+
+3. **框架速报（2026-09-22）—— 1 个新 release：LangGraph v1.2.12（interrupt() 新增 response_schema，HITL 走向接口规约）+ sdk 0.4.5**
+   - Superpowers — **289,698** ⭐（+478，发布后第三天增幅不降反升）；LangGraph — **42,096** ⭐（+69）；DeerFlow — **82,814** ⭐（+57，symlink 竞态安全加固）
+   - 采集方式：Tavily 连续第四日 HTTP 432，Google News RSS 解码 + fetch_text 直抓 + GitHub REST API
+
 ### 2026-09-21 - harness 成本工程实证 & Superpowers 执行模式拐点 & 微软官方 harness 课程
 
 **更新**：

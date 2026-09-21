@@ -2943,3 +2943,53 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 给 harness 工程补上「成本工程」维度：#66（Cost per Accepted Task）定义了 harness 时代的经济指标，本条给出执行手段——「换便宜模型」的安全流程
 - 三道评估门与 #62（把重构经验写进 evals）同构：**回归评估是一切激进变更（换模型/重构执行模式）的前置设施**
 - 与 Superpowers v6.4.1 Native 内联执行（01 章 09-21 收录）互为印证：token/成本压力正同时驱动「执行模式重构」与「模型降级」两条降本路线
+
+---
+
+## 71. Context is King: Long Live Context Engineering——prompt 技巧被吸收为上下文工程（2026-09-22 收录）
+
+**来源**：[HackerNoon - Context is King: Long Live Context Engineering](https://hackernoon.com/context-is-king-long-live-context-engineering)（2026-09-18）
+
+### 核心要点
+
+- **Prompt engineering 没有消失，而是被吸收为 context engineering 的子集**：更好的模型降低了对 prompt 技巧的依赖，但不降低对清晰目标与相关上下文的需求
+- 演进路径梳理：few-shot、角色扮演、结构化输出、CoT、meta-prompting → 基于 in-context learning 与逐步推理等模型行为研究的**系统化上下文设计**
+- 面向 agentic 系统的上下文组织需要全新一套工程方法——不能简单沿用人机对话时代的技巧
+
+### 与既有条目的关系
+
+- 与 #55（MarkTechPost 四机制）、#64（LangChain 多 harness 上下文组织）同属上下文工程主线：本条补上「方法论谱系」视角——从 prompt 时代到 context 时代的演化地图
+- 「系统化上下文设计」为 04 章上下文类实践（#45/#51/#68/#69）提供了统一的上位框架：compaction、分层、注入防御都是该框架下的具体工序
+
+---
+
+## 72. TDS：Coding Agents 需要的是意图连续性，而非更长的历史（2026-09-22 收录）
+
+**来源**：[Towards Data Science - Coding Agents Don't Need Longer History — They Need Intent Continuity](https://towardsdatascience.com/coding-agents-dont-need-longer-history-they-need-intent-continuity/)（2026-09-18；⚠️ 正文被付费墙拦截，要点基于标题与栏目语境）
+
+### 核心要点
+
+- 反「无限上下文窗口」思路：长会话中堆历史不如维护**意图连续性**——把用户目标、约束、已做决策压缩为持续更新的意图状态，而非让模型在原始历史里打捞
+- 与 Anthropic 的 compaction、OpenAI Agents SDK 的 session compaction 路线互为印证：上下文管理的正确目标是「意图不丢」而非「历史全在」
+
+### 与既有条目的关系
+
+- 给 compaction 类实践（#69 Simon Willison 注入风险、01 章 OpenAI 失准报告框架）补上**目标层定义**：压缩的对象不是历史而是意图，评估压缩好坏的标准是意图保真度
+- 与 #70（Notch 成本工程）暗合：意图状态通常远小于原始历史——「压缩到意图」同时是质量手段与成本手段
+
+---
+
+## 73. Atlassian：从终端给 AI agent 供设计系统上下文——企业知识到 agent 上下文的管道（2026-09-22 收录）
+
+**来源**：[Atlassian Engineering Blog - Giving AI agents design system context from the terminal: what we learned building a CLI](https://www.atlassian.com/blog/ai-at-work/giving-ai-agents-design-system-context-from-the-terminal-what-we-learned-building-a-cli)（2026-09-16）
+
+### 核心要点
+
+- Atlassian 实战复盘：为终端里的 AI agent 提供设计系统（design system）上下文的 CLI 工具建设经验
+- 核心模式：把组织内部的设计规范、组件语义**打包成 agent 可按需检索的上下文源**——「企业知识 → agent 上下文」管道的落地范例
+- 终端优先的接口选择：与编码 agent 的工作场景（CLI/编辑器）对齐，上下文供给嵌入既有工作流而非另起门户
+
+### 与既有条目的关系
+
+- 与 #64（LangChain 多 harness 上下文组织）互补：LangChain 讲框架层怎么编排上下文，本条讲企业怎么**生产**要被编排的内容——供给侧实践
+- 为「上下文工程」（#71）补上组织维度：最难的不是技术而是把分散在 Figma/Confluence/代码库里的规范收敛为机器可检索源——知识工程先于提示工程

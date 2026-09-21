@@ -1028,4 +1028,70 @@ harness 正是解决**可靠性/责任层**（reliability & accountability）的
 
 ---
 
-*更新时间：2026-09-21*
+## Built In：What Is an Agent Harness?——harness 概念科普登上主流工程媒体（2026-09-22 收录）
+
+**来源**：[Built In - What Is an Agent Harness, and Why Do You Need to Understand It?](https://builtin.com/articles/agent-harness)（2026-09-21）
+
+### 核心内容
+
+- 面向工程管理者的概念科普：AI 正从聊天机器人转向跨工具/API/数据库执行动作的 agent，**模型智能不再是关键指标——真正决定生产可用性的是模型外围基础设施**
+- Agent harness 提供权限、工具访问、guardrails 与审计轨迹，把原始模型变成可控的运营系统；核心论断：「模型答错只是尴尬，agent 做错动作会造成合规与资金损失」
+- 信号意义：harness 概念从厂商博客与社区话语进入主流工程媒体的编辑内容
+
+### 与既有条目的关系
+
+- 与 tej.as 五要素定义文（09-15 补充）、LangChain Anatomy（09-11 补充）同属定义科普线，但受众从工程师转向**技术与工程管理者**——概念扩散进入组织决策层
+- 「做错动作的代价」论证与 Stacklok 企业横评（09-20 收录）互补：一个讲为什么需要，一个讲怎么选
+
+---
+
+## Google 开源 EnvHarness：环境侧 harness 成为独立工程分支（2026-09-22 收录）
+
+**来源**：[VentureBeat - Google's open source EnvHarness lets AI agents train against environments that evolve with them](https://venturebeat.com/orchestration/googles-open-source-envharness-lets-ai-agents-train-against-environments-that-evolve-with-them)（2026-09-21；⚠️ 正文抓取为空，摘要基于标题与栏目语境）
+
+### 核心内容
+
+- Google 开源 EnvHarness：让 AI agent 在**随训练进程动态演化的环境**中练习，而非静态固定环境
+- 架构含义：harness 概念正式分化出「环境侧」分支——运行时 harness（循环/工具/权限）之外，**训练与评估基础设施**成为平行的新工程领域
+
+### 与既有条目的关系
+
+- 与 imec-int 评测沙箱「偷看」实测（09-16 补充）同属环境侧：前者警示评测环境本身就是分数的一部分，本条把「环境演化」产品化
+- 与运行时 harness 各条目（执行循环/权限/状态）正交：一侧管 agent 怎么跑，一侧管 agent 在什么环境里练——两条线共同构成完整的 harness 工程版图
+
+---
+
+## AWS Strands：只交付 harness 层，大脑刻意留白（2026-09-22 收录）
+
+**来源**：[The AI Economy - AWS Built an AI Agent and Left Out the Brain on Purpose](https://theaieconomy.substack.com/p/strands-harness-ai-agent)（2026-09-21）
+
+### 核心内容
+
+- AWS Strands 的设计哲学：官方只交付 **harness 层**（执行循环、工具、状态管理），模型「大脑」刻意留白由用户自选
+- 与 OpenAI/Anthropic 捆绑自家模型的路线形成对照——**harness 与模型解绑**成为云厂商的差异化打法
+
+### 与既有条目的关系
+
+- 与 Databricks「Agent = Model + Harness」官方定义（09-06 补充）互为印证，但立场更激进：不只是概念解耦，而是产品上就不提供其中一半
+- 与 Stacklok 企业横评（09-20 收录）互补：横评按「第一方/IDE/开源/K8s 原生」分类，Strands 代表了另一种姿态——「纯 harness，模型自选」
+- 与微软 .NET 自建 harness 课程（09-21 收录）同向：平台厂商不再强推全家桶，转教/转卖「骨架」
+
+---
+
+## HackerNoon：Is Harness Engineering Software's Last Breath?——软件工程边界之辩（2026-09-22 收录）
+
+**来源**：[HackerNoon - Is Harness Engineering Software's Last Breath?](https://hackernoon.com/is-harness-engineering-softwares-last-breath)（2026-09-20）
+
+### 核心内容
+
+- 争议性观点文章：当 harness 自动化程度足够高，传统软件工程与 harness engineering 的边界开始消融——软件是否正在把自己「工程化到失业」
+- 价值不在结论而在**问题本身**：harness engineering 的学科身份（是软件工程的新分支，还是替代者）开始被公开讨论
+
+### 与既有条目的关系
+
+- 与 Adnan Masood「There Is No Wall. There Is a Harness.」（09-17 补充）同属边界叙事：Masood 反驳「能力墙」，本条追问「墙没了之后工程师去哪」——同一转型的两面
+- 与微软 .NET 课程（09-21 收录）形成有趣对照：一边是学科身份之辩，一边是厂商已开始规模化教学——实践跑在叙事前面
+
+---
+
+*更新时间：2026-09-22*
