@@ -2993,3 +2993,53 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 - 与 #64（LangChain 多 harness 上下文组织）互补：LangChain 讲框架层怎么编排上下文，本条讲企业怎么**生产**要被编排的内容——供给侧实践
 - 为「上下文工程」（#71）补上组织维度：最难的不是技术而是把分散在 Figma/Confluence/代码库里的规范收敛为机器可检索源——知识工程先于提示工程
+
+---
+
+## 74. Splunk .conf26（Omdia）：AI SRE 的上下文分层供给——context 与 control 必须成对出现（2026-09-23 收录）
+
+**来源**：[TechTarget/Omdia - Splunk .conf26: Context, control for Cisco's AI agents at scale](https://www.techtarget.com/it-infrastructure/opinion/Splunk-conf26-Context-control-for-Ciscos-AI-agents-at-scale)（2026-09-17）
+
+### 核心要点
+
+- 以 AI SRE agent 为例的「上下文分层供给」范式——agent 自主决策需要三层上下文：①核心遥测（metrics/logs/traces/events）②情境数据（代码发布、应用依赖、配置、身份信息）③运营与业务上下文（工单、runbook、SOP、成本与用量）
+- 核心原则：**context + control 成对出现**——给 agent 行动所需的上下文，同时用企业既有平台控制它能做什么/不能做什么
+- 现实约束：现有企业平台都不是为「可观察、可解释、可控」的 agent 设计的，改造数据层是 agent 落地的前提
+
+### 与既有条目的关系
+
+- 与 #71（Context is King）同属上下文工程主线，本条给出**企业落地版的三层供给清单**：遥测/情境/业务上下文的分层与 01 章 LangChain Anatomy 的系统提示/工具/记忆分层互补——一个讲 agent 内部结构，一个讲企业怎么喂数
+- 「control 成对」与 TechTarget CIO 治理文（01 章 09-23 收录）同频：两侧都在纠正「只给上下文不设边界」或「只设边界不给上下文」的单腿走路
+- 与 #73（Atlassian 设计系统 CLI）呼应：Splunk 讲 SRE 域的 runbook/SOP 供给，Atlassian 讲设计域的规范供给——「企业知识 → agent 上下文」模式跨域复制
+
+---
+
+## 75. CMSWire：Context Engineering 取代静态用户画像——动态上下文理念外溢到 CX（2026-09-23 收录）
+
+**来源**：[CMSWire - Context Engineering Is Replacing Static Customer Profiles](https://www.cmswire.com/customer-experience/what-is-context-engineering-and-why-does-it-beat-personalization/)（2026-09-21；⚠️ 正文未能抓取，要点基于 RSS 标题与栏目语境）
+
+### 核心要点
+
+- context engineering 理念外溢到客户体验（CX）领域：personalization 时代的**静态用户画像**正被按交互**实时组装的动态上下文**取代
+- 模式差异：为每次交互拼装当下情境（意图、历史、环境信号），而非依赖写死的画像标签——与编码 agent 侧「意图连续性优于长历史」（#72）异曲同工
+
+### 与既有条目的关系
+
+- 与 #72（TDS 意图连续性）跨域印证：工程侧的「压缩到意图」与 CX 侧的「动态拼装替代静态画像」是同一原则——**状态按需构造，而非预先固化**
+- 信号价值大于技术增量：上下文工程词汇已从工程圈扩散到营销/客户体验媒体，概念完成跨行业泛化（与 Built In 科普、TechTarget CIO 文同一扩散曲线）
+
+---
+
+## 76. LinkedIn（InfoQ 演讲）：组织级上下文层——用 MCP 把企业知识基础设施化（2026-09-23 收录）
+
+**来源**：[InfoQ - Context Engineering at LinkedIn: How We Built an Organizational Context Layer for AI Agents with MCP](https://www.infoq.com/presentations/linkedin-context-engineering/)（2026-09-09；⚠️ 演讲页正文未能抓取，要点基于标题与主题）
+
+### 核心要点
+
+- LinkedIn 工程实践：不逐个 agent 喂上下文，而是建设**组织级上下文层**——通过 MCP 协议把企业内部知识统一暴露为 agent 可按需检索的上下文源
+- 路径定位：「企业知识 → agent 上下文」的基础设施化——上下文供给从各团队的临时管道收敛为公司级平台能力
+
+### 与既有条目的关系
+
+- 与 #73（Atlassian 设计系统 CLI）同属一个趋势的两端：Atlassian 是单域（设计系统）的终端管道，LinkedIn 是公司级（MCP 统一协议）的平台层——企业上下文供给的「点 → 面」演进
+- 与 #64（LangChain 多 harness 上下文组织）互补：LangChain 解决框架内怎么编排，LinkedIn 解决组织怎么持续生产与供给上下文——供给侧的平台化答案

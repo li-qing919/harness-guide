@@ -1163,6 +1163,49 @@ async function verifyUI() {
 
 ---
 
+## 2026-09-23 框架版本迭代速报
+
+> 数据：GitHub 未认证 API，2026-09-23 采集；当日净增相对 09-22 快照，累计相对 09-11 基线（7 仓全口径）。**今日无新 release**（7 仓最新 release 均已在册：Superpowers v6.4.1、LangGraph v1.2.12、OpenAI Agents SDK v0.22.3、Google ADK v2.9.2、CrewAI v1.15.22、BMAD v6.12.0、DeerFlow v2.0.0，2.1.0-rc0 亦为已记）。采集方式：Tavily 搜索 API 连续第五日 HTTP 432，Google News RSS（gnews_rss.py 解码）+ fetch_text 直抓 + 未认证 GitHub REST API。CrewAI 仓库地址维持 crewAIInc/crewAI，无需变更。
+
+**Star 增幅排名（日）**：Superpowers +481 ≫ LangGraph +51 > CrewAI +50 > DeerFlow +45 > BMAD +34 > OpenAI SDK +24 > ADK +12
+
+### Superpowers / obra (290,179 ⭐)
+- ⭐ 当日 **+481**/天，连续多日全列表最高增幅，**突破 29 万**；较 09-11 基线累计 **+5,519**（284,660）；`v6.4.1` (2026-09-19) 已在册
+- 仓库最近推送 09-22，无新 release；v6.4.1 的 Native 内联执行、诊断技能与 OpenCode 2.0/Muse/Qwen Code 支持见 09-19/09-20 速报
+- 📌 **启示**：发布后第四天单日 +481 再创新高——「更省 token 的执行路径」叙事持续自传播，与 SoL-Pi（01 章 09-23 收录）的自动 harness 优化互为成本拐点证据
+
+### LangGraph / LangChain (42,147 ⭐)
+- ⭐ 当日 **+51**/天，较 09-11 基线累计 **+738**（41,409）；`v1.2.12` (2026-09-21) 已在册
+- push 2026-09-22，CLI 侧新特性：🆕 **`langgraph deploy` 改用 `agent_id` 与 `environment` 参数**（#9055）；自托管部署新增 `--image-uri` 标志（#8482）
+- 📌 **启示**：部署命令从「指向一个图」演进为「指向一个带环境契约的 agent」——部署面开始以 agent 为一等公民
+
+### CrewAI (58,919 ⭐，crewAIInc/crewAI)
+- ⭐ 当日 **+50**/天，较 09-11 基线累计 **+576**（58,343）；`v1.15.22` (2026-09-16) 已在册
+- push 2026-09-22，聚焦 eval CLI：🆕 **`crewai eval` 移入 experimental**（#7707）；eval 完整打印评分覆盖的 areas（#7701）；前一日落地 `crewai eval` 经 AMP 评估最近一次 traced run（#7649）
+- 📌 **启示**：tracing（09-19 速报）之后紧接着 eval CLI 成型——「可观测 → 可评估」的度量闭环在单仓内快速走完
+
+### DeerFlow / ByteDance (82,859 ⭐)
+- ⭐ 当日 **+45**/天，较 09-11 基线累计 **+642**（82,217）；`v2.0.0` (2026-06-25) 仍为最新 release，2.1.0-rc0 推进中
+- push 2026-09-22：🆕 **user-scoped 安装时 skills 内容扫描改为从自身 config 解析**（#5703）；image-search 暴露颜色与 license_image 过滤器（#5723）；对齐 Vercel 部署名与挂载脚本路径（#5656）
+- 📌 **启示**：skills 内容扫描与安装作用域解耦——多用户宿主下技能资产的隔离边界正在被逐仓收紧
+
+### BMAD-METHOD (53,349 ⭐)
+- ⭐ 当日 **+34**/天，较 09-11 基线累计 **+481**（52,868）；`v6.12.0` (2026-09-04) 仍为最新 release
+- push 2026-09-22，大动作：🆕 **模块迁移机制上线**（含 method 模块 v6→v7 迁移，#2935）；ticketing 系统升级——stable id、build 拥有的状态流转、ticket 内嵌 plan section（#2934）；前一日落地 tickets.toml、跨 epic blockers、审批前依赖检查
+- 📌 **启示**：v6→v7 迁移通道意味着方法论大版本可以「原位升级」——工程化程度向框架看齐，preview-ticketing 走向正式基建
+
+### OpenAI Agents SDK (29,639 ⭐)
+- ⭐ 当日 **+24**/天，较 09-11 基线累计 **+307**（29,332）；`v0.22.3` (2026-09-17) 已在册
+- push 2026-09-22，当日为依赖维护（runloop-api-client 1.32、httpx2 ≥2.13、pyjwt ≥2.14 等）
+- 📌 **启示**：release 后静默期以依赖整备为主，观察窗口继续留在 main 分支
+
+### Google ADK (21,602 ⭐)
+- ⭐ 当日 **+12**/天，较 09-11 基线累计 **+112**（21,490）；`v2.9.2` (2026-09-18) 已在册（v2.9.1 自适应思考见 09-16 速报）
+- push 2026-09-22：重写第三方集成的 unit guides 文档；`stop_streaming` 正确传播外层 CancelledError；sessions 避免运行时索引误删并防护并发建索引
+- 📌 **启示**：取消传播与并发索引防护——与 DeerFlow 的 drain 系列同题，各仓都在补「中断路径的正确性」
+
+---
+
 ## 2026-09-22 框架版本迭代速报
 
 > 数据：GitHub 未认证 API，2026-09-22 采集；当日净增相对 09-21 快照，累计相对 09-11 基线（7 仓全口径）。今日 1 个新 release：LangGraph `v1.2.12`（2026-09-21，同日 sdk 0.4.5——09-21 采集时点未及）。其余 6 仓最新 release 均已在册（Superpowers v6.4.1、OpenAI Agents SDK v0.22.3、Google ADK v2.9.2、CrewAI v1.15.22、BMAD v6.12.0、DeerFlow v2.0.0，2.1.0-rc0 亦为昨日已记）。采集方式：Tavily 搜索 API 连续第四日 HTTP 432，改用 Google News RSS（gnews_rss.py 解码）+ fetch_text 直抓 + 未认证 GitHub REST API。CrewAI 仓库地址维持 crewAIInc/crewAI，无需变更。

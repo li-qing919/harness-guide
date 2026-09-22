@@ -97,6 +97,34 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-23 - Strands Harness 正式开源 & SoL-Pi 自动 harness 优化 & 治理/咨询视角进场
+
+**更新**：
+
+1. **新闻收录（01-architecture 新增 3 节 + Strands 官方发布合并追加）**：NVIDIA SoL-Pi——auto-research 循环自动发现 harness 层效率机制，token 流量降 44.7–49%（harness 成为可被 AI 自我优化的控制点）；TechTarget CIO 治理视角——53% 组织遭遇 agent 越权、IAM 原则直接映射到 agent（五组件：审计/人类监督/IAM/可观测/guardrails）；FTI Consulting——vibe coding 原型快但投产系统性失效，harness engineering 是原型到生产的桥。AWS Strands Harness 正式开源（Harbor 六基准平均 token 成本 -28%、准确率持平；Terminal-Bench 2.1 对决 $56.29/69.7% vs Claude Code $248.05/61.8%）以追加小节并入 09-22 已有 Strands 节，未另开重复小节
+
+2. **三条最佳实践新增（04 #74-#76）**：Splunk .conf26（Omdia）——AI SRE 三层上下文供给 + context/control 成对原则；CMSWire——静态用户画像被按交互实时组装的动态上下文取代（⚠️ 正文被拒，基于 RSS 标题/摘要）；InfoQ LinkedIn——组织级上下文层经 MCP 基础设施化（⚠️ 正文被拒，基于标题与主题）
+
+3. **框架速报（2026-09-23）——今日无新 release（7 仓最新 release 均已在册）**
+   - Superpowers — **290,179** ⭐（+481，发布后第四天再创新高，突破 29 万）；LangGraph — **42,147** ⭐（+51，deploy CLI 以 agent_id/environment 参数化）；CrewAI — **58,919** ⭐（+50，eval CLI 移入 experimental）
+   - DeerFlow — **82,859** ⭐（+45，skills 内容扫描按安装作用域解析）；BMAD — **53,349** ⭐（+34，模块迁移机制上线 v6→v7）；OpenAI SDK — **29,639** ⭐（+24，依赖维护）；Google ADK — **21,602** ⭐（+12，取消传播与并发索引防护）
+   - 采集方式：Tavily 连续第五日 HTTP 432，Google News RSS 解码 + fetch_text 直抓 + GitHub REST API
+
+**去重说明**：Strands 正式开源新闻按计划并入 09-22 已有节（追加「正式开源跟进」小节）；「其他值得关注」3 条（arcweb 物流 / MarkTechPost 本地 LLM harness 盘点 / DevOps.com Harness 公司 Agentic Era 平台重塑）均为未展开线索，暂不收录（宁缺毋滥）；CMSWire/InfoQ/TDS 正文被拒条目已在正文标注依据来源。
+
+**信源说明**：Tavily 搜索 API 连续第五日 HTTP 432（配额耗尽）；采集改用 Google News RSS（gnews_rss.py 解码）+ fetch_text 直抓 + 未认证 GitHub REST API（star 数与 09-22 采集记录对比）。
+
+**更新文件**：
+- `01-architecture.md` — 新增 SoL-Pi / TechTarget CIO / FTI Consulting 三节，Strands 节追加正式开源小节，时间戳 → 2026-09-23
+- `02-tools.md` — 新增 2026-09-23 速报（无新 release，7 仓 star 动态 + 提交级细节）
+- `04-best-practices.md` — 新增 #74-#76（Splunk 分层供给 / CMSWire 动态上下文 / LinkedIn 组织级上下文层）
+- `README.md` — 追加本日志
+
+**关键洞察**：
+- 🤖 **harness 优化本身开始被自动化**：SoL-Pi 用 auto-research 循环让 AI 自己改 harness（token -44.7~49%），与 Strands 官方基准（-28%）、Superpowers 内联执行同证——执行/harness 层是当前 ROI 最高的优化面，且优化主体正从人转向 AI
+- 🏛️ **harness 话语完成三级跳**：工程社区（定义/机制）→ IT 管理层（CIO/IAM/治理）→ 咨询业（vibe coding 到生产的桥）——同一周内治理与商业叙事进场，采购决策语言成形
+- 🧱 **企业上下文供给走向平台化**：Atlassian（单域 CLI）→ LinkedIn（组织级 MCP 层）→ Splunk（三层供给 + control 成对）——「企业知识 → agent 上下文」从点状实践收敛为基础设施模式
+
 ### 2026-09-22 - 概念科普主流化 & 环境侧 harness 分化 & 上下文工程方法论三连
 
 **更新**：

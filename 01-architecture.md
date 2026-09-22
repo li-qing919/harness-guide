@@ -1076,6 +1076,15 @@ harness 正是解决**可靠性/责任层**（reliability & accountability）的
 - 与 Stacklok 企业横评（09-20 收录）互补：横评按「第一方/IDE/开源/K8s 原生」分类，Strands 代表了另一种姿态——「纯 harness，模型自选」
 - 与微软 .NET 自建 harness 课程（09-21 收录）同向：平台厂商不再强推全家桶，转教/转卖「骨架」
 
+### 正式开源跟进：Strands Harness 发布，官方基准「平均 token 成本 -28%、准确率持平」（2026-09-23 追加）
+
+**来源**：[MarkTechPost](https://www.marktechpost.com/2026/09/21/aws-strands-agents-team-releases-strands-harness/)（2026-09-21）；另见 [The Register](https://www.theregister.com/ai-and-ml/2026/09/21/aws-bolts-together-open-source-agent-harness-says-it-sips-fewer-tokens-than-rivals/5297915)、[SiliconANGLE](https://siliconangle.com/2026/09/21/aws-debuts-strands-harness-an-open-source-ai-agent-that-can-be-deployed-in-any-environment/)、[The Stack](https://www.thestack.technology/aws-targets-ai-cost-worries-with-open-source-agent-harness/)
+
+- 次日多家媒体跟进：Strands 团队正式开源 harness——「完全组装好」的通用 agent harness（非编码专用），Python/TypeScript 双语言、Apache 2.0，`create_harness()` 一行起步；内置 shell/文件/Web 工具、长期记忆、会话恢复、子任务委派与 Agent Skills 加载
+- 官方基准（Harbor 评估框架；6 基准：ALFWorld、ContextBench、GAIA、WebShop、τ²-bench、Terminal-Bench 2.1；对比 Claude Code、Codex、oh-my-pi、OpenCode、DeepSeek Harness）：**平均 token 成本低 28%，准确率持平**
+- Terminal-Bench 2.1 同模型（Claude Fable 5）对决赛：Strands harness $56.29/69.7% vs Claude Code $248.05/61.8%（便宜 77% 且高 7.9 分）；DeepSeek Harness 更便宜（$40.30）但准确率低 10.2 分
+- 上下文工程细节：大体积工具结果卸载到文件、缓存复用请求片段——与 04 章 compaction/offloading 主线（#51/#55）同套手法；「成本优势 + 模型自选」使本节 09-22 的设计哲学叙事有了可核对的基准证据
+
 ---
 
 ## HackerNoon：Is Harness Engineering Software's Last Breath?——软件工程边界之辩（2026-09-22 收录）
@@ -1094,4 +1103,57 @@ harness 正是解决**可靠性/责任层**（reliability & accountability）的
 
 ---
 
-*更新时间：2026-09-22*
+## NVIDIA SoL-Pi：auto-research 循环自动优化 harness——token 流量最多降 49%（2026-09-23 收录）
+
+**来源**：[MarkTechPost - NVIDIA Researchers Have Released SoL-Pi](https://www.marktechpost.com/2026/09/21/nvidia-researchers-have-released-sol-pi/)（2026-09-21）
+
+### 核心内容
+
+- NVIDIA 联合 NTU/MIT 发布 SoL-Pi：针对开源 Pi 编码 agent 的 4 个 harness 层效率机制——**由 AI 通过 auto-research 循环自动发现**：研究 AI 观察执行 trace → 提议 harness 改动 → 测试验证；搜索覆盖 152 个方向、6 大家族（context、progress、tools、delegation、prompt/policy、improvement/evaluation）
+- 量化结果：51 任务 EdgeBench 上 token 流量降 **44.7%–49.0%**、API 成本降约 33%，GPT-5.6 Sol 与 Opus 5 上分数基本持平；MIT 协议开源在 NVlabs，可跑在未修改的 Pi 0.85.1 上
+- 核心理念：**不降单 token 成本，而是降任务消耗的 token 总量——harness 是控制点**
+
+### 与既有条目的关系
+
+- 与 Notch 成本工程（04 #70）互补：Notch 靠人工三道评估门换模型降本，SoL-Pi 把「找 harness 优化点」本身也交给自动化循环——成本工程进入自动搜索阶段
+- 与 Superpowers v6.4.1 Native 内联执行（09-21 收录）同向：执行路径/harness 改动是当前性价比最高的优化层，且优化主体开始从人转向 AI
+- 「harness 是控制点」与 Adnan Masood「There Is No Wall. There Is a Harness.」（09-17 补充）互为理论与实证
+
+---
+
+## TechTarget：Why CIOs should invest in agent harnesses——治理视角把 IAM 原则映射到 agent（2026-09-23 收录）
+
+**来源**：[TechTarget - Why CIOs should invest in agent harnesses](https://www.techtarget.com/it-strategy/feature/Why-CIOs-should-invest-in-agent-harnesses)（2026-09-22）
+
+### 核心内容
+
+- 面向 CIO 的治理叙事：agent harness 即 agent 的**安全/治理/可观测层**；引用 Cloud Security Alliance 调查——53% 组织的 AI agent 偶尔或经常越权，47% 遭遇过涉及 AI agent 的安全事件
+- 核心主张（Sabre CIO Joe DiFonzo 与微软架构师）：**像管理人类员工一样管理 agent**——把既有 IAM（身份、权限、数据访问）原则直接映射到 agent，而非另起炉灶
+- harness 五大组件清单：审计轨迹、人类监督、IAM、可观测性、安全 guardrails；结论：控制不是减速带，而是「安全地加速创新」的前提
+
+### 与既有条目的关系
+
+- 与 Built In 概念科普（09-22 收录）同一受众迁移轨迹：harness 话语从工程社区进入 IT 管理层，采购/治理决策开始被这个概念组织
+- 五组件清单与 Holloway「七权」（09-17 补充）互为镜像：一个从设计权责出发，一个从企业控制面出发——两份清单可拼出 harness 治理完形
+- 「像管理员工一样管理 agent」为 05 章企业案例补上组织与合规维度的注脚
+
+---
+
+## FTI Consulting：Vibe Coding vs. Production——harness engineering 是原型到生产的桥（2026-09-23 收录）
+
+**来源**：[FTI Consulting - Vibe Coding vs. Production: Why Harness Engineering Matters](https://www.fticonsulting.com/insights/articles/vibe-coding-production-why-harness-engineering-matters)（2026-09-22）
+
+### 核心内容
+
+- 咨询视角的落地复盘：vibe coding 在原型阶段极速（压缩创新周期、扩大参与面、释放工程师到高价值问题定义），但**推向大规模生产时系统性失效**
+- 引用大规模分析：AI 生成代码缺陷率显著高于人写代码（逻辑错误、安全漏洞、结构不一致），且常能通过初测、在生产环境才暴露
+- 风险结构性放大的场景：非技术用户使用时，「能跑」被误当「正确」的 false confidence；harness engineering 被定位为从原型到生产的桥
+
+### 与既有条目的关系
+
+- 与 HackerNoon 学科边界之辩（09-22 收录）对照阅读：一个问「工程会不会被 harness 取代」，一个答「没有 harness 工程就到不了生产」——原型繁荣与生产严谨的分野正是学科价值所在
+- 与 Built In（09-22）/TechTarget CIO（本日）构成媒体链路：概念科普 → 治理采购 → 落地咨询，harness engineering 的商业叙事闭环成形
+
+---
+
+*更新时间：2026-09-23*
