@@ -97,6 +97,34 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-24 - RRSI 正则化递归自我改进 & BCG「操作系统」定位 & LangGraph CLI 出货
+
+**更新**：
+
+1. **最佳实践新增（04 #77）**：RRSI（alphaXiv 2609.24972）——agent 反复改写自己的 harness（提示/工具/执行逻辑），正则项抑制 benchmark 过拟合、评估噪声与推理成本膨胀；与在册 Phil Schmid RSI 三层分类（#47）同属 model–harness co-evolution 脉络，把「最容易的改进目标是 harness」从分类学推进为形式化框架
+
+2. **新闻收录（01-architecture 新增 BCG 节 + Strands 节一句补充）**：BCG 把 harness 定位为企业级 agentic AI「操作系统」——规模化取决于工具供给/上下文管理/安全控制/编排/可观测性五件套（⚠️ 正文抓取被拒，基于标题与刊物语境，已标注建议人工复核）；与 09-23 FTI 相邻成对，「咨询视角进场」从个案变为行业动作。Strands 节补充 bundled skills 自动生成五云部署配置一句
+
+3. **框架速报（2026-09-24）——今日 1 个新 release：LangGraph `langgraph-cli 0.4.32`**
+   - Superpowers — **290,640** ⭐（+461，连续最高增幅；仓库零新提交仍高增长）；DeerFlow — **82,909** ⭐（+50，extensions v0.2.3 + 十页开发者手册）；LangGraph — **42,192** ⭐（+45，CLI 0.4.32：自托管独立 listener）
+   - BMAD — **53,392** ⭐（+43，v7 开发转入侧枝）；CrewAI — **58,953** ⭐（+34，pin instructor 保 Mode.TOOLS）；OpenAI SDK — **29,659** ⭐（+20，apply_patch 操作级审批）；Google ADK — **21,615** ⭐（+13，[openai] extra + clientInfo 握手）
+   - 采集方式：Tavily 连续第六日 HTTP 432，Google News RSS 解码 + fetch_text 直抓 + GitHub REST API
+
+**去重说明**：AWS Strands 正式开源细节（bundled skills 云配置生成一句除外）已并入 09-23 Strands 节，不再重复；EnvHarness（09-22 在册）、superhuman-bash（09-18 在册）、HackerNoon Last Breath（09-22 在册）、Anthropic context engineering（04 在册两处）、Phil Schmid 8 Tips（04 #42）、Phil Schmid RSI 分类（04 #47，RRSI 条目引用未重复展开）均已在库。
+
+**信源说明**：Tavily 搜索 API 连续第六日 HTTP 432（配额问题）；采集改用 Google News RSS（gnews_rss.py 解码）+ fetch_text 直抓（MarkTechPost/alphaXiv/philschmid.de 成功；BCG/VentureBeat 拒爬）+ 未认证 GitHub REST API；BCG（Akamai 反爬）连续第二日拒爬，条目按惯例标注建议人工复核。
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #77（RRSI 正则化递归自我改进）
+- `01-architecture.md` — 新增 BCG「操作系统」节（与 FTI 相邻），Strands 节追加一句，时间戳 → 2026-09-24
+- `02-tools.md` — 新增 2026-09-24 速报（langgraph-cli 0.4.32 + 7 仓 star 动态），CrewAI 旧链接复查无残留
+- `README.md` — 追加本日志
+
+**关键洞察**：
+- 🔁 **「harness 自我优化」完成三级演进**：Phil Schmid 分类学（8 月）→ SoL-Pi/Strands 工程实证（09-23）→ RRSI 形式化（本日）——正则项直指自动优化的可信度软肋（benchmark 过拟合/成本膨胀），auto-harness-optimization 从实践话题变成研究对象
+- 🏛️ **咨询业集体入场**：FTI（诊断：原型到生产失效）+ BCG（建设：操作系统五件套）相邻成对——harness engineering 的企业预算叙事成形，且与 Phil Schmid「Harness = OS」心智模型跨圈层同构
+- 🚀 **Superpowers 增长脱离事件驱动**：仓库连续两日零新提交仍日增 +461（较 09-11 基线累计 +5,980）——「省 token 执行路径」已成独立传播的口碑资产；同期 LangGraph CLI 把自托管做成体系（独立 listener + agent 一等公民参数），企业自管 harness 的运维面在两端同时成形
+
 ### 2026-09-23 - Strands Harness 正式开源 & SoL-Pi 自动 harness 优化 & 治理/咨询视角进场
 
 **更新**：

@@ -1084,6 +1084,7 @@ harness 正是解决**可靠性/责任层**（reliability & accountability）的
 - 官方基准（Harbor 评估框架；6 基准：ALFWorld、ContextBench、GAIA、WebShop、τ²-bench、Terminal-Bench 2.1；对比 Claude Code、Codex、oh-my-pi、OpenCode、DeepSeek Harness）：**平均 token 成本低 28%，准确率持平**
 - Terminal-Bench 2.1 同模型（Claude Fable 5）对决赛：Strands harness $56.29/69.7% vs Claude Code $248.05/61.8%（便宜 77% 且高 7.9 分）；DeepSeek Harness 更便宜（$40.30）但准确率低 10.2 分
 - 上下文工程细节：大体积工具结果卸载到文件、缓存复用请求片段——与 04 章 compaction/offloading 主线（#51/#55）同套手法；「成本优势 + 模型自选」使本节 09-22 的设计哲学叙事有了可核对的基准证据
+- 交付面细节（09-24 补充）：bundled skills file 可让编码 agent 自动生成 AWS/GCP/Azure/Cloudflare/Modal 五云部署配置——skills 不仅是能力包，也是部署面的一等输入
 
 ---
 
@@ -1156,4 +1157,22 @@ harness 正是解决**可靠性/责任层**（reliability & accountability）的
 
 ---
 
-*更新时间：2026-09-23*
+## BCG：Harness Engineering — The Operating System for Agentic AI——咨询视角把 harness 定位为企业级 agentic AI「操作系统」（2026-09-24 收录）
+
+**来源**：[BCG - Harness Engineering: The Operating System for Agentic AI](https://www.bcg.com/publications/2026/harness-engineering-scale-agentic-ai)（2026-09-16；⚠️ 正文抓取被拒（Akamai 反爬，09-23/09-24 两日均未成功），要点基于标题与刊物语境，建议人工复核原文）
+
+### 核心内容
+
+- 国际咨询视角的框架化定位：harness 是企业级 agentic AI 的「操作系统」——规模化落地不取决于单点模型能力，而取决于围绕模型的工程层的体系化建设
+- 工程层要素（据标题与语境归纳）：工具供给、上下文管理、安全控制、编排、可观测性——五件套构成企业导入 harness engineering 的建设清单
+- BCG 入场使「咨询视角」从个案变为行业动作：harness engineering 进入企业预算与转型叙事
+
+### 与既有条目的关系
+
+- 与 FTI Consulting（09-23 收录，相邻成对）分工明确：FTI 讲「为什么需要」（vibe coding 原型到生产的系统性失效），BCG 讲「要建什么」（操作系统级组件清单）——问题诊断 + 建设框架的咨询组合拳
+- 「harness = OS」比喻与 Phil Schmid「Model = CPU、Context Window = RAM、Harness = OS」心智模型（04 章 #47 引用）同构：工程社区与咨询界开始共用同一套隐喻，概念完成跨圈层对齐
+- 五要素中的安全控制/可观测性与 TechTarget CIO 治理五组件（09-23 收录）重叠——工程侧组件清单与管理侧治理清单正在收敛为同一张企业检查表
+
+---
+
+*更新时间：2026-09-24*

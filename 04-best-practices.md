@@ -3043,3 +3043,22 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 - 与 #73（Atlassian 设计系统 CLI）同属一个趋势的两端：Atlassian 是单域（设计系统）的终端管道，LinkedIn 是公司级（MCP 统一协议）的平台层——企业上下文供给的「点 → 面」演进
 - 与 #64（LangChain 多 harness 上下文组织）互补：LangChain 解决框架内怎么编排，LinkedIn 解决组织怎么持续生产与供给上下文——供给侧的平台化答案
+
+---
+
+## 77. RRSI：正则化递归自我改进——agent 反复改写自己的 harness，正则项抑制过拟合与成本膨胀（2026-09-24 收录）
+
+**来源**：[alphaXiv - RRSI](https://www.alphaxiv.org/abs/2609.24972)（2026-09-22，论文 2609.24972）
+
+### 核心机制
+
+> agent 反复改写自己的 harness（提示、工具、执行逻辑）实现递归自我改进，同时用正则项抑制三类副作用：benchmark 过拟合、评估噪声、不必要的推理成本膨胀。
+
+- 把「改 harness 而非改模型」的自我改进路线形式化为带正则的优化问题：改进空间开放，但爬升过程受约束
+- 实验覆盖 coding 等任务域（要点基于论文摘要级信息）
+
+### 与既有条目的关系
+
+- 与 #47（Phil Schmid Recursive Self-Improvement）同属「model–harness co-evolution」脉络的直接延续：#47 的三层分类（iteration / self-improvement / RSI）指出「最容易的改进目标是 harness 本身」，RRSI 把这个观察算法化为带正则的训练框架——从分类学到形式化的关键一步
+- 与 01 章 NVIDIA SoL-Pi auto-research 循环（09-23 收录）同题互证：都在自动优化 harness，SoL-Pi 靠外部搜索循环（token 流量 -44.7~49%），RRSI 靠 agent 自改写 + 正则约束——「harness 优化被自动化」从工程实践进入论文层
+- 正则项直指自动优化的可信度软肋：自我改写 harness 的最大隐患是应试评测集与成本失控，正则化让改进可迁移、成本受控——为 auto-harness-optimization 补上「可信度」一环
