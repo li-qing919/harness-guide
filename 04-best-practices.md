@@ -3062,3 +3062,32 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 与 #47（Phil Schmid Recursive Self-Improvement）同属「model–harness co-evolution」脉络的直接延续：#47 的三层分类（iteration / self-improvement / RSI）指出「最容易的改进目标是 harness 本身」，RRSI 把这个观察算法化为带正则的训练框架——从分类学到形式化的关键一步
 - 与 01 章 NVIDIA SoL-Pi auto-research 循环（09-23 收录）同题互证：都在自动优化 harness，SoL-Pi 靠外部搜索循环（token 流量 -44.7~49%），RRSI 靠 agent 自改写 + 正则约束——「harness 优化被自动化」从工程实践进入论文层
 - 正则项直指自动优化的可信度软肋：自我改写 harness 的最大隐患是应试评测集与成本失控，正则化让改进可迁移、成本受控——为 auto-harness-optimization 补上「可信度」一环
+
+## 78. Neo4j：Context Engineering vs Prompt Engineering——知识图谱供给侧视角，Agent 可靠性由「喂进窗口的事实质量」决定（2026-09-25 收录）
+
+**来源**：[Neo4j Blog - Why AI teams are moving from prompt engineering to context engineering](https://neo4j.com/blog/agentic-ai/context-engineering-vs-prompt-engineering/)（Michael Hunger，Head of Product Innovation & Developer Strategy；2026-01-16 首发，19 min read；09-25 经 RSS 重返信源视野收录。fetch_text 仅得导航骨架，正文以 agent-browser 全文抓取核验）
+
+### 核心论点
+
+> Prompt engineering focuses on the one-time textual instructions given to an LLM, while context engineering focuses on the contextual information architecture for the ongoing interactions with the model.
+> （提示词工程关注一次性文本指令；上下文工程关注与模型持续交互的信息架构）
+
+- **prompt engineering 的适用边界**：单轮自包含任务（摘要/抽取/翻译/分类/简单 chat）仍可靠；一旦需要记忆、检索、多步行动即失效——信息缺失、prompt 膨胀、遗忘、工具调用不可靠
+- **四个 prompt 填不上的缺口**：① 模型能力跑在技巧前面，大窗口 ≠ 好性能，塞满非结构化文本即 context rot；② 需要可靠、实时、领域专属信息，缺失即幻觉（"Most production issues stem from gaps in context, not limits in the model itself"）；③ 治理/合规/可追溯要求控制模型能看什么、依据什么决策；④ 静态 prompt 交付不了动态上下文
+- **context engineering 的管辖面清单**：Retrieval / Memory / Tool definitions / Task state / Policies / Reasoning history / Observations / Output constraints——prompt engineering 沦为子集
+- **非结构化 RAG 五宗罪（差异化核心）**：向量相似「看起来相关但缺深层语义」；multi-hop 问题失败（关系未被编码）；长文本检索引入噪声与 context poisoning；embedding 相似度不可解释；元数据与策略非一等公民、难以治理——「能告诉你哪段话像，说不出事物怎么相连」
+- **GraphRAG 补位主张**：实体/关系/元数据建模，只取相关切片、multi-hop 遍历、检索时策略过滤、可解释有据输出；官网 banner 自引独立研究称「GraphRAG makes AI agents 80% more truthful」（未附论文出处，待独立核验）
+
+### 实操框架
+
+- **context pyramid（上下文金字塔）**：底座 = 持久知识与策略，中层 = 动态记忆与示例，顶层 = 即时查询与工具输出——目标是每次只送「最小、最相关、高信号」的 token 集合
+- **Minimum Viable Context（MVC）**：理想的一次调用 = 用户目标 + 最相关的检索信息 + 下一步所需的工具定义 + 相关策略 + 压缩后的记忆摘要——「不少也不多」：缺了出错，多了稀释注意力
+- **prompt→context 迁移四步**：识别关键知识域与关系 → 建知识图谱 → RAG 升级 GraphRAG（向量 + 图遍历）→ 评估检索管线（盯 context rot / 幻觉 / 细节缺失三个信号）
+- **context engineer 技能面**：prompt engineering、graph modeling、retrieval & indexing、context orchestration、agent design & tool-use
+
+### 与既有条目的关系
+
+- 与 #14（Anthropic 原则）、#36（五层）、#55（4 机制）同属上下文工程正典，但视角互补：前述条目回答「窗口内如何编排」（预算/卸载/压缩/分层），本条回答「窗口外的知识以什么形态备货」——库内首个 graph-RAG/结构化知识供给侧立场的方法论条目
+- 与 #55 互证：「少而精」的两种实现路径——#55 的卸载/摘要/todo-state 是窗口侧压缩，本条的相关切片（relevant slice）是供给侧结构化；两者共享同一病理诊断（context rot，#55 引 Chroma 实测，本条引为非结构化供给失效的证据）
+- 与 #73（Atlassian 设计系统上下文管道）、#76（LinkedIn 组织级上下文层）同属「企业知识 → agent 上下文」管道化脉络：Atlassian/LinkedIn 讲传输层（CLI/MCP），Neo4j 讲存储与检索层的形态主张（图 vs 向量）——上下文供给的存储/传输/编排三层分工开始成形
+- ⚠️ **厂商立场标注**：Neo4j 即图谱数据库厂商，论证天然服务于 GraphRAG 卖点；框架价值（供给质量决定可靠性）可采信，80% truthfulness 等数据为官网自引，落地前需独立核验

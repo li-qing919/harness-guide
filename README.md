@@ -97,6 +97,31 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-25 - DeerFlow v2.1.0 正式出货 & Neo4j 结构化知识供给侧进场 & 新闻零新增
+
+**更新**：
+
+1. **框架速报（2026-09-25）——今日 1 个新 release：DeerFlow `v2.1.0`**（2026-09-24 发布，自 v2.0.0 起 772 个 PR 合并的大版本，主题「信任、规模、可运维」：可验证 Agent 执行、持久化批量任务委派、可插拔记忆后端、4 个新沙箱 Provider、out-of-tree 扩展系统、企业级认证授权；工作区新增项目/会话分支/引用对话——2.1.0-rc0 线自 09-18 起跟踪、本次正式出货）
+   - Superpowers — **291,184** ⭐（+544，连续最高增幅再走高，零提交零发版仍高增长）；LangGraph — **42,237** ⭐（+45，CLI 0.4.32 已在册、现迭代 0.4.32.dev0，无新 release）
+   - DeerFlow — **82,944** ⭐（+35，v2.1.0 正式发布）；BMAD — **53,426** ⭐（+34，v7 侧枝推进）；CrewAI — **58,986** ⭐（+33）；OpenAI SDK — **29,682** ⭐（+23）；Google ADK — **21,630** ⭐（+15）
+   - 采集方式：Tavily 连续第七日 HTTP 432，Google News RSS 解码 + fetch_text 直抓 + GitHub REST API
+
+2. **最佳实践新增（04 #78）**：Neo4j《Context Engineering vs Prompt Engineering》——知识图谱供给侧视角：Agent 能力上限由「喂进窗口的事实质量」决定，非结构化 RAG 五宗罪（语义浅/multi-hop 失败/噪声引入/不可解释/难治理）由 GraphRAG 补位；给出 context pyramid 与 Minimum Viable Context（MVC）实操框架及 prompt→context 迁移四步。正文经 agent-browser 全文抓取核验（fetch_text 仅得导航）；注意厂商立场，80% truthfulness 数据为官网自引独立研究、待核验
+
+**去重说明**：今日新闻 5 条全部在库、零新增收录——AWS Strands 正式开源（SiliconANGLE 报道，09-23 在册）、Google EnvHarness（VentureBeat 报道，09-22 在册）、Built In 概念科普（09-22 在册）、The AI Economy「没有大脑」解读（09-22 在册）、BCG「操作系统」报告（昨日 88c1716 刚收录）。MarkTechPost「Harness 内 4 机制」为 04 #55 在册。TDS《Deep Dive into Context Engineering for AI Agents》跳过：正文被 CloudFront 403（fetch_text / curl / agent-browser 三路均拒），无法验证正典外增量，且 RSS 摘要所示范围（范式迁移/记忆分层/检索注入/工具结果治理）与在册正典 #14/#25/#36/#51/#55/#72 大面积重叠——按「宁缺毋滥」不收录。
+
+**信源说明**：Tavily 搜索 API 连续第七日 HTTP 432（配额问题）；采集改用 Google News RSS（gnews_rss.py 解码）+ fetch_text 直抓 + 未认证 GitHub REST API。VentureBeat 与 BCG 反爬（429/403），对应条目摘要基于 RSS 元数据（均已在库，无新增影响）；TDS 亦 403；Neo4j 正文以 agent-browser 全文核验。
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-09-25 速报（DeerFlow v2.1.0 正式出货 + 7 仓 star 动态）
+- `04-best-practices.md` — 新增 #78（Neo4j 上下文工程供给侧视角）
+- `README.md` — 追加本日志
+
+**关键洞察**：
+- 🚀 **DeerFlow v2.1.0 从 rc 到正式出货**：772 个 PR、主题「信任、规模、可运维」——可验证执行补信任、持久化委派补规模、认证授权补可运维，harness 框架竞争进入「平台化 + 企业级」深水区；与 OpenAI Agents API（harness-as-a-service）、LangGraph 自托管体系同向收敛
+- 📈 **Superpowers 增长与事件完全脱钩**：零提交零发版状态下日增 +544（较昨日 +461 再走高，较 09-11 基线累计 +6,524）——口碑资产进入复利阶段，增长动量与仓库活动已无相关性
+- 🧱 **上下文工程话语迎来供给侧**：Neo4j 把讨论从「窗口内如何编排」翻转到「窗口外以什么形态备货」——结构化知识（图谱）成为 context engineering 的基础设施主张；与 Atlassian（传输层 CLI）、LinkedIn（组织级 MCP）互补，「企业知识 → agent 上下文」的存储/传输/编排三层分工开始成形
+
 ### 2026-09-24 - RRSI 正则化递归自我改进 & BCG「操作系统」定位 & LangGraph CLI 出货
 
 **更新**：
