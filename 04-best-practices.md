@@ -3091,3 +3091,30 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 与 #55 互证：「少而精」的两种实现路径——#55 的卸载/摘要/todo-state 是窗口侧压缩，本条的相关切片（relevant slice）是供给侧结构化；两者共享同一病理诊断（context rot，#55 引 Chroma 实测，本条引为非结构化供给失效的证据）
 - 与 #73（Atlassian 设计系统上下文管道）、#76（LinkedIn 组织级上下文层）同属「企业知识 → agent 上下文」管道化脉络：Atlassian/LinkedIn 讲传输层（CLI/MCP），Neo4j 讲存储与检索层的形态主张（图 vs 向量）——上下文供给的存储/传输/编排三层分工开始成形
 - ⚠️ **厂商立场标注**：Neo4j 即图谱数据库厂商，论证天然服务于 GraphRAG 卖点；框架价值（供给质量决定可靠性）可采信，80% truthfulness 等数据为官网自引，落地前需独立核验
+
+## 79. SitePoint：生产级 Harness 的持久化与检查点——把 Agent run 当分布式系统 durable state 来做（2026-09-26 收录）
+
+**来源**：[SitePoint - Designing a Production-Ready Agent Harness With Persistence and Checkpointing](https://www.sitepoint.com/designing-a-production-ready-agent-harness-with-persistence-and-checkpointing/)（Nandish Nanjappa，Staff Software Engineer @ Attentive，存储/分布式系统背景十余年；2026-09-24 发布、09-25 更新；正文约 15K 字符经 fetch_text 全文抓取核验，agent-browser 被 Cloudflare 挑战拦截、不影响核验）
+
+### 核心机制
+
+> The gap between "the model works" and "the system keeps working" is the agent harness... A run losing its progress to a pod eviction is a durability problem, and durability is well-trodden ground.
+> （「模型能用」与「系统持续工作」之间的鸿沟就是 harness；run 因 pod 驱逐丢失进度是个持久化问题，而持久化是早已趟平的领域）
+
+- **生产清单五条**：run 是 store 里的 durable state 而非随进程死掉的内存对象；每个有意义的转换处 checkpoint；工具调用必须可安全重放（崩溃后分不清最后一次是否已执行）；两个 worker 不得同时拾起同一 run；每步记录足以复盘无人值守的失败——「给 job scheduler 写的清单几乎一模一样，唯一区别是被协调的是 LLM 循环而非数据块」
+- **Run 建模**：`Run {run_id, goal, steps[], cursor, status, version}`——cursor 让恢复无需重放；version 每次持久写自增、防两进程互覆；整 run 序列化为单 JSON 文档（恢复路径一次查询；数千步以上才需范式化），SQLite 起步、设计可平移 Postgres
+- **检查点选址是成本权衡**：结尾一次（最省/全丢，适合廉价可重跑的短 run）；每步之后（默认，至多丢一步）；每个副作用两侧（最贵/不丢不可重建的副作用，适合动钱与发消息的 run）
+- **并发防护即 CAS**：`UPDATE ... SET version=version+1 WHERE run_id=? AND version=?`，rowcount==0 抛 StaleWriteError 退位——「调度器防两个 worker 认领同一任务的 fencing 模式，旧分布式系统机器指向新问题」
+- **恢复而非重启**：执行循环在动作两侧各写一次 checkpoint（「about to execute」先行）；崩溃重启后见 RUNNING 步无法判断工具是否已发出——模型步可安全重跑，工具步仅在幂等设计下安全
+- **幂等工具层**：at-least-once + 幂等 = 事实上的 exactly-once。进程内查 `idempotency_key` 表复用结果；更强是把 key 传给下游（支付 API 范式）；下游不支持则用自然键 upsert（run_id, step_index）；作者实测崩溃注入后恢复：「想要的 2 次副作用恰好执行 2 次」；诚实标注局限——邮件类副作用只能用去重表收窄双发窗口而非归零，「有界窗口是诚实的目标」
+- **运行观测**：每次转换记录 run_id/step/version（version 历史即「黑匣子」）；最关键指标不是延迟或 token 而是**恢复时处于 RUNNING 的步数**——直接读出「死在副作用中途、靠幂等兜底」的频率，且先于下游错误率移动（上游依赖变脆的早期信号）；RUNNING 步加 TTL 告警（抓住「拿了 run 就死」的 worker 与 leasing 边角案例）
+- **演进方向**：version 轻量 fencing → 真 leasing（worker id + 租约到期 + 续租，共享队列）；durable run 记录天然可回放旧 run 对新模型做对比——「已经是评估 harness 的一大部分」
+- **全文最便宜的一招**：执行前先写「about to execute」checkpoint——一次额外往返，评审时看似多余，却是把崩溃后不确定状态变成可恢复状态的分界线
+
+### 与既有条目的关系
+
+- 与 #57（Oracle 生产存活）、#43（Anthropic 长时运行）、#29（可靠性手册）同属「生产化」主线，但前述条目停在原则层，本条给出实现级模式（durable 状态机 + CAS fencing + 幂等键 + 先导指标）——库内首个持久化/检查点专题的实现级条目
+- 「旧分布式系统机器指向新问题」与 #34（Addy Osmani：harness 是工程学科不是提示词技巧）同构：作者以存储/调度背景论证 agent runtime 与 job scheduler 同构，harness 工程继承的是分布式系统的既有资产
+- 与 #43 的进度文件（文件系统持久化）互补：#43 解决跨会话信息传递，本条解决进程内崩溃恢复——持久化的两个不同时间尺度
+- 「durable run 记录可回放做评估」把可靠性基建与评估基建合流，与 #58（没有 eval 的 harness 无法安全迭代）、#62（把重构经验写进 evals）互证
+- 与 #31（Anthropic/OpenAI 架构趋同）中的框架 checkpoint/session 管理对照：LangGraph 等把 checkpoint 内建为框架能力，本条演示不带框架时如何以标准库手工达成同等能力

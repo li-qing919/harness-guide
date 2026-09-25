@@ -97,6 +97,37 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-26 - Superpowers v6.4.2 与 ADK v2.10.0 双发版 & Cloudflare 边缘层收敛 & 持久化/检查点实现级条目
+
+**更新**：
+
+1. **框架速报（2026-09-26）——今日 2 个新 release：Superpowers `v6.4.2` 与 Google ADK `v2.10.0`**（均于 2026-09-25 深夜 UTC 发布、北京时间 09-26 凌晨，gh api releases 核实）
+   - Superpowers `v6.4.2`——`writing-plans` 重做：计划只记录实现者需要的决策（函数签名、测试断言、规格值）而非代码转录，修复 Opus 5.5 等前沿模型规划期越权实现整个项目的倾向；实测规划耗时降至 1/4、token 约降至 1/3（#2333）
+   - Google ADK `v2.10.0`——Skill 生命周期管理（实验性，`ADK_ENABLE_SKILL_LIFECYCLE=1`：ephemeral 生命周期 + active skill 上限，动态控制资源占用与工具持久化）+ MongoDB 工具集（向量/混合检索）+ 评估新增 duration/token/调用次数效率指标
+   - Star 快照：Superpowers — **291,615** ⭐（+431，累计 +6,955、仍居全列表之首）；LangGraph — **42,288** ⭐（+51，push 停在 09-23、0.4.32.dev0 迭代中）；CrewAI — **59,021** ⭐（+35，push 09-25：LLM 节流重试/CLI 平台导流）；DeerFlow — **82,976** ⭐（+32，v2.1.0 后常规维护日）；BMAD — **53,458** ⭐（+32，push 09-25：ticketing 从 ticket tree 构建）；OpenAI SDK — **29,700** ⭐（+18，push 09-25：Docker 删除保护/审批按 agent 收紧/SQLite 加密历史保全）；Google ADK — **21,645** ⭐（+15）
+   - 采集方式：Tavily 连续第八日 HTTP 432，Google News RSS 解码 + fetch_text/agent-browser + gh api 认证调用
+
+2. **最佳实践新增（04 #79）**：SitePoint《Designing a Production-Ready Agent Harness With Persistence and Checkpointing》——库内首个持久化/检查点专题的实现级条目：run 建模为 durable state（cursor+version）、检查点选址成本表、CAS 乐观并发、动作两侧 checkpoint、幂等键工具层（at-least-once+幂等=事实 exactly-once，崩溃注入实测副作用零重复）、「恢复时 RUNNING 步数」作为先导指标；「给 job scheduler 写的清单几乎一样，区别只是被协调的是 LLM 循环」。正文约 15K 字符经 fetch_text 全文核验
+
+3. **新闻收录 3 条（本日条目）**：
+   - **Cloudflare Agents Week 收官，harness 模式嵌入边缘层**（Forkast 09-25 分析，r.jina.ai 全文核验）——25+ 项发布把同一套「控制-安全-执行」架构嵌入全球边缘网络：Sandboxes GA（持久隔离环境，shell/文件系统/后台进程按需恢复状态）、Artifacts（Git 兼容版本化存储、千万级仓库）、Workflows 控制面重构（5 万并发、300/秒创建）、Durable Object Facets（Dynamic Workers 实例化隔离 SQLite）、Cloudflare Mesh + Managed OAuth for Access（RFC 9728，取代不安全 service account）、MCP 参考架构 + Code Mode 降 token——云厂商/框架/边缘三层对 harness 模式的结构性收敛完成（性能数字为厂商自报）
+   - **Gemini 3.8 Flash harness 层调优**（SitePoint 09-22，目录与正文首节核验）——按任务难度动态分级 thinking level 的中间件 + Zod 结构化输出校验 + 工具调用指数退避重试；「同一默认设置下重命名变量与架构多文件模块获得同等推理投入」是结构性浪费——用 harness 工程把便宜模型跑出接近旗舰的编码效果
+   - **ARC Advisory Group：物流行业的 Harness Engineering**（09-24，⚠️ 正文三路核验失败：fetch_text/jina 仅得导航壳、agent-browser 被 Cloudflare 拦截，条目基于标题与采集摘要，建议人工复核）——裸 Agent 无法满足供应链可靠性要求，需把 Agent 行为固化为工程化工作流（可审计、可恢复）；继 BCG（09-24 在册）后义一家咨询/研究机构背书，概念渗透从软件向垂直行业扩散
+
+**去重说明**：raw 声称 5 条新闻全部新增，经 grep 复核实为 3 新 2 重——**SoL-Pi**（alphaXiv 2609.20519）与 01 章 09-23 已收录条目为同一论文（MarkTechPost 视角、NVIDIA 联合 NTU/MIT、token 流量 -44.7~49% 完全对应），不重复收录；**The Register Strands 后续报道**（28% token 成本声明独立验证）在 01 章 Strands 节已有「另见」注记（09-23 收录时列入），本日仅作关联注记、不重复收录。最佳实践 3 候选收录 1（SitePoint #79）：**LF 研讨会**《Beyond the Context Window: Memory, Forgetting, and 'Dreaming'》实为 2026-10-14 预告页（Gil Feig，Merge CTO；正文即约 150 词会议摘要，无方法论正文可核验，待研讨会举行后视纪要再议）；**Medium（Adnan Masood）**《Adopting Agentic AI Across Engineering》正文三路核验失败（fetch_text 403 / agent-browser Cloudflare 拦截 / r.jina.ai 仅得 member-only 预览），已核验 TL;DR 显示主体为 Claude Code/Claude Agent SDK 落地配置清单，决策框架内核（automation–assistant–agent 三档选择、按风险定自主度、成本按产出计量、人类评审门）与 #66（同作者 Cost per Accepted Task）、#43（人类监督评审门）、#57（生产存活）及 01 章 BCG 组织级采用叙事（09-24）重叠度高，正典外增量不足——按「宁缺毋滥」跳过（先例：昨日 TDS）。昨日已跳过的 arcweb 旧文（09-18《Why Better Models Aren't Enough》）与本日新文（09-24《From Agents to Engineered Workflows》）为不同 URL，本日按新条目收录。
+
+**信源说明**：Tavily 搜索 API 连续第八日 HTTP 432（配额问题）；采集改用 Google News RSS（gnews_rss.py 解码）+ fetch_text/agent-browser + gh api 认证调用。SitePoint 持久化正文 fetch_text 全文核验通过（agent-browser 被 Cloudflare 挑战拦截，不影响）；Forkast 经 r.jina.ai 全文核验；Gemini 3.8 Flash 文经 fetch_text 核验目录与首节；Medium/LF/ARC 核验失败情况见去重说明。GitHub release 数据（Superpowers v6.4.2 18:08 UTC / ADK v2.10.0 19:00 UTC）与 7 仓 push/star 均经 gh api 核实。
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-09-26 速报（Superpowers v6.4.2 + ADK v2.10.0 双 release + 7 仓 star 动态）
+- `04-best-practices.md` — 新增 #79（SitePoint 持久化与检查点实现级模式）
+- `README.md` — 追加本日志
+
+**关键洞察**：
+- 🚀 **「省 token」叙事从执行延伸到规划，skill 成为框架竞争新战线**：Superpowers v6.4.1 重做执行路径（09-19）、v6.4.2 重做规划路径（计划只记决策不写代码，规划耗时 1/4、token 1/3）——前沿模型行为失准在 skill 层即可矫正；ADK 同日把 skill 升级为受生命周期管理的资源（临时装载/限额/持久化控制），与 Skillzero #61「skill 管理是上下文预算问题」、Superpowers 技能化路线三向周证
+- 🧱 **harness 模式完成三层收敛，并向垂直行业渗透**：Cloudflare Agents Week 把「控制-安全-执行」同构方案嵌入边缘（Sandboxes GA + 5 万并发 Workflows + RFC 9728 agent 认证）——云厂商、框架、边缘三层出货同一架构，Forkast 判断「标准化已达栈的每一层」；叠加 ARC 落地物流，概念渗透横向（基础设施各层）与纵向（垂直行业）同时推进
+- 🛡️ **持久化/检查点从原则层进入实现层**：#79 用分布式系统老机器（CAS fencing、幂等键、lease 演进）解决 agent run 的 durability 问题，并给出「恢复时 RUNNING 步数」这一先导指标——durable run 记录同时是回放评估的素材，可靠性与评估基建在此合流
+
 ### 2026-09-25 - DeerFlow v2.1.0 正式出货 & Neo4j 结构化知识供给侧进场 & 新闻零新增
 
 **更新**：
