@@ -3014,19 +3014,25 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
-## 75. CMSWire：Context Engineering 取代静态用户画像——动态上下文理念外溢到 CX（2026-09-23 收录）
+## 75. CMSWire：Context Engineering 取代静态用户画像——动态上下文理念外溢到 CX（2026-09-23 收录，09-27 全文核验补全）
 
-**来源**：[CMSWire - Context Engineering Is Replacing Static Customer Profiles](https://www.cmswire.com/customer-experience/what-is-context-engineering-and-why-does-it-beat-personalization/)（2026-09-21；⚠️ 正文未能抓取，要点基于 RSS 标题与栏目语境）
+**来源**：[CMSWire - What Is Context Engineering — and Why Does It Beat Personalization?](https://www.cmswire.com/customer-experience/what-is-context-engineering-and-why-does-it-beat-personalization/)（Behnam Behzadyfar，CRM/CX 从业 16+ 年；2026-09-21；09-23 收录时正文未能抓取，**2026-09-27 经 fetch_text 全文核验并补全要点**）
 
 ### 核心要点
 
-- context engineering 理念外溢到客户体验（CX）领域：personalization 时代的**静态用户画像**正被按交互**实时组装的动态上下文**取代
+- context engineering 理念外溢到客户体验（CX）领域：personalization 时代的**静态用户画像**正被按交互**实时组装的动态上下文**取代——「personalization 回答『用户是谁』，context 回答『此刻正发生什么』」
+- **六类实时信号**汇入决策：环境（网络延迟/设备状态）、旅程与渠道（跨渠道路径/触点弃置）、微意图（任务执行/搜索语法/重试循环）、摩擦（错误循环/异常停留）、运营与基础设施（API 延迟/事故）、业务与政策边界（合规红线）——目标是拼装「执行下一最优决策所需的**最小高保真信号负载**」，而非穷尽采集
+- **Context Arbitration（上下文仲裁层）**：信号冲突时的算法治理层——高历史转化倾向不得压倒进行中的服务故障，季度营销目标不得越界监管边界；关键反转原则：高 CLV 客户也不应覆盖正在发生的服务故障
+- **刻意不作为**：压制一条自动营销序列保护的价值可能大于一次增量转化——「该不该发生任何外发交互」成为比 next-best-offer 更高阶的纪律
+- **隐私优势**：瞬时上下文（ephemeral telemetry）运行时组装、用后即弃，避免持久化追踪数据库的合规暴露——不取代 CDP，而是在其上加事件驱动智能层
+- **agentic AI 三分法**：prompt engineering 管怎么指示模型 / context engineering 管模型推理前收到的运行现实 / **context governance 管自主 agent 被授权执行什么**——对客户侧 agent，实时运营上下文是「有用的顾问交互」与「合规噩梦」的分界（结算 API 宕机时绝不推荐金融产品）
 - 模式差异：为每次交互拼装当下情境（意图、历史、环境信号），而非依赖写死的画像标签——与编码 agent 侧「意图连续性优于长历史」（#72）异曲同工
 
 ### 与既有条目的关系
 
 - 与 #72（TDS 意图连续性）跨域印证：工程侧的「压缩到意图」与 CX 侧的「动态拼装替代静态画像」是同一原则——**状态按需构造，而非预先固化**
 - 信号价值大于技术增量：上下文工程词汇已从工程圈扩散到营销/客户体验媒体，概念完成跨行业泛化（与 Built In 科普、TechTarget CIO 文同一扩散曲线）
+- 「context 决定 agent 被授权做什么」与 01 章 TechTarget（治理视角把 IAM 原则映射到 agent，09-23 收录）在 CX 域再汇合——上下文供给与权限治理开始被视为一个连续体（09-27 补全时增补）
 
 ---
 
@@ -3118,3 +3124,45 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 与 #43 的进度文件（文件系统持久化）互补：#43 解决跨会话信息传递，本条解决进程内崩溃恢复——持久化的两个不同时间尺度
 - 「durable run 记录可回放做评估」把可靠性基建与评估基建合流，与 #58（没有 eval 的 harness 无法安全迭代）、#62（把重构经验写进 evals）互证
 - 与 #31（Anthropic/OpenAI 架构趋同）中的框架 checkpoint/session 管理对照：LangGraph 等把 checkpoint 内建为框架能力，本条演示不带框架时如何以标准库手工达成同等能力
+
+---
+
+## 80. Graphify：代码库上下文统一化——AST + 知识图谱 + MCP，把「仓库即文本池」改为「仓库即图」（2026-09-27 收录）
+
+**来源**：[InfoQ - Graphify: Unifying Codebase Context to Streamline Agentic Software Engineering](https://www.infoq.com/news/2026/09/graphify-codebase-exploration/)（Olimpiu Pop；2026-09-23；正文经 r.jina.ai 全文核验——InfoQ 直连返回 405）
+
+### 核心机制
+
+- **问题定位**：AI 编码助手普遍把仓库当「孤立文本池」处理，跨文件推理与深层依赖追踪受限于上下文窗口与记忆——Graphify（[github.com/Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify)，2026 年 4 月启动、MIT/Apache-2.0 双许可、首 10 天破数千 star、月多次快速迭代）把代码库、文档与非结构化数据转为**可查询的多模态知识图谱**
+- **多级管线**：扫描目标目录 → tree-sitter 抽取 AST 结构元素 + 文档语义线索 → 社区发现算法聚类的统一图；产物可直接查询或经 MCP server 接入 AI 编码助手（Claude Code 等），相对朴素逐文件读取显著省 token——从线性文件浏览与重量级搜索转向结构化图导航
+- **解析器深化（近期迭代）**：Terraform block 属性保全（基础设施配置可随代码查询）；跨文件方法解析（Rust 泛型 split impl、Kotlin external receiver 追踪、C++ 作用域限定静态调用路由）；Markdown 代码 span → 代码符号映射（文档引用直连代码）；PHP 内嵌脚本索引；subpath 包导入依赖映射
+- **基准（⚠️ 第一方自报）**：LOCOMO recall@10 0.497、QA 准确率 45.3%、LongMemEval-S 50 题子集 76%、ERPNext 关键事实覆盖 70.8%→82.0%（六题）；跨 macOS/Windows/Linux，uv 安装
+- **社区评价两面性**：大型仓库定位/入职/架构评审获认可（r/ClaudeAI 与独立评测博客）；日常集成体验分化——中型仓库上暴力导航与标准 grep 仍常快于图工具，工具成熟度尚在爬坡
+
+### 与既有条目的关系
+
+- 与 #78（Neo4j 供给侧）构成图谱供给叙事的两端：Neo4j 主张企业知识以图谱形态备货，Graphify 把同一主张落到代码域——**「窗口外以什么形态备货」从企业知识扩展到代码库**
+- MCP 接入与 #73（Atlassian 设计系统 CLI）、#76（LinkedIn 组织级上下文层）同向：上下文供给管道的标准化接口正在统一到 MCP
+- 省 token 与 Superpowers v6.4.x「规划只记决策」互证：上下文供给的结构化（图）与提示的瘦身（决策）是同一成本工程的两条路径；「中型仓库 grep 仍常更快」的社区反馈则是结构化供给的适用边界提醒
+
+---
+
+## 81. Elastic/YourStory：tokenmaxxing 反面模式与上下文工程三层——「模型不是护城河，数据基础才是」（2026-09-27 收录）
+
+**来源**：[YourStory - From tokenmaxxing to context engineering: Why enterprise AI needs better context, not bigger prompts](https://yourstory.com/2026/09/tokenmaxxing-context-engineering-why-enterprise-ai-needs-better-context-not-bigger-prompts)（Gayatri Guha 采访 Elastic 印度区 Field Engineering 负责人 Ravindra Ramnani；2026-09-25；正文经 fetch_text 全文核验）
+
+### 核心论点
+
+- **「tokenmaxxing」命名反面模式**：2026 年初硅谷职场风潮——以 token 消耗量作为生产力信号、内部排行榜按烧掉 token 排名；「与按代码行数评价开发者是同一种谬误」——度量的是投入而非产出。架构层同型错误：把不相关文档与会话历史整包塞进提示，模型不像老练分析师会过滤，结果是噪声、变慢、人工复核成本上升
+- **文件柜类比**：tokenmaxxing = 递给对方整个文件柜让 TA 找那一页；context engineering = 递给已经夹好标签的三页——信息相同，只有后者支撑更好的决策
+- **上下文工程定义**：决定模型在推理每一步看到什么——哪些指令框定任务、哪些工具可用、从企业系统检索什么、前几轮携带什么、以及**刻意省掉什么**；企业场景最难的环节是检索（grounded 而不淹死）；相关性不仅是搜索功能，更是自主 AI 可安全行动的前提——银行合规流/SOC 里基于不完整上下文的错误自主行动会在人工介入前扩散
+- **Elastic 三层落地**：数据邻近（推理层贴近事实源，敏感数据不经外部管道）／检索精度（向量+关键词+结构化混合检索 + 语义重排，送到的要是「信号」而非 merely related）／**执行接地**（agent 能力按需装载而非每轮全副武装——同时降低 token 开销与意外自主行动风险）
+- **度量换轨**：token 用量与模型大小揭示不了业务价值；应改为任务完成率×人工接管率、生产 vs 测试决策准确率、高风险流 time-to-answer、监管可审计性（agent 咨询了什么数据、为何）
+- **结论句**：「模型不是护城河，数据基础才是」——grounded 小模型稳定胜过碎片上下文上的大模型（引 Gartner：2026 年底 40% 企业应用将含任务专用 agent）
+
+### 与既有条目的关系
+
+- 「执行接地：能力按需装载」与 ADK v2.10.0 Skill 生命周期管理（临时装载/限额）、OpenAI SDK 审批按 owner-agent 收紧（09-26 速报）三向印证——**工具/能力的按需供给成为 token 经济与安全治理的交汇点**
+- 与 #78（Neo4j 企业知识）、#80（Graphify 代码库）成谱系：企业知识、代码库、工具能力三类「窗口外资产」的供给侧工程化在同月密集出现
+- 「grounded 小模型 > 碎片上下文大模型」与 Gemini 3.8 Flash harness 层调优（README 09-26 新闻）同一判断的厂商/工程两侧表述；tokenmaxxing 作为命名反面模式与 #34（harness 是工程学科不是提示词技巧）的「反炼丹」叙事互补
+- ⚠️ **厂商立场标注**：受访者为 Elastic 现场工程负责人，三层框架与 Better Binary Quantisation（向量内存占用最多降 32×）等细节服务于 Elastic 产品叙事；反面模式命名与度量换轨本身可独立采信

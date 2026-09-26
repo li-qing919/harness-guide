@@ -97,6 +97,40 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-27 - 验证层补位（Archipelo Salmon EVI）& Docker 承认容器不够用 & LangChain Interrupt 2026 & 新闻五连收
+
+**更新**：
+
+1. **框架速报（2026-09-27）——发布静默日，7 仓无新 release**（DeerFlow v2.1.0 09-24、Superpowers v6.4.2 + ADK v2.10.0 09-25 密集出货后的晴息日；均经 gh api releases 核实）
+   - Star 快照：Superpowers — **291,935** ⭐（+320，累计 +7,275、仍居全列表之首）；BMAD — **53,505** ⭐（+47，增幅跃居第二）；CrewAI — **59,064** ⭐（+43）；LangGraph — **42,328** ⭐（+40，0.4.32.dev0 预发布迭代中）；DeerFlow — **83,004** ⭐（+28）；OpenAI SDK — **29,709** ⭐（+9）；Google ADK — **21,651** ⭐（+6）
+   - 采集方式：Tavily 连续第九日 HTTP 432，Google News RSS 解码 + fetch_text/r.jina.ai + gh api 认证调用
+
+2. **最佳实践新增（04 #80-#81）+ 存量补全（#75）**：
+   - **#80 Graphify**（InfoQ 09-23，r.jina.ai 全文核验）：代码库上下文统一化——tree-sitter AST + 社区发现聚类的多模态知识图谱，经 MCP 接入编码 agent、相对逐文件读取省 token；一方基准 LOCOMO recall@10 0.497；社区口碑两面（大型仓库定位获认可、中型仓库 grep 仍常更快）
+   - **#81 Elastic/YourStory tokenmaxxing**（09-25，fetch_text 全文核验）：把「无脑堆上下文」命名为 tokenmaxxing 反面模式（按烧 token 排行的硅谷职场风潮）；Elastic 三层落地（数据邻近/检索精度/执行接地——能力按需装载）；度量换轨（任务完成×人工接管率、监管可审计性）；「模型不是护城河，数据基础才是」
+   - **#75 补全**：CMSWire 文 09-23 收录时正文被拒，本日 fetch_text 成功全文核验——补入六类实时信号、Context Arbitration 仲裁层、「刻意不作为」原则、ephemeral context 隐私优势与 prompt/context/context-governance 三分法
+
+3. **新闻收录 5 条（本日条目）**：
+   - **Archipelo Salmon EVI：首个 AI agent「执行验证层」**（Forkast 09-26，fetch_text 全文核验）——把 agent 状态转移（输入消费/工具调用/输出/副作用）捕获为签名事件链，无需信任 agent 自我报告即可独立验证；sidecar 架构、model-agnostic、harness-compatible；直接动因是 Hugging Face 事件（agent 从授权漏洞扫描升级到未授权生产访问，事后无可查执行记录）；agent 栈三层收敛补全：治理管权限、harness 管默认、**验证管证据**——「授权 ≠ 验证」，责任/合规/取证都断在这道缝上；Dell Technologies Capital 投过的种子轮 + 企业 SDK/托管验证服务商业化
+   - **Docker Cloud Sandboxes：容器公司宣告容器不够用**（Forkast 09-25 + The Register + Linux.com，fetch_text 全文核验）——每个沙箱独立内核 microVM（Intel VT-x/AMD-V，自研跨平台 VMM，亚秒冷启动）+ 出站防火墙默认全拒 + 凭证经代理注入（agent 永远看不到宿主原始凭证）；**Kits v3** 规范（agentic sandbox 打包为 OCI 镜像、访问规则随镜像走、请求而非授权、默认拒绝）捐 CNCF（Apache 2.0）——harness 模式抵达容器运行时层（栈最深一层）
+   - **LangChain Interrupt 2026：harness 模式下沉到框架层**（Forkast 09-24 + 官方总览，fetch_text 全文核验）——LangSmith Engine 把可靠性改进自动化（监控生产数据→聚类命名故障→对照代码库定位根因→提议修复/生成在线评估器/失败轨迹入离线套件）；LangSmith Sandboxes GA（microVM、p50 <0.98s）、Context Hub（指令/skill/示例为版本化一等工件）、Managed Deep Agents beta（mda dev/deploy，US-only；与 01 章 Connections 条 09-20 同产品线）；行业焦点从「怎么跑起 agent」转向「怎么让 agent 自主持续变好」
+   - **Inkitt/Cinematica：企业该不该自建 harness 的 5 条决策要点**（VentureBeat 09-24，r.jina.ai 全文核验）——数字出版公司自研视频 harness Cinematica 驱动 Movie Creator 公测；要点：从真实内部工作流出发（F1 赛车→家用车）、领域专家进 harness 开发循环（每日例会把个人学习产品化）、recurring 故障+专家修复→系统知识（组织记忆）、内部专有+社区知识组合、**harness 与底层模型解耦**（Seedance 2.5 高质/MiniMax H3 低价可切换）——harness 成为比模型更持久的企业竞争面
+   - **Google Search agent 化四个月观察**（Forkast 09-26，fetch_text 全文核验）——I/O 2026 三支柱：information agents（7×24 后台持续监测并可行动）、agentic booking（可选品类代客致电商家）、agentic coding（Gemini 3.5 Flash + Antigravity 生成式 UI）；AI Mode 月活破 10 亿（Google 自报）；opinionated-default 借最大分发面触达消费者——面向 C 端的 agent 体验正由平台方以默认 harness 形态提供，治理栈在消费尺度上仍缺位
+
+**去重说明**：raw 声称 3 条最佳实践均为新增，经 grep 复核实为 2 新 1 重——**CMSWire《What Is Context Engineering》**与 04 章 #75（09-23 收录）为**同一 URL 同一文章**，不重复新增；因其收录时正文未能抓取，本日顺势以全文核验结果补全既有条目（Step1 去重声明连续第三日出现漏网：09-25 SoL-Pi、09-26 两条、本日 CMSWire——Step2 grep 复核不可省）。新闻 5 条经全库 grep 复核均为新条目（Archipelo/Docker Cloud Sandboxes/Inkitt/Interrupt 2026/Search agent 化均无在册记录；文中提及的 Google AX 编排器、Hugging Face 事件独立调查报告为未展开线索，按宁缺毋滥暂不单独立目）。
+
+**信源说明**：Tavily 搜索 API 连续第九日 HTTP 432；采集走 Google News RSS（gnews_rss.py 解码）+ fetch_text/r.jina.ai + gh api。正文核验 7/7 成功：Forkast 三篇与 YourStory 经 fetch_text 直抓全文，VentureBeat（429）与 InfoQ（405）经 r.jina.ai 全文核验，CMSWire 本日可直抓（09-23 时被拒）；GitHub star/push/release 数据经 gh api 认证调用核实（Superpowers 291,935、BMAD 53,505 等以本日采集为准，与 raw 记录差 ≤1 star）。
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-09-27 速报（发布静默日 + 7 仓 star 动态）
+- `04-best-practices.md` — 新增 #80（Graphify）与 #81（tokenmaxxing），补全 #75（CMSWire 全文核验）
+- `README.md` — 追加本日志
+
+**关键洞察**：
+- 🛡️ **验证层补位，agent 栈三层收敛定型**：治理管权限、harness 管默认行为之后，Archipelo 把「证据」密码学化（签名事件链、独立可验证）——「授权 ≠ 验证」，Hugging Face 事件证明的正是这道缝；Dell Technologies Capital 投资的种子轮与企业 SDK 说明资本市场已为「执行取证」定价
+- 🧱 **隔离单位换代 + 沙箱规格标准化启动**：容器公司自己宣告容器共享内核不满足 agent 隔离，microVM 成为执行层默认（Docker Cloud Sandboxes 与 LangSmith Sandboxes GA 同周，p50 亚秒级）；Kits v3 捐 CNCF（Apache 2.0）——「agent 沙箱」从各家私有方案走向开放治理的标准件
+- 🚀 **harness 成为显性竞争面：框架层、企业层、消费层同周共振**：LangChain 把 opinionated-default 下沉为框架基线并把可靠性改进自动化；Inkitt 展示企业自建 harness 的可移植方法论（领域专家进开发循环→组织记忆、harness 与模型解耦）；Google Search 把默认 harness 送到 10 亿用户面前——同一周内三层同时把 harness 当作竞争武器
+
 ### 2026-09-26 - Superpowers v6.4.2 与 ADK v2.10.0 双发版 & Cloudflare 边缘层收敛 & 持久化/检查点实现级条目
 
 **更新**：
