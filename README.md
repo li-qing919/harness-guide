@@ -97,6 +97,41 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-28 - CAFE(S) 上下文质量五属性 & QCon「harness engineering 成为核心基础设施」& 压缩验收与 GraphRAG 选型 & 新闻五连收
+
+**更新**：
+
+1. **框架速报（2026-09-28）——发布静默第二日，7 仓无新 release；代码面安全加固主线**（均经 gh api releases 核实）
+   - Star 快照：Superpowers — **292,171** ⭐（+236，累计 +7,511、仍居全列表之首）；BMAD — **53,553** ⭐（+48）；DeerFlow — **83,052** ⭐（+48，与 BMAD 并列第二）；LangGraph — **42,367** ⭐（+39）；CrewAI — **59,101** ⭐（+37）；OpenAI SDK — **29,726** ⭐（+17）；Google ADK — **21,663** ⭐（+12）
+   - 代码动态：OpenAI SDK 09-27 一晚**安全五连**（会话历史强制加密信封 #5204、沙箱递归删除强制 grants #5206、Redis 连接细节移出诊断 #5205 等）；LangGraph 拒绝携带凭证的 Git 依赖（#8542）；DeerFlow 十连修复聚焦取消路径/并发正确性（#5949/#5950/#5860）
+   - 采集方式：Tavily 连续第十日 HTTP 432，Google News RSS 解码 + fetch_text/r.jina.ai + gh api 认证调用
+
+2. **最佳实践新增（04 #82-#84）**：
+   - **#82 CAFE(S)**（Atlassian/DX，09-24，r.jina.ai 全文核验）：上下文质量五属性框架——Clarity/Actionability/Fidelity/Efficiency/(S)ecurity；管线视角 intent→context→harness→model，intent→context 翻译最缺纪律；Notion prompt caching 省 90% 成本、EchoLeak CVE-2025-32711 与 Air Canada 判例入 security 论证；落地=上下文当一等工程产物（有人拥有/评审/随演进维护）
+   - **#83 Compactor 验收**（HackerNoon，微软 Anuj Kapoor，09-25，fetch_text 全文核验）：「可读的摘要仍可能在操作层面是错的」——低频高影响状态字段（禁忌症/审批阈值/回滚阈值）最先被散文压缩糊掉；probe harness 断言决策态幸存 + 免线上模型调用的 CI 单测；先测 token 构成（工具载荷占 92%）
+   - **#84 GraphRAG 6 模式**（TDS，发布时间核正为 09-20，r.jina.ai 全文核验）：Text-to-Cypher/Parallel Hybrid/Sequential Graph-First（+Sparse 变体）/Vector-First/Adaptive Router/Agentic GraphRAG 六架构的权衡与选型菜单——#78 供给侧论证的工程落地配套
+
+3. **新闻收录 5 条（本日条目）**：
+   - **HackerNoon：用 Harness Engineering 重造数据工程**（09-27，fetch_text 全文核验）——现代数据栈为人设计不为 Agent 设计；「生成工程产物 ≠ 交付可靠工程结果」，生产系统要 trusted/verifiable/controlled/recoverable/accountable；Snowflake 与 Databricks 双路径收敛于 Context/Capability/Governance/Execution 四能力；工作流范式从 Write SQL→Monitor→Fix 转向 Understand Intent→Plan→Invoke→Execute→Validate→Learn
+   - **Cerebras 实测：慢助手的 19x 提速**（09-24，fetch_text 全文核验）——晚餐订位基准：Meta Muse 4 分 36 秒（9 次 OpenTable 调用）、Claude Cowork 6 分 25 秒（57 次工具调用）、Grok Bot 7 分 40 秒（单次浏览器串行查 3 家餐厅耗 2 分 18 秒）；Qwen 3.8 27B + Pi harness 压到 22 秒（19x）——harness 管理对话/工具/错误回填是延迟主战场；三手法：并行独立检查（浏览器/API 段 6.8s vs 4 分 31 秒）、加速剩余模型调用、把学到的流程存成 skill（工具调用降 80%+）；提及 Opus 4.5 context compaction 与 CompactionRL
+   - **TechGig：Agent Harness 弥合模型与生产系统鸿沟**（09-25，fetch_text 全文核验）——「围绕模型的一切工程」占生产级 Agent 工程量大头，分开发侧（扩能力）与运营侧（AI 版 DevOps）；选型轴心 Harness-as-a-Service（AWS AgentCore）vs 自管栈（LangChain + Agent Router on K8s）；三大能力：统一模型访问（OpenAI 兼容端点/模型别名/灰度切换为配置变更）、成本控制（每次调用硬上限 + 每用户每日 token 预算）、可观测性（OTel GenAI 语义约定）
+   - **OpenAI 官宣 ChatGPT Workspace Agents**（09-23，r.jina.ai 全文核验）——GPTs 的演进：Codex 驱动、云端常驻、组织内共享、ChatGPT 与 Slack 双入口；research preview（Business/Enterprise/Edu/Teachers），2026-05-06 前免费后 credit 计费；敏感步骤（发邮件/改表格/加日程）可强制审批；企业治理（管理员工具面控制 + Compliance API + prompt injection 防护）；Rippling 实证金句：「构建 agent 的难点不是模型，而是集成、记忆、用户体验」
+   - **QCon AI New York 2026 议程前瞻**（InfoQ 09-25，r.jina.ai 全文核验）——大会主席 Hien Luu：AI engineering has become systems engineering——给 agent 有界执行权威、管理上下文与状态、把概率模型包进确定性控制面，**「harness engineering、持续评估、可观测性、策略执行正在成为核心基础设施」**；keynote Nancy Wang（1Password）讲 agent 身份与授权（委托权威链/多跳审计/凭证不进上下文）；LinkedIn 50 万节点 K8s 运维 agent（限速/删除保护/同行审批）；Netflix 共享推理平台（100 万 QPS/300+ 模型）；DoorDash 无 ground truth 的上线后评估
+
+**去重说明**：本日 15 条（5 新闻 + 7 仓 + 3 实践）逐条全库 grep 复核——新闻 5 条（数据工程重造/Cerebras 实测/TechGig/Workspace Agents/QCon 前瞻）与实践 3 条（CAFE(S)/Compactor/GraphRAG 6 模式）均无同 URL 或同文在册记录，全部为新增。近似主题甄别：CAFE(S) 与 #81 tokenmaxxing 同为 Atlassian 系话语但角度不同（#81 是 Elastic 受访反面模式，本条是五属性定义框架，作者阵容与 URL 均不同）；Compactor 文与 #51/#55 compaction 主线同题但角度全新（验收而非实现）；GraphRAG 6 模式与 #78（Neo4j 供给侧）同方向不同文（工程选型菜单 vs 厂商论证）。连续四日漏网后本日 raw 去重声明首次与 grep 复核一致。
+
+**信源说明**：Tavily 搜索 API 连续第十日 HTTP 432；采集走 Google News RSS（gnews_rss.py 解码）+ fetch_text/r.jina.ai + gh api。正文核验 **8/8 成功**：HackerNoon×2、Cerebras、TechGig 经 fetch_text 直抓全文；OpenAI（JS 挑战）、InfoQ（CAPTCHA）、Atlassian（站点壳）、TDS（403）经 r.jina.ai 全文核验；GitHub star/push/release 经 gh api 认证调用核实（LangGraph、Superpowers 与 raw 差 1 star，以 gh api 为准：42,367 / 292,171；raw 所称近 24h 无新 release 经逐仓复核属实）。
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-09-28 速报（发布静默第二日 + 安全加固代码主线 + 7 仓 star 动态）
+- `04-best-practices.md` — 新增 #82（CAFE(S)）、#83（Compactor 验收）、#84（GraphRAG 6 模式）
+- `README.md` — 追加本日志
+
+**关键洞察**：
+- 📐 **上下文质量从口号进入定义时代**：CAFE(S) 用五属性 + 柱子独立性判据把「好上下文」变成可评审的工程标准（有人拥有/有人评审/随演进维护），Compactor 文同日把「压缩质量」变成可断言的验收对象——**上下文管线的「定义-验收」两端同日到位**，与 QCon 主席「harness engineering 成为核心基础设施」宣言形成工程界/会议圈共振
+- 🔐 **安全加固成为框架代码面共同主线**：OpenAI SDK 一晚五连（加密信封/沙箱 grants/秘密卫生）、LangGraph 拒绝凭证依赖——继治理话语（授权/验证/隔离）之后，秘密的静态治理与最小权限执行开始落到框架默认行为层；OpenAI Workspace Agents 的企业治理面（审批/Compliance API）是同一主线的平台化表达
+- ⚡ **harness 工程的度量从「能不能」转向「快不快、省不省」**：Cerebras 19x 实测把 harness（会话/工具/错误回填）定位为延迟主战场，QCon 把 inference economics 列为一等架构约束，Notion prompt caching 省 90%——延迟与 token 成本正在取代能力成为 harness 竞争的显性指标
+
 ### 2026-09-27 - 验证层补位（Archipelo Salmon EVI）& Docker 承认容器不够用 & LangChain Interrupt 2026 & 新闻五连收
 
 **更新**：

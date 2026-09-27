@@ -3166,3 +3166,77 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 与 #78（Neo4j 企业知识）、#80（Graphify 代码库）成谱系：企业知识、代码库、工具能力三类「窗口外资产」的供给侧工程化在同月密集出现
 - 「grounded 小模型 > 碎片上下文大模型」与 Gemini 3.8 Flash harness 层调优（README 09-26 新闻）同一判断的厂商/工程两侧表述；tokenmaxxing 作为命名反面模式与 #34（harness 是工程学科不是提示词技巧）的「反炼丹」叙事互补
 - ⚠️ **厂商立场标注**：受访者为 Elastic 现场工程负责人，三层框架与 Better Binary Quantisation（向量内存占用最多降 32×）等细节服务于 Elastic 产品叙事；反面模式命名与度量换轨本身可独立采信
+
+---
+
+## 82. Atlassian/DX：CAFE(S) 上下文质量五属性框架——「你的 Agent 只和它的上下文一样好」（2026-09-28 收录）
+
+**来源**：[Atlassian - Introducing CAFE(S): A framework for defining AI context quality](https://www.atlassian.com/blog/ai-at-work/cafes-framework)（Laura McNamara 等与 Max Kanat-Alexander（Capital One）、Eirini Kalliamvakou（DX）、Margaret-Anne Storey（UVic）、Nicole Forsgren（Google）合著；2026-09-24；正式版见 ACM Queue 与 [DX 白皮书](https://getdx.com/whitepaper/the-cafes-framework/)；正文经 r.jina.ai 全文核验）
+
+### 核心论点
+
+- **管线视角**：intent → context → harness → model。三个环节已有成熟学科——ML 研究改进模型、harness engineering 改进编排、产品与需求工作改进 intent——唯独 **intent→context 的翻译最缺纪律**。相邻学科各答各的问题：知识管理问「信息是否存在且被维护」、信息检索问「能否被找到」、context engineering 问「怎么选、怎么组装」，**没有任何一个回答「这份上下文是否胜任手头任务」**——CAFE(S) 补的就是这个空
+- **五属性定义**（前四项问「上下文能否让 Agent 做好工作」，第五项单列括号问「上下文是否根本安全」）：
+  - **Clarity（清晰）**：作者与 Agent 解析一致。歧义时 Agent 可能选中错误解释且**静默执行**，此后每一步都在放大这个选择
+  - **Actionability（可行动）**：有目标、约束与「完成」的定义。缺失时 Agent 空转循环、过早停止、或对着自己推断的（而非被给定的）成功标准宣布完成
+  - **Fidelity（保真）**：准确、最新、内部一致、来源可信。失真时 Agent 自信地从过时指引推理，或用猜测填补空隙——猜完即与事实不可区分
+  - **Efficiency（高效）**：高信噪比。无关内容不只占窗口，还**争夺模型注意力**（关键细节就这样 lost in the middle）；且每个 token 都要付钱——Notion 把上下文工程化为 prompt caching 复用后，**成本降约 90% 且输出质量无损**
+  - **(S)ecurity（安全）**：该不该让 Agent 拿到这些上下文。失败形态是 prompt injection、数据泄露、策略违规而非「效果不好」——EchoLeak（CVE-2025-32711，首个实现真实世界数据外泄的生产级 prompt injection：一封用户从未打开的邮件让 M365 Copilot 把内部文档拉进工作上下文并泄露）与 Air Canada 判例（BC 民事仲裁庭裁定航空公司为聊天机器人承诺的退款担责）说明这是**责任与安全问题**
+- **为什么恰好五个**：柱子独立性判据——不可从其他属性推导、可独立行动、能命名其他属性漏掉的失败。timeliness 并入 Fidelity（过时=不再为真），cost 并入 Efficiency（是下游后果而非工件属性）。五者可独立失败：清晰但不保真（描述的是旧系统）、高效保真但不可行动（从不说完成长什么样）
+- **落地要求**：把交给 Agent 的上下文当**一等工程产物**——有人拥有、有人评审、随系统演进维护。高杠杆动作：AGENTS.md/checked-in specs 引入与代码同级的评审纪律（复用越广审查越严）；runbook/ADR/API schema 等关键上下文源配所有权与评审节奏（归属团队而非个人，穿越组织重组）；**效率是位置问题**（测试套件指令放根 AGENTS.md 是高质量，罕见文件指令塞进数千无关会话则有害——移入该文件注释即变高质量，字没变只有位置变了）；**安全是边界问题**（邮件/ticket/PR 内容是输入不是指令——把它们当指令正是 prompt injection 的机制）
+- **结论句**：CAFE(S) 不声称好上下文就足以把钥匙交给 Agent；它只是说明**没有好上下文就不该交**
+
+### 与既有条目的关系
+
+- 与 #81（tokenmaxxing）、#73（Atlassian 设计系统 CLI）同厂不同层：#73 是传输管道实践、#81 是反面模式命名与度量换轨、本条是**上下文质量的正向定义框架**——Atlassian 系话语成体系化
+- 与 #34（harness 是工程学科）互补：harness engineering 管编排质量，CAFE(S) 管**喂给编排的东西本身的质量**——管线两端的工程化标准同月到位
+- EchoLeak 与 01 章 OpenAI compaction 自我注入（09-19 收录）同向：上下文管线（注入面/压缩面）正式成为安全边界；Notion prompt caching 与 Superpowers v6.4.x「规划只记决策」同为成本工程实证（复用与瘦身两条路径）
+- 「intent→context 翻译最缺纪律」为 #75（Context Arbitration 仲裁层）与 #76（LinkedIn 组织级上下文层）提供上游理论支点——企业上下文工程的定义/仲裁/供给三层开始闭环
+
+---
+
+## 83. HackerNoon（微软）：先别怪模型，查查你的 Compactor 删掉了什么——压缩质量的可断言验收（2026-09-28 收录）
+
+**来源**：[HackerNoon - Before You Blame the Model, Check What Your Compactor Deleted](https://hackernoon.com/before-you-blame-the-model-check-what-your-compactor-deleted)（Anuj Kapoor，Microsoft 高级软件工程师，AI agents/workflow orchestration 方向；2026-09-25；正文经 fetch_text 全文核验）
+
+### 核心论点
+
+- **一句话中心**：「可读的摘要仍可能在操作层面是错的」。多数团队像编辑一样评审压缩产物（「读起来顺不顺、全不全」），生产系统需要的是另一种检查：**断言「下一步决策所需的精确状态是否幸存」**
+- **失败模式跨域同构**：每个领域都有低频出现但高影响的状态字段，恰是散文式压缩最先糊掉的东西——医疗（禁忌症/剂量约束/转诊归属）、金融（审批阈值/冲正承诺/合规标志）、法律运营（辖区约束/立案截止/必需评审人）、事件响应（爆炸半径/回滚阈值/升级 owner）、供应链（冷链约束/交付异常/交接归属）
+- **端到端演练**：SRE 助手拿到「范围仅 us-east-1、禁止重启数据库、错误率超 4% 持续 10 分钟触发回滚预案 B」→ 若干工具调用后 compaction 运行 → 数分钟后助手提议**全局重启**且错过回滚阈值。模型没有变笨，是压缩态丢了关键约束
+- **方法三步**：
+  1. **先测 token 构成再动手**：参考实现中对话仅 445 tokens、工具结果 5,400 tokens（占窗口 92%）——工具载荷才是主战场，只压缩对话是小优化
+  2. **已消费的工具载荷换成 re-fetch 指针**：已参与决策的工具结果移出活动上下文，保留可重取指针再压缩
+  3. **probe harness 做决策态断言**：不对摘要做编辑式评审，而是断言决策关键字段在压缩后仍精确在场；配套**不依赖线上模型调用**的 CI 化单测方案
+- 与「模型幻觉」归因的分界：模型常是在**忠实执行**被压坏的上下文——先修管线再修模型
+
+### 与既有条目的关系
+
+- 与 #51（compaction 工程实现）、#55（MarkTechPost 四机制）同主题新维度：从「怎么压缩」推进到「**怎么验收压缩**」——压缩有了自己的测试方法论
+- 与 01 章 OpenAI compaction 自我注入报告（09-19 收录）互证：compaction 摘要同时是可靠性载体（本条）与安全载体（自注入）——压缩管线需要双重治理
+- 与 Cerebras 19x 实测（README 本日新闻）提及的 Opus 4.5 代 context compaction、CompactionRL 研究同周共振：**压缩质量正在成为长时程 Agent 的核心可靠性瓶颈**——平台在优化压缩、研究在训练跨压缩步工作、工程侧开始验收压缩
+
+---
+
+## 84. TDS：GraphRAG 从业者指南——6 种高级架构模式的选型权衡（2026-09-28 收录）
+
+**来源**：[Towards Data Science - GraphRAG: A Practitioner's Guide to 6 Advanced Architectural Patterns](https://towardsdatascience.com/graphrag-a-practitioners-guide-to-6-advanced-architectural-patterns/)（2026-09-20 发布；正文经 r.jina.ai 全文核验。注：采集时误标 09-27，以页面元数据 2026-09-20T15:00Z 为准）
+
+### 核心机制
+
+- **伞形术语拆解**：「GraphRAG」在实践中是数种根本不同的架构模式，其中若干模式里知识图谱并非唯一知识存储；**选型取决于查询模式、成本、延迟与能力**，而非把图谱当万能药
+- **基线四组件**：信息抽取（LLM 做 NER+关系抽取，计算昂贵且依赖良定义本体）→ 图存储（Neo4j/NebulaGraph/Memgraph，Cypher 遍历，节点可嵌入做相似回退）→ 检索（**模式分化之处**）→ 生成（图数据注入上下文合成）
+- **六模式速览**：
+  1. **Text-to-Cypher（图查询生成）**：LLM 只当查询翻译器（schema 注入 + few-shot + 报错回执自纠环）。检索 100% 确定性、**唯一原生支持计数/均值等聚合**；无节点嵌入时词汇不匹配即返回空（脆）
+  2. **Parallel Hybrid（向量+图并行）**：双库并发查询、结果拼接注入。高召回、延迟取慢者而非两者之和；token 重、部分查询下冗余
+  3. **Sequential Hybrid（Graph-First）**：图遍历结果过滤聚焦向量搜索，砍冗余省 token；**Sparse Graph 变体**用 SpaCy/小模型只抽高层关键实体的稀疏骨架图，直击「稠密图谱抽取太贵」这一 GraphRAG 采用的最大成本障碍
+  4. **Sequential Hybrid（Vector-First）**：向量先行、图补确定性关系
+  5. **Adaptive Router Agent**：路由 agent 分析查询意图/实体密度/关系复杂度，动态选路（Text-to-Cypher/Vector-Only/Graph-First/Vector-First/Parallel）——查询结构不可预测的通用企业搜索的现实选择
+  6. **Agentic GraphRAG**：自主 agent 持 `query_graph(cypher)`/`search_documents(语义)` 双工具，ReAct 循环中在结构化关系与非结构化文本间迭代导航、scratchpad 记录发现、死路回溯；需 LangGraph/AutoGen 级框架承载；无界推理上限最高，延迟与成本也最难预测
+
+### 与既有条目的关系
+
+- 与 #78（Neo4j 供给侧）构成 GraphRAG 叙事两端：#78 讲「为什么知识要以图谱形态备货」（厂商立场已标注），本条讲「图谱落地时选哪种架构」——**供给侧论证 + 工程选型菜单**，后者无厂商绑定
+- Pattern 5（Adaptive Router）与 TechGig Agent Router（README 本日新闻，模型层路由）同构：**路由决策从模型层上移到检索架构层**——「为每类查询选对执行路径」成为独立设计面
+- Pattern 6（Agentic GraphRAG）把检索管线本身 agent 化，与 DeerFlow「SuperAgent harness」、QCon「bounded execution authority」（README 本日）同属编排思想下沉：静态管线→受权 agent 迭代导航
+- Sparse Graph 变体的成本主张与 #80 Graphify（AST+图谱省 token）、Superpowers v6.4.x「规划只记决策」同向：**上下文供给的结构化瘦身是跨层共识**
