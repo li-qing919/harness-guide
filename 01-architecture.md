@@ -1053,6 +1053,7 @@ harness 正是解决**可靠性/责任层**（reliability & accountability）的
 
 - Google 开源 EnvHarness：让 AI agent 在**随训练进程动态演化的环境**中练习，而非静态固定环境
 - 架构含义：harness 概念正式分化出「环境侧」分支——运行时 harness（循环/工具/权限）之外，**训练与评估基础设施**成为平行的新工程领域
+- **2026-09-29 补充（GitHub API 核实）**：仓库 [google-research/envharness](https://github.com/google-research/envharness) 606 ⭐、创建于 2026-08-07、最后推送 2026-08-21——开源后活跃约两周即停滞，环境侧 harness 分支的社区热度与维护节奏待观察
 
 ### 与既有条目的关系
 

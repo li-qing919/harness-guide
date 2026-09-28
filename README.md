@@ -97,6 +97,42 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-09-29 - CrewAI 1.15.23 出货（Gemini 3.8 Flash + crewai eval）& AGENTS.md 实证经济学 & Credentials API 密钥隔离 & Opus 5.5 迁移冲击与 ART 发现
+
+**更新**：
+
+1. **框架速报（2026-09-29）——CrewAI 1.15.23 唯一新 release；代码面运行时健壮性主线**（均经 gh api releases 核实）
+   - Star 快照：Superpowers — **292,479** ⭐（+308，累计 +7,819、连续居首）；DeerFlow — **83,162** ⭐（+110，日增第二）；LangGraph — **42,424** ⭐（+57，累计 +1,015 破千）；CrewAI — **59,147** ⭐（+46）；BMAD — **53,594** ⭐（+41）；OpenAI SDK — **29,748** ⭐（+22）；Google ADK — **21,671** ⭐（+8）
+   - CrewAI 1.15.23（09-28 21:14 UTC）：原生 Gemini 3.8 Flash、`crewai eval` 经 AMP 评估并记录最近 traced run（跑完即评闭环）；旧地址 joaomdmoura/crewAI 经 curl 实测 HTTP 301 → crewAIInc/crewAI
+   - 代码动态：DeerFlow 非有限值/配置类型校验五连（#6009/#5990/#5997 等）；ADK abort_signal 全组件贯通 + 并行流合并修复；OpenAI SDK 压缩模型命名/流式取消修复 + release-please 整备（⚠️ raw 误记其 09-18 后无推送，实际 09-28 六连提交）；BMAD v7 前命名收敛（bmad-preview-ticketing → bmad-ticket）
+   - 采集方式：Tavily 连续第十一日 HTTP 432，Google News RSS 解码 + fetch_text/r.jina.ai + gh api 认证调用
+
+2. **最佳实践（04 新增 #85、增量更新 #14/#56）**：
+   - **#85 Augment Code AGENTS.md 指南**（fetch_text 全文核验）：ETH Zurich × LogicStar 实证——上下文文件未显著提升成功率（生成文件 +20~23% 成本且 -0.5~-2% 成功率；人工文件比生成好 7%、p=0.038）；仓库概览是唯一无效部分；六段式构造（精确版本栈/全旗标命令/真实片段约定/测试规则/三级禁触区/非标准工具链）；Claude Code 不读 AGENTS.md（import/symlink 桥接）；Codex 32 KiB 拼接硬顶会静默丢弃深树叶子文件
+   - **#14 增量**（r.jina.ai 核验）：补齐 agentic search / structured note-taking / sub-agent architectures（子代理只回传 1,000-2,000 token 浓缩摘要）三大长时程技术与 compaction「先 recall 后 precision」调参法；raw 所称「稀缺资源」表述未在正文检出，未收录
+   - **#56 增量**（fetch_text 核验）：作者 Jeff Hollan（VP of PM, Foundry Agent Service）、09-02 发布、四部曲第 3 篇；上下文是 agent 唯一能自我改进的部分；Agent optimizer 自动生成改进指令/skills/工具描述闭环
+
+3. **新闻收录 3 条（本日条目）+ 1 条在册增量**：
+   - **Anthropic 发布 Claude Opus 5.5 + The New Stack 迁移冲击报道**（官方 r.jina.ai 全文核验 / TNS 基于标题与元数据）：Opus 5.5（09-22）典型负载成本降 40%（cache reads $0.20/M、-60%）、输出提速 30%+、行为审计史上最强、外部评测（Frontier Design/METR）；680,000 行代码迁移一日完成。The New Stack（09-23）《Anthropic made Opus 5.5 cheaper. Then it broke four things your agent depends on》——模型层变更直接破坏上层 harness 假设，与 Superpowers v6.4.2 修复 Opus 5.5 规划期越权（#2333）互证：**模型换代期 = harness 规则重校准期**；另 09-28 有迁移指南报道提及 Agent「中途停摆」源于程序误判（二手源，背景提及）
+   - **Phil Schmid：Gemini Managed Agents 推出 Credentials API**（09-28，fetch_text 全文核验）：密钥服务端保存（write-only、静态加密、API 只回元数据）、egress proxy 在网络层按 trusted_domains 注入；三类凭据 bearer_token / oauth2（自动刷新）/ environment_variable（容器内仅占位符 `__GEMINI_CRED_<id>__`，出站时代理换真值、域外 403）；GitHub MCP + 只读 token 的 PR 审查示例——「沙箱内任何依赖都能读 os.environ」的旧模式被架构性淘汰
+   - **Anthropic：Claude 借长时程 Agent 工作流发现 CRISPR 样 ART 酶系统**（09-23，r.jina.ai 全文核验）：950 个 agent 并行 21 小时、2.1 亿 token，从 20 万+ RT 中筛出 array-associated reverse transcriptases（噬菌体、重复阵列似 CRISPR、功能待定）；人类只给初始 prompt 与实验室验证；Feng Zhang 背书；官方明确提及「a harness of our own that coordinates many Claude sessions running in parallel」——**海量并行会话协调 harness 的科研级公开展示**
+   - **Google EnvHarness 仓库数据补充**（在册增量，01 章 09-22 条目）：google-research/envharness 606 ⭐、创建 2026-08-07、最后推送 08-21（GitHub API 核实）——开源后活跃两周即停滞，环境侧 harness 分支的社区热度待观察
+
+**去重说明**：本日 14 条（4 新闻 + 7 仓 + 3 实践）逐条全库 grep 复核。实践 3 条中 2 条为存量正典增量更新——Anthropic Effective Context Engineering → 04 #14（2026-03-29 收录，09-18/09-22 曾两次判重跳过，本日做增量补充而非新增）；Azure Economics → 04 #56（2026-09-14 收录同 URL，补作者/系列/闭环细节）；Augment Code 指南为新增 #85（与 #59 Termdock 同域不同文：实证经济学 vs 工作流组织）。新闻 4 条中 EnvHarness 为 01 章 09-22 在册（VentureBeat 同 URL），仅补仓库数据；其余 3 条（Opus 5.5 迁移 / Credentials API / ART）无同 URL 或同文在册，为新增——其中 Opus 5.5 此前仅在 Superpowers v6.4.2 release 语境被顺带提及，本日首次作为独立条目收录。raw 的去重声明（Step1 对照 09-28）与 grep 复核一致。
+
+**信源说明**：Tavily 搜索 API 连续第十一日 HTTP 432；采集走 Google News RSS（gnews_rss.py 解码）+ fetch_text/r.jina.ai + gh api。正文核验 **9/10 成功**：Phil Schmid、Azure、Augment Code 经 fetch_text 直抓全文；Opus 5.5、ART、Effective Context Engineering 经 r.jina.ai 全文核验；7 仓 star/push/release 及 CrewAI 301 重定向经 gh api/curl 核实（LangGraph 42,424 与 raw 差 2、Superpowers 292,479 差 1，以 gh api 为准）。The New Stack 经 r.jina.ai 仅得标题与发布时间（2026-09-23T12:00Z），正文为 Cloudflare cookie 墙所阻——相应摘要标注「基于标题/元数据」；VentureBeat 同阻，EnvHarness 以 GitHub API 数据补充。raw 之外核验发现：OpenAI SDK 实际 09-28 有六连推送（raw 误记 09-18）；Anthropic ctxeng 原文无「稀缺资源」表述。
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-09-29 速报（CrewAI 1.15.23 + 运行时健壮性主线 + 7 仓 star 动态）
+- `04-best-practices.md` — 新增 #85（Augment Code AGENTS.md）；#14、#56 增量补充
+- `01-architecture.md` — EnvHarness 条目补仓库数据一行
+- `README.md` — 追加本日志
+
+**关键洞察**：
+- 🧬 **harness 的公开展示进入「科研级」量级**：ART 发现中 950 个并行 Claude 会话、21 小时、2.1 亿 token 由自研 harness 协调完成——「harness of our own」从工程博客话术变成重大科学发现的直接依赖；长会话状态管理与错误恢复的可靠性要求有了最硬的参照场景
+- 🔑 **密钥治理从「最佳实践」落到「架构默认」**：Credentials API 把秘密从环境变量（沙箱内任何依赖可读）移到服务端 + egress proxy 网络层注入——与 OpenAI SDK 加密信封（09-27）、LangGraph 拒凭证依赖（#8542）同周共振，**「密钥不进上下文/不进沙箱」成为三方同时收敛的默认架构**
+- 📉 **上下文文件进入「实证经济学」时代**：ETH Zurich 数据给出 AGENTS.md 的成本底价（~20% 推理开销）与收益边界（概览无效、只写不可推断项、文档稀薄仓库才见增益）——与 CAFE(S)（#82 质量定义）、Compactor 验收（#83）共同把上下文工程从「信仰」推向「可测量」；模型换代冲击（Opus 5.5 破坏四事）则提醒：**harness 假设本身需要随模型版本纳管**
+
 ### 2026-09-28 - CAFE(S) 上下文质量五属性 & QCon「harness engineering 成为核心基础设施」& 压缩验收与 GraphRAG 选型 & 新闻五连收
 
 **更新**：

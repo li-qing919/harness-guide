@@ -691,6 +691,18 @@ Anthropic 官方发布 Context Engineering 完整指南，覆盖五大上下文�
 - 支持通过文件系统在上下文窗口外存储和查询信息
 - 解决长任务中上下文窗口限制问题
 
+#### 2026-09-29 增量补充（正文经 r.jina.ai 全文核验）
+
+针对 context pollution（而非窗口大小——「等更大窗口」不解决相关性问题），官方给出三大长时程技术，与上文四大策略互补：
+
+- **Agentic search（自主检索）**：让 agent 自主导航与检索数据，本身即渐进披露——文件大小暗示复杂度、命名约定暗示用途、时间戳作相关性代理；agent 逐层组装理解、工作记忆只保留必要子集，配笔记策略做额外持久化
+- **Structured note-taking（结构化笔记/agentic memory）**：agent 定期把笔记写入窗口外的持久记忆，后续按需拉回上下文窗口——适合有清晰里程碑的迭代开发
+- **Sub-agent architectures（子代理架构）**：专注子任务的子代理用干净上下文深挖（每个可用数万 token），只向主 agent 回传 1,000-2,000 token 浓缩摘要——关注点分离，主 agent 负责综合分析；multi-agent research system 实证在复杂研究任务上显著优于单 agent
+- **Compaction 调参法**：先最大化 recall（确保压缩提示捕获轨迹中每一处相关信息），再迭代提升 precision（剔除冗余）；Claude Code 实现保留架构决策/未解 bug/实现细节 + 最近 5 个访问文件
+- **系统提示「right altitude」论**：在硬编码脆弱逻辑与空泛指导之间取 Goldilocks 区间，追求「完整勾勒预期行为的最小信息集」（minimal ≠ short）；整体守则是 keep your context informative, yet tight
+
+> 注：本条为存量正典的增量核验——raw 所称「上下文是稀缺资源、系统提示每句话有机会成本」表述未在正文检出，不单独收录。子代理隔离与 #25（Schmid/Manus 可逆压缩）同题互证；AGENTS.md 的实证成本数据见 #85。
+
 ---
 
 ## 15. Context Engineering 六大核心技术（2026-03-29 更新）
@@ -2700,6 +2712,8 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 2. **精准检索 > 长上下文堆料**：注入越精准，成本越低、质量越高
 3. **云厂商正式入场**：Azure 以官方博客背书 context engineering，与 AWS/Google 的同类内容一起标志「harness 教育期」进入云厂商渠道
 
+**2026-09-29 增量核验（fetch_text 全文）**：作者 Jeff Hollan（VP of PM, Foundry Agent Service），2026-09-02 发布，系四部曲系列第 3 篇（第 1 篇立「三个决策」框架；第 2 篇讲运行时请求侧「Command Line, Tool search」，07-29）。核心新细节：上下文是 agent 中**唯一能自我改进的部分**——模型能力选定时即固定、指令只有人为重写才变，而「agent 知道什么、能访问什么、记住什么」随运行增长；Foundry Agent Service 的闭环是 Agent optimizer 分析 agent 行为后自动生成改进的指令/skills/工具描述/模型配置（知识库随源系统刷新、工具搜索按实际使用自适应、记忆沉淀用户与成功工作流）——「把 AI 当作可管理的投资系统运营」的产品化表达（Microsoft Foundry + Purview 治理）。
+
 ---
 
 ## 57. Oracle：构建能在生产环境存活的 Agent Harness（2026-09-14 收录）
@@ -3240,3 +3254,25 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - Pattern 5（Adaptive Router）与 TechGig Agent Router（README 本日新闻，模型层路由）同构：**路由决策从模型层上移到检索架构层**——「为每类查询选对执行路径」成为独立设计面
 - Pattern 6（Agentic GraphRAG）把检索管线本身 agent 化，与 DeerFlow「SuperAgent harness」、QCon「bounded execution authority」（README 本日）同属编排思想下沉：静态管线→受权 agent 迭代导航
 - Sparse Graph 变体的成本主张与 #80 Graphify（AST+图谱省 token）、Superpowers v6.4.x「规划只记决策」同向：**上下文供给的结构化瘦身是跨层共识**
+
+---
+
+## 85. Augment Code：How to Build Your AGENTS.md——上下文文件的实证经济学与六段式构造（2026-09-29 收录）
+
+**来源**：[Augment Code - How to Build Your AGENTS.md: The Context File That Makes AI Coding Agents Actually Work](https://www.augmentcode.com/guides/how-to-build-agents-md)（Ani Galstian；2026-03-31 首发、2026-09-04 更新；正文经 fetch_text 全文核验）
+
+### 核心机制
+
+- **定位**：AGENTS.md = 放在仓库根部的 Markdown 上下文文件，提供 agent 无法从代码库自行推断的持久项目指引（构建命令、约定、测试规则、约束）。OpenAI 2025-08 发布规范，spec 站点报告 60,000+ 开源项目在用；2025-12-09 Linux Foundation 的 Agentic AI Foundation（AAIF）接管 AGENTS.md，与 Anthropic 的 MCP、Block 的 goose 同列治理
+- **实证基线（ETH Zurich × LogicStar.ai preprint，2026-06-23 修订版）**：4 模型 × SWE-bench Lite + 自建 CTXbench（12 仓 138 issue）。结论冷静——**上下文文件未显著提升任务成功率**：LLM 生成文件降低解决率 0.5%/2%（p=0.87/0.37 不显著）且推高推理成本 20%/23%（唯一显著变化）；人工撰写文件平均 +2.4%（p=0.21 不显著）但**比生成文件好 7%（p=0.038 显著）**、成本至多 +19%。追踪分析显示成本去向：指令被良好遵循→更多测试与探索→更多步数；**仓库概览（repository overview）是唯一无效部分**——「虽受模型厂商推荐，实则无益」
+- **反直觉补充实验**：删掉仓库其余文档后再测，生成文件反而 +2.7% 且优于人工文件——「文档稀薄的仓库里，上下文文件就是文档」：AGENTS.md 的边际价值与既有文档完备度成反比
+- **只写不可推断的内容（论文建议 + 2500+ 文件 GitHub 分析收敛的六段式）**：① 精确版本的技术栈定义（Inngest：「ALWAYS USE pnpm - DO NOT use npm」）；② 带完整旗标的可执行命令（未列出的测试命令 agent 没有理由运行）；③ 编码约定用真实代码片段而非三段描述（最有价值的是反直觉约定：NetCore「client.api 永不抛异常，包 try/catch 恒错」）；④ 测试规则；⑤ ✅/⚠️/🚫 三级「禁触区」（「never commit secrets」是 2500+ 仓最常见有效约束）；⑥ 非标准工具链（pixi 等 LLM 训练数据欠代表工具 ROI 最高）
+- **工具变体矩阵**：Claude Code 读 CLAUDE.md 不读 AGENTS.md（@AGENTS.md import 或 symlink 桥接；auto memory 默认开；claudeMdExcludes 防大 monorepo 指令渗漏）；Cursor 根目录 AGENTS.md + .cursor/rules MDC glob 作用域；Copilot .github/copilot-instructions.md + applyTo glob + 任意位置 AGENTS.md；Devin Desktop 喂入同一规则引擎。多工具团队用 symlink 防漂移（Next.js 仓库：「CLAUDE.md is a symlink to AGENTS.md」）
+- **模块化拆分**：Anthropic 建议等价文件 <200 行（更长=更多上下文+更差依从）；Codex 机制是根到叶**拼接而非替换**（更近文件因在组合提示中更晚出现而覆盖早指导），且有 project_doc_max_bytes 32 KiB 硬顶——深树叶子文件可能被静默丢弃
+
+### 与既有条目的关系
+
+- 与 #59（Termdock CLAUDE.md+AGENTS.md 实战）互补：#59 讲「怎么组织工作流」，本条给出**实证的放什么/不放什么**（概览无效、只写不可推断项）与成本底价（~20% 推理开销）——实践文升级为证据文
+- 「只写 agent 无法独立发现的内容」与 #14（Anthropic 最小信息集）、Superpowers v6.4.x「规划只记决策」同向：**上下文供给的最小化原则跨层一致**；ETH 数据同时是 #81 tokenmaxxing（堆料无益）的量化注脚
+- 仓库概览无效的发现与 #80 Graphify（结构化图导航取代线性文件浏览）形成张力：概览散文不值 token，结构化查询路径值——「窗口外资产」要以可查询形态备货而非以散文形态预载
+- 「文档稀薄仓库里上下文文件即文档」为 03 章 AGENTS.md 分层指导（根 + 子目录覆盖）补上适用边界：文档完备仓库边际收益趋零，先补 README 再谈 AGENTS.md
