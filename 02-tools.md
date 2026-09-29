@@ -1163,6 +1163,49 @@ async function verifyUI() {
 
 ---
 
+## 2026-09-30 框架版本迭代速报
+
+> 数据：gh api 认证调用，2026-09-30 采集；当日净增相对 09-29 快照，累计相对 09-11 基线（7 仓全口径）。**今日无新 release——发布静默日**，7 仓最新版本均与昨日一致（Superpowers v6.4.2、DeerFlow v2.1.0、LangGraph cli==0.4.32.dev0 预发布、OpenAI Agents SDK v0.22.3、CrewAI 1.15.23、Google ADK v2.10.0、BMAD v6.12.0），更新以持续提交为主。代码面两大主线：**上下文管理集中化**（CrewAI 09-29 四连：SummarizeMessages 收敛 + context windows 表集中刷新）与**审批/会话状态保持**（OpenAI SDK #5240 审批恢复时保留已完成工具结果）；DeerFlow 与 ADK 各自 11/15 连修复（raw 仅各列 3 条，已按 gh api 补全），主题为连接/会话生命周期关闭与 MCP 传输健壮性。行业焦点当日密集转向**harness 边界与安全**：Manus 2.0 以 Cascade harness 为核心卖点（实测配置 -32% 运行成本）、NVIDIA 把 agent 安全下沉到 CPU/DPU 硬件层（明确「模型与 agent harness 之外的可强制执行边界」）、Axios 报道 kill switch 未能拦停失控 Agent（Anthropic 将事件定性为 harness/运维失效而非模型对齐失效），见 README 本日条目。采集方式：Tavily 搜索 API 连续第十二日 HTTP 432，Google News RSS（gnews_rss.py 解码）+ fetch_text/r.jina.ai 直抓 + gh api 认证调用。CrewAI 维持 crewAIInc 组织（旧地址 301），无 URL 变更。
+
+**Star 增幅排名（日，gh api 口径）**：Superpowers +455 ≫ DeerFlow +65 > LangGraph +53 > BMAD +48 > CrewAI +46 > OpenAI SDK +21 > ADK +9（与 raw 微差：DeerFlow 83,227 vs 83,228、Superpowers 292,934 vs 292,931，以 gh api 为准）
+
+### CrewAI ⭐ 今日焦点 (59,193 ⭐，crewAIInc/crewAI)
+- ⭐ 当日 **+46**/天，较 09-11 基线累计 **+850**（58,343）；`1.15.23` (2026-09-28) 已在册，无新版本
+- push 2026-09-29（06:17-15:53 UTC）四连（raw 记三连，#7806 为核验补全）：**refactor 消息摘要逻辑收敛进 SummarizeMessages（#7815）**、**refactor(llms) 集中化管理并刷新各 LLM 的 context windows 表（#7796）**、fix(tracing) tracing 用量上报改从 grant exporter 取数（#7810）、fix(cli) `crewai eval` 未过 gate 时以退出码 1 退出且未登录时提示登录（#7806）
+- 📌 **启示**：三处重构同时指向**上下文管理的集中化**——摘要、模型上下文窗口表、用量上报各自收敛到单一组件，与 1.15.23 的 eval/tracing 闭环同周；「每个 LLM 的 context windows 表」成为框架自有资产而非散落常量，是新模型快速接入（Gemini 3.8 Flash 同周）的地基
+
+### Superpowers / obra (292,934 ⭐)
+- ⭐ 当日 **+455**/天，全列表最高；较 09-11 基线累计 **+8,274**（284,660）；`v6.4.2` (2026-09-25) 已在册，无新版本
+- 默认分支最新提交仍为 v6.4.2 release 提交（09-25 18:06 UTC），仓库推送活动停在 09-27 02:37 UTC——与昨日快照一致，连续第二日无新推送
+- 📌 **启示**：29 万+ star 体量下无代码活动仍维持 +455 日增（近五日最高），v6.4.2「规划只记决策」叙事的长尾发酵期；「口碑惯性 > 发布节奏」的高增长模式跨周成立
+
+### DeerFlow / ByteDance (83,227 ⭐)
+- ⭐ 当日 **+65**/天，较 09-11 基线累计 **+1,010**（82,217，累计增幅破千）；`v2.1.0` (2026-09-24) 已在册，无新版本
+- push 2026-09-29（08:53-14:10 UTC）**十一连修复**（raw 仅列 3 条）：Gateway 加载的 config.yaml 升级修复（#5991）、沙箱 glob 模式根相对化并支持递归 `**`（#6046）、Helm chart 外部 PostgreSQL 示例文档（#6038）、file_signature 测试夹具写为 bytes 防 CRLF 泄漏（#6042）、每调用 Firecrawl 客户端异步 HTTP 池关闭（#6013）、uploads 保留人类消息元数据（#5972）、工具与中间件中解包 Overwrite 包裹的沙箱状态（#6015）、Lark 集成运行时状态一致（#5994）、**取消时冲刷受管子代理变更（#6023）**、doctor 检查 Gateway 实际加载的配置（#5987）、**线程删除时关闭线程级 MCP 会话（#5956）**
+- 📌 **启示**：修复主题从输入校验（昨日）转向**连接与会话生命周期**——HTTP 池、MCP 会话、受管子代理变更都在拿「关闭/冲刷」路径开刀；长时程 harness 的可靠性债偿还顺序：流程正确 → 输入域防御 → 资源生命周期
+
+### OpenAI Agents SDK (29,769 ⭐)
+- ⭐ 当日 **+21**/天，较 09-11 基线累计 **+437**（29,332）；`v0.22.3` (2026-09-17) 已在册，无新版本
+- push 2026-09-29（05:04-19:38 UTC）五连（raw 记三条，#5230/#5238 为核验补全）：**fix 审批恢复时保留已完成的工具结果（#5240）**、fix 归一化可空 Chat Completions token 计数（#5238）、ci release candidate 准备与审阅自动化（#5230）、deps temporalio 1.26→1.33（#5233）、deps cryptography 50.0.1（#5234）
+- 📌 **启示**：#5240 补上 human-in-the-loop 的中断恢复缺口——审批挂起期间已完成的工具调用结果不因流程恢复而丢失，**审批流的状态保持**成为一等修复对象；release-please（昨日）→ RC 自动化（今日）连续两日整备发布管线，v0.22.4 在途证据链完整；temporalio 七个 minor 版本的跨越升级续押长时程工作流
+
+### LangGraph / LangChain (42,477 ⭐)
+- ⭐ 当日 **+53**/天，较 09-11 基线累计 **+1,068**（41,409）；最新 release 仍为 `cli==0.4.32.dev0` 预发布（2026-09-23），无新版本
+- 默认分支最新提交仍为 09-27 的「拒绝携带凭证的 Git 依赖」（#8542，09-28 速报已收录），本周期默认分支最安静；仓库推送时间戳显示 09-29 16:44 UTC 有非默认分支活动（含 docs/infra 类分支）
+- 📌 **启示**：凭证依赖拒绝后连续第三日无默认分支提交——大版本预发布（0.4.32.dev0）后的沉淀期；「resilient agents」定位下日增稳定 +50 量级
+
+### BMAD-METHOD (53,642 ⭐)
+- ⭐ 当日 **+48**/天，较 09-11 基线累计 **+774**（52,868）；`v6.12.0` (2026-09-04) 仍为最新 release
+- 默认分支最新提交停在 2026-09-28（#2981/#2983/#2975/#2979——均为昨日速报已收录内容，raw 今日重复罗列，判重复不重复计入）；仓库推送时间戳显示 09-29 12:49 UTC 有非默认分支推送
+- 📌 **启示**：v7 主线前静默期；star 增速（+48）与代码活动继续脱钩——方法论框架的受众扩张先于代码出货
+
+### Google ADK (21,680 ⭐)
+- ⭐ 当日 **+9**/天，较 09-11 基线累计 **+190**（21,490）；`v2.10.0` (2026-09-25) 已在册，无新版本
+- push 2026-09-29（00:44-21:38 UTC）**十五连**（raw 仅列 3 条）：GcpSkillRegistry 下载技能时跟随重定向、`--avatar_config` 仅对请求视频的 live 会话生效、检测藏在 dispatcher 后面已死亡的 MCP 会话（raw 三条全核）＋ MCP SDK 2.x 现代协议可选连接路径（e738c26）、兄弟工具调用已应答时重放从未执行的并行调用（7298e09）、NodeTool 失败上浮 on_tool_error 并返回字典校验错误（b4c5272）、Redis 会话加盖事件时间戳（def458b）、skip_summarization 从节点工具传播到工具响应（5a0421c）、非 live 模式同步工具遵守 tool_thread_pool_config（c50ade3）、Vertex 多轮 eval 跳过无内容事件（fd2ca87）等
+- 📌 **启示**：MCP 传输健壮性（死亡会话检测 + 2.x 协议路径）与**会话时间戳**（Redis 事件加盖）同日落地——ADK 在把「连接与会话的可观测边界」补进运行时；并行工具调用的「未跑重放」修复是并发正确性的又一细粒度案例，与昨日并行流合并修复接力
+
+---
+
 ## 2026-09-29 框架版本迭代速报
 
 > 数据：gh api 认证调用，2026-09-29 采集；当日净增相对 09-28 快照，累计相对 09-11 基线（7 仓全口径）。今日 1 个新 release：CrewAI **`1.15.23`**（2026-09-28 21:14 UTC——原生 Gemini 3.8 Flash 支持 + `crewai eval` 经 AMP 评估并记录最近一次 traced run，距上一版 1.15.22 间隔 12 天，release notes 逐条核实）。其余 6 仓最新版本均已在册（Superpowers v6.4.2、DeerFlow v2.1.0、LangGraph langgraph-cli 0.4.32.dev0、OpenAI Agents SDK v0.22.3、Google ADK v2.10.0、BMAD v6.12.0）。本日代码面主题是**运行时健壮性**：DeerFlow 连续修复非有限值/配置类型校验、ADK 加 abort_signal 并修并行流合并、OpenAI SDK 回归压缩命名与流式取消并整备 release-please 发布自动化（⚠️ raw 所称「OpenAI SDK 09-18 后无推送」有误，实际 09-28 有六连提交）。行业焦点当日转向模型层变更对 harness 的冲击（Opus 5.5 迁移踩坑、Phil Schmid Credentials API 密钥隔离、Anthropic ART 发现中 950 个并行 Claude 会话的自研 harness，见 README 本日条目）。采集方式：Tavily 搜索 API 连续第十一日 HTTP 432，Google News RSS（gnews_rss.py 解码）+ fetch_text/r.jina.ai 直抓 + gh api 认证调用。CrewAI 旧地址 joaomdmoura/crewAI 经 curl 实测返回 HTTP 301 → crewAIInc/crewAI，本文档链接复查无旧 URL 残留，无变更。

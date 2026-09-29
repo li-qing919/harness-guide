@@ -2714,6 +2714,8 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 **2026-09-29 增量核验（fetch_text 全文）**：作者 Jeff Hollan（VP of PM, Foundry Agent Service），2026-09-02 发布，系四部曲系列第 3 篇（第 1 篇立「三个决策」框架；第 2 篇讲运行时请求侧「Command Line, Tool search」，07-29）。核心新细节：上下文是 agent 中**唯一能自我改进的部分**——模型能力选定时即固定、指令只有人为重写才变，而「agent 知道什么、能访问什么、记住什么」随运行增长；Foundry Agent Service 的闭环是 Agent optimizer 分析 agent 行为后自动生成改进的指令/skills/工具描述/模型配置（知识库随源系统刷新、工具搜索按实际使用自适应、记忆沉淀用户与成功工作流）——「把 AI 当作可管理的投资系统运营」的产品化表达（Microsoft Foundry + Purview 治理）。
 
+**2026-09-30 增量（CIO BrandPost 并入，r.jina.ai 全文核验）**：Google Cloud 赞助的 BrandPost 系列「The economics of agentic AI」刊发《The hidden economics of AI context》（CIO 页面元数据 2026-09-21 17:21 ET，raw 记 09-23；作者署名未能从抓取正文核验，raw 记为 Google VP Sirish Chandrasekaran）。增量观点：① **token 成本只是等式的一部分**——每一次浪费的推理循环都会级联拉起数据管道查询、跨云网络调用与存储命中，「只盯 token 错过了账单真正累积的地方」，真正的经济杠杆在**数据层**；② **可预测性与优化同等重要**——agent 跨分布式数据资产执行时成本方差便得财务规划极难，跨云 egress 不仅要降还要转成稳定月度承诺（明显的 Google Cloud 产品语境，需在此赞助背景下阅读）；③ 金句：用 token 消耗度量 AI 进步，就像用代码行数度量开发者生产力。与 #56 主体（Azure Foundry 视角）合并后，三大云厂商的「上下文经济学」内容线集齐：Azure 讲投入产出闭环、Google 讲 TCO 与可预测性——「超越 token 计数」成为跨厂商共识口径。
+
 ---
 
 ## 57. Oracle：构建能在生产环境存活的 Agent Harness（2026-09-14 收录）
@@ -3276,3 +3278,50 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 「只写 agent 无法独立发现的内容」与 #14（Anthropic 最小信息集）、Superpowers v6.4.x「规划只记决策」同向：**上下文供给的最小化原则跨层一致**；ETH 数据同时是 #81 tokenmaxxing（堆料无益）的量化注脚
 - 仓库概览无效的发现与 #80 Graphify（结构化图导航取代线性文件浏览）形成张力：概览散文不值 token，结构化查询路径值——「窗口外资产」要以可查询形态备货而非以散文形态预载
 - 「文档稀薄仓库里上下文文件即文档」为 03 章 AGENTS.md 分层指导（根 + 子目录覆盖）补上适用边界：文档完备仓库边际收益趋零，先补 README 再谈 AGENTS.md
+
+## 86. Cursor（官方研究）：Improved token efficiency——harness 层 token 优化的五技实战与「A/B 驱动 harness 迭代」方法论（2026-09-30 收录）
+
+**来源**：[Cursor Blog (research) - Improved token efficiency for longer agent runs](https://cursor.com/blog/improved-token-efficiency)（Jediah Katz, Connor O'Keefe & Calvin Yee；2026-09-23；正文经 fetch_text 全文核验）
+
+### 背景与总效果
+
+- Agent 成熟后 token 花费结构变了：agent 跑得更久、步间携带更多上下文，「如何组装与管理这些上下文」成为主战场；Cursor 直称由其 **agent harness** 直接控制请求组装、上下文复用与工作切分——五项改动合计**降低用户 token 成本 7% 且不降 agent 质量**（生产流量口径）
+
+### 五项技术（全部带生产量化数据）
+
+1. **裁剪系统提示（-66%）**：模型变强后，「DO NOT / You must / Important」式长清单已无必要——只需定义工具行为本身，模型跨家族自然依从；系统提示历史包袱（防超长 hash 倾倒/二进制输出/emoji 等）按代际削减，并随新模型增删指令
+2. **工具定义按需加载（静态描述 token -60%）**：年内新增工具（后台 shell 监控、云端子代理等）每个仅在 <20% 会话中被用到；沿用此前 MCP 动态化经验（那一次使调用 MCP 的会话总 token **-46.9%**），现把自研工具同样卸载到动态上下文——保留高频读/搜/改/shell 工具，保留易被幻觵调用的 `ask_question` 与 Plan Mode 关键的 `create_plan`
+3. **提升缓存复用（冷缓存未命中率 -20%）**：自 GPT-5.6 起 OpenAI API 支持显式缓存断点；在稳定层（工具/系统指令）之后、增长中的对话之前设断点；把易变的 skills/子代理/环境信息移入缓存边界之后的「phantom user message」
+4. **压缩文件读取（cache-read token -1.6%）**：行号从逐行标注改为每十行一标，模型仍能正确引用代码——单处 3-5 token 的行号在万行级会话中累积可观
+5. **战略性子代理**：子代理以干净上下文开跑、只回传结果，但有「协调税」（无共享上下文会重复劳动/做废任务）；Cursor 反而**删掉了强烈鼓励探索性子代理的指令**（模型已从训练数据原生学会该模式）并收紧子代理选型——仅在用户或 harness 指定时才换模型
+
+### 方法论要点
+
+- **大流量 A/B 测试驱动 harness 迭代**：离线 evals 只代表「难题」分布，不反映真实用户请求分布——eval 可作快速代理但不可作终极裁判（与 #58 行为评测主张形成「eval 与在线实验分工」的互补）
+- 降本不靠单点大招：66%+60%+20%+1.6% 五处叠加才这 7%——**harness 效率是持续工程，不是一次性优化**
+
+### 与既有条目的关系
+
+- 系统提示「right altitude / 最小信息集」与 #14（Anthropic 官方上下文工程）、#85（AGENTS.md 只写不可推断项）三角互证：**指令的最小化原则跨「模型厂商/上下文文件/harness 组装」三层一致**
+- 工具按需加载与 #82 CAFE(S)「按需装载」、Superpowers/ADK 技能生命周期同向：能力静止预载 → 按需动态装载成为框架与 harness 共同收敛点
+- 子代理「删鼓励指令」与 #14 子代理架构（干净上下文深挖、只回传浓缩摘要）互补：隔离有协调税，**该用时才用，且模型原生会用的不要再注入指令**
+- 缓存断点/phantom user message 是对「上下文经济学」的工程化落地（#56/#56 增量），也是模型 API 能力（GPT-5.6 显式缓存）反向塑造 harness 设计的直接案例
+
+## 87. Oracle（开发者博客）：用 Jev 与 Oracle AI Database 治理 Agent 记忆——记忆三决策的分层治理与「阈值先校准再放权」（2026-09-30 收录）
+
+**来源**：[Oracle Developers Blog - Using Jev and Oracle AI Database to govern agent memory](https://blogs.oracle.com/developers/using-jev-and-oracle-ai-database-to-govern-agent-memory)（raw 记作者 Jeremy Daly；正文经 r.jina.ai 全文核验，署名未能从抓取文本确认；配套 notebook 开源于 oracle-devrel/oracle-ai-developer-hub）
+
+### 核心机制
+
+- **开篇即 harness 定位**：作者前作《building an AI agent harness》（发表于 The New Stack）指出 agent 需要 harness 控制工具与运行上下文；**记忆需要同样的关注——harness 决定 Agent 能访问哪些证据、证据不全时如何应对**；但「每个额外判断都有成本」，让推理模型逐条检查每条候选记忆会吞掉记忆系统本该省下的时间与钱
+- **记忆三决策**：检索什么、什么进入上下文、什么沉淀为长期记忆——用 Jev（TypeSafe AI 的 System One 模型，快而结构化的类型化评估：Noul 是非/Choice 选项/Score 评分三类原语，一次请求可批量独立问题）在每一道门做廉价评估，**应用代码保留查询与策略控制权**（「我不会给决策模型宽泛的记忆管理指令；给它具体问题，让 harness 对答案应用策略」）；厂商标称 $0.042/M 输入 token、输出免费、端到端 70-500ms——3000 token 评估约 $0.000126，厂商数字需自测
+- **数据库侧治理**：Oracle AI Database 让每条记忆与来源引用、版本、scope、状态、有效期关联（例外记录链接到授权它的审批、替换策略指回被取代版本）——「应用永远不需要从散文中重建这些关系」；检索用混合搜索（向量+关键词保策略标识符精度）；**VPD（Virtual Private Database）租户隔离限制哪些记录能到达评估服务/推理模型，模型给的 customer ID 不能建立授权，只有请求允许的证据才能离开检索边界**
+- **关键警示（实测数据）**：**合法的输出类型仍可能包含错误判断**——notebook 中同一候选记忆重复评估落在 0.90 支持阈值两侧；阈值必须先用自己的标注数据校准再无人值守放权；另一个实测：先前退款在相关性上得 1.62/2 却被分类为 history——高相关≠授权今天的请求
+- **上线方法**：晋升（promotion）先跑 shadow mode 与人工审阅结果对比，用分歧打磨问题定义；用已审阅决策构建 replay set、冻结数据库快照双方案对比；度量目标是「漏掉必需证据」与「无支持晋升」，成本与延迟是约束条件
+
+### 与既有条目的关系
+
+- 与 01 章 09-19 在册的 LangChain《What Is Jev?》直接接力：那条讲「小模型占决策位」的分工模式，本条是该模式在**记忆治理**场景的全栈落地（评估门 × 数据库治理 × 策略控制）；DeerFlow 09-27 的 feat(memory) Jev 预筛与信号分类（#5906，02 章在册）是同一模式在编排框架侧的先例——「Jev 位」正在从博客概念变成多框架/多厂商的实际组件
+- 与 #57（Oracle「能在生产环境存活的 Agent Harness」）同厂商同作者系内容线：#57 讲工具与运行上下文的生存性，本条讲记忆层的治理——「harness 决定证据可达性」从工具面延伸到记忆面
+- 「三决策 + 每道门廉价评估 + 应用控策略」与 #14 结构化笔记（窗口外持久化、按需拉回）互补：#14 讲记什么/怎么压缩，本条讲**检索与晋升的门禁治理**；「阈值先校准再放权」与 #83（压缩质量可断言验收）同属「不可靠组件的验收工程」主线
+- VPD 租户隔离与密钥治理（Schmid Credentials API，README 09-29 在册）同向：**权限判定收回基础设施层，模型输出不作为授权依据**
