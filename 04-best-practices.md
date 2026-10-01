@@ -3307,6 +3307,21 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 子代理「删鼓励指令」与 #14 子代理架构（干净上下文深挖、只回传浓缩摘要）互补：隔离有协调税，**该用时才用，且模型原生会用的不要再注入指令**
 - 缓存断点/phantom user message 是对「上下文经济学」的工程化落地（#56/#56 增量），也是模型 API 能力（GPT-5.6 显式缓存）反向塑造 harness 设计的直接案例
 
+## 88. xda-developers：Claude Code 工作流自查——哪些「熟练习惯」反而拖慢你（2026-09-30 收录）
+
+> 链接：https://www.xda-developers.com/compared-my-claude-code-workflow-to-a-beginners-some-of-my-habits-were-making-things-worse/ · 作者自述式实证：将自己的工作流与新手对照后发现部分习惯为负收益
+
+### 核心要点
+- **过度自动化是负资产**：把每个环节都脚本化/自动化后，agent 失去必要的中间人工验证点，错误在长链条中静默传播；自动化应集中在验证与反馈环节，而非代替判断
+- **上下文过载稀释关键指令**：CLAUDE.md/规则堆得越满，单条规则的边际约束力越低——关键指令被淹没在禁令噪声中
+- **对策：做减法**：定期重置会话、精简规则集，让模型原生能力承担更多；每条规则应能回答「删掉它会发生什么坏事」
+
+### 与既有条目的关系
+- 与 **#86（Cursor token 优化，09-30）** 跨源印证：模型变强后禁令式指令已无必要，「规则做减法」从成本优化（#86）扩展到工作流健康度（#88），是 09 月末实践侧的共同信号
+- 与 **#85（AGENTS.md 实证经济学，09-29）** 互补：#85 讲上下文文件怎么构造，#88 讲什么时候该删
+
+---
+
 ## 87. Oracle（开发者博客）：用 Jev 与 Oracle AI Database 治理 Agent 记忆——记忆三决策的分层治理与「阈值先校准再放权」（2026-09-30 收录）
 
 **来源**：[Oracle Developers Blog - Using Jev and Oracle AI Database to govern agent memory](https://blogs.oracle.com/developers/using-jev-and-oracle-ai-database-to-govern-agent-memory)（raw 记作者 Jeremy Daly；正文经 r.jina.ai 全文核验，署名未能从抓取文本确认；配套 notebook 开源于 oracle-devrel/oracle-ai-developer-hub）

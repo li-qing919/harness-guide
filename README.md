@@ -97,6 +97,32 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-01 - Anthropic 上线 claude.dev 开发者中心 & Claude Code 2.1.285 管理员管控收紧 & Yext 把「Agent Harness」做成产品名 & 企业级 agent 活动审计链路成型
+
+**更新**：
+
+1. **框架速报（2026-10-01）——代码面主线：护栏内聚到工具层 + 取消/重试路径的可靠性打磨**（均经 gh api 核实）
+   - Star 快照（gh api 口径）：Superpowers — **293,618** ⭐（**+684，全列表最高日增**，无推送仍高增）；LangGraph — **42,547** ⭐（+70）；DeerFlow — **83,293** ⭐（+66）；CrewAI — **59,251** ⭐（+58）；OpenAI SDK — **29,795** ⭐（+26）；BMAD — **53,687** ⭐（+45）；ADK — **21,687** ⭐（+7）
+   - 7 仓无新 release（版本与 09-30 一致）；BMAD 与 Superpowers 昨日以来零提交（Superpowers 以纯 star 流量 +684 领跑，说明关注与使用在代码静默期仍在加速）；DeerFlow 六连修复集中在**取消路径与提示质量**：middleware 原子化发布外部化输出（#6109）、自定义 skill 取消时 drain mutation tails（#6078）、read-before-write 拦截消息带文件行数（#6020）、模型重试时保留 todo 完成提醒（#6132）；ADK 五连：**tool confirmation gate 下沉到 tools 层**（架构内聚）、新增 execution cancellation 开发者指南、config-based adk create 跳过 __init__.py；CrewAI 四连：tracing 保持 tool/task 输出完整入 span（#7833）、refused trace 降级为 untraced 而非炸 crew（#7812）、litellm 安全升级 1.88.6（GHSA-3cv6-jpf6-8222）、`crewai eval --models` 支持 llm_overlay 换模型；OpenAI SDK：schema 先解码 URI fragments 再做 pointer 遍历（#5272）+ deps 升级；LangGraph 全为依赖 bump（维护日）
+
+2. **最佳实践（04 新增 #88）**：
+   - **#88 xda：Claude Code 工作流自查——哪些「熟练习惯」反而拖慢你**（2026-09-30）：作者对比自己与新手的 Claude Code 工作流，发现部分自认高效的习惯实际在拖累 agent：过度自动化让 agent 失去必要的中间验证、上下文塞太满稀释关键指令；结论是**定期重置会话、精简规则胜过堆砌 CLAUDE.md 禁令**——与 #86（Cursor：模型变强后禁令式指令已无必要）形成跨源印证，「规则做减法」成为 09 月末实践侧的共同信号
+
+3. **新闻收录 4 条（去重后新增）**：
+   - **Anthropic 上线 claude.dev 开发者中心**（2026-10-01，claude.dev 已验证 200）：聚合 Claude Code/Cowork/API 开发者资源与文档入口——开发者体验（DX）门户化，配合其 Compliance API 与安全可见性布局，Anthropic 在企业开发者侧的入口收敛成型
+   - **Claude Code 2.1.285：可关闭 web 抓取、管理员可限制 API 提供商**（MIXED 09-30）：harness 权限面继续向企业管理员收口——禁用 web fetch、API 提供商白名单；与 09-30 条目（NVIDIA 硬件层边界/kill switch 警示）同属「harness 边界与安全」主线，本条是**配置面**的表达：边界即配置
+   - **Yext 发布 Multiplayer Agent Harness（营销增长场景）**（marketscreener 09-30）：「Agent Harness」首次作为企业软件产品名出现——harness 概念从工程社区词汇进入厂商营销词表，侧面印证其成为品类共识（呼应 09-28 CAFB 条目「harness engineering 成为核心基础设施」）
+   - **Trend Vision One 扩展 Claude Compliance API 集成至 Claude Code 与 Cowork 会话**（PR Newswire/cyberpress 09-29）：第三方安全平台接入 agent 会话审计——企业级 agent 活动的「可见性链路」（谁在跑什么、碰了哪些数据）开始有标准化产品承接，与 Workspace Agents 的 Compliance API（09-23 在册）构成同一治理线
+
+**去重说明**：Manus 2.0（Pandaily 09-30）与 09-30 条目 InfoWorld 报道为同一事件（Cascade harness/Cue/Cloud Computer），判重复不入册；claude.dev、Claude Code 2.1.285、Yext、Trend Vision One 经全库 grep 均无在册，全部新增。实践侧仅 xda 一条够格（Anthropic context engineering 长文与 HN Codex 讨论均为旧文，遵循「宁缺毋滥」不收）。
+
+**信源说明**：Tavily 本日恢复可用（未触发 432）；Google News RSS + googlenewsdecoder 解码 5/5 成功；claude.dev 与 context engineering 文章 URL 经 curl 验证 200；7 仓 star/push/release/commits 经 gh api 逐仓核实。降级 0 条。
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-10-01 速报（护栏内聚主线 + 7 仓 star 动态）
+- `04-best-practices.md` — 新增 #88（Claude Code 工作流自查）
+- `README.md` — 追加本日志
+
 ### 2026-09-30 - Manus 2.0 以 Cascade harness 为卖点 & NVIDIA 把 agent 安全下沉到硬件层 & kill switch 失效警示 & Cursor 官方 token 优化实战 & Jev 记忆治理
 
 **更新**：

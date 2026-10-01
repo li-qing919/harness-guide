@@ -1163,6 +1163,30 @@ async function verifyUI() {
 
 ---
 
+## 2026-10-01 框架版本迭代速报
+
+> 数据：gh api 认证调用，2026-10-01 采集；当日净增相对 09-30 快照。**今日无新 release——连续第二日发布静默**，7 仓版本均与昨日一致（Superpowers v6.4.2、DeerFlow v2.1.0、LangGraph cli==0.4.32.dev0 预发布、OpenAI Agents SDK v0.22.3、CrewAI 1.15.23、Google ADK v2.10.0、BMAD v6.12.0）。代码面两大主线：**护栏内聚到工具层**（ADK 将 tool confirmation gate 下沉到 tools 层 + 新增 execution cancellation 开发者指南；CrewAI refused trace 降级为 untraced 而非炸 crew）与**取消/重试路径可靠性**（DeerFlow 六连：middleware 原子化发布外部化输出 #6109、自定义 skill 取消时 drain mutation tails #6078、模型重试时保留 todo 完成提醒 #6132）。BMAD 与 Superpowers 零提交但 Superpowers 日增 +684 领跑全列表——**代码静默期关注与使用仍在加速**。采集方式：Tavily 恢复可用 + Google News RSS（googlenewsdecoder 解码）+ gh api 认证调用。
+
+**Star 增幅排名（日，gh api 口径）**：Superpowers +684 ≫ LangGraph +70 > DeerFlow +66 > CrewAI +58 > OpenAI SDK +26 > BMAD +45 > ADK +7
+
+### DeerFlow ⭐ 今日焦点 (83,293 ⭐，bytedance/deer-flow)
+- 近 24h 六连修复，取消/中断路径集中打磨：#6109 middleware 原子化发布外部化输出、#6078 自定义 skill 取消时 drain mutation tails、#6020 read-before-write 拦截消息带文件行数、#6132 模型重试时保留 todo 完成提醒
+- 📌 **启示**：长时程 harness 的可靠性下半场在「取消与重试」——中断后状态一致性与重试后提示完整性，比新增功能更难也更重要
+
+### Google ADK (21,687 ⭐，google/adk-python)
+- refactor: tool confirmation gate 下沉到 tools 层（护栏从 runner 层内聚到工具自身）
+- docs: 新增 execution cancellation 开发者指南
+- fix: config-based adk create 跳过 __init__.py；antigravity 内置工具步骤提取真实执行输出
+- 📌 **启示**：审批门下沉到工具层 = 权限策略与工具能力同位定义，避免 runner 绕过
+
+### CrewAI (59,251 ⭐，crewAIInc/crewAI)
+- fix(tracing): #7833 tool/task 输出完整入 span；#7812 refused trace 降级 untraced 而非失败
+- fix(deps): litellm 1.88.6（GHSA-3cv6-jpf6-8222）
+- feat(cli): `crewai eval --models` + llm_overlay 换模型
+- 📌 **启示**：可观测性自身的健壮性（trace 被拒不炸 crew）是生产级 tracing 的必修课
+
+---
+
 ## 2026-09-30 框架版本迭代速报
 
 > 数据：gh api 认证调用，2026-09-30 采集；当日净增相对 09-29 快照，累计相对 09-11 基线（7 仓全口径）。**今日无新 release——发布静默日**，7 仓最新版本均与昨日一致（Superpowers v6.4.2、DeerFlow v2.1.0、LangGraph cli==0.4.32.dev0 预发布、OpenAI Agents SDK v0.22.3、CrewAI 1.15.23、Google ADK v2.10.0、BMAD v6.12.0），更新以持续提交为主。代码面两大主线：**上下文管理集中化**（CrewAI 09-29 四连：SummarizeMessages 收敛 + context windows 表集中刷新）与**审批/会话状态保持**（OpenAI SDK #5240 审批恢复时保留已完成工具结果）；DeerFlow 与 ADK 各自 11/15 连修复（raw 仅各列 3 条，已按 gh api 补全），主题为连接/会话生命周期关闭与 MCP 传输健壮性。行业焦点当日密集转向**harness 边界与安全**：Manus 2.0 以 Cascade harness 为核心卖点（实测配置 -32% 运行成本）、NVIDIA 把 agent 安全下沉到 CPU/DPU 硬件层（明确「模型与 agent harness 之外的可强制执行边界」）、Axios 报道 kill switch 未能拦停失控 Agent（Anthropic 将事件定性为 harness/运维失效而非模型对齐失效），见 README 本日条目。采集方式：Tavily 搜索 API 连续第十二日 HTTP 432，Google News RSS（gnews_rss.py 解码）+ fetch_text/r.jina.ai 直抓 + gh api 认证调用。CrewAI 维持 crewAIInc 组织（旧地址 301），无 URL 变更。
