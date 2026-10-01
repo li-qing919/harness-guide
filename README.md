@@ -97,6 +97,31 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-02 - AWS 开源本地 agent 管控「leash」& DeepSeek Harness v0.2 桌面化 & 发布静默第三日 & 「随模型减负」获得结构面判据
+
+**更新**：
+
+1. **框架速报（2026-10-02）——代码面主线：并发与取消的资源生命周期收口**（均经 gh api 核实）
+   - Star 快照（gh api 口径）：Superpowers — **293,912** ⭐（**+294，连续两日领跑**，代码静默期 star 流量不减）；LangGraph — **42,581** ⭐（+34）；BMAD — **53,709** ⭐（+22）；DeerFlow — **83,314** ⭐（+21）；CrewAI — **59,269** ⭐（+18）；ADK — **21,691** ⭐（+4）；OpenAI SDK — **29,797** ⭐（+2）
+   - 7 仓无新 release（**连续第三日发布静默**）；DeerFlow：并发工具输出临时文件隔离（#6150）、gateway 持久写抽共享 drain helper（#6151）、serper 相对时间范围搜索（#6113）；ADK：caller 取消时联动取消 in-flight tool call、live session teardown 挂起修复、auth transport 懒加载、JSON mode 输出 validated schema；CrewAI：human_feedback 的 review 暴露进结构化 outputs（#7850）；OpenAI SDK：release-please 切本地 maintainer review（#5274）；LangGraph 连续第二日纯依赖 bump
+
+2. **新闻收录 2 条（去重后新增）**：
+   - **AWS 开源本地 agent harness 管控「leash」**（The Register 10-01）：本地运行 + 开源的 agent 权限围栏——与云侧 AgentCore 构成部署光谱两端，与云端审计线（Compliance API/Trend Vision One）按信任边界分层互补（正文反爬，要点基于标题与刊物语境并已标注）
+   - **DeepSeek Harness v0.2 Preview：桌面安装包 + 插件管理器 + 定时自动化**（Pandaily 09-30）：从 Harbor 基准参与者转向终端用户产品，开源 harness 桌面化，与 Manus 2.0 Cue（09-30 在册）构成个人 agent 赛道开源/闭源两路径
+
+3. **最佳实践（04 新增 #89）**：
+   - **#89 Jinyan Su：三代 harness 演进与「随模型能力减负」判据**（2026-07）：把 Anthropic 两篇长文（#10、#43 均在册）读作同一 harness 的 v1（initializer+coding）→ v2（planner+generator+evaluator），并给出 v3 判据——**evaluator 去留取决于任务是否超出当前模型 solo 可靠边界**（Opus 4.5 有用、4.6 应弱化）；实操为「模型大版本升级后做 scaffold 审计」——与 #86/#88 构成「随模型减负」三部曲（前两条讲规则面，本条给出结构面组件级判据）
+
+**去重说明**：Anthropic「Effective harnesses」（#43 在册）与「Harness design」（#10 在册）、Manus 2.0（09-30 在册，Pandaily 与 InfoWorld 同事件）、Yext Multiplayer Agent Harness（10-01 在册）、TrendAI Vision One × Compliance API（10-01 在册，cyberpress 与 PR Newswire 同事件）均判重复不入册；forkast「Harness Pattern 是基础设施架构」（09-30）仅标题可见、正文未验证，按「宁缺毋滥」暂不收录。Jinyan Su 博文与 AWS leash、DeepSeek Harness v0.2 经全库 grep 均无在册，全部新增。
+
+**信源说明**：Tavily 可用；Google News RSS + googlenewsdecoder 解码成功（AWS leash/Manus/Yext/DeepSeek 四条均解码到位，Anthropic 可见性条解码失败但已判重复不影响）；AWS Register 正文抓取被拒（要点基于标题与刊物语境并标注）；7 仓 star/push/release/commits 经 gh api 逐仓核实。降级 0 条。
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-10-02 速报（资源生命周期收口主线 + 7 仓 star 动态）
+- `01-architecture.md` — 新增 2 节（AWS leash、DeepSeek Harness v0.2）
+- `04-best-practices.md` — 新增 #89（三代 harness 演进与减负判据）
+- `README.md` — 追加本日志
+
 ### 2026-10-01 - Anthropic 上线 claude.dev 开发者中心 & Claude Code 2.1.285 管理员管控收紧 & Yext 把「Agent Harness」做成产品名 & 企业级 agent 活动审计链路成型
 
 **更新**：

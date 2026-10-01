@@ -3340,3 +3340,27 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 与 #57（Oracle「能在生产环境存活的 Agent Harness」）同厂商同作者系内容线：#57 讲工具与运行上下文的生存性，本条讲记忆层的治理——「harness 决定证据可达性」从工具面延伸到记忆面
 - 「三决策 + 每道门廉价评估 + 应用控策略」与 #14 结构化笔记（窗口外持久化、按需拉回）互补：#14 讲记什么/怎么压缩，本条讲**检索与晋升的门禁治理**；「阈值先校准再放权」与 #83（压缩质量可断言验收）同属「不可靠组件的验收工程」主线
 - VPD 租户隔离与密钥治理（Schmid Credentials API，README 09-29 在册）同向：**权限判定收回基础设施层，模型输出不作为授权依据**
+
+---
+
+## 89. Jinyan Su：从 Context Engineering 到 Long-running Harness——三代 harness 演进梳理与「随模型能力减负」判据（2026-10-02 收录）
+
+**来源**：[Jinyan Su - The Evolution of Agents: From Context Engineering to Long-running Harnesses](https://jinyansu1.github.io/blog/2026/07/agent-context-engineering-long-running-harness)（2026-07）
+
+### 核心内容
+
+- 三代 harness 演进史：① Anthropic 2025-11《Effective harnesses》（#43 在册）第一版 long-running harness：initializer + coding agent 双角色，外部化 feature list / progress file / init script / git 接力；② Anthropic 2026-03《Harness design》（#10 在册）扩展为 planner + generator + evaluator：evaluator 用 Playwright MCP 像用户一样验收 UI/API/DB，不合格即拒绝；③ 下一步是 harness 结构与模型能力**共同演化**
+- 关键判据：**evaluator 是否该存在取决于任务是否超出当前模型 solo 可靠边界**——Opus 4.5 上 evaluator 明显有用，Opus 4.6 后模型变强，部分 scaffold 应移除或弱化；「harness 不是固定结构，而是和模型能力共同演化的」
+- 早期模型（Sonnet 4.5 / Opus 4.5）有 context anxiety、under-scope 倾向，需要更重的 scaffold；模型升级后 scaffold 成了拖累——**scaffold 是补丁，不是资产**
+
+### 实操要点
+
+- 每次模型大版本升级后做一次「scaffold 审计」：逐项问「这个补丁还在补真实存在的问题吗」，删掉为旧模型弱点设计的护栏/提示/重试层
+- evaluator 去留用数据判：同一任务集在「带 evaluator」与「模型 solo」下跑 A/B（呼应 #86 Cursor 的 A/B 驱动 harness 迭代方法论），diff 不显著即降级 evaluator
+- 交接物（feature list、progress file、规范 commit）是三代不变量：模型能力再强，跨 context window 接力仍依赖外部化状态
+
+### 与既有条目的关系
+
+- 与 #86（Cursor：模型变强后禁令式指令已无必要）、#88（xda：精简规则胜过堆砌禁令）构成「随模型减负」三部曲：#86/#88 讲规则面减负，本条给出**结构面**（scaffold 组件级）的减负判据与时间轴——三条独立信源在两周内指向同一工程动作
+- Anthropic 两篇原文均已在册（#10、#43），本条价值在**串联与演化视角**：把两篇读作同一 harness 的 v1→v2，并给出 v3 的设计原则
+- 「scaffold 审计」与 #83（压缩质量可断言验收）同属「不可靠组件的验收工程」主线：scaffold 本身也要被验收，而不是默认有益

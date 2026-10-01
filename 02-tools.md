@@ -1163,6 +1163,29 @@ async function verifyUI() {
 
 ---
 
+## 2026-10-02 框架版本迭代速报
+
+> 数据：gh api 认证调用，2026-10-02 采集；当日净增相对 10-01 快照。**今日无新 release——连续第三日发布静默**，7 仓版本均与昨日一致（Superpowers v6.4.2、DeerFlow v2.1.0、LangGraph cli==0.4.32.dev0 预发布、OpenAI Agents SDK v0.22.3、CrewAI 1.15.23、Google ADK v2.10.0、BMAD v6.12.0）。代码面主线：**并发与取消的资源生命周期收口**——DeerFlow 并发工具输出临时文件隔离（#6150）+ gateway 持久写抽公共 drain helper（#6151）；ADK caller 取消时联动取消 in-flight tool call + live session teardown 挂起修复 + auth transport 懒加载。昨日主线是「取消后状态一致」，今日推进到「并发下资源隔离」——多 agent harness 的正确性战场从单会话时序转向并发资源竞争。采集方式：Tavily + Google News RSS（googlenewsdecoder 解码）+ gh api 认证调用。
+
+**Star 增幅排名（日，gh api 口径）**：Superpowers +294 ≫ LangGraph +34 > BMAD +22 > DeerFlow +21 > CrewAI +18 > ADK +4 > OpenAI SDK +2
+
+### DeerFlow (83,314 ⭐，bytedance/deer-flow)
+- fix(middleware): 并发工具输出临时文件隔离（#6150）——多 agent 并发时输出文件互不踩踏
+- refactor(gateway): 持久写 drain 收口为共享 helper（#6151）；fix 上传所有权转换（#6101）
+- feat(serper): 支持相对时间范围搜索（#6113）；扩展管理器测试套件支持 Windows/uv 镜像（#6142）
+- 📌 **启示**：与昨日取消路径六连修复连续成章——先保证「中断后一致」，再保证「并发下隔离」，长时程 harness 的可靠性补课有清晰先后序
+
+### Google ADK (21,691 ⭐，google/adk-python)
+- fix: caller 取消时联动取消 in-flight tool call（孤儿工具调用收口）；live session teardown 挂起修复；auth transport 懒加载
+- fix: JSON mode 输出 validated schema；docs 补充 execution cancellation / node tool direct output / span provenance
+- 📌 **启示**：取消传播到工具层 + 会话拆卸不挂起 + 懒加载——生命周期收口三件套齐活，与昨日 confirmation gate 下沉同属「运行时内聚」主线
+
+### 其余五仓
+- **CrewAI** (59,269 ⭐): human_feedback emit steps 在 outputs 暴露 review（#7850）——人工反馈结果进入结构化输出而非只留在会话里；pypdf 安全升级
+- **OpenAI Agents SDK** (29,797 ⭐): release-please 切换本地 maintainer review 流程（#5274）；依赖安全升级
+- **LangGraph** (42,581 ⭐): 全为依赖 bump，连续第二日维护日
+- **BMAD** (53,709 ⭐) 与 **Superpowers** (293,912 ⭐) 零提交；Superpowers 日增 +294 连续两日领跑——发布静默期 star 流量仍未减速
+
 ## 2026-10-01 框架版本迭代速报
 
 > 数据：gh api 认证调用，2026-10-01 采集；当日净增相对 09-30 快照。**今日无新 release——连续第二日发布静默**，7 仓版本均与昨日一致（Superpowers v6.4.2、DeerFlow v2.1.0、LangGraph cli==0.4.32.dev0 预发布、OpenAI Agents SDK v0.22.3、CrewAI 1.15.23、Google ADK v2.10.0、BMAD v6.12.0）。代码面两大主线：**护栏内聚到工具层**（ADK 将 tool confirmation gate 下沉到 tools 层 + 新增 execution cancellation 开发者指南；CrewAI refused trace 降级为 untraced 而非炸 crew）与**取消/重试路径可靠性**（DeerFlow 六连：middleware 原子化发布外部化输出 #6109、自定义 skill 取消时 drain mutation tails #6078、模型重试时保留 todo 完成提醒 #6132）。BMAD 与 Superpowers 零提交但 Superpowers 日增 +684 领跑全列表——**代码静默期关注与使用仍在加速**。采集方式：Tavily 恢复可用 + Google News RSS（googlenewsdecoder 解码）+ gh api 认证调用。

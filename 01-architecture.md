@@ -1176,4 +1176,40 @@ harness 正是解决**可靠性/责任层**（reliability & accountability）的
 
 ---
 
-*更新时间：2026-09-24*
+## AWS 开源本地 agent harness 管控「leash」——把 agent 行为边界留在本地（2026-10-02 收录）
+
+**来源**：[The Register - AWS offers local, open source leash for agent harnesses](https://www.theregister.com/ai-and-ml/2026/10/01/aws-offers-local-open-source-leash-for-agent-harnesses/5300578)（2026-10-01；⚠️ 正文抓取被拒（反爬页），要点基于标题与刊物语境，建议人工复核原文）
+
+### 核心内容
+
+- AWS 发布本地运行、开源的 agent harness 管控工具（媒体措辞「leash」/缰绳）：为跑在本地/私有环境的 coding agent 提供权限与安全围栏，方向是把 agent 行为边界留在企业自有基础设施内
+- 「本地 + 开源」与 AWS AgentCore（云侧托管 harness，09-23 在册）构成同一厂商的部署光谱两端：数据不出域的团队有本地管控选项，愿意托管的走 AgentCore
+- 主流工程媒体（The Register）跟进报道本地 harness 治理，说明「agent 权限管控」已从工具特性上升为公共技术议题
+
+### 与既有条目的关系
+
+- 与 Trend Vision One × Claude Compliance API（09-29 在册）、TechTarget CIO 治理五组件（09-23 在册）同属「agent 治理」主线，但部署位置相反：前两者做云端/平台侧审计可见性，本条做**本地侧事前围栏**——治理工具箱开始按信任边界分层
+- 与 forkast AgentCore Harness Bypass（08-22 在册，04 章）对读：托管 harness 暴露跨平台漏洞类 → 厂商补本地开源管控选项，漏洞披露与产品响应的闭环在六周内完成
+- 与 NVIDIA SoL-Pi（09-23 在册）的「harness 是可自我优化的控制点」互补：控制点同时也必须是**可治理点**——优化与围栏作用在同一层
+
+---
+
+## DeepSeek Harness v0.2 Preview：桌面安装包 + 插件管理器 + 定时自动化——开源 harness 桌面化（2026-10-02 收录）
+
+**来源**：[Pandaily - DeepSeek Harness v0.2 Preview Adds Desktop Installers, Plugin Manager and Scheduled Automations](https://pandaily.com/deepseek-harness-v0-2-preview-desktop-installers-plugin-manager-automations)（2026-09-30）
+
+### 核心内容
+
+- DeepSeek Harness v0.2 预览版三项升级：桌面安装包（不再依赖终端）、插件管理器（第三方能力扩展规范化）、定时自动化任务（trigger 驱动的无人值守运行）
+- DeepSeek Harness 此前作为 Strands 对比基准出现在 Harbor 评估（09-23 在册：更便宜但 Terminal-Bench 准确率低 10.2 分），v0.2 转向产品化——从「基准参与者」到「终端用户产品」
+- 桌面化 + 定时任务指向同一判断：harness 的目标用户正从工程师扩展到泛用户，个人 agent（personal agent）赛道再添开源玩家
+
+### 与既有条目的关系
+
+- 与 Manus 2.0 Cascade/Cue（09-30 在册）同周竞发：闭源产品化 vs 开源桌面化，个人 agent 赛道形成两条路径；DeepSeek 选择「桌面安装包 + 插件生态」，走 Claude Desktop 式路线
+- 「定时自动化」与 DeerFlow gateway 持久化（02 章 10-02 速报）呼应：无人值守需要 harness 自带调度与状态持久，框架层与产品层同时补课
+- 定时任务 = 最小化的人类监督界面，与治理主线（本地 leash、Compliance API）共同回答「谁来为 agent 的自主行为负责」
+
+---
+
+*更新时间：2026-10-02*
