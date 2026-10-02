@@ -1163,6 +1163,32 @@ async function verifyUI() {
 
 ---
 
+## 2026-10-03 框架版本迭代速报
+
+> 数据：gh api（GraphQL 单次查询），2026-10-03 02:34 CST 采集；当日净增相对 10-02 快照。**发布解冻：三连静默终结**——OpenAI Agents SDK 一日双发 v0.23.0 + v0.23.1（10-02 15:19 UTC），Google ADK 发 v2.11.0（10-02 00:44 UTC）；其余 5 仓版本不变（Superpowers v6.4.2、DeerFlow v2.1.0、LangGraph cli==0.4.32.dev0 预发布、CrewAI 1.15.23、BMAD v6.12.0）。代码面主线：**评测治理与工具权限治理**——DeerFlow typesafe 风险门控 eval 的 rubric 可校准化 + 策略可复现（#6179）；ADK ExecuteBashTool allowlist 改为整 shell token 匹配 + skill-script 产物 artifact 化。采集方式：Tavily + gh api 认证调用。
+
+**Star 增幅排名（日，gh api 口径）**：Superpowers +427 ≫ LangGraph +36 > BMAD +22 > CrewAI +16 > DeerFlow +15 > OpenAI SDK +5 > ADK −3
+
+### OpenAI Agents SDK ⭐ 今日焦点 (29,802 ⭐，openai/openai-agents-python)
+- **一日双发 v0.23.0 → v0.23.1**（#5226 / #5279）：语音栈更新——gpt-transcribe 成为默认 voice STT 模型（#5276）；默认运行收紧为仅 OpenAI 凭据（#5277）；release 测试链路修复（#5278）
+- 📌 **启示**：发布静默三日后的首个动作是「默认值收权」——STT 默认模型切换 + 默认凭据收紧，SDK 的安全默认值策略从文档倡议落到代码默认
+
+### Google ADK (21,688 ⭐，google/adk-python)
+- **v2.11.0 发布**（10-02 00:44 UTC）
+- feat: skill-script 输出持久化为 artifacts——评测与复现的产物链路补全
+- fix: ExecuteBashTool allowlist 按**整 shell token** 匹配——防子串绕过白名单；fix(evaluation): LlmAsJudge 评审请求统一禁用 AFC；InMemoryArtifactService 条目与调用方变更隔离
+- 📌 **启示**：allowlist 整 token 匹配是「边界即配置」的代码面注脚（呼应 09-30 Claude Code 2.1.285 管理员配置收口）——权限边界漏洞往往出在解析层而非策略层
+
+### DeerFlow (83,329 ⭐，bytedance/deer-flow)
+- feat(typesafe): 风险门控 eval 的 rubric 可校准化、策略可复现（#6179）——安全门控本身可被评测校准，治理规则从「写死」到「可调参可复现」
+- feat(extensions): 默认展示内置 catalog（#6188）；scheduled-tasks 尊重显式 null assistant_id（#6185）；Firecrawl/fastCRW max_results 归一化（#6175）
+- 📌 **启示**：与 10-01/10-02 的取消与并发主线接续，本日转向「治理规则的可校准性」——门控策略可复现 = 评测可回归 = 治理可审计
+
+### 其余四仓
+- **LangGraph** (42,617 ⭐): subgraph delta channels 用调用方解析的 saver 水合（#8538）+ answered interrupts 不再出现在 get_state（#9103）——interrupt 状态语义两连修，human-in-the-loop 断点恢复正确性提升
+- **BMAD** (53,731 ⭐): 打包规则清理——无脚本模块保留 scripts 目录、移除 web bundles、validate-skills 测试收紧
+- **CrewAI** (59,285 ⭐) 零提交（静默第二日）；**Superpowers** (294,339 ⭐) 零提交但日增 +427 连续第三日领跑——代码静默第六天，star 流量不减
+
 ## 2026-10-02 框架版本迭代速报
 
 > 数据：gh api 认证调用，2026-10-02 采集；当日净增相对 10-01 快照。**今日无新 release——连续第三日发布静默**，7 仓版本均与昨日一致（Superpowers v6.4.2、DeerFlow v2.1.0、LangGraph cli==0.4.32.dev0 预发布、OpenAI Agents SDK v0.22.3、CrewAI 1.15.23、Google ADK v2.10.0、BMAD v6.12.0）。代码面主线：**并发与取消的资源生命周期收口**——DeerFlow 并发工具输出临时文件隔离（#6150）+ gateway 持久写抽公共 drain helper（#6151）；ADK caller 取消时联动取消 in-flight tool call + live session teardown 挂起修复 + auth transport 懒加载。昨日主线是「取消后状态一致」，今日推进到「并发下资源隔离」——多 agent harness 的正确性战场从单会话时序转向并发资源竞争。采集方式：Tavily + Google News RSS（googlenewsdecoder 解码）+ gh api 认证调用。

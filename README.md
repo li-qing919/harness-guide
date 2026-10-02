@@ -97,6 +97,27 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-03 - 发布解冻：OpenAI Agents SDK 一日双发 & ADK v2.11.0 & DeerFlow 门控可校准化 & 「agent 环境工程」主航道化
+
+**更新**：
+
+1. **框架速报（2026-10-03）——代码面主线：发布解冻 + 评测/权限治理**（gh api GraphQL 核实）
+   - Star 快照（gh api 口径）：Superpowers — **294,339** ⭐（**+427，连续第三日领跑**，代码静默第六天流量不减）；LangGraph — **42,617** ⭐（+36）；BMAD — **53,731** ⭐（+22）；CrewAI — **59,285** ⭐（+16）；DeerFlow — **83,329** ⭐（+15）；OpenAI SDK — **29,802** ⭐（+5）；ADK — **21,688** ⭐（−3，持平）
+   - **三连发布静默终结**：OpenAI Agents SDK 一日双发 v0.23.0/v0.23.1（gpt-transcribe 默认 STT、默认凭据收紧、release 链路修复）；ADK v2.11.0（skill-script 产物 artifact 化、ExecuteBashTool allowlist 整 shell token 匹配防子串绕过、LlmAsJudge 禁用 AFC）
+   - DeerFlow：typesafe 风险门控 eval rubric 可校准 + 策略可复现（#6179）——治理规则从「写死」到「可调参可复现」；LangGraph interrupt/get_state 语义两连修（#8538/#9103）；CrewAI 连续第二日零提交
+
+2. **最佳实践（04 新增 #90）**：
+   - **#90 Pragmatic Engineer：走进 OpenAI/Anthropic/Cursor**（2026-09 末）：三家共同趋势——工程师主任务转向「为 agent 构建执行环境」；spend-per-token 平台化治理（Coinbase 案例）；Opus 4.5/GPT-5.4 分水岭后长时 harness 基建回报才成立——与 #89 构成「随模型减负」的产业侧印证；OpenAI 招聘 cloud agent platform 工程师 = harness 岗位化信号
+
+**去重说明**：Adaptive Security「agents slipped their leash」分析（Stanford 研究者质疑沙箱隔离有效性）所涉逃逸事件与 141,006 会话审查已于 09-28 Axios 条目在册，增量仅「披露文化」视角，判重复不入册；Anthropic「How we contain Claude across products」已在册（01 章专节）；Adnan Masood「AI Control Plane」一文与在册同作者两篇（09-11/09-12）主题重叠且发布日期未能验证，按宁缺毋滥不收。HN「The agent harness belongs outside the sandbox」为 4 个月前旧讨论，不入册。本日新增仅 #90 一条 + 速报。
+
+**信源说明**：Tavily 可用（未触发 432）；7 仓 star/push/release/commits 经 gh api GraphQL 单次查询核实（避免并行 REST 输出交错）；DeerFlow/LangGraph/ADK commit 明细 API 直采。降级 0 条。
+
+**更新文件**：
+- `02-tools.md` — 新增 2026-10-03 速报（发布解冻主线 + 7 仓 star 动态）
+- `04-best-practices.md` — 新增 #90（Pragmatic Engineer：agent 环境工程主航道化）
+- `README.md` — 追加本日志
+
 ### 2026-10-02 - AWS 开源本地 agent 管控「leash」& DeepSeek Harness v0.2 桌面化 & 发布静默第三日 & 「随模型减负」获得结构面判据
 
 **更新**：

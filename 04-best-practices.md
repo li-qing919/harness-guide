@@ -3364,3 +3364,28 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 与 #86（Cursor：模型变强后禁令式指令已无必要）、#88（xda：精简规则胜过堆砌禁令）构成「随模型减负」三部曲：#86/#88 讲规则面减负，本条给出**结构面**（scaffold 组件级）的减负判据与时间轴——三条独立信源在两周内指向同一工程动作
 - Anthropic 两篇原文均已在册（#10、#43），本条价值在**串联与演化视角**：把两篇读作同一 harness 的 v1→v2，并给出 v3 的设计原则
 - 「scaffold 审计」与 #83（压缩质量可断言验收）同属「不可靠组件的验收工程」主线：scaffold 本身也要被验收，而不是默认有益
+
+---
+
+## 90. Pragmatic Engineer：走进 OpenAI/Anthropic/Cursor——「为 agent 构建执行环境」成为主航道工程工作（2026-10-03 收录）
+
+**来源**：[Pragmatic Engineer - Impressions from visiting OpenAI, Anthropic, & Cursor](https://newsletter.pragmaticengineer.com/p/impressions-from-visiting-openai)（2026-09 末）
+
+### 核心内容
+
+- 三家共同趋势：**越来越多工程工作是在为 agent 构建更高效的执行环境**——Anthropic 与 Cursor 都把「给 agent 建环境」当作核心工程任务而非辅助工作
+- 新趋势信号：企业开始激进优化 **spend-per-token**（每 token 成本平台化治理），Coinbase 作为案例被引用——token 成本治理正成为平台团队的正式职能
+- 「编码模型已足够好」的分水岭判断：Opus 4.5 / GPT-5.4 之前，模型无法真正自主编码，长任务跑了也白跑；此后长时自主任务的 harness 基建才有回报
+- MCP 与 skills 已成主流、被更好理解的上下文供给方式；OpenAI 在招 cloud agent platform 工程师（大规模 agent 编排系统的设计/运维）——harness 工程的岗位化信号
+
+### 实操要点
+
+- 把 harness 建设当产品做：执行环境本身就是工程产出物，按 ROI 排优先级，而非当作模型的临时脚手架
+- token 成本平台化：spend-per-token 应作为平台团队的北极星指标之一（Coinbase 案例）
+- 模型跨阈值后重估 harness 投入回报：长时自主任务的基建回报在 Opus 4.5 / GPT-5.4 之后才成立——先验证阈值再重投入
+
+### 与既有条目的关系
+
+- 与 #89（Jinyan Su：随模型能力减负）互证「模型跨阈值改变 harness 回报结构」：#89 给组件级判据，本条给产业侧印证（三家一线公司都在做同一件事）
+- 「agent 环境工程主航道化」与 QCon 议程（09-25 在册）「harness engineering 成为核心基础设施」、Yext 产品化（09-30 在册）构成「概念→议程→产品→岗位」的品类成熟链
+- Coinbase spend-per-token 案例与 #86（Cursor token 优化五技）同属成本治理线：#86 是个体技法，本条是平台职能化
