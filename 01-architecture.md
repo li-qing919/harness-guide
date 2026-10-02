@@ -1212,4 +1212,20 @@ harness 正是解决**可靠性/责任层**（reliability & accountability）的
 
 ---
 
-*更新时间：2026-10-02*
+## DigitalOcean Managed Agents：harness 运行时成为云厂商标准产品线（2026-10-03 收录）
+
+**来源**：TechGig 报道（2026-10-02）——DigitalOcean Managed Agents 发布
+
+### 核心内容
+
+- DigitalOcean 发布 Managed Agents 托管式 agent 基础设施，进入 agent 运行时赛道——云厂商把 agent harness 运行时（托管执行、工具接入、生命周期管理）做成标准云产品线
+- 与 01 章部署光谱呼应：AWS AgentCore（云托管）、开源 leash（本地围栏）、TrueForge（自托管）之后，Managed Agents 补上中小云厂位——托管光谱从两端向中间加密
+
+### 与既有条目的关系
+
+- 与 AWS leash / AgentCore（10-02 在册）构成「本地开源围栏 ↔ 云托管运行时」两翼；TrueForge（08-18 在册）代表自托管中间态
+- 云厂商产品线化 = harness engineering 从工程实践变成可采购的基础设施品类，与 Yext 产品化（09-30 在册）、Pragmatic Engineer 岗位化信号（#90）同向
+
+---
+
+*更新时间：2026-10-03*

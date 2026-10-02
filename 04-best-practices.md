@@ -3367,6 +3367,30 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
+## 91. Anthropic 官方 Claude Agent SDK Workshop——从零 live-coding 一个 harness（2026-10-03 收录）
+
+**来源**：[YouTube - Claude Agent SDK Full Workshop — Thariq Shihipar, Anthropic](https://www.youtube.com/watch?v=TqC1qOfiVcQ)（2026-09/10 上线）
+
+### 核心内容
+
+- Anthropic 官方全长 workshop，对 agent 的官方定义：**自建上下文、自决轨迹、高度自主**的系统；核心论点 **agent = model + harness**——harness 包含 Tools、Prompts、File System、Skills、Sub-agents、Memory、Compaction、Hooks
+- 现场从零实现：Agent Loop（Context→Thought→Action→Observation）、Bash 工具接入、stuck-state 反馈环、多轮研究 agent demo
+- 关键洞察：context 不只是 prompt——「the tools, the files, the scripts that it can use」都是上下文；**文件系统即 context engineering**（用 ls/cat 动态构建上下文）
+- Claude Agent SDK 构建在 Claude Code 之上的原因：内部工具反复重造同样组件，SDK 是这套 harness 的打包输出
+
+### 实操要点
+
+- 把「上下文供给」拆解为 prompt / 工具 / 文件 / 脚本四路，只调 prompt 是最常见的单一化误区
+- 为 agent 预设 stuck-state 反馈模式（错误信息要能引导模型自我纠正），而非失败即终止
+- SDK 落地注意：CLAUDE.md 不会自动加载——需同时开启项目设置 + 匹配的 preset system prompt，两个开关缺一个 agent 就看不到项目约定（社区实测最常见翻车点）
+
+### 与既有条目的关系
+
+- 官方视频版把 #43/#10（Anthropic 两篇长文在册）的 harness 要素变成可跟做的代码课——**概念→长文→代码课**的教材链补全
+- 「文件系统即 context engineering」与 01 章 context engineering 主线同源，本条提供官方第一手表述与现场演示
+
+---
+
 ## 90. Pragmatic Engineer：走进 OpenAI/Anthropic/Cursor——「为 agent 构建执行环境」成为主航道工程工作（2026-10-03 收录）
 
 **来源**：[Pragmatic Engineer - Impressions from visiting OpenAI, Anthropic, & Cursor](https://newsletter.pragmaticengineer.com/p/impressions-from-visiting-openai)（2026-09 末）

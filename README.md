@@ -97,6 +97,31 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-03（晨） - 晨间增量：ADK 发布后评测/上下文隔离批次 & Anthropic 官方 Agent SDK Workshop & DigitalOcean 入局托管 agent 运行时
+
+**更新**：
+
+1. **框架速报增量（10-03 晨，相对 02:34 快照）**（gh api 复核）
+   - 7 仓无新 release；star 微涨（Superpowers +65 至 294,404 连续第四日领跑，其余 +3~+9）
+   - ADK v2.11.0 发布后傍晚批次：Dev UI eval 效率指标、工具子分支事件隔离出调用 agent LLM 上下文（**上下文隔离下沉 flows 层**）、hallucination judge 补 grounding metadata、AgentCardBuilder skill 级安全
+   - DeerFlow：extension-first evaluation gate 写入 agent guidance（#6178）、工具输出共享 blob 恢复（#6159）、memory 变更走 drained-write helper（#6164）
+
+2. **新闻收录 1 条（01 章新增）**：
+   - **DigitalOcean Managed Agents**（10-02）：云厂商把 agent 运行时做成托管产品线——与 AWS AgentCore（云）/ 开源 leash（本地）/ TrueForge（自托管）构成部署光谱全覆盖
+
+3. **最佳实践（04 新增 #91）**：
+   - **#91 Anthropic 官方 Claude Agent SDK Workshop（Thariq Shihipar）**：从零 live-coding harness（Agent Loop/Bash/文件系统上下文工程/stuck-state 反馈环）；「agent = model + harness」官方定义；补全概念→长文→代码课教材链；SDK 落地 CLAUDE.md 双开关注意点
+
+**去重说明**：QCon SF 2026（与 09-28 在册 QCon NY 前瞻同主题，聚合源无法核验原文）、TrueFoundry《10 Rules》（TrueForge 已在册 08-18，规则与 #86/#88/#90 重叠，仅 4x token 基准数字为增量）、Exa「coding agent 六个月过时」演讲（聚合源摘要无可核验正文）均按宁缺毋滥不收。OpenAI SDK 双发/ADK v2.11.0 主体已于今日 02:41 批次在册，本批次仅录增量。
+
+**信源说明**：Tavily 可用（未触发 432）；gh api REST 逐仓核实 star/push/commits/releases；DeerFlow/ADK/LangGraph commit 明细 API 直采。降级 0 条。
+
+**更新文件**：
+- `02-tools.md` — 10-03 速报追加晨间增量（ADK 发布后批次 + DeerFlow 治理文档化）
+- `01-architecture.md` — 新增 DigitalOcean Managed Agents 节
+- `04-best-practices.md` — 新增 #91（Anthropic Agent SDK Workshop）
+- `README.md` — 追加本日志
+
 ### 2026-10-03 - 发布解冻：OpenAI Agents SDK 一日双发 & ADK v2.11.0 & DeerFlow 门控可校准化 & 「agent 环境工程」主航道化
 
 **更新**：

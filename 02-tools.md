@@ -1189,6 +1189,15 @@ async function verifyUI() {
 - **BMAD** (53,731 ⭐): 打包规则清理——无脚本模块保留 scripts 目录、移除 web bundles、validate-skills 测试收紧
 - **CrewAI** (59,285 ⭐) 零提交（静默第二日）；**Superpowers** (294,339 ⭐) 零提交但日增 +427 连续第三日领跑——代码静默第六天，star 流量不减
 
+### 10-03 晨间增量（05:45 CST 补采，相对 02:34 快照）
+
+> Star 微涨：Superpowers 294,404（+65）、LangGraph 42,626（+9）、BMAD 53,738（+7）、OpenAI SDK 29,808（+6）、CrewAI 59,290（+5）、ADK 21,692（+4）、DeerFlow 83,332（+3）。7 仓无新 release；代码面增量集中在 ADK v2.11.0 发布后傍晚批次与 DeerFlow 治理文档化：
+
+- **ADK**：feat(eval) Dev UI eval 效率指标（发布后首个 feat）——评测不只看对错还看效率；fix(flows) 工具子分支事件不再进入调用 agent 的 LLM 上下文——**上下文隔离下沉到 flows 层**；hallucination judge 上下文补 grounding metadata；AgentCardBuilder 新增 skill 级安全支持（v2.11.0 合入批次）；A2A 暂停任务可被普通用户回复恢复
+- **DeerFlow**：docs 新增 extension-first evaluation gate 至 agent guidance（#6178）——把「扩展优先」写进 agent 指令；feat(storage) 工具输出从共享 blob 恢复（#6159）；refactor(gateway) memory 变更走共享 drained-write helper（#6164，10-02 #6151 的延续——持久写收口扩展到 memory 面）
+- **LangGraph**：两个依赖 bump（notebook/virtualenv），无功能变化
+- 📌 **启示**：ADK 发布后首批动作是「评测效率 + 上下文隔离」——框架在把上下文工程做成默认行为而非用户责任；DeerFlow 治理主线从代码延伸到文档（agent guidance 也纳入 gate）
+
 ## 2026-10-02 框架版本迭代速报
 
 > 数据：gh api 认证调用，2026-10-02 采集；当日净增相对 10-01 快照。**今日无新 release——连续第三日发布静默**，7 仓版本均与昨日一致（Superpowers v6.4.2、DeerFlow v2.1.0、LangGraph cli==0.4.32.dev0 预发布、OpenAI Agents SDK v0.22.3、CrewAI 1.15.23、Google ADK v2.10.0、BMAD v6.12.0）。代码面主线：**并发与取消的资源生命周期收口**——DeerFlow 并发工具输出临时文件隔离（#6150）+ gateway 持久写抽公共 drain helper（#6151）；ADK caller 取消时联动取消 in-flight tool call + live session teardown 挂起修复 + auth transport 懒加载。昨日主线是「取消后状态一致」，今日推进到「并发下资源隔离」——多 agent harness 的正确性战场从单会话时序转向并发资源竞争。采集方式：Tavily + Google News RSS（googlenewsdecoder 解码）+ gh api 认证调用。
