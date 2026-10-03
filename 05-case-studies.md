@@ -1108,3 +1108,26 @@ Faros.ai 建议先量化再决定投入方向：
 1. 「把人从监督环节拿出来」与 Dark Factory（案例 24）0% 人工审查同向，但路径不同：Dark Factory 靠 eval+护栏堆厚度，本案例靠环境塑造（常驻云端 + 真实限额 + 上下文外化）
 2. 「团队上下文外化为 harness 可读工件」与 #59（Termdock 文件化路径）、#62（经验沉淀为 evals）共同指向：组织知识必须变成 agent 可消费的格式才能参与自动化
 3. 与案例 11/24 并列为「小团队/短周期大规模产出」谱系的新数据点，可作为评估自身 harness 成熟度的参照案例
+
+---
+
+## 2026-10-04 补充：安全事件双响（配置投毒劫持 / OAuth 凭证泄漏）与「harness 攻击面」浮出水面
+
+**来源**：[GitLab - How a poisoned config can hijack an AI coding agent](https://about.gitlab.com/blog/)（2026-10-02）、Google ADK commits（2026-10-03）
+
+### 事件 1：DeepSeek-Reasonix 配置投毒案例（GitLab，10-02）
+
+- 案例演示：一个被投毒的配置文件即可**劫持整个 coding agent**——harness 的配置面（settings/规则文件/env）是新的攻击入口
+- 与在册安全线（#43 护栏、09-25 在册 企业活动审计链路）互补：此前条目讲「防 agent 误伤」，本条讲「防人/供应链投毒 harness」——威胁模型扩了一维
+
+### 事件 2：Google ADK OAuth2 secrets 泄漏修复（v2.11.0 后 10-03 紧急 fix）
+
+- ADK 修复：OAuth2 secrets 会经 `/run`、`/run_sse`、`/run_live`、dev server、session endpoints **外泄**——框架自带的 dev/run 端点成为凭证泄漏通道
+- 同日 ADK 还修复 `GoogleOidcVerifier` 要求 boolean `email_verified` claim（验证链又一洞）
+- 启示：**harness 的每个端点/会话机制都是 secret 的潜在出口**，升级框架版本要盯安全 fix，不只是 feature
+
+### 案例启示
+
+1. 「harness 攻击面」应与「harness 能力面」同权重进设计评审：配置文件、端点、会话状态、工具输出都是不可信输入
+2. 两条事件同周出现（第三方面研究 + 一线框架紧急修复）说明 harness 安全已从理论议题进入「必须打补丁」阶段
+3. 对自建 harness 的 checklist 增项：配置文件完整性校验、dev 端点默认禁用/鉴权、secrets 永不进会话序列化路径

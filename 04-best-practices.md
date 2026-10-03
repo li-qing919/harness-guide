@@ -3367,6 +3367,31 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
+## 92. Addy Osmani：Agent Harness Engineering——同模型换 harness 从 Top 30 到 Top 5（2026-10-04 收录）
+
+**来源**：[AddyOsmani.com - Agent Harness Engineering](https://addyosmani.com/blog/agent-harness-engineering)（2026-10 上旬）
+
+### 核心论点与数据
+
+- **关键数据点**（综合 Viv 与 HumanLayer 两个信源）：Terminal Bench 2.0 上 Claude Opus 4.6 在 Claude Code 内的得分**显著低于同一模型跑在自定义 harness**；Viv 团队仅改 harness（不改模型）把 coding agent 从 Top 30 提到 Top 5——harness 差异是当前最大的免费性能杠杆
+- **模型与 harness co-training**：今天的 agent 产品在 post-training 时就把 harness 放进回路，模型被专门训练得擅长 harness 设计者认为该擅长的动作（文件系统操作、bash、规划、subagent 派发）——这就是 Opus 4.6 在 Claude Code 里和在别人 harness 里手感不同的原因，也是「改一个工具逻辑会引发奇怪回归」的根源
+- **Simon Willison 极简定义**：agent 是「runs tools in a loop to achieve a goal」的系统；技能在于工具与回路两者的设计。Claude Code / Cursor / Codex / Aider / Cline 都是 harness——底层模型有时相同，但体验由 harness 主导
+- **Surface area 归属**：这一大块面（工具、回路、反压、prompt）是你的 surface area，不是模型厂商的——harness 工程师的职责边界
+
+### 实操要点
+
+- 评估 agent 效果时把「模型 × harness」当二维矩阵看，别把 harness 的问题归咎于模型（或反之）
+- 为自家代码库定制工具 + 更紧的 prompt + 更利的 back-pressure，往往比换/升级模型收益更大
+- 升级模型版本后重测 harness 集成：co-training 意味着新版模型的「最佳搭配 harness」可能已变
+
+### 与既有条目的关系
+
+- 与 #90（Pragmatic Engineer：agent 环境工程主航道化）同日线互证：本条给「为什么 harness 值得投入」的量化证据，#90 给产业侧的岗位化/平台化印证
+- 「模型吸收 harness 能力」论点与案例 24（Latent Space 注意力 harness：模型把 harness 能力吸进权重）形成对照——吸收的是通用能力，定制工具与代码库特化仍是净增益
+- Terminal Bench 2.0 数据与 #89（Jinyan Su 三代 harness 演进）的「scaffold 组件级判据」互补：#89 讲减什么，本条讲加什么能换多少分
+
+---
+
 ## 91. Anthropic 官方 Claude Agent SDK Workshop——从零 live-coding 一个 harness（2026-10-03 收录）
 
 **来源**：[YouTube - Claude Agent SDK Full Workshop — Thariq Shihipar, Anthropic](https://www.youtube.com/watch?v=TqC1qOfiVcQ)（2026-09/10 上线）

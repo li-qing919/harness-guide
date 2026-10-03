@@ -1163,6 +1163,32 @@ async function verifyUI() {
 
 ---
 
+## 2026-10-04 框架版本迭代速报
+
+> 数据：gh api 认证调用，2026-10-04 05:30 CST 采集（since 10-02 21:30 UTC）。**今日无新 release**（最新仍为 OpenAI SDK v0.23.1 / ADK v2.11.0，均在 10-02，已在册）。代码面主线：**安全修复与工单治理**——ADK 紧急修复 OAuth2 secrets 经 dev/run 端点外泄（安全级 fix，详见 05 章 10-04 补充）；BMAD ticketing alignment 大合入。采集方式：Tavily + Google News RSS + gh api 认证调用。
+
+**Star 增幅排名（日，相对 10-03 晨 05:45 快照）**：Superpowers +471（294,875，连续第五日领跑）≫ LangGraph +49（42,675）> CrewAI +33（59,323）> DeerFlow +23（83,355）> BMAD +16（53,754）= OpenAI SDK +16（29,824）> ADK +6（21,698）
+
+### Google ADK (21,698 ⭐) ⭐ 今日焦点：安全紧急修复
+- **fix: OAuth2 secrets 不再经 `/run`、`/run_sse`、`/run_live`、dev server、session endpoints 泄漏**——框架自带端点成为凭证出口，v2.11.0 发布次日即打补丁
+- fix: `GoogleOidcVerifier` 要求 boolean `email_verified` claim；fix: `run_llm_agent_as_node` 不再突变共享 node agent
+- refactor(tools): live batch tool execution 收口进 `_live_caller`；refactor(workflow): replay interceptor 与 `_ToolNode` 解耦 + rehydration 边界修复
+- 📌 **启示**：发布后 24h 内连出安全 fix，验证「框架升级要盯安全批次」——dev/调试端点是 harness secret 管理的盲区
+
+### DeerFlow (83,355 ⭐)
+- feat(config): 显式选择 backend dotenv 文件（#6227）；feat(serper): 搜索源域名过滤配置化（#6228）——检索面可控性继续加深
+- feat(extensions): host-bound Agent run 控制（#6190）；fix(channels): stop 超时后保留 live SDK workers；fix(telegram): `allowed_users` 无有效 ID 时默认拒绝所有用户（安全默认值收紧，与 OpenAI SDK 10-02「默认仅自家凭据」同向）
+- 📌 **启示**：「默认拒绝」成为 harness 安全默认值的新共识——ADK/OpenAI SDK/DeerFlow 三家同周各修一处默认权限
+
+### BMAD-METHOD (53,754 ⭐)
+- **ticketing alignment 大合入（PR #3022）**：fix(ticket) 拒绝重复 tracker_id、risk/criteria/done-when 规则各精简为一行；fix mirror 失败保留 unmatched 并回写真实状态；feat(ticket) 风险落位 build plan、customize.toml 收敛为 settings、移除 estimation
+- 📌 **启示**：工单镜像的双向状态一致性 + 规则减行，与 #88「精简规则胜过堆砌」同向——治理文件也在做减法
+
+### 其余三仓
+- **LangGraph** (42,675 ⭐): fix #8548 修复 abandoned branch 被重放进 DeltaChannel fork——分支状态语义继续收口
+- **CrewAI** (59,323 ⭐): feat(flow) #7864 experimental job lifecycle and runner——Flow 获得任务生命周期原语，长时运行编排能力补齐
+- **OpenAI SDK** (29,824 ⭐) / **Superpowers** (294,875 ⭐) 零提交；Superpowers 代码静默第七天但日增 +471 星流量不减
+
 ## 2026-10-03 框架版本迭代速报
 
 > 数据：gh api（GraphQL 单次查询），2026-10-03 02:34 CST 采集；当日净增相对 10-02 快照。**发布解冻：三连静默终结**——OpenAI Agents SDK 一日双发 v0.23.0 + v0.23.1（10-02 15:19 UTC），Google ADK 发 v2.11.0（10-02 00:44 UTC）；其余 5 仓版本不变（Superpowers v6.4.2、DeerFlow v2.1.0、LangGraph cli==0.4.32.dev0 预发布、CrewAI 1.15.23、BMAD v6.12.0）。代码面主线：**评测治理与工具权限治理**——DeerFlow typesafe 风险门控 eval 的 rubric 可校准化 + 策略可复现（#6179）；ADK ExecuteBashTool allowlist 改为整 shell token 匹配 + skill-script 产物 artifact 化。采集方式：Tavily + gh api 认证调用。

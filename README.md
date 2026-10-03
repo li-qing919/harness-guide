@@ -97,6 +97,26 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-04 - 安全紧急修复批次：ADK OAuth 凭证泄漏 & DeerFlow 默认拒绝收紧 & Addy Osmani 量化 harness 杠杆
+
+**更新**：
+
+1. **新闻收录 2 条（05 章 10-04 补充 + 02 章速报）**：
+   - **GitLab：配置投毒可劫持 AI coding agent**（10-02）——harness 配置面成为供应链攻击入口，「harness 攻击面」与能力面同权重入设计评审
+   - **Google ADK OAuth2 secrets 经 dev/run 端点外泄紧急修复**（10-03，v2.11.0 发布次日）——框架自带端点是 secret 管理盲区
+
+2. **最佳实践（04 新增 #92）**：
+   - **#92 Addy Osmani《Agent Harness Engineering》**：Terminal Bench 2.0 上 Opus 4.6 在 Claude Code 内跑分低于同模型自定义 harness，仅改 harness 从 Top 30 → Top 5；模型与 harness co-training（改工具逻辑会引发奇怪回归）；「模型 × harness」二维评估矩阵
+
+3. **框架速报（02 章 10-04 节）**：7 仓无新 release；主线为安全修复与工单治理——ADK secrets 泄漏 fix + OidcVerifier 收紧、DeerFlow telegram allowed_users 默认拒绝 + host-bound run 控制、BMAD ticketing alignment 大合入（#3022）、CrewAI Flow 任务生命周期实验特性（#7864）、LangGraph 分支重放修复（#8548）。Star：Superpowers +471（294,875）连续第五日领跑，代码静默第七天
+
+**信源说明**：Tavily 可用（未触发 432）；gh api REST 逐仓核实；gnews RSS 补充。降级 0 条。
+
+**更新文件**：
+- `02-tools.md` — 10-04 速报（ADK 安全批次 + DeerFlow 安全默认值 + BMAD 治理减法）
+- `04-best-practices.md` — 新增 #92（Addy Osmani：量化 harness 杠杆与 co-training）
+- `05-case-studies.md` — 10-04 补充：安全事件双响与「harness 攻击面」
+
 ### 2026-10-03（晨） - 晨间增量：ADK 发布后评测/上下文隔离批次 & Anthropic 官方 Agent SDK Workshop & DigitalOcean 入局托管 agent 运行时
 
 **更新**：
