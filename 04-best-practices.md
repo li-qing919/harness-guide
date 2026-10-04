@@ -3367,6 +3367,30 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
+## 93. capitalandcompute：Claude Code Harness Guide——七大扩展原语与 subagent 泄压阀（2026-10-05 收录）
+
+**来源**：[Claude Code Harness Guide: Skills, Hooks, Subagents, MCP](https://capitalandcompute.net/blog/claude-code-harness-guide)（2026-10）
+
+### 核心内容
+
+- Claude Code 在 2026 年已从「一个 CLI + 一份配置文件」演化为**含七种扩展原语的完整 harness**：CLAUDE.md/rules 文件、skills、hooks、subagents、agent teams、MCP servers、plugins——各有不同加载时机、上下文成本与保证强度；**harness 工程就是知道该伸手拿哪个原语**，选错原语是常见失效模式
+- 核心论点：**上下文是每个会话的稀缺资源，且先退化后耗尽**（best practices 文档本身就建立在「窗口越满性能越差」的观察上）——subagent 是泄压阀：在新鲜上下文里跑重 IO 工作（代码库探索、大 diff 评审），只把摘要回传主会话
+- 配套佐证（同日信源）：PubNub 子代理角色分工实践（Spec/Architect/Implementer/Tester 四角色 + hooks 串联；子代理无 stepwise plan、无中间输出可见性，需可观测增量的任务留给主 agent，[链接](https://www.pubnub.com/blog/best-practices-for-claude-code-sub-agents)）；Sakasegawa 博客的 PostToolUse 自纠错闭环（hook 自动跑 linter/测试 → stdout 返回 JSON additionalContext → agent 下一步自纠，[链接](https://nyosegawa.com/en/posts/harness-engineering-best-practices-2026)）
+
+### 实操要点
+
+- 按原语分级做决策：规则/记忆类（CLAUDE.md）选常驻低成本，确定性自动化选 hooks（模型跳不过去），隔离与并行选 subagents，外部系统选 MCP，分发选 plugins——先问「我要什么等级的保证」，再选原语
+- subagent 任务设计接受「黑盒执行」权衡：可观测性换并行生产力；需要过程可见的探索/调试任务不下放
+- 定期复查各原语的上下文开销账单：每个原语都在不同时机加载，「全开」的 harness 未必比精选的好
+
+### 与既有条目的关系
+
+- 与 #92（Osmani：harness 杠杆量化）、#89（三代 harness 演进）构成「为什么→怎么演化→用什么原语」三部曲；本条补齐**原语级选型指南**这一层
+- subagent 泄压阀论与 #91（SDK Workshop「文件系统即 context engineering」）同源：都是把上下文当预算管理，只是粒度不同（文件级 vs 会话级）
+- PostToolUse 自纠错闭环与 #43（在册 Anthropic Effective harnesses）的反馈环设计一致，本条给出 2026 年 hooks 机制下的最小落地形态
+
+---
+
 ## 92. Addy Osmani：Agent Harness Engineering——同模型换 harness 从 Top 30 到 Top 5（2026-10-04 收录）
 
 **来源**：[AddyOsmani.com - Agent Harness Engineering](https://addyosmani.com/blog/agent-harness-engineering)（2026-10 上旬）

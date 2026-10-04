@@ -1163,6 +1163,34 @@ async function verifyUI() {
 
 ---
 
+## 2026-10-05 框架版本迭代速报
+
+> 数据：gh api 认证调用，2026-10-05 05:30 CST 采集（since 10-03 21:30 UTC）。**新 release：BMAD v6.12.1**（10-04 19:29 UTC，含 dogfood.py 工具、AGENTS.md 重构与 CONTRIBUTING 检查文档化）；其余版本不变（OpenAI SDK v0.23.1 / ADK v2.11.0 / DeerFlow v2.1.0 / CrewAI 1.15.23 / Superpowers v6.4.2）。代码面主线：**ADK 凭证安全闭环 + OpenAI SDK tracing 可观测性 + DeerFlow 插件扩展**。采集方式：Tavily + Google News RSS + gh api 认证调用。
+
+**Star 增幅排名（两日，相对 10-04 晨快照）**：Superpowers +385（295,260，代码静默第九天流量不减）≫ DeerFlow +30（83,385）> LangGraph +37（42,712）> BMAD +29（53,783）> CrewAI +25（59,348）> OpenAI SDK +11（29,835）> ADK +5（21,703）
+
+### BMAD-METHOD (53,783 ⭐) ⭐ 今日焦点：v6.12.1 发布
+- **release v6.12.1**（10-04）：feat(tools) 新增 dogfood.py、docs 输出迁移至 docs-site/dist、修剪 .gitignore（#3035）；docs 重构 AGENTS.md 并把 checks 写入 CONTRIBUTING（#3034）
+- 📌 **启示**：方法论仓库自身也在 harness 化——AGENTS.md 作为 agent 入口文件被重构、CI checks 文档化，与 #93（七大原语）「先选原语再建 harness」的方法论互证
+
+### DeerFlow (83,385 ⭐)
+- **feat(extensions): Custom Agent 团队协作插件全量上线（#6243）**——多 agent 协作从内置能力转为插件形态，与 extension-first 路线（10-03 在册）一致
+- fix 流密集（昨日 10+ commits）：fix(skills) 识别 key 带引号的 secret assignment（#6276）、lead budget 纳入已完成子任务用量（#6218）、TUI 会话切换与 resume 引用防护（#6248/#6249）、artifacts 保存前边界检查（#6250）
+- 📌 **启示**：多 agent 协作插件化 + 预算计量把子任务用量算进 lead 上限——团队协作的成本治理在代码层落地
+
+### OpenAI Agents SDK (29,835 ⭐)
+- fix: Runner tracing opt-out 在调用方 trace 内生效（#5296）；fix: resumed agent span 内记录 approved tools（#5294）——**tracing 对 opt-out 与恢复场景的语义收口**
+- docs: 远程 MCP 端点位置澄清（#5297）、Git 系统要求文档化（#5295）
+- 📌 **启示**：v0.23.x 发布后重心转向可观测性边界 case——opt-out 语义和恢复 span 的审计完整性是人机协作场景的隐性刚需
+
+### Google ADK (21,703 ⭐)
+- **feat: session 内加密存储 Google 凭证**——接续 10-04 OAuth2 secrets 泄漏修复，从「堵端点」进入「加密会话态」，安全闭环（详见 05 章 10-05 补充）
+- fix(agents): `is_resumable=False` 时用户 FunctionResponses 路由至 sub-agents（10-04）；fix(flows): `is_resumable=False` 时重放子分支被中断的工具调用——多 agent 恢复语义打磨
+- 📌 **启示**：同一条凭证泄漏线索 48h 内两步走（端点封堵 → 会话态加密），框架安全响应周期的参照样本
+
+### 其余三仓
+- **LangGraph** (42,712 ⭐) / **CrewAI** (59,348 ⭐) / **Superpowers** (295,260 ⭐) 窗口内零提交；LangGraph/CrewAI 正常节奏，Superpowers 代码静默第九天
+
 ## 2026-10-04 框架版本迭代速报
 
 > 数据：gh api 认证调用，2026-10-04 05:30 CST 采集（since 10-02 21:30 UTC）。**今日无新 release**（最新仍为 OpenAI SDK v0.23.1 / ADK v2.11.0，均在 10-02，已在册）。代码面主线：**安全修复与工单治理**——ADK 紧急修复 OAuth2 secrets 经 dev/run 端点外泄（安全级 fix，详见 05 章 10-04 补充）；BMAD ticketing alignment 大合入。采集方式：Tavily + Google News RSS + gh api 认证调用。

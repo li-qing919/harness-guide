@@ -1111,6 +1111,29 @@ Faros.ai 建议先量化再决定投入方向：
 
 ---
 
+## 2026-10-05 补充：ADK 凭证安全闭环 & Claude Code Mods 生态趋同
+
+**来源**：Google ADK commits（2026-10-04）、gnews RSS 多源（2026-10-02/04）
+
+### 线索 1：ADK 凭证安全 48h 两步走（接 10-04 在册事件 2）
+
+- 10-03 紧急封堵 OAuth2 secrets 经 dev/run 端点外泄后，10-04 落地 **feat: session 内加密存储 Google 凭证**——从「堵出口」进入「加密静态态」，同一漏洞的纵深修复闭环
+- 参照样本价值：从漏洞暴露（v2.11.0 发布次日）到端点封堵再到会话态加密，**48h 三步**——对自建 harness 的安全响应周期是可对标的节奏
+
+### 线索 2：DeepSeek Harness v0.2.1-alpha.1 实验性兼容 Claude Code Mods（10-04）
+
+- 第三方开源 harness 新增实验性 Claude Code Mods 兼容层（并回应「抄作业」争议）——**Claude Code 生态（mods/skills/hooks）正在被第三方当作事实兼容目标**
+- 与在册 #90（agent 环境工程岗位化）、#93（七大原语选型）同向：当原语足够标准化，生态间会出现「兼容层」这种趋同产物；反向印证「投原语而非投单一 harness」的选型策略
+- 配套生态动态：Agent37 打平价多 harness 沙箱（Claude Code/Codex/Hermes/OpenClaw 同笼，10-03）、MIT/Sakana 用 LLM judge 降自改进 agent 评测成本（10-02）、Meta/Duke/UC Davis self-improving branches 自动优化 harness（10-03）——工具层/评测层/优化层各自分层成熟
+
+### 案例启示
+
+1. 安全修复看「是否闭环」而非「是否打补丁」：ADK 两步走示范了出口封堵 ≠ 态势安全，会话态里的凭证也要加密
+2. 生态兼容层的出现是原语标准化的领先指标：评估自建 harness 时优先采用已趋同的原语（skills/hooks/subagents 形态），降低未来迁移成本
+3. harness 优化的自动化链条成形：LLM judge 降评测成本 + self-improving branches 自动搜索配置——「人调 harness」正在被「harness 自调」补充
+
+---
+
 ## 2026-10-04 补充：安全事件双响（配置投毒劫持 / OAuth 凭证泄漏）与「harness 攻击面」浮出水面
 
 **来源**：[GitLab - How a poisoned config can hijack an AI coding agent](https://about.gitlab.com/blog/)（2026-10-02）、Google ADK commits（2026-10-03）

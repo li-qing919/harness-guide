@@ -97,6 +97,29 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-05 - Claude Code Mods 生态趋同 & ADK 凭证安全闭环 & 七大扩展原语指南
+
+**更新**：
+
+1. **新闻收录（05 章 10-05 补充）**：
+   - **DeepSeek Harness v0.2.1-alpha.1 实验性兼容 Claude Code Mods**（10-04）——第三方 harness 开始以 Claude Code 生态（mods/skills/hooks）为兼容目标，生态事实标准化的信号
+   - **MIT & Sakana AI：LLM judge 降低自改进 agent 评测成本**（10-02）；**Kimchi by Cast AI**：harness 层按任务动态路由模型（10-03）
+
+2. **最佳实践（04 新增 #93）**：
+   - **#93 capitalandcompute《Claude Code Harness Guide：七大扩展原语》**：CLAUDE.md/rules、skills、hooks、subagents、agent teams、MCP、plugins 各有加载时机/上下文成本/保证强度；上下文先退化后耗尽——subagent 是「泄压阀」（重 IO 在新鲜上下文跑、只回传摘要）；含 PubNub 子代理角色分工（Spec/Architect/Implementer/Tester）与 PostToolUse hook 自纠错闭环佐证
+
+3. **框架速报（02 章 10-05 节）**：**BMAD 发 v6.12.1**（10-04，含 AGENTS.md 重构与 CONTRIBUTING 检查文档化）；DeerFlow 10+ fix 流 + **Custom Agent 团队协作插件**（#6243）；OpenAI SDK 4 commits 主线为 tracing 可观测性（Runner opt-out、resumed span 内记录 approved tools）；ADK **session 内加密 Google 凭证**（接续 10-04 泄漏修复，安全闭环）+ is_resumable=False 子代理路由双 fix。Star：Superpowers 295,260（两日 +921，代码静默第九天）
+
+**信源说明**：Tavily 可用（未触发 432）；gnews RSS 补充 7 条；gh api REST 逐仓核实 star/push/commits/releases。Anthropic/OpenAI 官网为 JS 渲染直抓无输出，改用间接源（Releasebot/NeuralTrust）。
+
+**更新文件**：
+- `02-tools.md` — 10-05 速报（BMAD v6.12.1 + DeerFlow 插件 + SDK/ADK 修复流）
+- `04-best-practices.md` — 新增 #93（七大扩展原语 + subagent 泄压阀）
+- `05-case-studies.md` — 10-05 补充：ADK 安全闭环 + DeepSeek Harness Mods 兼容（生态趋同）
+- `README.md` — 更新日志 + 框架 star 数刷新
+
+---
+
 ### 2026-10-04 - 安全紧急修复批次：ADK OAuth 凭证泄漏 & DeerFlow 默认拒绝收紧 & Addy Osmani 量化 harness 杠杆
 
 **更新**：
@@ -2143,13 +2166,13 @@ Harness Engineering (最上层)
    - ✅ 机械强制：CI 任务验证文档新鲜度和交叉链接
 
 4. **热门 Agent Harness 框架更新**
-   - [obra/superpowers](https://github.com/obra/superpowers) - 112K ⭐ - Agentic Skills 框架
-   - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) - 45K ⭐ - 字节跳动 SuperAgent Harness
-   - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) - 47K ⭐ - 多 Agent 协作框架
-   - [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) - 42K ⭐ - AI 驱动开发方法论
-   - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) - 27K ⭐ - 图结构 Agent 构建
-   - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) - 20K ⭐ - OpenAI 官方 Agent SDK
-   - [google/adk-python](https://github.com/google/adk-python) - 18K ⭐ - Google Agent 开发工具包
+   - [obra/superpowers](https://github.com/obra/superpowers) - 295K ⭐ - Agentic Skills 框架
+   - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) - 83K ⭐ - 字节跳动 SuperAgent Harness
+   - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) - 59K ⭐ - 多 Agent 协作框架
+   - [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) - 54K ⭐ - AI 驱动开发方法论
+   - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) - 43K ⭐ - 图结构 Agent 构建
+   - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) - 30K ⭐ - OpenAI 官方 Agent SDK
+   - [google/adk-python](https://github.com/google/adk-python) - 22K ⭐ - Google Agent 开发工具包
 
 5. **Termdock AI CLI 最佳实践**
    - 📝 来源：[Termdock Blog](https://www.termdock.com/en/blog)
