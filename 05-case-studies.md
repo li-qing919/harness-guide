@@ -1111,6 +1111,23 @@ Faros.ai 建议先量化再决定投入方向：
 
 ---
 
+## 2026-10-06 补充：Cohere North 2 —— 预算与记忆成为 harness 一等能力（闭源企业向新样本）
+
+**来源**：gnews RSS 多源（Unite.AI / VentureBeat，2026-10-05 前后）
+
+### 线索：Cohere 发布 North 2，重新设计 agent harness
+
+- 三要素：**重新设计的 harness + 内建记忆系统 + token 预算控制**（VentureBeat 标题即「puts AI agents on a budget and gives them a memory」），面向企业私有化部署
+- 与开源侧对照：AWS Strands（10-05 在册）主打多模型 + 成本（−77%），DeepSeek Harness 桌面化 + 插件开放；North 2 把「预算控制」做成 harness 内建能力——**token 成本治理正从「框架外运维」前移为「harness 内建」**
+- 去重注：MarkTechPost/GIGAZINE 今日多篇「DeepSeek Harness v0.2 桌面版」为 10-02 在册事件（Pandaily 09-30 首发）的后续扩散报道，同事件不重复入册
+
+### 案例启示
+
+1. 选型新增一问：预算/记忆是 harness 内建还是外挂？内建（North 2）省集成但绑供应商，外挂（显式节点 + 自建预算闸）灵活但自担工程
+2. 「harness 管钱」趋势与 10-05 DeerFlow lead budget 计量、10-03 Kimchi 动态路由同向：成本治理三件套（计量/路由/预算）在闭源/开源两侧同步落地
+
+---
+
 ## 2026-10-05 补充：ADK 凭证安全闭环 & Claude Code Mods 生态趋同
 
 **来源**：Google ADK commits（2026-10-04）、gnews RSS 多源（2026-10-02/04）

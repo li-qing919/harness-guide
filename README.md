@@ -97,6 +97,29 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-06 - LangGraph 1.2.13 分支语义收口 & Cohere North 2 预算内建 & ADK 认证边界 breaking fix
+
+**更新**：
+
+1. **新闻收录（05 章 10-06 补充）**：
+   - **Cohere North 2**（10-05 前后）：重新设计 agent harness，内建记忆 + token 预算控制——「预算/记忆」成为 harness 一等能力，闭源企业向新样本；与开源侧（Strands 成本、DeepSeek 开放）对照入选
+   - 注：今日多篇 DeepSeek Harness v0.2 桌面版报道为 10-02 在册事件扩散，同事件不重复入册
+
+2. **最佳实践（04 新增 #94）**：
+   - **#94 薄 harness 哲学与框架生产化清单**：CrewAI 类框架 action trace 可能不反映真实执行（#3095）→ 以实际执行/provider 账单为准校验；五类失败路径（tool 失败/上下文溢出/超时/限流/OOD）与 happy path 同建；对话式多 agent 无硬终止可烧 5-10× token；Anthropic 薄 harness 论——harness 越薄越能 1:1 继承模型升级收益
+
+3. **框架速报（02 章 10-06 节）**：**LangGraph 1.2.13 发布**（10-05，checkpoint 分支/重放/DeltaChannel 四连修，HITL 纠偏场景应升级）；DeerFlow 24h 34 commits（调度 run history 可回看 goal outcomes + summarizer no-op 短路省钱）；ADK **breaking fix：user id 仅认已认证 principal**（凭证安全线 72h 三步走后收口）；CrewAI oauthlib PYSEC-2026-4114 依赖修复；OpenAI SDK tracing 脱敏 + docstring 参数保真。Star：Superpowers 295,628（日 +368，代码静默第十天）
+
+**信源说明**：Tavily 可用（未触发 432）；gnews RSS 补充（Cohere North 2 由该渠道发现）；gh api REST 逐仓核实 star/push/commits/releases；采集窗口 since 10-04 21:31 UTC，与上期无缝衔接。
+
+**更新文件**：
+- `02-tools.md` — 10-06 速报（LangGraph 1.2.13 + DeerFlow 调度可观测性 + ADK breaking fix）
+- `04-best-practices.md` — 新增 #94（薄 harness 哲学 + 生产化三道闸）
+- `05-case-studies.md` — 10-06 补充：Cohere North 2 预算内建 + DeepSeek v0.2 扩散去重
+- `README.md` — 更新日志 + 框架 star 数刷新
+
+---
+
 ### 2026-10-05 - Claude Code Mods 生态趋同 & ADK 凭证安全闭环 & 七大扩展原语指南
 
 **更新**：

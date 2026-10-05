@@ -1163,6 +1163,31 @@ async function verifyUI() {
 
 ---
 
+## 2026-10-06 框架版本迭代速报
+
+> 数据：gh api 认证调用，2026-10-06 05:30 CST 采集（since 10-04 21:31 UTC，与 10-05 期窗口无缝衔接）。**新 release：LangGraph 1.2.13**（10-05 17:51 UTC，checkpoint 分支/重放语义修复批次）；其余版本不变。代码面主线：**LangGraph checkpoint 语义收口 + ADK 认证边界 breaking fix + DeerFlow 调度可观测性**。采集方式：Tavily + Google News RSS + gh api 认证调用。
+
+**Star 增幅排名（日，相对 10-05 晨快照）**：Superpowers +368（295,628，代码静默第十天流量不减）> LangGraph +32（42,744）> BMAD +26（53,809）≈ CrewAI +26（59,374）> DeerFlow +25（83,410）> OpenAI SDK +12（29,847）> ADK +11（21,714）
+
+### LangGraph (42,744 ⭐) ⭐ 今日焦点：1.2.13 发布
+- **release 1.2.13**（10-05 17:51 UTC）：fix: replay 已越过的 update checkpoint 先 fork（#9170）；update_state 不再污染其他分支的旧 checkpoint（#9165）；DeltaChannel 计数器在所有 update_state 路径保持（#9142）；从未写入的 DeltaChannel 不再走 history（#9141）
+- 📌 **启示**：一次发布全部火力集中在「时间旅行 + 分支」语义——checkpoint/分支是 LangGraph 的护城河也是 bug 密集区；用 update_state 做人工干预（HITL 纠偏）的团队应尽快升级，跨分支污染会静默破坏状态
+
+### DeerFlow (83,410 ⭐)
+- 24h 34 commits 高产：feat(scheduled-tasks) run history 展示 goal outcomes 与 end conditions（#6326）——调度任务的「完成判定」可回看；perf(summarization) 已证明 no-op 的输入跳过 summarizer LLM 调用（#6318）——摘要链路加「短路」省钱；fix(gateway) 多实例部署按声明 gate 并强制 redis stream bridge（#6328）；fix(knowledge) catalog agent config 加载移出 event loop（#6313）；fix(subagents) isolated-loop shutdown ownership 保持可重试（#6316）
+- 📌 **启示**：无人值守调度的可观测性（goal outcomes 可回看）+ 成本短路（no-op 跳过 LLM）——长时运行 harness 从功能竞争转入运营面打磨
+
+### Google ADK (21,714 ⭐)
+- **fix!（breaking）: ADK user id 仅从已认证 principal 获取**——接续 10-03 端点封堵、10-04 会话态加密，凭证安全线第三步：身份语义重构；fix: eval 场景生成改用 project backend；refactor: 移除从未生效的 token compaction skip（死代码清理）；feat: adk create 后打印 next steps
+- 📌 **启示**：同一漏洞 72h 三步走（堵出口 → 加密静态态 → 身份只认 principal）后以 breaking fix 收口——框架安全修复会演进为 breaking change，升级前评估身份迁移成本
+
+### 其余三仓
+- **OpenAI Agents SDK**（29,847 ⭐）3 fix：不可序列化的 dataclass run contexts 直接省略（#5303）；Args-only docstring 保留参数描述（#5302）——工具签名保真；tracing 生命周期调试日志移除调用方数据（#5299）——日志脱敏
+- **CrewAI**（59,374 ⭐）1 fix：oauthlib 升 4.0.0 清 PYSEC-2026-4114（#7906）——依赖面安全扫描入账
+- **BMAD**（53,809 ⭐）/ **Superpowers**（295,628 ⭐）窗口内零提交；Superpowers 代码静默第十天
+
+---
+
 ## 2026-10-05 框架版本迭代速报
 
 > 数据：gh api 认证调用，2026-10-05 05:30 CST 采集（since 10-03 21:30 UTC）。**新 release：BMAD v6.12.1**（10-04 19:29 UTC，含 dogfood.py 工具、AGENTS.md 重构与 CONTRIBUTING 检查文档化）；其余版本不变（OpenAI SDK v0.23.1 / ADK v2.11.0 / DeerFlow v2.1.0 / CrewAI 1.15.23 / Superpowers v6.4.2）。代码面主线：**ADK 凭证安全闭环 + OpenAI SDK tracing 可观测性 + DeerFlow 插件扩展**。采集方式：Tavily + Google News RSS + gh api 认证调用。

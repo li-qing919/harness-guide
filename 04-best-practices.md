@@ -3367,6 +3367,29 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
+## 94. 薄 harness 哲学与框架生产化清单：工具执行校验、失败路径、预算硬闸（2026-10-06 收录）
+
+**来源**：[LangChain: The best AI agent frameworks in 2026](https://www.langchain.com/resources/ai-agent-frameworks)、[Towards AI: LangGraph vs CrewAI vs AutoGen Production Guide](https://pub.towardsai.net/langgraph-vs-crewai-vs-autogen-which-ai-agent-framework-should-your-enterprise-use-in-2026-3a9ebb407b09)、AI Tech Spectrum（Cat Wu/Ars Technica 薄 harness 访谈转述）
+
+### 核心内容
+
+- **别信 action trace，信实际执行**：LangChain 官方指出 CrewAI 类框架中 agent 的工具调用轨迹可能不反映真实执行（issue #3095），async crew 与前端 streaming 是已知痛点——生产必须对工具执行做显式校验，以 provider 账单/真实副作用为准核对成本（框架内部报表不一定对得上）
+- **失败路径与 happy path 同建**：没有任何框架默认处理五类故障——tool call 失败、上下文溢出、LLM 超时、限流、OOD 输入；每类都要在架构期显式设计，而非上线后补
+- **对话式多 agent 必须设硬终止**：开放讨论循环无终止条件可烧 5-10× 预期 token（案例：物流项目 40% 超支）；显式图结构（LangGraph）使每次 LLM 调用成为可预测的离散量，成本可预算
+- **薄 harness 判据**（Anthropic Cat Wu）：harness 越薄越能 1:1 继承未来模型能力提升，厚 harness 用中间逻辑掩盖模型短板、反而吃掉模型升级收益——评估框架时问：这层逻辑在下一代模型面前是资产还是负资产
+
+### 实操要点
+
+- 生产部署前三查：max_iters/终止条件设了没、工具执行有没有事后校验点、token 预算闸是框架内建（如 North 2，见 05 章 10-06）还是自建
+- 选型时按「薄/厚」给框架分层：编排原语（图/状态/检查点）是薄资产，「帮模型补短板」的重 prompt 工程层是厚负债，模型升级后优先审计后者
+
+### 与既有条目的关系
+
+- 与 #93（七大扩展原语）互补：#93 讲「用什么原语搭」，本条讲「搭完后生产化的三道闸」——校验/失败路径/预算
+- 与 #86/#88「随模型减负」三部曲同源的另一面：薄 harness 论给出了「为什么减负」的理论根据（继承模型收益），10-05 在册 #92 之 scaffold 审计给出了「怎么减」的操作流程
+
+---
+
 ## 93. capitalandcompute：Claude Code Harness Guide——七大扩展原语与 subagent 泄压阀（2026-10-05 收录）
 
 **来源**：[Claude Code Harness Guide: Skills, Hooks, Subagents, MCP](https://capitalandcompute.net/blog/claude-code-harness-guide)（2026-10）
