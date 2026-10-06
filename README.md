@@ -97,6 +97,17 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-07 - ARC-AGI-3 脚手架 4.9× 量化证据 & 重试语义（超时≠失败）& 框架动态
+
+**更新**：
+
+1. **新闻/案例收录（05 章 10-07 补充）**：
+   - **ARC-AGI-3 榜单 scaffolding 4.9× 增益**（TechTimes，10-06）：同模型不同 harness 设置，55.89% vs 27.9%——“scaffolding > 模型升级”第三条独立量化证据，且首次出现在推理基准而非 coding 基准
+   - **框架动态速览**：LangGraph 1.2.14 当日发布（sdk-py percent-encode fix）；deer-flow bash exit marker/内存清理修复；openai-agents-python 审批历史跨 resume 持久化；ADK 修孤儿 function_call 阻塞 compaction 并 drop Py3.10；BMAD Toolsmith 模块取代 BMad Builder
+
+2. **最佳实践（04 新增 #95）**：
+   - **#95 Agent 重试语义**（HackerNoon，10-04）：harness 必须区分超时（幂等可重试）与语义失败（不可重试）——工具层返回结构化错误类别，按类别路由到重试/上报/中断；与 #94 失败路径五分类互为操作细则
+
 ### 2026-10-06 - LangGraph 1.2.13 分支语义收口 & Cohere North 2 预算内建 & ADK 认证边界 breaking fix
 
 **更新**：

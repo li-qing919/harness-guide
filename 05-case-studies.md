@@ -1171,3 +1171,30 @@ Faros.ai 建议先量化再决定投入方向：
 1. 「harness 攻击面」应与「harness 能力面」同权重进设计评审：配置文件、端点、会话状态、工具输出都是不可信输入
 2. 两条事件同周出现（第三方面研究 + 一线框架紧急修复）说明 harness 安全已从理论议题进入「必须打补丁」阶段
 3. 对自建 harness 的 checklist 增项：配置文件完整性校验、dev 端点默认禁用/鉴权、secrets 永不进会话序列化路径
+
+---
+
+## 2026-10-07 补充：ARC-AGI-3 脚手架 4.9 倍增益——同模型不同 harness 的量化证据 & 框架动态速览
+
+**来源**：[Tech Times - ARC-AGI-3 Scaffolding Beats Model Upgrades](https://www.techtimes.com/articles/328542/20261006/arc-agi-3-scaffolding-beats-model-upgrades-same-ai-two-settings-49x-score-gain.htm)（2026-10-06）、GitHub API（2026-10-07 实测）
+
+### 案例：ARC-AGI-3 榜单——scaffolding 差异 > 模型差异
+
+- ARC-AGI-3 Kaggle 社区榜单 10-04 达到 **55.89% RHAE**，几乎翻倍 09-30 Milestone 2 冠军的 27.9%——顶级提交所用**模型几乎相同**，得分差全部来自 scaffolding/harness 设置（约 4.9 倍差距）
+- 与 #92（Osmani：Terminal Bench 2.0 上 Viv 换 harness 从 Top 30 到 Top 5）、案例 23 等构成第三条独立量化证据线：**harness 是当前最大的免费性能杠杆**，且首次出现在推理基准（ARC-AGI-3）而非 coding 基准上——外推到通用 agent 场景
+- 启示：评测 agent 时先固定模型、扫描 harness 配置，再谈换模型；benchmark 报告应披露 harness 配置，否则分数不可比
+
+### 框架动态（2026-10-06 快照，GitHub API）
+
+- **LangGraph 1.2.14**（10-06 当日发布）：sdk-py 0.4.6 同步发版，修复 thread_id/assistant_id percent-encode——stream 请求中特殊字符 ID 的编码边界
+- **deer-flow**（83.4K⭐）：连续 harness 细节修复——bash exit marker 在 budget rewrite 后保持末位（输出解析不破）、memory 排除无效/原始 assistant tool calls、shutdown 时 drain pending notify
+- **openai-agents-python**（v0.23.1）：早期拒绝不支持的 Redis Cluster session、computer-use 安全检查警告、**deferred approval 历史跨 resume 持久化**——审批态是会话状态的一部分
+- **google/adk-python**（v2.11.0 后）：修复**孤儿 function_call 永久阻塞 compaction**（上下文压缩被单个悬空调用卡死）；**要求 Python 3.11+**（drop 3.10）
+- **BMAD-METHOD**（v6.12.1）：**Toolsmith 模块取代 BMad Builder**（10-06）——方法论框架也在把「工具生成」产品化
+- **superpowers**（296.0K⭐）：昨日无新 commit，v6.4.2（09-25）
+
+### 案例启示
+
+1. 「scaffolding > 模型升级」已有三条独立量化证据（Viv/Terminal Bench、OpenAI 百万行代码库、ARC-AGI-3 榜单），跨 coding 与推理两域——harness 投入回报论证可以引用成组证据而非单例
+2. 框架侧的修复方向高度趋同：会话状态完整性（deer-flow exit marker、agents-python 审批历史、ADK 孤儿调用）——「状态机正确性」正在成为 harness 工程的核心修炼
+3. adk-python drop 3.10 提醒：harness 框架的运行时基线在快速上移，依赖锁定策略要预留升级窗口

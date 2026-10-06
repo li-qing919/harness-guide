@@ -3367,6 +3367,23 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
+## 95. Agent 重试语义：区分「超时」与「失败」，结构化错误类别（2026-10-07 收录）
+
+**来源**：[HackerNoon - Your Agent Retries Because It Can't Tell a Timeout From a Failure](https://hackernoon.com/your-agent-retries-because-it-cant-tell-a-timeout-from-a-failure)（2026-10-04，作者 Sakti Bagchi）
+
+### 核心论点
+
+- Agent 陷入无效重试循环的根因：harness 把所有工具错误一视同仁地重试——**超时（幂等、可重试）与失败（语义上不可重试）被混为一谈**；对后者重试只是烧 token 复现同一个错误
+- 解法在工具层而非 prompt 层：工具返回**结构化错误类别**（timeout / validation / auth / upstream-down…），harness 按类别路由——timeout 进自动重试（带退避），validation 进上报/修复循环，auth 直接中断等人
+- 与 #94 的「失败路径同建」互为操作细则：#94 讲五类失败路径都要建处理，本条给出最常见一类（网络错误）的路由判据
+
+### 实操要点
+
+- 工具错误码设计先问一句话：「重试会不会得到不同结果？」——会（超时、限流）才进重试白名单
+- 重试上限与预算硬闸绑定（#94 三道闸之一），防止单工具死循环拖垮整个会话预算
+
+---
+
 ## 94. 薄 harness 哲学与框架生产化清单：工具执行校验、失败路径、预算硬闸（2026-10-06 收录）
 
 **来源**：[LangChain: The best AI agent frameworks in 2026](https://www.langchain.com/resources/ai-agent-frameworks)、[Towards AI: LangGraph vs CrewAI vs AutoGen Production Guide](https://pub.towardsai.net/langgraph-vs-crewai-vs-autogen-which-ai-agent-framework-should-your-enterprise-use-in-2026-3a9ebb407b09)、AI Tech Spectrum（Cat Wu/Ars Technica 薄 harness 访谈转述）
