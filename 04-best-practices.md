@@ -3367,6 +3367,30 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
+## 96. Anthropic「Managed Agents」meta-harness：harness 假设会过期，用通用接口解耦大脑与双手（2026-10-08 收录）
+
+**来源**：[Anthropic Engineering Blog - Scaling Managed Agents: Decoupling the brain from the hands](https://www.anthropic.com/engineering/managed-agents)（2026-10 上旬）
+
+### 核心论点
+
+- **harness 编码的是「模型自己做不到什么」的假设，而这些假设会随模型进步过时**——Anthropic 官方首次把这一判断写成 meta-harness 的设计动机：不预设 Claude 需要什么 harness，而是提供通用接口容纳多种 harness（Claude Code、task-specific harness 等），让 harness 能力随模型智能同步升级
+- **职责分层**：会话（session）存放可恢复上下文存储；任意上下文管理放 harness 层——因为无法预测未来模型需要什么上下文工程，接口层面就把它外置了；事件进模型前可在 harness 层做转换，用于上下文组织以实现**高 prompt cache 命中率**
+- **单一 harness 不再最优**：Claude Code 是通用强 harness，但 task-specific harness 在窄域更优；meta-harness 以「可插拔」对冲不确定性——这是 #94 薄 harness 哲学的架构化落地：薄的不是某个 harness，而是「harness 与运行时之间的接口」
+
+### 实操要点
+
+- 设计自有 harness 时把「对模型能力的假设」显式列出并标注日期，模型升级时逐条复核（与 #89 scaffold 审计同一动作的官方背书版）
+- 上下文管理逻辑不写死在 agent 主循环里，做成 harness 层可替换的转换管道；缓存命中优先于逻辑优雅
+- 多任务域场景优先做「meta-harness + 可插拔 task harness」而非一个万能 harness
+
+### 与既有条目的关系
+
+- 与 #89（随模型能力减负判据）构成正式呼应：#89 是社区观察，本条是 Anthropic 官方确认「harness 假设会过期」并给出架构解法
+- 与 #10、#43（Anthropic harness 系列在册文）同一内容线：#43 讲 v1 双角色、#10 讲 v2 三角色，本条是面向「多 harness 并存」的下一阶段
+- 「事件进模型前可转换」与 #95（错误类别路由）、#92（七大扩展原语）同属「模型前后处理才是 harness 价值主战场」主线
+
+---
+
 ## 95. Agent 重试语义：区分「超时」与「失败」，结构化错误类别（2026-10-07 收录）
 
 **来源**：[HackerNoon - Your Agent Retries Because It Can't Tell a Timeout From a Failure](https://hackernoon.com/your-agent-retries-because-it-cant-tell-a-timeout-from-a-failure)（2026-10-04，作者 Sakti Bagchi）

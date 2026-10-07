@@ -1198,3 +1198,38 @@ Faros.ai 建议先量化再决定投入方向：
 1. 「scaffolding > 模型升级」已有三条独立量化证据（Viv/Terminal Bench、OpenAI 百万行代码库、ARC-AGI-3 榜单），跨 coding 与推理两域——harness 投入回报论证可以引用成组证据而非单例
 2. 框架侧的修复方向高度趋同：会话状态完整性（deer-flow exit marker、agents-python 审批历史、ADK 孤儿调用）——「状态机正确性」正在成为 harness 工程的核心修炼
 3. adk-python drop 3.10 提醒：harness 框架的运行时基线在快速上移，依赖锁定策略要预留升级窗口
+
+---
+
+## 2026-10-08 补充：Anthropic「Managed Agents」meta-harness——用通用接口对冲 harness 过期风险 & 框架动态速览
+
+**来源**：[Anthropic Engineering Blog - Scaling Managed Agents](https://www.anthropic.com/engineering/managed-agents)（2026-10 上旬）、GitHub API（2026-10-08 实测）
+
+### 案例：Anthropic 官方确立 meta-harness 架构方向
+
+- Anthropic 工程博客新文：Managed Agents 是一种 **meta-harness**——不预设 Claude 需要什么 harness，而是提供通用接口容纳多种 harness（Claude Code、task-specific harness 等），「matching Claude's intelligence over time」
+- 官方论点：**harness 编码了「模型自己做不到什么」的假设，这些假设随模型进步而过时，需要频繁重审**——为 #89 的「随模型减负」判据提供官方背书，详见 04 章 #96
+- 职责分层：会话存可恢复上下文，任意上下文管理放 harness 层；事件进模型前可转换以实现高 prompt cache 命中率——上下文工程从「写死在主循环」变为「可插拔转换管道」
+
+### 行业动态速览（Google News，2026-10-06~08）
+
+- **Microsoft Agent Lightning v1.0**：3,500 行代码的轻量 agentic RL 框架，直接在真实 harness 环境中训练 agent（非 sandbox 假环境）——「训练时用真 harness」与「推理时 harness 决定表现」正在合流
+- **Google EnvHarness 开源**：agent 训练的环境 harness 框架（DataDrivenInvestor 报道），大厂开始把 harness 作为训练基建开源
+- **GitLab**：agent 流水线使软件任务重试次数至多降 45 倍，归因 harness 层验证与反馈循环——与 #95 重试语义、ARC-AGI-3 4.9× 证据线同向
+- **Apple 研究**：极简单 agent 在 ML 工程任务上持平或胜过多 agent 系统——再次提醒「多 agent ≠ 更强」，harness 结构要按任务域裁剪
+- **Together Link Beta**：免费 CLI 将 Kimi K3、GLM 5.3 等开源模型接入 Claude Code/Codex/OpenCode——第三方模型「借壳」成熟 harness 生态成为趋势（与 DeepSeek 兼容 Claude Code Mods 同向）
+
+### 框架动态（2026-10-08 快照，GitHub API，since 10-07 UTC）
+
+- **CrewAI 1.15.24**（10-07 当日发布）：`crewai eval` 在 agent 运行时输出 markdown brief（#7907）；flow 实验性 turn/reply 身份 + 后台回复排队（#7909/#7911）——flow 事件模型在向可观测性演进
+- **LangGraph cli 0.4.33**（10-07）：修复 astream_events 在 v1/v2 丢 control/interrupts（#9219）；CLI 新增 `--image-uri` 部署已推镜像、`deploy listeners list`
+- **deer-flow**（83.5K⭐，24h 10+ commits）：skillscan 检测 fine-grained PAT/Google API key 并扫描 .zsh（#6423）——安全扫描扩面；批处理韧性（暂停态跨单项重试保持 #6417、同线程批量结果有界检查 #6416）；sandbox 端口分配止于 TCP 上限（#6424）
+- **google/adk-python**（v2.11.0 后，24h 10+ commits）：轻量安装 Gemini Enterprise SDK（免 GAPIC stack）；Gemini 3+ 允许 sub-agents 用内置搜索工具；文档补 ToolCallIntegrityPlugin 与 internal event metadata——「工具调用完整性」被产品化
+- **openai-agents-python**（v0.23.1）：run 级工具异常格式化（#5326）、callback 失败后保留 tool outputs（#5318）——错误路径不吞输出
+- **BMAD-METHOD**（53.9K⭐）：无昨日新 commit，v6.12.1（10-04）；**superpowers**（296.4K⭐）：无昨日新 commit，v6.4.2（09-25）
+
+### 案例启示
+
+1. meta-harness（接口化、可插拔）是「薄 harness 哲学」（#94）的架构化终局：薄的对象从 harness 本身转移到 harness 与运行时的接口上
+2. 训练侧（Agent Lightning、EnvHarness）开始把真实 harness 纳入 RL 环境——「harness 差异可学习」意味着 harness 工程经验可能被模型侧吸收，长期或改变 harness 投入回报结构
+3. 框架安全扫描扩面（deer-flow skillscan 扫 .zsh、检测 PAT）提示：harness 运行在开发者的真实 shell 环境，凭证泄露面随 agent 普及同步扩大

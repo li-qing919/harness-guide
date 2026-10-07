@@ -97,6 +97,29 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-08 - Anthropic「Managed Agents」meta-harness 官方化 & 训练侧真实 harness 合流 & 框架动态
+
+**更新**：
+
+1. **新闻/案例收录（05 章 10-08 补充）**：
+   - **Anthropic Engineering 新文《Scaling Managed Agents》**：官方确立 meta-harness 架构——不预设模型需要什么 harness，用通用接口容纳多种可插拔 harness；「harness 假设会随模型进步过期」首次成为官方设计动机
+   - **训练侧与 harness 合流**：Microsoft Agent Lightning v1.0（3.5K 行轻量 agentic RL，在真实 harness 中训练）+ Google EnvHarness 开源——harness 差异从推理侧杠杆变成可被训练吸收的对象
+   - **GitLab**：harness 层验证反馈使任务重试至多降 45×；**Apple 研究**：极简单 agent 持平多 agent 系统；**Together Link Beta**：开源模型借壳 Claude Code/Codex harness 生态
+
+2. **最佳实践（04 新增 #96）**：
+   - **#96 Anthropic「Managed Agents」meta-harness**：会话存可恢复上下文、任意上下文管理放 harness 层（可插拔转换管道 + prompt cache 命中优先）；对模型能力的假设要显式列出并随模型升级逐条复核——为 #89「随模型减负」提供官方背书，是 #94 薄 harness 哲学的架构化落地
+
+3. **框架速报（05 章 10-08 快照）**：**CrewAI 1.15.24 当日发布**（eval markdown brief + flow 后台回复排队）；LangGraph cli 0.4.33（修 astream_events 丢 interrupts）；DeerFlow skillscan 扫 .zsh/检测 PAT（安全扩面）+ 批处理韧性修复；ADK 轻量 Gemini Enterprise SDK 安装 + ToolCallIntegrityPlugin 产品化；OpenAI Agents SDK 错误路径不吞 tool outputs。Star：Superpowers 296,363（+0.3K）；BMAD/Superpowers 代码静默
+
+**信源说明**：Tavily 可用（未触发 432）；gnews RSS 补充（Agent Lightning/EnvHarness/GitLab 45× 由该渠道发现）；gh api REST 逐仓核实 star/push/commits/releases；采集窗口 since 10-07 00:00 UTC，与上期无缝衔接
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #96（meta-harness：通用接口对冲 harness 过期）
+- `05-case-studies.md` — 10-08 补充：Managed Agents meta-harness + 训练侧合流 + 框架速报
+- `README.md` — 更新日志 + 框架 star 数刷新
+
+---
+
 ### 2026-10-07 - ARC-AGI-3 脚手架 4.9× 量化证据 & 重试语义（超时≠失败）& 框架动态
 
 **更新**：
@@ -2200,7 +2223,7 @@ Harness Engineering (最上层)
    - ✅ 机械强制：CI 任务验证文档新鲜度和交叉链接
 
 4. **热门 Agent Harness 框架更新**
-   - [obra/superpowers](https://github.com/obra/superpowers) - 295K ⭐ - Agentic Skills 框架
+   - [obra/superpowers](https://github.com/obra/superpowers) - 296K ⭐ - Agentic Skills 框架
    - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) - 83K ⭐ - 字节跳动 SuperAgent Harness
    - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) - 59K ⭐ - 多 Agent 协作框架
    - [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) - 54K ⭐ - AI 驱动开发方法论
