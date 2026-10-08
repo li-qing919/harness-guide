@@ -3367,6 +3367,30 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
+## 97. Claude Haiku 5.5 定价重构 harness 经济学：小模型分层 + 半价缓存读取 + 1M 上下文（2026-10-09 收录）
+
+**来源**：[SiliconANGLE - Anthropic releases Claude Haiku 5.5 and halves Sonnet 5.5 cache read prices](https://siliconangle.com/)（2026-10-07）、[AWS - Introducing Claude Haiku 5.5](https://aws.amazon.com/blogs/machine-learning/introducing-claude-haiku-5-5-on-aws/)（2026-10-07）、[MarkTechPost - $0.10/M input, 1M context](https://www.marktechpost.com/)（2026-10-07）
+
+### 核心论点
+
+- **小模型经济学质变**：Haiku 5.5 输入 $0.10/M tokens（最高降 90%）、1M 上下文、对标 GPT-6 Luna——「exploration/信息收集类 subagent 用廉价小模型」从省钱技巧变成默认架构决策：大规模并发 subagent 的边际成本下降一个数量级
+- **缓存读取减半改变长会话成本结构**：Sonnet 5.5 cache-read 价格 -50%——多轮长会话、大 system prompt + skills 常驻的 harness 形态成本大幅下降，「高缓存命中优先」（#96 meta-harness 的转换管道目标）的 ROI 进一步放大
+- **定价脚注要核**：MIXED News 指出「90% 便宜」依赖 token 口径（输出/缓存写入不在折扣内）——成本模型要按自己的 token 构成实算，不能引用营销倍数
+
+### 实操要点
+
+- subagent 分层调度：探索/检索/摘要类任务路由到 Haiku 5.5 级小模型，规划/编码类保留旗舰模型——harness 的 model router 是成本治理第一杠杆（与 #90 spend-per-token 平台化同向）
+- 1M 上下文降低 summarization 频率：JIT retrieval（按需拉全文）替代激进压缩的窗口变大，#10/#43 的上下文分层参数需重调
+- 降级路径重估：原先「降级到小模型会明显掉智」的假设逐条复核——模型跨阈值后（参照 #89/#90 判据），降级策略的适用面扩大
+
+### 与既有条目的关系
+
+- 与 #90（spend-per-token 平台化治理）构成「指标→新杠杆」闭环：Coinbase 案例提出治理指标，本条提供最新的价格杠杆
+- 与 #96（缓存命中优先）同向：cache-read 减半直接提高「缓存命中优先于逻辑优雅」的收益
+- 与 #89（随模型减负）同主线：价格变化改变「哪些环节值得保留 harness 脚手架」的成本判据
+
+---
+
 ## 96. Anthropic「Managed Agents」meta-harness：harness 假设会过期，用通用接口解耦大脑与双手（2026-10-08 收录）
 
 **来源**：[Anthropic Engineering Blog - Scaling Managed Agents: Decoupling the brain from the hands](https://www.anthropic.com/engineering/managed-agents)（2026-10 上旬）

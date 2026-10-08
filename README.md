@@ -97,6 +97,29 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-09 - Claude Haiku 5.5 定价重构 harness 经济学 & 框架并发正确性修复潮
+
+**更新**：
+
+1. **新闻/案例收录（05 章 10-09 补充）**：
+   - **Claude Haiku 5.5 发布**（10-07）：1M 上下文、输入 $0.10/M（最高降 90%）、对标 GPT-6 Luna；**Sonnet 5.5 缓存读取价 -50%**——subagent 分层调度与长会话缓存策略的成本判据重写
+   - **Claude Max/Team 新增 API credits**（Max 最高 $200/月）；**OutSystems Agent Experience 开放 Claude Code/Cursor**（harness 接入企业低代码平台）
+   - **Claude Code 2.1.293 回退两天前的 cloud-session 修复**：harness 升级需 pin 版本 + 盯 changelog；agent 互评工具评测站上线；OpenAI DevDay 2026 聚焦 agent 任务管理
+
+2. **最佳实践（04 新增 #97）**：
+   - **#97 Haiku 5.5 定价经济学**：小模型分层调度成为默认架构决策（探索类 subagent 路由廉价模型）；cache-read 减半放大「缓存命中优先」（#96）收益；折扣倍数按实际 token 构成核实（营销口径陷阱）
+
+3. **框架速报（05 章 10-09 快照）**：**并发正确性修复潮**——DeerFlow 24h 48 commits（subagent poller fence、scheduler one-time task、sandbox env）；ADK 24h 30 commits（confirmed tool 审批幂等）；CrewAI 1.15.25（rwlock 所有权）；LangGraph 修 checkpoint 序列化/ToolNode resume 校验；OpenAI Agents SDK macOS 沙箱封锁 Launch Services。BMAD/Superpowers 代码静默。Star：Superpowers 296,541；DeerFlow 83,527；CrewAI 59,470
+
+**信源说明**：Tavily 可用（未触发 432）；gnews RSS 补充（Haiku 5.5/OutSystems/Claude Code revert 由该渠道发现，带 pubDate 核实）；gh api REST 逐仓核实 star/push/commits/releases；采集窗口 since 10-07 21:30 UTC，与上期无缝衔接
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #97（定价重构 harness 经济学）
+- `05-case-studies.md` — 10-09 补充：Haiku 5.5 定价 + 框架并发修复潮 + 案例启示
+- `README.md` — 更新日志
+
+---
+
 ### 2026-10-08 - Anthropic「Managed Agents」meta-harness 官方化 & 训练侧真实 harness 合流 & 框架动态
 
 **更新**：

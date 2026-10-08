@@ -1233,3 +1233,31 @@ Faros.ai 建议先量化再决定投入方向：
 1. meta-harness（接口化、可插拔）是「薄 harness 哲学」（#94）的架构化终局：薄的对象从 harness 本身转移到 harness 与运行时的接口上
 2. 训练侧（Agent Lightning、EnvHarness）开始把真实 harness 纳入 RL 环境——「harness 差异可学习」意味着 harness 工程经验可能被模型侧吸收，长期或改变 harness 投入回报结构
 3. 框架安全扫描扩面（deer-flow skillscan 扫 .zsh、检测 PAT）提示：harness 运行在开发者的真实 shell 环境，凭证泄露面随 agent 普及同步扩大
+
+## 2026-10-09 补充：Claude Haiku 5.5 定价重构 harness 经济学 & 框架并发正确性修复潮
+
+**来源**：Google News/Tavily（2026-10-07~08）、GitHub API（2026-10-09 实测，since 10-07 21:30 UTC）
+
+### 案例：定价变化改写 subagent 并发经济学
+
+- **Claude Haiku 5.5 发布**（10-07）：1M 上下文、输入 $0.10/M tokens（最高降 90%）、性能对标 GPT-6 Luna；**Sonnet 5.5 缓存读取价 -50%**——小模型分层调度 + 高缓存命中的成本收益双升，详见 04 章 #97
+- **Claude Max/Team 订阅新增 API credits**（10-08，Max 最高 $200/月，不可用于 Claude Code 本身）：订阅与 API 打通，SDK/subagent 批量任务多了 subsidized 额度渠道
+- **OutSystems Agent Experience 向 Claude Code/Cursor 开放**（10-08）：编码 harness 接入企业低代码平台，harness 生态从开发者工具向企业应用平台渗透
+- **Claude Code 2.1.293 回退两天前的 cloud-session 修复**（10-08）：fix→regression→revert 循环再现——harness 升级需 pin 版本 + 盯 changelog，不要盲升
+- **Agent 互评工具评测站上线**（10-08，Claude Code/Codex 已在发帖）：工具质量成为 harness 竞争新维度，agent-to-agent 评测生态萌芽
+- **OpenAI DevDay 2026 聚焦 agent 任务管理**（10 月上旬）：harness 竞争焦点从模型能力转向任务编排/执行管理
+
+### 框架动态（2026-10-09 快照，GitHub API，since 10-07 21:30 UTC）
+
+- **deer-flow**（83,527⭐，24h **48 commits**，最活跃）：fix(subagents) stop drain 期间 fence 批次 poller 启动（#6517）；fix(scheduler) one-time task 在 early trial 后保留调度（#6512）；fix(sandbox) 本地 provider 遵守 sandbox.environment（#6463）；fix(auth) 登录锁定计数入库存（Gateway 多副本一致，#6501）
+- **google/adk-python**（21,748⭐，24h **30 commits**）：fix: confirmed tool 每次审批只执行一次（审批幂等）；feat(plugins) BigQueryLoggerConfig 新增 on_schema_error/on_schema_ready 钩子；fix: after_model_callback 替换 response 时继承 usage_metadata（用量元数据不丢）
+- **CrewAI 1.15.25**（10-07 发布，59,470⭐）：fix: rwlock 获取被中断时保持所有权（#7944）；fix(cli) log-tasks-outputs 显示真实任务输出（#7936）
+- **LangGraph**（42,912⭐，4 commits，cli 0.4.33 后）：fix(checkpoint) 对象无法 rebuild 时保留序列化数据（#9251）；fix(prebuilt) ToolNode 不吞非法 resume 值（#9232）；fix(exit-mode) delta writes 不落 null task id（#9229）
+- **openai-agents-python**（29,916⭐，2 commits）：[sandbox-hardening] macOS 本地沙箱封锁 Launch Services（#5335）；fix: 会话写入按 API 限额批量（#5334）
+- **BMAD-METHOD**（53,953⭐）/ **superpowers**（296,541⭐）：无昨日新 commit（v6.12.1 / v6.4.2）
+
+### 案例启示
+
+1. **并发正确性成为本周框架修复主题**：deer-flow poller fence、ADK confirmed-tool 幂等、CrewAI rwlock 所有权、LangGraph null task id——subagent/工具并发路径的竞态与重复执行是当前 harness 实现的共同痛点，自有 harness 应专项审计「审批后重复执行」与「drain 期间新任务准入」两类竞态
+2. **定价重构后重算 harness 账本**：Haiku 5.5 + 缓存减半改变了 subagent 分层、长会话缓存策略的成本判据（#97）——每季度重跑一次成本模型，营销折扣倍数按实际 token 构成核实
+3. **发布回退事件**（Claude Code 2.1.293）提示 harness 依赖管理：生产环境 pin 具体版本，升级前核对 changelog 与回退历史，而非追新
