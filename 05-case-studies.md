@@ -1261,3 +1261,30 @@ Faros.ai 建议先量化再决定投入方向：
 1. **并发正确性成为本周框架修复主题**：deer-flow poller fence、ADK confirmed-tool 幂等、CrewAI rwlock 所有权、LangGraph null task id——subagent/工具并发路径的竞态与重复执行是当前 harness 实现的共同痛点，自有 harness 应专项审计「审批后重复执行」与「drain 期间新任务准入」两类竞态
 2. **定价重构后重算 harness 账本**：Haiku 5.5 + 缓存减半改变了 subagent 分层、长会话缓存策略的成本判据（#97）——每季度重跑一次成本模型，营销折扣倍数按实际 token 构成核实
 3. **发布回退事件**（Claude Code 2.1.293）提示 harness 依赖管理：生产环境 pin 具体版本，升级前核对 changelog 与回退历史，而非追新
+
+## 2026-10-10 补充：Meta 计算预算循环 & checkpoint 稳定性冲刺 & agent 安全边界扩散
+
+**来源**：VentureBeat/Tech in Asia/Techgenyz（Google News RSS when:2d + Tavily，2026-10-08~09）、GitHub API（2026-10-10 实测，since 10-08 21:30 UTC）
+
+### 案例：Meta 提出计算预算循环，「管理计算」成为显式工程能力
+
+- **Meta 研究（VentureBeat 10-09）**：给 agent 堆算力收益有限，杠杆在计算资源分配机制——Assess→Propose→Evaluate 控制器循环，按剩余预算权衡候选动作（详见 04 章 #98）。「管理计算的能力」应成为 agent 评测显式指标
+- **Soket AI 发布开源 LOOP harness**（10-08~09，IndiaAI 背书）：面向长时运行 agent 的生命周期管理与断点续跑——长任务编排赛道再添开源选项
+- **微软 MXC 为 AI agent 加安全边界**（10-09）：沙箱/权限隔离方向；与 OpenAI Agents SDK 的 macOS sandbox hardening（#5335）同向——**harness 安全层成为本周共同主题**
+- **Postman @ AI Engineer（10-08）**：为 coding agent 绘制 115 个微服务的上下文图谱——大代码库场景「结构化地图」优于整仓检索
+- **Reducto @ AI Engineer（10-08）**：推倒重建 MCP server 复盘——工具接口粒度与返回体积直接影响 agent 成功率
+
+### 框架动态（2026-10-10 快照，GitHub API，since 10-08 21:30 UTC）
+
+- **LangGraph**（42,971⭐，24h 5+ commits）：**DeltaChannel/checkpoint 连环修复**（#9260-#9264）——fork 快照不再误启动未运行节点、空 checkpoint_id 视为最新、DeltaChannel Overwrite 重置后快照一致、InMemorySaver 一致性套件进 CI；cli 0.4.33（10-07）
+- **deer-flow**（83,577⭐，24h 5+ commits）：chat goal 停止原因可视化 + goal evaluator 输入脱敏（#6556）；JSONL 中断追加后 framing 修复（#6520）；Claude 重试纳入请求准入控制（#6545）——**并发准入治理延续上周主题**
+- **CrewAI 1.15.26**（10-08 发布，59,508⭐）：新增 deepinfra provider（#7459）；修 bedrock 向 GPT 系误发 stopSequences（#7731）；RAG github loader 保留来源归因（#7983）；CLI 记录评测中止原因（#7963）
+- **google/adk-python**（21,758⭐，24h 5+ commits）：修 partial tools 碰撞与 `__call__` docstring 缺失、ApigeeLlm 函数响应伴随文本丢失；新增孤立导入包量测量（依赖瘦身信号）
+- **openai-agents-python**（29,931⭐）：本日无新 commit（3d 内：macOS 沙箱封锁 Launch Services #5335、会话写入按限额批量 #5334）；v0.23.1（10-02）
+- **BMAD-METHOD**（53,990⭐）/ **superpowers**（296,871⭐）：默认分支 3 日无 commit（v6.12.1 / v6.4.2）
+
+### 案例启示
+
+1. **checkpoint 稳定性进入「一致性套件」阶段**：LangGraph 把 DeltaChannel 一致性测试推入 CI 并连环修 fork/快照语义——自有 harness 的 state 管理若没有 conformance suite，fork/resume 路径的隐性 bug 大概率还在；值得照搬「对内存实现跑一致性套件」的做法
+2. **计算管理从隐含变显式**（Meta #98）：agent 评测与优化应加入「同等算力下的完成质量」维度；预算外闸（#94）+ 内生预算环（#98）双层叠加
+3. **安全边界扩散**：微软 MXC、OpenAI 沙箱硬化、deer-flow goal 输入脱敏三家同向——harness 评审清单里「脱敏与沙箱」应从可选项升为默认项

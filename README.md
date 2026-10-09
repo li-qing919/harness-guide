@@ -97,6 +97,26 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-10 - Meta 计算预算循环 & LangGraph checkpoint 一致性冲刺 & agent 安全边界扩散
+
+**更新**：
+
+1. **新闻/案例收录（05 章 10-10 补充）**：
+   - **Meta 研究（VentureBeat 10-09）**：堆算力收益有限，计算资源分配机制才是杠杆——Assess/Propose/Evaluate 预算循环，「管理计算」成为 agent 评测显式指标
+   - **Soket AI 开源 LOOP harness**（长时运行 agent 断点续跑）；**微软 MXC agent 安全边界**（10-09）；Postman「为 agent 绘 115 微服务上下文地图」与 Reducto「推倒重建 MCP server」复盘（均 10-08）
+
+2. **最佳实践（04 新增 #98）**：
+   - **#98 Meta 计算预算循环**：pause-and-allocate 检查点、同等算力完成质量作为评测维度、发现持久化避免隐性算力税；与 #94 预算硬闸互补（外闸保底 + 内环提效）
+
+3. **框架速报（05 章 10-10 快照）**：**LangGraph DeltaChannel/checkpoint 连环修复**（#9260-#9264，InMemorySaver 一致性套件进 CI）；deer-flow goal 可视化/JSONL framing/Claude 重试准入；**CrewAI 1.15.26**（deepinfra provider、bedrock stopSequences 修复）；ADK partial tools 碰撞修复 + 孤立导入包量测量。BMAD/Superpowers 代码静默。Star：Superpowers 296,871；DeerFlow 83,577；CrewAI 59,508；LangGraph 42,971
+
+**信源说明**：Tavily 可用（未触发 432）；gnews RSS when:2d（Meta/Soket/MXC 由该渠道发现，googlenewsdecoder 解出直链）；gh api REST 逐仓核实 star/push/commits/releases；采集窗口 since 10-08 21:30 UTC，与上期无缝衔接
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #98（Meta 计算预算循环）
+- `05-case-studies.md` — 10-10 补充：Meta 预算循环 + checkpoint 一致性冲刺 + 案例启示
+- `README.md` — 更新日志
+
 ### 2026-10-09 - Claude Haiku 5.5 定价重构 harness 经济学 & 框架并发正确性修复潮
 
 **更新**：

@@ -3367,6 +3367,30 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
+## 98. Meta：算力不是 agent 瓶颈，「管理计算」应是显式能力——Assess/Propose/Evaluate 预算循环（2026-10-10 收录）
+
+**来源**：[VentureBeat - Why giving AI agents more compute isn't enough—and what Meta proposes instead](https://venturebeat.com/orchestration/why-giving-ai-agents-more-compute-isnt-enough-and-what-meta-proposes-instead)（2026-10-09）
+
+### 核心内容
+
+- Meta 研究结论：给 agent 堆算力收益有限；真正杠杆是 **agent 自身的计算资源分配机制**——随任务变长，agent 应能主动暂停并决定如何分配剩余预算
+- 提出控制器循环：**Assess**（评估当前进展/剩余预算）→ **Propose**（生成候选动作，不先受预算限制）→ **Evaluate**（controller 按预算权衡，如「修已知失败」比「重写正常组件」更值）→ 分配算力，循环往复
+- 关键设计：**前期发现持久保留**，agent 在先前尝试基础上继续，无需反复重放完整执行历史——预算治理与上下文复用一体两面
+- 企业侧含义：「管理计算的能力」应成为 agent 评测与优化的显式指标，而非隐含在模型参数里
+
+### 实操要点
+
+- 长 workflow 的 harness 应设置 **pause-and-allocate 检查点**：每到检查点先做「剩余预算 × 动作价值」评估，再决定继续/换向/收敛
+- agent 评测基准中加入计算管理维度：同等算力下的任务完成质量差异，就是编排层的可测收益
+- 发现/结论持久化：把中间产物写盘并按引用复用，避免「每步重读全史」的隐性算力税
+
+### 与既有条目的关系
+
+- 与 #94（薄 harness 哲学的**预算硬闸**）互补：#94 是 harness 侧的外部强制上限，本条是 agent 内生的预算决策循环——外闸保底、内环提效，两层叠加才是完整预算治理
+- 与 #89（随模型能力给 scaffold 减负）互证：模型跨阈值后，算力分配从「harness 替它管」演进为「agent 自己管」，harness 的角色从执行者转向预算审计方
+
+---
+
 ## 97. Claude Haiku 5.5 定价重构 harness 经济学：小模型分层 + 半价缓存读取 + 1M 上下文（2026-10-09 收录）
 
 **来源**：[SiliconANGLE - Anthropic releases Claude Haiku 5.5 and halves Sonnet 5.5 cache read prices](https://siliconangle.com/)（2026-10-07）、[AWS - Introducing Claude Haiku 5.5](https://aws.amazon.com/blogs/machine-learning/introducing-claude-haiku-5-5-on-aws/)（2026-10-07）、[MarkTechPost - $0.10/M input, 1M context](https://www.marktechpost.com/)（2026-10-07）
