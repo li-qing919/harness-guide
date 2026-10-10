@@ -97,6 +97,27 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-11 - harness 平台化/订阅互认 & AI 生成 PR 冲垮验证流水线 & Superpowers v7.0.0
+
+**更新**：
+
+1. **新闻/案例收录（05 章 10-11 补充）**：
+   - **Codex App Server 平台化定位**（10-09）+ **ChatGPT 订阅直接用 Devin**（10-10）：harness 从产品转向协议/平台，订阅互认成新竞争维度
+   - **Sonar：AI 生成 PR 冲垮 code validation**（10-09）——验证端成下一个工程主战场；**MCP 凭据泄露 8.2 万文件 1/8 暴露**（10-09）
+   - Qoder Fast Mode（延迟/成本分层）、TianxiCode+DeepSeek-V4.1-Flash 达 SWE-bench-Live Lite 71%
+
+2. **最佳实践（04 新增 #99）**：
+   - **#99 AGENTS.md 通用格式 + file-scoped 文档 + 上下文污染三件套**：AGENTS.md 被 9+ harness 原生读取（Linux Foundation 接管）、`.instructions.md` 按域路由、compaction/结构化笔记/multi-agent 三件套、subagent 五条 checklist
+
+3. **框架速报（05 章 10-11 快照）**：**Superpowers v7.0.0**（重写 brainstorming + Antigravity Marketplace manifest）；**CrewAI 1.15.27**；ADK HITL 并发正确性修复（ParallelWorker 等 in-flight worker）；deer-flow 凭据加密 + 双 Gateway 脚本；LangGraph update_state checkpoint 修复。Star：Superpowers 297,205；DeerFlow 83,661；CrewAI 59,539；LangGraph 43,024；BMAD 54,015
+
+**信源说明**：Tavily 可用；gnews RSS when:2d/3d；gh api REST 逐仓核实 star/push/commits/releases；采集窗口 since 10-09 21:30 UTC，与上期无缝衔接
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #99（AGENTS.md 通用格式与 file-scoped 文档）
+- `05-case-studies.md` — 10-11 补充：平台化/订阅互认 + 验证流水线过载 + Superpowers v7
+- `README.md` — 更新日志
+
 ### 2026-10-10 - Meta 计算预算循环 & LangGraph checkpoint 一致性冲刺 & agent 安全边界扩散
 
 **更新**：

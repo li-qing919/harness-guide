@@ -1262,6 +1262,34 @@ Faros.ai 建议先量化再决定投入方向：
 2. **定价重构后重算 harness 账本**：Haiku 5.5 + 缓存减半改变了 subagent 分层、长会话缓存策略的成本判据（#97）——每季度重跑一次成本模型，营销折扣倍数按实际 token 构成核实
 3. **发布回退事件**（Claude Code 2.1.293）提示 harness 依赖管理：生产环境 pin 具体版本，升级前核对 changelog 与回退历史，而非追新
 
+## 2026-10-11 补充：harness 平台化/订阅互认 & AI 生成 PR 冲垮验证流水线 & Superpowers v7.0.0
+
+**来源**：Google News RSS when:2d/3d + Tavily（2026-10-08~10）、GitHub API（2026-10-11 实测，since 10-09 21:30 UTC）
+
+### 案例：harness 从产品变平台，订阅互认成为新竞争维度
+
+- **Codex App Server 定位为平台而非产品**（OpenAI Dominik Kundel @ BigGo Finance 10-09）：Codex 以 App Server 形式把 agent 能力暴露给第三方 IDE/工具——harness 厂商从「卖产品」转向「定协议+建平台」，工具生态集成度成为护城河
+- **ChatGPT 订阅者可直接付费使用 Devin**（Startup Fortune 10-10）：OpenAI × Cognition 订阅互认——用户不必离开现有套餐即可使用别家 coding agent，harness 生态从零和竞争走向「互认分销」
+- **AI 生成 PR 冲垮 code validation 流水线**（Sonar Adl-Tabatabai @ BigGo Finance 10-09）：AI PR 数量激增使人工 review 与 CI 验证成为新瓶颈——harness 工程需把验证环节（静态分析、review gating、agent 自验）纳入工作流设计，而非只优化生成端
+- **MCP 凭据泄露：8.2 万文件中 1/8 暴露**（tech-insider 10-09）：MCP 配置里的凭据管理成为最大安全短板；与本周 deer-flow 新增 DEER_FLOW_CREDENTIALS_KEY 凭据加密同向——**harness 评审清单中「凭据隔离/加密」应升为默认项**
+- **Qoder 新增 Fast Mode**（Pandaily 10-10，首响应 3 秒、降低 credit 消耗）：延迟/成本分层成为 coding harness 产品差异化手段；**TianxiCode + DeepSeek-V4.1-Flash 达 SWE-bench-Live Lite 71% verified**（Pandaily 10-10）：模型+硬件厂自建 harness 路线抬头
+
+### 框架动态（2026-10-11 快照，GitHub API，since 10-09 21:30 UTC）
+
+- **superpowers v7.0.0 大版本发布**（10-10，297,205⭐）：重写 brainstorming skill、新增 Antigravity Marketplace manifest、Windows hook 修复（#2489）——skills 框架开始面向第三方 marketplace 分发
+- **CrewAI 1.15.27**（10-09 发布，59,539⭐）：版本 bump + docs snapshot（#8001/#8004），隔日一发的发布节奏
+- **google/adk-python**（21,769⭐，24h 9+ commits，最活跃）：**HITL 并发正确性修复**——ParallelWorker 中断时等待 in-flight worker 完成（531a86a）、rerun_on_resume 节点等待所有直接中断（bcac35a）；首请求停止导入未用 provider（perf）；ComputerUseToolset 并发懒初始化 guard（15486db）
+- **deer-flow**（83,661⭐，24h 10+ commits）：新增 DEER_FLOW_CREDENTIALS_KEY + channel 凭据加密（安全）；**双 Gateway 多实例 harness 脚本**（35f6a98）；Redis Last-Event-ID 流式重放 gap 修复；URL ResourceLink 不再持久化并修复 bricked threads
+- **LangGraph**（43,024⭐，2 commits）：update_state 的 writes 存到所更新的 checkpoint（#9258）；InMemorySaver delta history 默认取最新 checkpoint（#9257）——checkpoint 语义修复延续
+- **openai-agents-python**（29,954⭐，无新 commit）/ **BMAD-METHOD**（54,015⭐，无昨日新 commit）：v0.23.1 / v6.12.1
+
+### 案例启示
+
+1. **验证端成为下一个工程主战场**：生成端（AI 写 PR）已过剩，Sonar 指出的 validation 过载提示——自有 harness 应把「agent 自验 + 分级 review gating」当作一等公民设计，否则并行 agent 的产出反而压垮交付
+2. **凭据管理从配置细节升级为安全事故源**：MCP 凭据大范围泄露 + deer-flow 加密凭据同周发生——审计所有 MCP/skill 配置中的明文凭据，落 env 注入或 secret 管理
+3. **平台化信号明确**：Codex App Server 平台化 + Devin 订阅互认 + Superpowers v7 上 Antigravity Marketplace——harness 间接口（协议、marketplace manifest、订阅）比单点功能更值得投入
+4. **HITL 并发正确性是本周框架修复主题的延续**（ADK ParallelWorker）：上周 deer-flow poller fence、本周 ADK 等待 in-flight worker——「中断/恢复路径上的并发等待」是人机协作 harness 的通用难题，值得专项测试
+
 ## 2026-10-10 补充：Meta 计算预算循环 & checkpoint 稳定性冲刺 & agent 安全边界扩散
 
 **来源**：VentureBeat/Tech in Asia/Techgenyz（Google News RSS when:2d + Tavily，2026-10-08~09）、GitHub API（2026-10-10 实测，since 10-08 21:30 UTC）

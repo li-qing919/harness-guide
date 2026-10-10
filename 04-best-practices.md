@@ -3367,6 +3367,30 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
+## 99. AGENTS.md 成为通用 agent 指令格式：file-scoped 文档 + 上下文污染三件套（2026-10-11 收录）
+
+**来源**：[metacto - Context Engineering for AI Agents: 2026 Leader's Guide](https://www.metacto.com/blogs/context-rich-environments-ai-agents)（2026-10）、[Anthropic - Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
+
+### 核心内容
+
+- **AGENTS.md 已成事实标准**：截至 2026，被 Claude Code、OpenAI Codex CLI、Cursor、Aider、Devin、GitHub Copilot、Gemini CLI、Windsurf、Amazon Q 原生读取；2025-12 Anthropic 将其捐赠给 Linux Foundation Agentic AI Foundation 后彻底中立化——仓库级 agent 指令文件从各家方言收敛为统一格式，一次编写全 harness 生效
+- **file-scoped 文档实践**：前沿团队从「根目录一本 AGENTS.md」演进为 `.instructions.md` + YAML frontmatter 声明适用的文件/目录，不同代码域路由到不同推理上下文；与 subagent（各自专注上下文处理代码切片）天然配合
+- **Anthropic 上下文污染管理三件套**：① Compaction——长对话压缩为高保真摘要后重启；② Structured note-taking——中间发现写文件而非塞上下文；③ Multi-agent 架构——子代理用干净聚焦的上下文分治
+- **Just-in-time 加载**（Anthropic 官方）：不全量预处理，维护轻量标识符（文件路径/存储查询/链接），运行时按工具拉取——Claude Code 对大库做数据分析即此模式
+
+### 实操要点
+
+- 仓库根放 AGENTS.md（跨 harness 通用），按域拆 `.instructions.md` 并用 frontmatter 圈定作用域；保持精炼、写「持久事实」（构建命令、约定、边界），不写一次性任务指令
+- 用 Sentry Greg Pstrucha 的提法自查：「Stop prompting — 让 repo 记住 agent 记不住的东西」——重复出现的指令应下沉到仓库文档，而非每次会话重复 prompt
+- subagent 设计五条 checklist（Medium/vibe-coding 归纳 Anthropic 官方建议）：① 从 Claude 自动生成的 agent 起步再改 ② 单一职责 ③ prompt 写详细 ④ 限制工具访问面 ⑤ 纳入版本控制
+
+### 与既有条目的关系
+
+- 是 #98（Meta 计算预算循环）的上下文侧对应物：预算环管「算力怎么花」，AGENTS.md/file-scoped 文档管「上下文给什么」——两者共同构成 agent 运行时的资源治理
+- 与 #89（随模型能力给 scaffold 减负）同向：指令文件是「减负」的持久化形态——模型变强后 prompt 可以短，但仓库事实必须沉淀在文件里
+
+---
+
 ## 98. Meta：算力不是 agent 瓶颈，「管理计算」应是显式能力——Assess/Propose/Evaluate 预算循环（2026-10-10 收录）
 
 **来源**：[VentureBeat - Why giving AI agents more compute isn't enough—and what Meta proposes instead](https://venturebeat.com/orchestration/why-giving-ai-agents-more-compute-isnt-enough-and-what-meta-proposes-instead)（2026-10-09）
