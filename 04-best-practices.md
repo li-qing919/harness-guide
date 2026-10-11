@@ -3367,6 +3367,31 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
+## 100. 澄清前置的结构化交互：交互式卡片与复述回放取代自由文本往返（2026-10-12 收录）
+
+**来源**：[deer-flow PR #6670 - Feishu interactive clarification cards](https://github.com/bytedance/deer-flow)（2026-10-11 合入）、[superpowers v7.0.0 release notes](https://github.com/obra/superpowers/releases/tag/v7.0.0)（2026-10-10，brainstorming 重写 #2463/#2482）
+
+### 核心内容
+
+- **deer-flow：IM 渠道内的交互式澄清卡片**——agent 需要澄清时，在飞书渠道发出带选项的交互卡片，用户点选而非打字回复；澄清从「自由文本多轮往返」变为「结构化单轮点选」，缩短人机协作 round-trip
+- **superpowers v7 brainstorming：复述回放 + 猜想标记**——先问一个开放问题、把听到的理解复述回几百字供纠正、猜测显式标注为猜测；弄清需求后才决定流程规模（直接做/小改/写设计文档）；**builder-check** 用全新子代理以「即将动手实现的人」视角读设计文档、列出仍需追问的问题，一轮收敛
+- 两条独立信源同一周指向同一模式：**澄清质量是长任务成败的前置变量**——需求没弄清就动手的 harness，后面所有纠错都在放大初始偏差（superpowers 自述案例：从未问平台就设计 iOS 应用，结果交付了 Web 应用）
+
+### 实操要点
+
+- harness 跑在 IM 渠道（飞书/Slack/Telegram）时，澄清请求用结构化卡片（选项列表 + 默认值）而非开放问题；每次澄清附「我目前的理解」供一键确认/纠正
+- 需求澄清后做「规模匹配」：小任务直接执行、中任务聊天里对齐方案、大任务产出设计文档——并在执行中允许任务升级重议
+- 用「builder-check 子代理」做设计验收：fresh context 读设计文档，只问「按这个我还有什么不知道的」，主 agent 能答的自答并标注，答不了的集中一轮问用户
+- 技术边角：向上下文注入内容时用字面插入而非 `String.replace`（`$'`/`$&` 序列会被当替换模式吃掉，superpowers #2362 教训）
+
+### 与既有条目的关系
+
+- 与 #99（AGENTS.md 沉淀持久事实）互补：#99 管「仓库能自己回答的」，本条管「必须问人的」——两界划分清楚后，澄清交互才值得花工程力气
+- 与 #96（Managed Agents 解耦大脑与双手）同属人机接口层：#96 是架构解耦，本条是对话协议设计
+- superpowers「builder-check」是 #43/#10（Anthropic evaluator 进化线）的轻量变体：evaluator 不跑 Playwright 验收成品，而是在动工前以实现者视角审设计——把验收左移一个阶段
+
+---
+
 ## 99. AGENTS.md 成为通用 agent 指令格式：file-scoped 文档 + 上下文污染三件套（2026-10-11 收录）
 
 **来源**：[metacto - Context Engineering for AI Agents: 2026 Leader's Guide](https://www.metacto.com/blogs/context-rich-environments-ai-agents)（2026-10）、[Anthropic - Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)

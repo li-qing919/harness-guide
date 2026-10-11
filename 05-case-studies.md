@@ -1316,3 +1316,40 @@ Faros.ai 建议先量化再决定投入方向：
 1. **checkpoint 稳定性进入「一致性套件」阶段**：LangGraph 把 DeltaChannel 一致性测试推入 CI 并连环修 fork/快照语义——自有 harness 的 state 管理若没有 conformance suite，fork/resume 路径的隐性 bug 大概率还在；值得照搬「对内存实现跑一致性套件」的做法
 2. **计算管理从隐含变显式**（Meta #98）：agent 评测与优化应加入「同等算力下的完成质量」维度；预算外闸（#94）+ 内生预算环（#98）双层叠加
 3. **安全边界扩散**：微软 MXC、OpenAI 沙箱硬化、deer-flow goal 输入脱敏三家同向——harness 评审清单里「脱敏与沙箱」应从可选项升为默认项
+
+## 2026-10-12 补充：GPT-5.6 Sol harness 层量化增益 & Uber 法务红线性 Agent & AI Engineer 峰会 harness 议程
+
+**来源**：[Ken Huang - From Software Engineering to Harness Engineering](https://kenhuangus.substack.com/p/from-software-engineering-to-harness)、Uber Engineering / AI Engineer 峰会报道（gnews RSS when:3d + Tavily，2026-10-09~11）、GitHub API（2026-10-12 实测，since 10-10 21:30 UTC）
+
+### 案例：OpenAI 自证 harness 层优化量级——同模型 ARC-AGI-3 从 13.3% 到 38.3%
+
+- Ken Huang（Substack，10 月上旬）：harness 层优化——**retained reasoning + context compaction**——把 GPT-5.6 Sol 的 ARC-AGI-3 从 13.3% 提到 **38.3%（2.9 倍）**，token 消耗降为 **1/6**
+- 与 10-07 在册的 ARC-AGI-3 Kaggle 榜单（scaffolding 差异 4.9 倍）互为印证：这次是**厂商第一方数据**，不是社区提交——「同模型换 harness」的量化收益已从社区旁证升级为官方口径
+- 同文 ArXiv 拆解：Claude Code 代码库 98.4% 是 harness 基础设施、1.6% 是模型决策逻辑（在册 98% 发现的精确化版本）
+
+### 案例：Uber 法务红线性 Agent——高危领域的生产化样本
+
+- Uber Engineering（10-09）：法务合同 redlining（红线审查）agent 上生产——高危、强合规领域的 harness 设计样本：权限门控 + 人工在环 + 领域工具集
+- 信号：coding agent 之外，**垂直职能域**（法务/财务/风控）的 harness 落地案例开始密集出现，且都以「审批链」而非「自主执行」为核心设计
+
+### 峰会议程信号：AI Engineer（10-08~11）
+
+- **Dominik Kundel（OpenAI）：Building on the Codex Harness**——Codex harness 的构建实践专场；与 10-11 在册的 Codex App Server 平台化呼应
+- **Viren Baraiya：Brains vs Hands**——生产环境 agent 安全运行，「大脑/双手」分离与审批门设计（与 #96 Managed Agents 同构）
+- **Anders Swanson（Oracle）：From Context to Memory**——agent 需要真正的记忆层；记忆从上下文管理中独立成层是本周反复出现的议题
+- **Jakarta Post 评论（10-11）：用 harness engineering 规模化印尼数字经济**——概念首次进入主流财经媒体叙事，品类出圈
+
+### 框架动态（2026-10-12 快照，GitHub API，since 10-10 21:30 UTC）
+
+- **deer-flow**（83,694⭐，**单日 36 commits 全场最活跃**）：**飞书交互式澄清卡片**（#6670，澄清请求结构化为卡片点选，详见 04 章 #100）；skillscan 按「形状」而非拼写匹配 fork 炸弹（#6689，防绕过的模式识别）；scheduler 保持临近执行的 once 调度不变（#6686）；ACP Windows 绝对路径解析（#6656）；cancel takeover 标记 orphan-recovery 停止原因（#6674）
+- **BMAD-METHOD**（54,037⭐）：**v6.12.2**（10-11）——`install --yes` 无 `--directory` 不再卡提示；Windows UTF-8 写入；CIS/TEA 钉在 v6 末版（新版目标 v7）；安装器提示 **v7 已开放预览**——大版本迁移前夜，生产用户暂留 v6 稳定线
+- **LangGraph**（43,077⭐）：checkpoint 分支修复（#9269）——线程已移过的 exit run 不再混入新分支；checkpoint 一致性主题连续第三周修复
+- **google/adk-python**（21,779⭐）：ParallelAgent 移除 Python <3.11 的 merge fallback——**版本地板抬升**信号，跟进方注意运行环境约束
+- **superpowers**（297,639⭐）：v7.0.0 已在册（10-11），代码静默；**CrewAI**（59,576⭐）/ **openai-agents-python**（29,967⭐）：无新 commit（1.15.27 / v0.23.1 仍为最新）
+
+### 案例启示
+
+1. **harness 层量化增益进入官方口径**：GPT-5.6 Sol 2.9 倍/6 倍省 token 的数据可作为内部立项依据——向管理层论证「为什么 invest harness 而不是等下一代模型」时直接引用
+2. **澄清交互值得专项工程**：deer-flow 卡片化 + superpowers 复述回放两条线同周落地——自有 harness 的「提问质量」（问什么、怎么问、附什么上下文）应作为评测维度，而不只是执行质量
+3. **垂直高危域以审批链为核心设计**：Uber 法务案例再次确认——不是「让 agent 更自主」，而是「让审批更顺手」；与 10-11 在册「验证端成主战场」同向：人工闸口的工程化是下一个投入点
+4. **大版本迁移窗口管理**：BMAD v7 预览 + v6 末版钉版的处理方式值得借鉴——双轨并行、旧线继续收 bug、安装器明示双版本状态

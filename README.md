@@ -97,6 +97,26 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-12 - GPT-5.6 Sol harness 层量化增益 & 澄清交互卡片化 & BMAD v7 预览信号
+
+**更新**：
+
+1. **新闻/案例收录（05 章 10-12 补充）**：
+   - **GPT-5.6 Sol harness 层优化官方数据**（Ken Huang Substack）：retained reasoning + context compaction 把 ARC-AGI-3 从 13.3%→38.3%（2.9 倍），token 降为 1/6——「同模型换 harness」收益首次有厂商第一方口径；Claude Code 98.4% harness 比例精确化
+   - **Uber 法务红线性 Agent**（10-09）：高危垂直域以审批链为核心设计；**AI Engineer 峰会**：OpenAI Codex Harness 专场、Brains vs Hands 安全框架、Oracle 记忆层；**Jakarta Post** 引用 harness engineering（概念出圈）
+
+2. **最佳实践（04 新增 #100）**：
+   - **#100 澄清前置的结构化交互**：deer-flow 飞书交互式澄清卡片（点选取代自由文本往返）+ superpowers v7 brainstorming 复述回放/builder-check 子代理；`String.replace` 注入内容的 `$&` 序列坑
+
+3. **框架速报（05 章 10-12 快照）**：**deer-flow 单日 36 commits**（飞书卡片 + skillscan fork 炸弹形状匹配 + scheduler once 保持）；**BMAD v6.12.2**（CIS/TEA 钉 v6 末版，v7 开放预览）；LangGraph checkpoint 分支修复（#9269）；ADK 移除 Python <3.11 fallback（版本地板抬升）。Star：Superpowers 297,639；DeerFlow 83,694；CrewAI 59,576；LangGraph 43,077；BMAD 54,037
+
+**信源说明**：Tavily 可用（未触发 432）；gnews RSS when:3d；gh api REST 逐仓核实 star/push/commits/releases；采集窗口 since 10-10 21:30 UTC，与上期无缝衔接
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #100（澄清前置的结构化交互）
+- `05-case-studies.md` — 10-12 补充：GPT-5.6 Sol 官方数据 + Uber 法务案例 + 峰会议程 + 框架速报
+- `README.md` — 更新日志
+
 ### 2026-10-11 - harness 平台化/订阅互认 & AI 生成 PR 冲垮验证流水线 & Superpowers v7.0.0
 
 **更新**：
