@@ -97,6 +97,28 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-13 - Anthropic「harness 挤薄论」厂商口径 & hooks 失控防护 & 扩展机制选型边界
+
+**更新**：
+
+1. **新闻/案例收录（05 章 10-13 补充）**：
+   - **Gabe Cemaj（Anthropic）「harness 挤薄论」**（10-12）：自建 harness 中间层会随模型变强被挤薄，设计要保持可削减性——与 #89「scaffold 审计」同判据的厂商侧确认
+   - **DeepSeek Harness v0.2.1-alpha.2**（10-11）：reasoning translation + git worktree 并行隔离（与 Tano 案例同模式落地）
+   - **4B 模型自动改写 agent harness**（10-12）：harness 本身成为可被模型优化的对象，元层级信号；**Harness.io 收购 Augment Code 资产**（10-11）行业整合加速；**Claude Managed Agents 系列 Part 1-2** 官方跟做教材
+
+2. **最佳实践（04 新增 #101/#102）**：
+   - **#101 AWS hooks 失控防护**：拦截逻辑从 prompt 服从改为确定性代码钩子（前置拦危险命令/预算硬熔断/后置校验落盘）；指令面减负 + 强制面加固的完整策略
+   - **#102 Skills/Agents/Subagents/MCP 选型边界**：选型口诀（教模型→Skill、接外部→MCP、要并行→Subagent、要常驻→Agent）+ Skill description 全局上下文税提醒 + 扩展供应链安全清单
+
+3. **框架速报（05 章 10-13 快照）**：deer-flow 单日 24 commits（澄清卡片后持续高频）；ADK 18 commits 密集修复；CrewAI 10；LangGraph 3（checkpoint 第四周小步修）；agents-python/BMAD/superpowers 发版后静默。Star：Superpowers 298,164；DeerFlow 83,755；CrewAI 59,615；BMAD 54,063；LangGraph 43,147；agents-python 29,988；ADK 21,789
+
+**信源说明**：Tavily 可用（未触发 432）；gnews RSS when:2d；gh api REST 逐仓核实 star/push/commits/releases；采集窗口 since 10-11 21:30 UTC，与上期无缝衔接
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #101（hooks 失控防护）、#102（扩展机制选型边界）
+- `05-case-studies.md` — 10-13 补充：harness 挤薄论 + DeepSeek v0.2.1-alpha.2 + 4B 模型改写 harness + 行业整合
+- `README.md` — 更新日志
+
 ### 2026-10-12 - GPT-5.6 Sol harness 层量化增益 & 澄清交互卡片化 & BMAD v7 预览信号
 
 **更新**：

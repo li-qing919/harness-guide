@@ -1317,6 +1317,50 @@ Faros.ai 建议先量化再决定投入方向：
 2. **计算管理从隐含变显式**（Meta #98）：agent 评测与优化应加入「同等算力下的完成质量」维度；预算外闸（#94）+ 内生预算环（#98）双层叠加
 3. **安全边界扩散**：微软 MXC、OpenAI 沙箱硬化、deer-flow goal 输入脱敏三家同向——harness 评审清单里「脱敏与沙箱」应从可选项升为默认项
 
+## 2026-10-13 补充：Anthropic「harness 会被挤薄」厂商口径 & DeepSeek harness 迭代 & 4B 模型自动改写 harness
+
+**来源**：Google News RSS when:2d（2026-10-11~12）+ Tavily + GitHub API（2026-10-13 实测，since 10-11 21:30 UTC）
+
+### 厂商口径：Gabe Cemaj（Anthropic）——今天建的 harness 会被模型进步「挤薄」
+
+- BigGo Finance 转载访谈（10-12）：Anthropic 的 Gabe Cemaj 提出「The Agent Harness You Build Today Will Thin Out as Claude Gets Smarter」——随模型变强，harness 中间层会被逐步挤薄，设计时要保持**可削减性**
+- 与 #89（Jinyan Su「scaffold 是补丁不是资产」+ scaffold 审计）同判据、不同身份：#89 是社区梳理，本条是厂商侧一线声音——「thin-out-able 设计」从工程经验升级为厂商明确预期
+- 操作含义：harness 每一层都应可独立摘除且回退路径明确；与模型耦合深的组件（依赖模型弱点的设计）生命周期最短
+
+### DeepSeek Harness v0.2.1-alpha.2：reasoning translation + git worktrees（10-11）
+
+- Pandaily 报道：新 pre-release 加入 **reasoning translation**（思维链跨语言/跨模型翻译）与 **git worktree 隔离**（并行任务各自 worktree，互不污染工作区）
+- worktree 隔离与 Tano 案例（04 章在册「Worktree + 端口隔离跑 5 个并行任务」）同模式在开源 harness 落地；reasoning translation 则是推理可见性/可移植性的新方向
+
+### 前沿信号：4B 小模型被训练来自动改写 agent harness（10-12）
+
+- FourWeekMBA 报道：研究者用 RL 训练 4B 模型专门改写/优化 agent harness——**harness 本身成为可被模型优化的对象**
+- 与 10-12 在册 GPT-5.6 Sol harness 层量化增益（同模型换 harness 2.9 倍）衔接：既然 harness 层收益可量化，「自动搜索 harness 设计」就成了自然的下一步；AI 应用于 harness 的元层级（meta-level）开始出现
+
+### 行业整合：Harness.io 收购 Augment Code 资产（10-11~12）
+
+- SD Times / APAC Media：CI/CD 厂商 Harness 收购 Augment Code 资产，扩展自主 SDLC 能力——AI 开发工具链整合加速，「harness」一词在产业侧同时指代工程实践与产品品类
+
+### 教程资源：Claude Managed Agents 系列 Part 1-2（10-12）
+
+- AI Engineer 连载：Part 1《Decoupling the Brain from the Hands》（控制面/计算面解耦实操）、Part 2《Build a Research Agent》（三 REST 端点搭 research agent）——#96 架构概念的官方跟做教材
+
+### 框架动态（2026-10-13 快照，GitHub API，since 10-11 21:30 UTC）
+
+- **deer-flow**（83,755⭐，单日 24 commits）：澄清卡片之后持续高频迭代，SuperAgent 定位（sandbox/memory/skills/subagents/message gateway）稳国
+- **google/adk-python**（21,789⭐，18 commits）：版本地板抬升（<3.11 fallback 移除）后进入密集修复期
+- **CrewAI**（59,615⭐，10 commits）：1.15.27（10-09）后持续维护
+- **LangGraph**（43,147⭐，3 commits）：checkpoint 一致性主题第四周小步修复
+- **openai-agents-python**（29,988⭐）/ **BMAD**（54,063⭐）/ **superpowers**（298,164⭐）：无新 commit；BMAD v6.12.2（10-11）与 superpowers v7.0.0（10-10）发版后静默期
+
+### 案例启示
+
+1. **「可削减性」应进 harness 设计评审清单**：每个组件标注「补的是模型哪个弱点」，弱点消失即触发摘除评估（与 #89 scaffold 审计同一动作，现在有厂商背书）
+2. **并行隔离的标配化**：DeepSeek worktree + Tano 端口隔离两条线同模式——多任务并行 harness 的隔离层已是共识设计，不必自创
+3. **harness 优化正在被「harness 化」**：4B 模型改写 harness 是元层级信号——关注 harness 自动搜索/自动调参工具的出现，人工设计可能从「写 harness」转向「评审 harness」
+
+---
+
 ## 2026-10-12 补充：GPT-5.6 Sol harness 层量化增益 & Uber 法务红线性 Agent & AI Engineer 峰会 harness 议程
 
 **来源**：[Ken Huang - From Software Engineering to Harness Engineering](https://kenhuangus.substack.com/p/from-software-engineering-to-harness)、Uber Engineering / AI Engineer 峰会报道（gnews RSS when:3d + Tavily，2026-10-09~11）、GitHub API（2026-10-12 实测，since 10-10 21:30 UTC）

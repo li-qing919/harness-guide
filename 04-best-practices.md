@@ -3367,6 +3367,55 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
+## 102. Skills / Agents / Subagents / MCP 四种扩展机制选型边界（2026-10-13 收录）
+
+**来源**：[Colin McNamara - Understanding Skills, Agents, Subagents, and MCP in Claude Code: When to Use What](https://colinmcnamara.com/blog/understanding-skills-agents-and-mcp-in-claude-code)（2026-10）
+
+### 核心内容
+
+- 四种扩展机制的职责边界一次说清：**Skills**（挂给模型的程序化能力，按需触发）、**MCP**（外部资源/系统的标准化接入）、**Subagents**（并行任务 + 上下文隔离）、**常驻 Agent**（CI 监控、告警等无人值守场景）
+- Skills 四条设计准则：① description 进每一次模型交互，必须精写；② 单一职责，一个 Skill 只做好一件事；③ 可移植设计，避免平台特定代码；④ 安全第一，只装可信来源
+- 安全清单：Skills 能在本机执行代码——安装前审代码、用 `claude skills list` 定期审计；MCP 最小权限（能只读就只读）、凭证走环境变量不进上下文
+- 组合范式示例：开发流用 Claude Code + Subagents 并行开发，Agent（SDK）盯 CI/CD 出告警，Skills 沉淀代码质量规范——三层各司其职而非互相替代
+
+### 实操要点
+
+- 选型口诀：**教模型怎么做 → Skill；接外部系统 → MCP；要并行/隔离 → Subagent；要常驻 → Agent**
+- Skill 的 name+description 是全局上下文税：每个 Skill 的描述都进主对话，装 50 个低质 Skill 等于往每次交互塞噪音——定期清理比新增更重要
+- MCP 权限按「最小可用」配置并在接入新 server 时复查 scope；企业环境优先只读
+
+### 与既有条目的关系
+
+- 补全 #93（Claude Code Harness Guide 七大扩展原语）的选型判据：#93 讲原语全景，本条给「何时用哪个」的决策规则
+- 与 #99（AGENTS.md file-scoped 指令）、#100（澄清交互）同属「harness 的接口层工程」：指令面、对话面、能力面三面合一
+- 安全清单与 10-04 在册配置投毒事件、02 章 credential scoping 主线同向：扩展机制的供应链面是 harness 攻击面的最新组成部分
+
+---
+
+## 101. AWS 工程实践：hooks 是 agent 失控防护的主机制（2026-10-13 收录）
+
+**来源**：[BigGo Finance - AWS Engineers Say Hooks Are the Answer to Runaway AI Agents](https://biggo.com)（gnews 转载，2026-10-11）
+
+### 核心内容
+
+- AWS 工程师的一线结论：**agent 失控（runaway）的防护不能靠 prompt 约束，要靠 hooks**——在工具调用的前置/后置插入确定性代码钩子，把拦截逻辑从「模型是否服从」变成「代码是否执行」
+- hooks 的本质优势是**确定性**：黑名单命令拦截、成本预算硬闸、路径/权限检查在代码层强制执行，与模型能力升级无关、不随 prompt 漂移而失效
+- 与「随模型减负」线形成互补而非矛盾：prompt 里堆禁令可以随模型变强而精简（#86/#88/#89），但**强制面**（hooks）不随模型升级而撤除——指令面减负、强制面加固
+
+### 实操要点
+
+- 失控三道闸全部 hooks 化：① 前置钩子拦危险命令/越权路径；② 预算钩子按 token/时长硬熔断；③ 后置钩子校验输出落盘范围
+- hooks 逻辑写成幂等、可测试的纯代码，纳入仓库版本管理并与 CI 同审——钩子本身是 harness 的一等公民，不是配置边角
+- 审批类钩子（高危操作转人工）与 #96（Managed Agents 审批链）、Uber 法务案例（10-12 在册）同一设计取向：危险操作的门是代码建的，不是提示词求出来的
+
+### 与既有条目的关系
+
+- #94（薄 harness 哲学：工具执行校验、失败路径、预算硬闸）给出了「要有硬闸」，本条给出具体实现机制（hooks）与工程化要求
+- 与 #86/#88/#89 减负线构成对照组：#86/#88/#89 管指令面（减法），本条管强制面（加法）——完整的模型升级应对策略 = 指令面做减法 + 强制面做加固
+- 与 #100（澄清交互）共同构成人机安全接口的两端：事前澄清（问对人）+ 事中拦截（hooks 挡住错事）
+
+---
+
 ## 100. 澄清前置的结构化交互：交互式卡片与复述回放取代自由文本往返（2026-10-12 收录）
 
 **来源**：[deer-flow PR #6670 - Feishu interactive clarification cards](https://github.com/bytedance/deer-flow)（2026-10-11 合入）、[superpowers v7.0.0 release notes](https://github.com/obra/superpowers/releases/tag/v7.0.0)（2026-10-10，brainstorming 重写 #2463/#2482）
