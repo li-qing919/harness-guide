@@ -97,6 +97,24 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-14 - harness 换血即提分实证 & MVH 四周路线图 & 审批-compaction 交互坑
+
+**更新**：
+
+1. **最佳实践（04 新增 #103/#104）**：
+   - **#103 MVH（最小可行 harness）四周路线图**：AGENTS.md≤50 行当指针、检查前移三级阶梯（CI→pre-commit→PostToolUse）、ADR 从第一周写；引用 Böckeler「收窄解空间反而提升信任」
+   - **#104 行为→组件映射表**（harness.md gist）：按「想要什么行为/观察到什么故障」反查组件；「配现成 harness 然后停手」覆盖大部分价值
+
+2. **新闻/案例收录（05 章 10-14 补充）**：
+   - **LangChain「The Anatomy of an Agent Harness」**：Opus 4.6 在 Claude Code 上 Terminal Bench 2.0 得分低于其他 harness；LangChain 仅改 harness 即 Top30→Top5——「换 harness 先于换模型」成为可复现评测事实
+   - **Anthropic 长时应用 harness 设计**官方教程：结构简化 + 给应用内建「tools 驱动自身功能的内部 agent」
+   - **UK ICO 监管伸进 agentic AI**（10-08）：10 家开发商整改 + evidence call（截止 11-20）——权限/凭证/日志按可举证标准建设
+   - **Sonnet 5.5 发布**（10-07）：快 30%、降本 30%，模型路由默认档更新
+
+3. **框架动态（10-14 快照）**：adk-python 32 commits 最活跃（v2.12.0 + sandbox manager）；deer-flow 18 commits 集中修 channel 生命周期；openai-agents 修复**审批暂停点推迟 compaction**（人工在环与上下文回收的交互坑）；langgraph checkpoint 线连续第四周发版
+
+**信源说明**：Tavily 可用；gh api REST 逐仓核实 star/push/commits/releases；采集窗口 since 10-12 21:30 UTC，与上期无缝衔接
+
 ### 2026-10-13 - Anthropic「harness 挤薄论」厂商口径 & hooks 失控防护 & 扩展机制选型边界
 
 **更新**：

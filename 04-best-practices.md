@@ -3367,6 +3367,59 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
+## 104. 行为→harness 组件映射表：从「想要什么行为」反推「用哪个组件」（2026-10-14 收录）
+
+**来源**：[owainlewis - harness.md gist](https://gist.github.com/owainlewis/2daeda1ec58c2c0e81569513f87d4e6d)（2026-10）
+
+### 核心内容
+
+- 一张把「行为需求/故障观察」直接映射到 harness 组件的决策表：
+  - 「agent 应懂项目约定」→ `AGENTS.md` / `CLAUDE.md`
+  - 「agent 要能访问 Linear」→ MCP server
+  - 「agent 永不许推 main」→ permission rule 或 hook
+  - 「测试不过不许宣布完成」→ back-pressure（失败时重新提示的测试闸）
+  - 「长任务失焦」→ sub-agents（context firewall）
+- 核心论断：**多数用户应配置现成 harness（Claude Code/Codex/Pi）然后停手**——精写一份 AGENTS.md、装真正用得上的 skills、接必要 MCP、配权限和少量 hooks，即覆盖大部分价值；自研 harness 是少数团队的事
+- 与「MVH 路线图」（#103）构成同一判断的两个版本：#103 给时间轴（按周递进），本条给查表法（按行为反查组件）
+
+### 实操要点
+
+- 需求评审时把每个「希望 agent 会/不会 X」翻译成组件条目，落到配置文件而非 prompt 嘱托
+- back-pressure 模式（测试失败→自动重新提示）是实现「完成判定可信」的最低成本手段，无需自研编排
+
+### 与既有条目的关系
+
+- #102 给四种扩展机制的选型口诀，本条补「故障/行为反查」视角，两张表合用覆盖选型与排障两端
+- 「配现成 harness 就够」与 #89（随模型减负）、05 章「harness 会被挤薄」口径一致：自研前先穷尽默认能力
+
+---
+
+## 103. MVH（最小可行 harness）路线图：四周递进的最小配置集（2026-10-14 收录）
+
+**来源**：[Sakasegawa's Blog - Harness Engineering Best Practices for Claude Code / Codex Users, Explained Plainly](https://nyosegawa.com/en/posts/harness-engineering-best-practices-2026)（2026-10）
+
+### 核心内容
+
+- 不必一次采纳所有原则，按周递进建 MVH：
+  - **Week 1**：AGENTS.md/CLAUDE.md 只做指针、控制在 50 行内；pre-commit hooks（推荐 Lefthook）跑 lint/format/类型检查；配 PostToolUse hook 做自动格式化；写第一个 ADR
+  - **Week 2-4**：逐步补 skills、审批流、评测
+- 检查前移原则：**把检查尽量推到更快的层**——只在 CI 跑的 linter 移到 pre-commit，只在 pre-commit 跑的 formatter 移到 PostToolUse hook；反馈环越短，agent 自纠正成功率越高
+- 引用 Böckeler（Thoughtworks）的反直觉观察：**提升对 AI 代码的信任靠收窄解空间而非扩大**——对人类显得限制性的规则，对 agent 是复利式质量收益
+
+### 实操要点
+
+- AGENTS.md 当索引用（指向 skills/docs），不当百科写——超 50 行即触发拆分重构
+- 每个检查问一句「能在更快的层跑吗」：CI→pre-commit→PostToolUse 三级阶梯
+- ADR 从第一周就写：架构决策外部化是 agent 跨会话保持一致的前提
+
+### 与既有条目的关系
+
+- 检查前移与 #101（AWS hooks 失控防护）互补：#101 讲强制面用 hooks，本条讲检查放哪一层跑最快
+- 「收窄解空间提升信任」与 #88（精简规则胜过堆砌禁令）不矛盾——收窄的是解空间（约束生成分布），精简的是指令条数
+- 50 行指针式 AGENTS.md 与 #99（AGENTS.md file-scoped 指令）、90 条（Pragmatic Engineer）同属「指令面轻量化」主线
+
+---
+
 ## 102. Skills / Agents / Subagents / MCP 四种扩展机制选型边界（2026-10-13 收录）
 
 **来源**：[Colin McNamara - Understanding Skills, Agents, Subagents, and MCP in Claude Code: When to Use What](https://colinmcnamara.com/blog/understanding-skills-agents-and-mcp-in-claude-code)（2026-10）

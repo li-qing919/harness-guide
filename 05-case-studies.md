@@ -1397,3 +1397,47 @@ Faros.ai 建议先量化再决定投入方向：
 2. **澄清交互值得专项工程**：deer-flow 卡片化 + superpowers 复述回放两条线同周落地——自有 harness 的「提问质量」（问什么、怎么问、附什么上下文）应作为评测维度，而不只是执行质量
 3. **垂直高危域以审批链为核心设计**：Uber 法务案例再次确认——不是「让 agent 更自主」，而是「让审批更顺手」；与 10-11 在册「验证端成主战场」同向：人工闸口的工程化是下一个投入点
 4. **大版本迁移窗口管理**：BMAD v7 预览 + v6 末版钉版的处理方式值得借鉴——双轨并行、旧线继续收 bug、安装器明示双版本状态
+
+---
+
+## 2026-10-14 补充：LangChain「harness 换血即提分」& Anthropic 长时应用 harness 官方教程 & 监管伸进 agentic AI
+
+### LangChain：The Anatomy of an Agent Harness（harness 独立于模型的增益实证）
+
+- **来源**：[langchain.com/blog/the-anatomy-of-an-agent-harness](https://www.langchain.com/blog/the-anatomy-of-an-agent-harness)（2026-10）
+- **核心论据**：Opus 4.6 在 Claude Code harness 上 Terminal Bench 2.0 得分**低于**其他 harness 跑同一模型——同一模型换 harness 即改变排名；LangChain 此前仅改 harness 就把自家 coding agent 从 Top 30 提到 Top 5
+- **模型-harness 联合 post-training**：Claude Code / Codex 的模型是「模型+默认 harness 在环」训练的，模型擅长 filesystem/bash/规划/子代理并行正是 harness 设计者选择的 nativization 方向——但**最适合你任务的 harness 不必是模型 post-training 用的那个**
+- 开放问题清单（LangChain deepagents 方向）：数百 agent 并行共享代码库的编排；agent 自析 trace 找 harness 级故障模式并修复；按任务动态组装工具与上下文（just-in-time 而非预配置）
+- 启示：与 10-12 在册「harness 层量化增益」（GPT-5.6 Sol 2.9x）互为第二信源——**「换 harness 比换模型便宜且见效快」已从厂商话术变成可复现的评测事实**；内部选型应先做 harness A/B 再考虑换模型
+
+### Anthropic Engineering：Harness design for long-running application development（官方长时 harness 教程）
+
+- **来源**：[anthropic.com/engineering/harness-design-long-running-apps](https://www.anthropic.com/engineering/harness-design-long-running-apps)（2026-10）
+- Labs 团队（Prithvi Rajasekaran）复盘两个互锁问题：高质量前端设计 + 无人值守完整应用构建；在 frontend design skill 与长时 coding harness 之上，靠 prompt engineering + harness 设计把性能推到基线之上，但双双触顶
+- 突破手法：**结构简化**（structural simplification）+ 让生成器给应用内建「能用 tools 驱动应用自身功能的内部 agent」——相关知识太新、训练数据覆盖薄，靠迭代调 prompt 补齐
+- 启示：与 #43/#10（Anthropic 两篇长文）同谱系，官方第一手「harness 设计突破天花板」的方法论样本；「给应用内置 agent 接口」是长时任务 harness 的新组件模式
+
+### 监管线：UK ICO 把审视范围正式伸进 agentic AI（2026-10-08）
+
+- **来源**：[ico.org.uk 公告](https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/2026/10/ico-secures-changes-from-leading-ai-developers-as-scrutiny-extends-to-ai-agents)
+- 10 家基础模型开发商已整改或承诺整改；发起 agentic AI 数据保护风险 evidence call（截止 2026-11-20）；确认对今年早些时候 agentic AI 测试与部署事件的问询
+- 启示：harness 的权限门控/数据边界/审计日志从「工程最佳实践」开始变成**合规要件**——企业 harness 的 permission rule 与凭证隔离（02 章主线）要按可监管举证标准建设
+
+### 模型侧：Anthropic 发布 Sonnet 5.5（2026-10-07）
+
+- **来源**：[anthropic.com](https://www.anthropic.com)
+- 比 Sonnet 5 快 30%、多数工作负载成本降 30%——agent harness 的模型路由默认档更新；与 Haiku 5.5 定价重构（10-09 在册）共同构成「中档模型经济学」新基准
+
+### 框架动态（2026-10-14 快照，GitHub API，since 10-12 21:30 UTC）
+
+- **google/adk-python**（21,807⭐，**32 commits 本周最活跃**）：v2.12.0 发布；NodeTool 从 START 后继节点推断 Workflow input_schema；rewind 加载完整 session；artifact 校验拒绝空白路径；sandbox manager 新增 command/readiness helpers——sandbox 化与状态回放继续是主线
+- **bytedance/deer-flow**（83,815⭐，18 commits）：channel 稳定性集中修复（Feishu/DingTalk transport 进程内可停、Slack connect 优雅关闭）；LLM 修复「streamed 200-OK 无 chunk」的重试判定；新增 team 历史与结果检索——**channel 生命周期管理成为多渠道 harness 的新修理工序**
+- **openai/openai-agents-python**（30,015⭐，11 commits）：pending approvals 推迟自动 compaction（审批与上下文管理的交互）；RunState 跨 hook 变更保留 agent 归属；docs 新增 Decisions API 集成配方；MCP annotations 暴露到转换 tools；Redis compaction 历史原子替换
+- **langchain-ai/langgraph**（43,212⭐）：langgraph 1.2.15 / sdk-py 0.4.7 / checkpoint-postgres 3.1.3 / cli 0.4.34（deploy listeners list --json）——checkpoint 线连续第四周发版
+- **crewAIInc/crewAI**（59,661⭐，6 commits）：1.15.27 仍最新；**BMAD-METHOD**（54,102⭐）：v6.12.2 后活动放缓（1 commit）；**superpowers**（298,621⭐）：v7.0.0 后静默
+
+### 案例启示
+
+1. **harness A/B 先于模型选型**：Terminal Bench 2.0 的 harness 敏感性 + LangChain Top30→Top5 案例给了可引用的评测方法论——内部立项先建 harness 对照评测，再决定是否换模型
+2. **审批与 compaction 的交互是被忽视的坑**：openai-agents「pending approval 时推迟 compaction」修复说明——人工在环暂停点与上下文回收机制会互相踩踏，凡有审批链的 harness 都要检查这个交互
+3. **监管合规进入 harness 需求清单**：ICO evidence call 之后，权限/凭证/日志的工程标准应对齐「可举证」，而不是「够用就行」
