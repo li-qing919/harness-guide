@@ -97,6 +97,33 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-15 - CORE-Bench 同模型跨 harness 36pp 分差 & LangGraph checkpoint-postgres 3.2.0 prune & CrewAI/ADK/BMAD 发版
+
+**更新**：
+
+1. **最佳实践（04 新增 #105）**：
+   - **Winder.ai 跨 harness 对比实证**：CORE-Bench 同模型换 scaffold 42% vs 78%（36pp，当前公开最大差距）；LangChain 仅改 harness Terminal Bench 52.8%→66.5%；Harvey 法律 agent 纯 harness 工作准确率翻倍——「换 harness 先于换模型」第四组独立证据；另收录 ACP 协议互操作（Zed/OpenHands/DeepSeek 互驱）与 LF Agentic AI Foundation 三大捐赠锚定的生态动态
+
+2. **新闻/参考收录（README 日志留存，未单独立条）**：
+   - **Marmelab「The State of AI Harness Engineering 2026」**（09-24）：harness 文献全景索引（Böckeler/Anthropic/LangChain/Dynamic Workflows 等 10+ 源），适合新手上手路线图
+   - **Ryan Lopopolo（OpenAI）AIE New York 演讲**（10-12~14）：Humans Steer, Agents Execute 的 harness 构建方法论（视频在册）
+   - **Jakarta Post**（10-12）：harness engineering 视角的国家级数字经济开发评论
+
+3. **框架动态（10-15 快照，窗口 since 10-14）**：
+   - **LangGraph**：checkpoint-postgres 3.2.0 发布，PostgresSaver/AsyncPostgresSaver 新增 `prune`（#9290）；CLI 0.4.35（`--image-pull-secret` 私有 registry 部署、保留失败构建日志）；修 DeltaChannel 字段变 reducer 丢值（#9302）
+   - **CrewAI**：v1.15.28（10-14）；provider input token count（#8109）；`deploy push --force`（#8150）；eval 遇 AMP 限流改等待（#8148）
+   - **Google ADK**：v2.12.0 后续：评估/用户模拟支持 BaseLlm 实例；各 metric 独立 eval_status；RequestInput interrupt_id 跨重跑消歧
+   - **DeerFlow**：extensions 脚本工作流 MVP（#6858）、ModelTool 插件返回结构化 artifacts（#6861）、subagents 要求测试证据（#6868）
+   - **OpenAI Agents SDK**：修复兄弟工具失败时保留已完成工具输出（#5332，多工具并行可靠性通用参考）
+   - **BMAD-METHOD**：v6.12.4（10-14 21:19Z 刚发版）；**Superpowers**：v7.0.0（10-10）后静默
+   - Star 快照：Superpowers 299,133；DeerFlow 83,867；CrewAI 59,693；BMAD 54,143；LangGraph 43,273；agents-python 30,038；ADK 21,845
+
+**信源说明**：Tavily 可用（未触发 432）；gnews RSS when:3d；gh api REST 逐仓核实 star/push/commits/releases；采集窗口 since 10-14 00:00 UTC，与上期无缝衔接
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #105（Winder.ai 跨 harness 对比实证）
+- `README.md` — 更新日志
+
 ### 2026-10-14 - harness 换血即提分实证 & MVH 四周路线图 & 审批-compaction 交互坑
 
 **更新**：

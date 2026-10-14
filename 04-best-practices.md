@@ -3367,6 +3367,33 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
+## 105. Winder.ai 跨 harness 对比实证：同模型不同 scaffold 分差可达 36pp（2026-10-15 收录）
+
+**来源**：[Winder.ai - A Comparison of AI Agent Harnesses in 2026](https://winder.ai/ai-agent-harness-comparison)（2026-10 更新版）
+
+### 核心数据（四组独立实证同向）
+
+| 实验 | 变量 | 结果 |
+|---|---|---|
+| Vercel | 砍掉 80% 工具 | 成功率 80%→100%，token 减半，延迟 724s→141s |
+| LangChain | 仅改 harness（同模型） | Terminal Bench 52.8%→66.5%（+13.7pp） |
+| Princeton CORE-Bench | 同一模型换 scaffold | 42% vs 78%（分差 36pp） |
+| Harvey（法律） | 纯 harness 工作 | agent 准确率翻倍以上 |
+
+### 实操要点
+
+- 「换 harness 先于换模型」的第四组独立证据：CORE-Bench 36pp 分差是目前同模型跨 scaffold 的最大公开量化差距，用于说服「先升级模型再说」的团队
+- 工具精简的完整 ROI 三元组（成功率↑/token↓/延迟↓）可直接作为 harness 审计的验收指标，与 #40（Vercel 少即是多）互补细化
+- 生态趋同信号：Zed/OpenHands/DeepSeek Harness 已互讲 Agent Client Protocol，DeepSeek Harness 可将 Claude Code/Codex 作为子进程驱动——选 harness 时把「协议互操作」纳入评估项
+- Linux Foundation Agentic AI Foundation 以三大捐赠锚定（Anthropic MCP / OpenAI AGENTS.md / Goose）：指令格式与工具协议已成标准赛道
+
+### 与既有条目的关系
+
+- #92（Addy Osmani：同模型换 harness Top30→Top5）、05 章 LangChain Anatomy 案例（Terminal Bench 2.0）与本条共同构成「同模型跨 harness 量化增益」证据链，本条补 CORE-Bench 学术基准与 Harvey 垂直行业数据
+- 与 #40（Vercel「少即是多」）同源不同文：#40 给理论解释（管道乘法效应），本条给 2026 更新的完整数字与协议生态动态
+
+---
+
 ## 104. 行为→harness 组件映射表：从「想要什么行为」反推「用哪个组件」（2026-10-14 收录）
 
 **来源**：[owainlewis - harness.md gist](https://gist.github.com/owainlewis/2daeda1ec58c2c0e81569513f87d4e6d)（2026-10）
