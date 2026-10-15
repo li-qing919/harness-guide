@@ -1441,3 +1441,27 @@ Faros.ai 建议先量化再决定投入方向：
 1. **harness A/B 先于模型选型**：Terminal Bench 2.0 的 harness 敏感性 + LangChain Top30→Top5 案例给了可引用的评测方法论——内部立项先建 harness 对照评测，再决定是否换模型
 2. **审批与 compaction 的交互是被忽视的坑**：openai-agents「pending approval 时推迟 compaction」修复说明——人工在环暂停点与上下文回收机制会互相踩踏，凡有审批链的 harness 都要检查这个交互
 3. **监管合规进入 harness 需求清单**：ICO evidence call 之后，权限/凭证/日志的工程标准应对齐「可举证」，而不是「够用就行」
+
+---
+
+## 新闻与框架动态（2026-10-16 快照，GitHub API，since 10-15 UTC）
+
+### 新闻补充
+
+- **OpenAI DevCon 演讲文字版收录（ZenML LLMOps Database）**：[Harness Engineering: Structuring Context and Guardrails for AI Coding Agents in Production](https://www.zenml.io/llmops-database/harness-engineering-structuring-context-and-guardrails-for-ai-coding-agents-in-production)——与 10-15 在册 Lopopolo AIE New York 演讲同系（ZenML 记名 Ryan Leiulo，应为同一人转写）；新增可引论点：**把团队质量标准写成显式文档，在 agent 执行轨迹中 just-in-time 注入，「让质量上下文可读」是 harness engineering 的本质动作**；起源故事：从让 agent 读 Slack 告警分诊 on-call 开始演进
+- **Arthur AI：护栏分工**（[link](https://www.arthur.ai/blog/best-practices-for-building-agents-guardrails)）：护栏是 first-class 执行逻辑（在 agent loop 内，不是事后补丁）；pre-LLM 护栏要快且确定性（regex PII/规则注入检查，热路径避免 LLM 检查）——与 #101/#107 同主线
+- **Anthropic Agent Skills 工程文**（[link](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)）：progressive disclosure 三级结构（SKILL.md → 按需链接文件）+「让 Claude 把成功路径与常见错误沉淀回 skill」的自反思迭代法——skill 即 harness 的可演化组件，与 #106 演化思想同向
+
+### 框架速报（since 10-15 00:00 UTC）
+
+- **bytedance/deer-flow**（83,912⭐，25 commits 本周最活跃）：acceptance 拒绝非 passing unittest 汇总（#6916，**验证口径收紧**：汇总必须全部 passing 才算过）；knowledge scope 与 read-only catalog 解耦 phase 2（#6904）；DSN driver suffix 清理（#6917）
+- **google/adk-python**（21,863⭐，24 commits）：新增 **ForceEscalationPlugin**（tools 确定性升级到模型咨询）；eval 退出码反映 passed/failed（CI 可用性）；网关根证书 env 进 deploy 镜像
+- **crewAIInc/crewAI**（59,744⭐，4 commits）：**上下文/循环护栏三连**——主动摘要超大上下文（#8191）、停止重复同一 tool call 的 agent（#8164）、延迟原生超大 tool 结果（#8110）——与 #95 重试语义、#101 护栏主线同向
+- **langchain-ai/langgraph**（43,321⭐，4 commits）：subgraph resume 不再重跑已完成任务（#9315）；resumed exit run 的 pending writes 只存一次（#9314，checkpoint 一致性）；CLI push 透传 active Docker context（#9321）；prebuilt 1.1.1（10-15）
+- **openai/openai-agents-python**（30,058⭐）：v0.24.0 发布（10-15）
+- **BMAD-METHOD**（54,193⭐）/ **superpowers**（299,797⭐）：无新 commit（v6.12.4 / v7.0.0 均已在册）
+
+### 案例启示（10-16）
+
+1. **循环护栏正在框架层标准化**：crewAI 一天内连落「上下文摘要/重复工具调用熔断/超大结果延迟」三条，循环失控（重复调用、上下文爆量）已成框架默认内建项——自建 harness 对照检查这三点
+2. **验证口径收紧是 agent 验收新趋势**：deer-flow 拒绝非 passing unittest 汇总 + ADK eval 退出码修复，都在堵「汇报层说过了但实际没过」的口子——CI 里 agent 产出的验证结论要能映射为真实退出码

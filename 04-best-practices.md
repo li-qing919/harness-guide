@@ -3367,6 +3367,68 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
+## 108. Martin Fowler 站长文：harness engineering 心智模型——Ashby 定律的「拓扑收窄」论证（2026-10-16 收录）
+
+**来源**：[martinfowler.com/articles/harness-engineering.html](https://martinfowler.com/articles/harness-engineering.html)
+
+### 核心内容
+
+- 面向 coding agent 用户收窄 harness 定义（系统提示、检索机制、编排皆属 harness）；核心论点：LLM 非确定性、不懂你的上下文、按 token 思考——工程师对 AI 代码存在天然信任壁垒，harness engineering 是建立信任的手段
+- 引 Ashby 必需变异度定律：调节器的变异度必须 ≥ 被控系统才能调控；LLM 几乎可产出任何东西，**预先承诺一个拓扑（topology）收窄产出空间，全面 harness 才可达成**——「定义拓扑是变异度削减动作」
+- 与 01 章在册「Martin Fowler 背书」呼应：从背书到本站长文，harness engineering 完成权威工程社区的概念接纳
+
+### 实操要点
+
+- 设计 harness 的顺序：先定拓扑（工作流形状/角色分工/产物契约），再按拓扑配护栏——而不是先堆护栏再期待涌现出结构
+- 「收窄解空间反而提升信任」与 #103 MVH 路线图同判据，Fowler 站背书后可作为对上说服材料
+
+---
+
+## 107. Endor Labs：安全 harness 三层控制——确定性的是「可接受运行的条件」，不是运行本身（2026-10-16 收录）
+
+**来源**：[Endor Labs - Engineering a security harness for AI coding agents](https://www.endorlabs.com/learn/engineering-a-security-harness-for-ai-coding-agents)
+
+### 核心内容
+
+- 不要指望 agent 每轮推理完全确定（那就失去用模型的意义）；**能确定性化的是可接受运行的条件**：required schemas、evidence prerequisites、approval gates、tool permissions、budgets、stop conditions、validation requirements——七项清单可直接抄进 harness 设计评审
+- 确定性系统负责建立事实（版本、发现、可达性、升级影响），模型负责综合权衡与规划；**harness 拥有两者之间的路径**：决定哪些证据必需、哪个源是权威、何时信息足够可以继续
+- 证据缺失或矛盾时，缺失本身要保持可见（不得静默降级）
+- 任务契约与执行上下文要**版本化**：新版本先确定性+对抗性测试、留回滚路径、运行期监控、过期退役但保留审计历史；ownership 显式化（谁拥有 agent/平台/安全策略/受影响应用/出事谁响应）
+
+### 实操要点
+
+- 把「可接受运行条件」七项作为 harness PR 的 checklist：新增 agent 能力时逐项确认是否存在确定性闸门
+- 证据不可用≠跳过：harness 必须让「无证据」成为一等状态显式上报
+
+### 与既有条目的关系
+
+- 与 #101（AWS hooks 失控防护：拦截从 prompt 服从改为确定性代码钩子）同主线，本条把「确定性」从单点拦截扩展到**契约版本化 + ownership** 的治理面
+- 「模型输出不作为授权依据」与 Oracle VPD 租户隔离（#88 后记线）同向
+
+---
+
+## 106. Harmony Harness（Google×CMU）：自我改进 harness 的多目标演化——安全必须作为独立目标（2026-10-16 收录）
+
+**来源**：[Rohan Paul 转述（X）](https://x.com/rohanpaul_ai/status/2110735411916247523)、Crypto Briefing 报道（2026-10-15）
+
+### 核心内容
+
+- Google×CMU 论文：agent harness（prompt/tools/loop）已可从反馈中重写自身（自我改进 harness）；多数此类系统追单一分数（如 test pass rate），由此捡到的安全增益在新任务上**基本消失**
+- Harmony Harness 的做法：并行演化多个 harness 版本，每个被推向「过测试 vs 拦截风险」的不同配比——把安全作为**独立演化目标**而非约束项，安全收益留存显著更好
+- 意义：harness 本身成为可优化对象之后，「怎么优化 harness」有了方法论——单一目标函数会让多目标收益互相覆盖
+
+### 实操要点
+
+- 凡做 harness 自动调优（自动改 prompt/工具集/循环策略），验收函数不要用单一综合分：正交目标（安全/质量/成本）拆开分别演化，保留 Pareto 候选而非只留冠军
+- 安全验收要跨任务集测留存（held-out），不只看当轮任务涨幅
+- 信源以 X 转述为主，论文原文待核对后升级本条
+
+### 与既有条目的关系
+
+- 与 #89（harness 与模型共同演化）、10-13 在册「4B 模型自动改写 agent harness」构成「harness 作为优化对象」线：#89 讲人工审计节奏，本条讲自动化演化的目标函数设计
+
+---
+
 ## 105. Winder.ai 跨 harness 对比实证：同模型不同 scaffold 分差可达 36pp（2026-10-15 收录）
 
 **来源**：[Winder.ai - A Comparison of AI Agent Harnesses in 2026](https://winder.ai/ai-agent-harness-comparison)（2026-10 更新版）

@@ -97,6 +97,32 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-16 - Harmony Harness 多目标演化 & Fowler 站长文 Ashby 拓扑收窄 & CrewAI 循环护栏三连
+
+**更新**：
+
+1. **最佳实践（04 新增 #106/#107/#108）**：
+   - **#106 Harmony Harness（Google×CMU）**：自我改进 harness 追单一分数时安全增益在新任务上消失；把安全作为独立演化目标、多版本各押「过测试 vs 拦风险」配比留存更好——harness 自动调优的目标函数设计
+   - **#107 Endor Labs 安全 harness**：确定性化「可接受运行的条件」七项清单（schemas/evidence/approval gates/permissions/budgets/stop conditions/validation）+ 任务契约版本化 + ownership 显式化
+   - **#108 Martin Fowler 站长文**：Ashby 定律论证「先定拓扑收窄变异度，全面 harness 才可达成」；harness engineering 心智模型进入权威工程社区
+
+2. **新闻/案例收录（05 章 10-16 补充）**：
+   - OpenAI DevCon 演讲 ZenML 文字版（Lopopolo 系）：团队质量标准显式文档化 + just-in-time 注入，「让质量上下文可读」
+   - Arthur AI 护栏分工（pre-LLM 快而确定、护栏 first-class）；Anthropic Agent Skills 自反思沉淀法
+
+3. **框架动态（10-16 快照，since 10-15 UTC）**：
+   - **deer-flow** 25 commits：acceptance 拒绝非 passing unittest 汇总（#6916，验证口径收紧）
+   - **crewAI** 4 commits：上下文/循环护栏三连（主动摘要超大上下文 #8191、重复 tool call 熔断 #8164、超大结果延迟 #8110）
+   - **adk-python** 24 commits：ForceEscalationPlugin、eval 退出码修；**langgraph**：subgraph resume 重跑修复（#9315）；**agents-python** v0.24.0；BMAD/superpowers 静默
+   - Star 快照：Superpowers 299,797；DeerFlow 83,912；CrewAI 59,744；BMAD 54,193；LangGraph 43,321；agents-python 30,058；ADK 21,863
+
+**信源说明**：Tavily 可用（未触发 432）；gnews RSS when:3d；gh api REST 逐仓核实 star/push/commits/releases；采集窗口 since 10-15 00:00 UTC，与上期无缝衔接
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #106/#107/#108
+- `05-case-studies.md` — 10-16 补充：OpenAI DevCon ZenML 文字版 + Arthur/Anthropic + 框架速报 + 案例启示
+- `README.md` — 更新日志
+
 ### 2026-10-15 - CORE-Bench 同模型跨 harness 36pp 分差 & LangGraph checkpoint-postgres 3.2.0 prune & CrewAI/ADK/BMAD 发版
 
 **更新**：
