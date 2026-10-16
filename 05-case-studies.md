@@ -1465,3 +1465,30 @@ Faros.ai 建议先量化再决定投入方向：
 
 1. **循环护栏正在框架层标准化**：crewAI 一天内连落「上下文摘要/重复工具调用熔断/超大结果延迟」三条，循环失控（重复调用、上下文爆量）已成框架默认内建项——自建 harness 对照检查这三点
 2. **验证口径收紧是 agent 验收新趋势**：deer-flow 拒绝非 passing unittest 汇总 + ADK eval 退出码修复，都在堵「汇报层说过了但实际没过」的口子——CI 里 agent 产出的验证结论要能映射为真实退出码
+
+---
+
+## 新闻与框架动态（2026-10-17 快照，GitHub API，since 10-16 21:30 UTC 采集）
+
+### 新闻补充
+
+- **InfoQ：AI in Production 圆桌**（2026-10-16）：业界面板聚焦 agent 静默失败（silent failures）、harness engineering 与 agent governance——「harness 层故障不会报错只会悄悄产出坏结果」进入主流工程讨论；与 10-16 在册 Endor Labs 安全 harness（#107）、QCon 议程线互证品类成熟
+- **Milvus：Harness Engineering 执行层长文**（[link](https://milvus.io/blog/harness-engineering-ai-agents.md)）：溯源 Mitchell Hashimoto 2026-02「engineering the harness」习惯（agent 犯错即把永久性修复写入环境）→ OpenAI/Anthropic 跟进发文 → 术语确立的三段谱系；定义 harness 为「模型之外的执行环境：工具边界、信息源、自校验、停止条件」
+- **AI Maker：Claude Code hooks 工作流实战**（[link](https://aimaker.substack.com/p/claude-code-hooks-workflow)）：harness 最小可靠集 = 跨 session 记忆（重复纠正沉淀）+ hooks 机械校验（缺日期/空步骤/无归属任务）+ 单命令多 agent 编排 + 评审循环（review→repair→re-check 后才进人工判断）；核心洞察：多数人停在「能出初稿」，**评审层才是可靠性跃升点**
+- **Anthropic 长时 harness 教程热度延续**（[harness-design-long-running-apps](https://www.anthropic.com/engineering/harness-design-long-running-apps)）：本日多份第三方解读（aibuilderclub、Addy Osmani、Databricks）围绕其「Generator/Evaluator 分离」「context reset + 结构化交接」展开——官方教程进入社区消化期
+
+### 框架速报（since 10-15 21:30 UTC，24h 窗口）
+
+- **bytedance/deer-flow**（83,958⭐，16 commits）：模型目录不可用时保留 reasoning 默认值（#6907）；**host-bash guard 拒绝 shell 变量路径前缀（#6930，沙箱逃逸面继续收窄）**；acceptance 识别原生 Node 测试汇总（#6953）
+- **google/adk-python**（21,885⭐，31 commits 本日最活跃）：**新增 tools 度量 model consultation 升级次数/token/成本**（可观测性延伸到「模型咨询」这一内部动作）；gcs/secret_manager/parameter_manager 懒加载（启动开销）；agentplatform<2.2 加载明确报错
+- **langchain-ai/langgraph**（43,374⭐，5 commits）：langgraph-cli 0.4.36 发布；sdk-py 上浮线程流错误、被拒流停止重试（#9317）；resume 值无效时让其余任务先完成（#9265，部分失败语义细化）
+- **crewAIInc/crewAI**（59,773⭐，4 commits）：LanceDB filter 转义 scope/id（#7820，记忆层注入面修复）；pip-audit 依赖修复；IP 地址 MCP server 的 tool 命名兼容（#8117）
+- **bmad-code-org/BMAD-METHOD**（54,233⭐，2 commits）：toolsmith 新增 cut mode 并在 ship 时应用 leanness 结论（#3091）；deep-recon 从代码与 git 历史研究代码库（#3085）
+- **openai/openai-agents-python**（30,091⭐）/ **superpowers**（300,615⭐）：24h 无 commit（superpowers 突破 300K，代码静默延续）
+
+### 案例启示（10-17）
+
+1. **「模型咨询」正在成为被度量的一等动作**：ADK 给 model consultation 加 token/成本指标——escalation（工具搞不定升级问模型）从隐性成本变成显式预算项，自建 harness 可对照补这个观测点
+2. **沙箱防护向「间接路径」深入**：deer-flow 堵 shell 变量路径前缀，说明 guard 不能只匹配字面路径——环境变量/间接引用是下一层攻击面
+3. **记忆层也要注入防护**：crewAI 的 LanceDB filter 转义修复提示：RAG/记忆查询参数与 SQL 同级对待，转义规则进 code review checklist
+

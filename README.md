@@ -97,6 +97,31 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-17 - 指令预算与防「配置规避」 & 沙箱/记忆层安全修复潮 & ADK 度量模型咨询
+
+**更新**：
+
+1. **最佳实践（04 新增 #109）**：
+   - **#109 指令预算与防「配置规避」**（Sakasegawa's Blog）：指令预算量化口径（system prompt ~50 条 + CLAUDE.md 100 行 ≈ 150 条，超预算下沉 docs/）；PreToolUse hook 硬阻断改 linter 配置的「作弊路径」；先单 agent 打磨 harness 再扩展，否则是复利式认知债
+
+2. **新闻/案例收录（05 章 10-17 快照）**：
+   - **InfoQ AI in Production 圆桌**（10-16）：静默失败/harness engineering/agent governance 进入主流工程讨论
+   - **Milvus 谱系长文**：Mitchell Hashimoto「engineering the harness」（2026-02）→ OpenAI/Anthropic 跟进 → 术语确立
+   - **AI Maker hooks 实战**：记忆 + hooks + 单命令编排 + 评审循环 = 最小可靠集，「评审层才是可靠性跃升点」
+
+3. **框架动态（10-17 快照，24h 窗口）**：
+   - **adk-python** 31 commits 本日最活跃：**tools 度量 model consultation 升级/token/成本**（「模型咨询」成为一等观测点）；gcs/secret_manager 懒加载
+   - **deer-flow** 16 commits：host-bash guard 拒绝 shell 变量路径前缀（#6930，沙箱逃逸面收窄）；reasoning 默认值保留（#6907）
+   - **crewAI**：LanceDB filter 转义 scope/id（#7820，记忆层注入面修复）；**langgraph**：cli 0.4.36 + 被拒流停止重试（#9317）；**BMAD**：toolsmith cut mode + deep-recon 代码考古（#3091/#3085）
+   - Star 快照：Superpowers 300,615（突破 300K，静默延续）；DeerFlow 83,958；CrewAI 59,773；BMAD 54,233；LangGraph 43,374；agents-python 30,091；ADK 21,885
+
+**信源说明**：Tavily 可用（未触发 432）；gh api REST 逐仓核实 star/push/commits/releases；采集窗口 since 10-15 21:30 UTC
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #109（指令预算 + 防配置规避 + 扩展顺序）
+- `05-case-studies.md` — 10-17 快照：InfoQ 圆桌 + Milvus 谱系 + hooks 实战 + 框架速报 + 案例启示
+- `README.md` — 更新日志 + 框架 star 数刷新
+
 ### 2026-10-16 - Harmony Harness 多目标演化 & Fowler 站长文 Ashby 拓扑收窄 & CrewAI 循环护栏三连
 
 **更新**：
@@ -2400,9 +2425,9 @@ Harness Engineering (最上层)
    - ✅ 机械强制：CI 任务验证文档新鲜度和交叉链接
 
 4. **热门 Agent Harness 框架更新**
-   - [obra/superpowers](https://github.com/obra/superpowers) - 296K ⭐ - Agentic Skills 框架
-   - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) - 83K ⭐ - 字节跳动 SuperAgent Harness
-   - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) - 59K ⭐ - 多 Agent 协作框架
+   - [obra/superpowers](https://github.com/obra/superpowers) - 300K ⭐ - Agentic Skills 框架
+   - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) - 84K ⭐ - 字节跳动 SuperAgent Harness
+   - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) - 60K ⭐ - 多 Agent 协作框架
    - [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) - 54K ⭐ - AI 驱动开发方法论
    - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) - 43K ⭐ - 图结构 Agent 构建
    - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) - 30K ⭐ - OpenAI 官方 Agent SDK

@@ -3367,6 +3367,30 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
+## 109. 指令预算与防「配置规避」：先单 agent 打磨 harness，再谈扩展（2026-10-17 收录）
+
+**来源**：[Sakasegawa's Blog: Harness Engineering Best Practices for Claude Code / Codex Users, Explained Plainly](https://nyosegawa.com/en/posts/harness-engineering-best-practices-2026)
+
+### 核心内容
+
+- **指令预算账**：Claude Code system prompt 本身含约 50 条指令，再加 100 行 CLAUDE.md（Codex 对应 AGENTS.md）总量即约 150 条——长上下文文件会埋没关键指令；AGENTS.md 应做目录/地图而非百科（与「Give Codex a map, not a 1,000-page instruction manual」黄金法则互证，给出量化口径）
+- **防「配置规避」hook**：agent 撞上 linter 错误的高频作弊路径是改 linter 配置让报错消失而非修代码——用 PreToolUse hook 机械阻断对 linter 配置文件的修改，把「修根因」变成唯一通路
+- **扩展顺序判据**：无 harness 情况下横向堆 agent 数量产生的是**复利式认知债**（compounding cognitive debt）而非复利杠杆——先用单 agent 把 harness 打磨到稳定，再扩展 agent 数量
+- 另推荐 provider-neutral skill [agents-best-practices](https://github.com/DenisSergeevitch/agents-best-practices)（Claude Code/Codex 通用 harness 设计/审计/重构 skill，含 agentic-loop 等分主题参考文件）
+
+### 实操要点
+
+- CLAUDE.md/AGENTS.md 定期做「指令预算审计」：条目超预算就下沉到 docs/ 渐进加载（呼应 #99 file-scoped 文档与 #102 选型边界）
+- linter/formatter 配置文件加入 PreToolUse deny 清单，比 prompt 里写「不许改配置」可靠——prompt 是软约束，hook 是硬约束（#101 主线）
+- 评 agent 并行方案先问：单 agent 版 harness 里重复错误率降下来了吗？没有就先修 harness
+
+### 与既有条目的关系
+
+- 与 #93（capitalandcompute 七大扩展原语）互补：#93 讲各组件怎么用，本条给「用多少」（指令预算）与「什么顺序」（单 agent 先行）
+- 防配置规避 hook 是 #101（hooks 主机制）与 #107（确定性化可接受运行条件）的具体落点
+
+---
+
 ## 108. Martin Fowler 站长文：harness engineering 心智模型——Ashby 定律的「拓扑收窄」论证（2026-10-16 收录）
 
 **来源**：[martinfowler.com/articles/harness-engineering.html](https://martinfowler.com/articles/harness-engineering.html)
