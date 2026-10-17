@@ -97,6 +97,31 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-18 - Anthropic 官方「移除 sprint 构件」简化实证 & Claude Code 自举数据 & handoff 权限边界
+
+**更新**：
+
+1. **最佳实践（04 新增 #110）**：
+   - **#110 Anthropic 官方 harness 简化实证**：初版三角色 harness「bulky/slow/expensive」→做减法；「组件=待压测的模型能力假设」判据 + Opus 4.6 后**移除 sprint 构件**（首个被证伪的过期假设）；compaction 不足时用 full context reset + 结构化 handoff 文件重建会话
+
+2. **新闻/案例收录（05 章 10-18 快照）**：
+   - **Claude Code 自举数据**（FourWeekMBA）：90% 代码由 Claude 编写、回退率降超 40%——harness 反馈循环自举的量化证据，建议自建 harness 跟踪「同类错误复发率」
+   - **安全警示双条**：Claude Code Desktop preview pane 漏洞可窃凭证（恶意 HTML 渲染面）；对比 10-17 deer-flow 沙箱/记忆层防护线，非受信内容渲染面成新攻击面
+   - **Linus Torvalds 用 Claude Code 产出内核补丁**（曾称 AI「90% 营销」）；DOE 发布 Genesis Agent Skills；gzip + 更快云会话（传输层也是 harness 层）
+
+3. **框架动态（10-18 快照，24h 窗口）**：
+   - **adk-python**：plugins 记录终止/节点结果/工具错误并分类 error-bearing tool results（可观测性延续「模型咨询度量」主线）；JoinNode 循环修复
+   - **langgraph** 1.2.16 + sdk-py 0.4.8 双发版；**deer-flow**：sandbox 并发 retire() 竞态栅栏（#6961）
+   - **agents-python**：docs 澄清 handoff 场景本地 shell 审批范围（#5385）——交接路径的权限边界要单独评审
+   - Star 快照：Superpowers 301,168（10-10 起静默，8 天无 push）；DeerFlow 84,024；CrewAI 59,803；BMAD 54,264；LangGraph 43,416；agents-python 30,102；ADK 21,894
+
+**信源说明**：Tavily 可用（未触发 432）；gnews RSS when:2d；gh api REST 逐仓核实 star/push/commits/releases；采集窗口 since 10-16 21:30 UTC，与上期无缝衔接
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #110（移除 sprint 构件 + 组件假设压测 + full reset 判据）
+- `05-case-studies.md` — 10-18 快照：Claude Code 自举数据 + 安全双警示 + Torvalds/DOE + 框架速报 + 案例启示
+- `README.md` — 更新日志 + 框架 star 数刷新
+
 ### 2026-10-17 - 指令预算与防「配置规避」 & 沙箱/记忆层安全修复潮 & ADK 度量模型咨询
 
 **更新**：
@@ -2424,8 +2449,8 @@ Harness Engineering (最上层)
    - ✅ 使用 docs/ 目录存放结构化知识库
    - ✅ 机械强制：CI 任务验证文档新鲜度和交叉链接
 
-4. **热门 Agent Harness 框架更新**
-   - [obra/superpowers](https://github.com/obra/superpowers) - 300K ⭐ - Agentic Skills 框架
+4. **热门 Agent Harness 框架更新**（Star 快照 2026-10-18）
+   - [obra/superpowers](https://github.com/obra/superpowers) - 301K ⭐ - Agentic Skills 框架
    - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) - 84K ⭐ - 字节跳动 SuperAgent Harness
    - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) - 60K ⭐ - 多 Agent 协作框架
    - [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) - 54K ⭐ - AI 驱动开发方法论

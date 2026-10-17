@@ -1492,3 +1492,32 @@ Faros.ai 建议先量化再决定投入方向：
 2. **沙箱防护向「间接路径」深入**：deer-flow 堵 shell 变量路径前缀，说明 guard 不能只匹配字面路径——环境变量/间接引用是下一层攻击面
 3. **记忆层也要注入防护**：crewAI 的 LanceDB filter 转义修复提示：RAG/记忆查询参数与 SQL 同级对待，转义规则进 code review checklist
 
+---
+
+## 新闻与框架动态（2026-10-18 快照，GitHub API，since 10-16 21:30 UTC 采集）
+
+### 新闻补充
+
+- **Claude Code 自举数据：90% 代码由 Claude 编写，回退率降超 40%**（FourWeekMBA，2026-10-17）：Anthropic 披露 Claude Code 自身 90% 代码由模型编写且回退率持续下降——harness 反馈循环（agent 犯错→把修复固化进 harness→agent 更可靠）的自举证据链再添官方级数据点，与在册 Milvus 谱系文（10-17）「Hashimoto 习惯→官方跟进」线索互证
+- **Anthropic 宣布 Claude Code gzip 压缩 + 更快云会话**（Pasquale Pillitteri，2026-10-17）：运行时 harness 层继续迭代，上下文传输成本与会话启动延迟双降——自建 harness 可对照评估传输层压缩收益
+- **Claude Code Desktop 漏洞警示**（Hackread/Cybernews，2026-10-16）：恶意 HTML 可通过 preview pane 窃取开发者凭证——桌面 harness 的「非受信内容渲染面」成为新攻击面，与在册 #101（hooks 主机制）、#107（安全 harness）主线互证
+- **Linus Torvalds 用 Claude Code 开发内核补丁**（CyberSecurityNews/36Kr，2026-10-16/17）：曾称 AI「90% 营销」的 Torvalds 实际用 Claude Code 产出 8 个性能提升补丁与测试程序——顶级内核开发者工作流纳入 agent harness 的标志性案例
+- **DOE 发布 Genesis Agent Skills**（ExecutiveGov/HPCwire，2026-10-16）：美国能源部发布面向科研的官方 Agent Skills 集——agent skills 从开发者生态进入国家级科研基础设施
+- **垂直 harness 趋势**（PRLog，2026-10-16）：「AI Agents Are Getting Their Own Computers」——agent 专属运行环境兴起，HRTech 领跑垂直 harness 开发；Oracle 分享记忆感知 harness 在反洗钱场景落地（AI Engineer，10-17）
+
+### 框架速报（since 10-16 21:30 UTC，24h 窗口）
+
+- **bytedance/deer-flow**（84,024⭐，5 commits）：sandbox 并发 retire() 竞态时保持隔离栅栏（#6961）；uploads 文档转换全量尺寸 offload（#6924）+ opt-in 语义澄清（#7010）；TUI bridge 超时取消持久化（#6927）
+- **google/adk-python**（21,894⭐，5 commits）：**plugins 记录终止/节点结果/工具错误并分类 error-bearing tool results**（可观测性延续 10-17「模型咨询度量」主线）；JoinNode 在循环内等待各迭代前驱（修复）；SqliteMemoryService + delete_memory 文档补全；云部署支持 extra packages
+- **langchain-ai/langgraph**（43,416⭐，3 commits）：**langgraph 1.2.16 + sdk-py 0.4.8 双发版**（10-16/17）
+- **openai/openai-agents-python**（30,102⭐，1 commit）：澄清 handoff 场景下本地 shell 审批范围（#5385）——跨 agent 交接时的权限边界文档化，与 #107「确定性化可接受运行条件」同主题
+- **crewAIInc/crewAI**（59,803⭐）/ **bmad-code-org/BMAD-METHOD**（54,264⭐）：24h 窗口无 commit；最近发版 crewAI 1.15.28（10-14）、BMAD v6.12.4（10-14）
+- **obra/superpowers**（301,168⭐）：已 8 天无 push（10-10 起），v7.0.0 后静默延续；star 增速放缓（24h +553）
+
+### 案例启示（10-18）
+
+1. **自举数据点值得进评估基线**：Claude Code「90% 自写 + 回退率 -40%」说明 harness 反馈循环的收益可量化——自建 harness 应跟踪「同类错误复发率」而非只看任务成功率
+2. **handoff 权限边界是文档级功课**：OpenAI agents-python 用一个 docs commit 澄清跨 handoff 的 shell 审批范围——权限矩阵随 agent 拓扑变化而失效，交接路径要单独评审
+3. **传输层也是 harness 层**：gzip 与云会话加速提示：上下文传输成本/延迟可优化空间常被忽略，长会话场景收益显著
+
+

@@ -3367,6 +3367,31 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
+## 110. Anthropic 官方 harness 简化实证：移除 sprint 构件——每个组件都是一个待压测的模型能力假设（2026-10-18 收录）
+
+**来源**：[Anthropic Engineering: Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps)（官方原文细读补充，10-17 社区消化期后）
+
+### 核心内容
+
+- **简化动机的量化表述**：初版三角色 harness（Planner/Generator/Evaluator）结果令人鼓舞但「bulky、slow、expensive」——下一步不是加层而是**在不降低性能的前提下做减法**；每轮简化都以评估数据兜底，防止「感觉没用」驱动的误删
+- **「组件=假设」判据的官方表述**：harness 里每个组件都编码了一个「模型自己做不到 X」的假设；这些假设**值得主动压测**——既可能本来就是错的，也会随模型升级迅速过期（新模型发布即触发全量复查，本例为 Opus 4.6）
+- **移除 sprint 构件的实例**：v1 harness 强制 Generator 按 sprint 切分实现、每轮与 Evaluator 协商完成标准；Opus 4.6 落地后该构件不再承重，被整体移除而性能不掉——「更细粒度的过程管控」是首个被官方证伪的过期假设
+- **full context reset 判据**：长任务中 compaction（上下文压缩）不足以为继时，teardown 整个会话、用一份**结构化 handoff 文件**重建新会话——官方明确这更像人类工程师的重新 onboarding，而非「记忆」的延续
+
+### 实操要点
+
+- 给 harness 组件建「假设清单」：每个组件记录它假设模型做不到什么；模型升级后逐条压测，删掉不再成立的组件（呼应 #96 Managed Agents 的通用接口解耦思路）
+- 简化轮次以 A/B 数据判定去留（与 #86 Cursor 方法论同构），不凭直觉；优先砍「过程管控类」构件——它们最可能只是旧模型能力缺陷的补丁
+- 长任务设计提前定 reset 阈值：连续 compaction 后质量下滑即触发 full reset + handoff 文件，而不是无限压缩
+
+### 与既有条目的关系
+
+- 与 #89（随模型能力减负）、10-17 在册「Opus 4.6 后部分 scaffold 应移除」判断同主线，本条是**官方案例级确认**并给出第一个被移除的具体构件（sprint）
+- 「组件=待压测假设」与 #96（harness 假设会过期）互相印证：#96 给架构解法（接口解耦），本条给运维节奏（压测清单+模型升级触发器）
+- full context reset + handoff 文件在册于 #10/#43（Anthropic harness 系列文），本条补充官方对 compaction 局限的显式判据
+
+---
+
 ## 109. 指令预算与防「配置规避」：先单 agent 打磨 harness，再谈扩展（2026-10-17 收录）
 
 **来源**：[Sakasegawa's Blog: Harness Engineering Best Practices for Claude Code / Codex Users, Explained Plainly](https://nyosegawa.com/en/posts/harness-engineering-best-practices-2026)
