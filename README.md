@@ -97,6 +97,31 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-19 - HumanLayer/Hugo Bowe 双篇确认 sub-agent 隔离主线 & Codex 插件化企业工作台 & deer-flow 字节级清洗修复潮
+
+**更新**：
+
+1. **最佳实践（04 新增 #111/#112）**：
+   - **#111 HumanLayer「Skill Issue」**：harness engineering 是 context engineering 的子集（学科定义级表述）；Chroma context rot 实证锚点；sub-agent 隔离机制——父级只见自己写的 prompt + 子代理最终结果，中间工具调用不进主上下文
+   - **#112 Hugo Bowe 三原则**：Reduce（压缩/摘要）/ Offload（工具结果落盘 + action space 原子化）/ Isolate（token 密集子任务隔离回传简洁结论）
+
+2. **新闻/案例收录（05 章 10-19 快照）**：
+   - **OpenAI Codex 企业工作台更新**（VentureBeat/Engadget）：Sites/Annotations + 111 个插件（skills+集成+MCP 三合一），插件化供给与 Claude Code skills 路线合流
+   - **Codex CLI 0.160–0.162**：托管 Git worktrees、opt-in Guardian review context、MCP OAuth client-secret
+   - **Claude Code 2.1.292–2.1.296**：managed-agent onboarding、**subagent auto-compact**——隔离的下一题是隔离体自身的上下文回收
+
+3. **框架动态（10-19 快照，24h 窗口）**：
+   - **deer-flow** 修复密集日：SKILL.md/SOUL.md 剥 BOM 双连修、**deferred tool promotion 收窄到 user turn**（#6977）、guarded evolution host APIs（#5645）、idle agent 等待不耗 worker turns
+   - **adk-python**：被拒 dynamic child 改 retry 而非 replay（状态机正确性）；**langgraph** CLI deploy 默认 serverless（#9333）；**crewAI** 无终端 headless 运行 JSON crews（#8239）；**BMAD** verification-gap lens 检出 stale tests
+   - Star 快照（gh api 口径）：Superpowers — **301,609** ⭐（+441，9 天无 push 仍断层第一）；DeerFlow — **84,077** ⭐（+53）；CrewAI — **59,837** ⭐（+34）；BMAD — **54,300** ⭐（+36）；LangGraph — **43,458** ⭐（+42）；OpenAI SDK — **30,116** ⭐（+14）；ADK — **21,901** ⭐（+7）
+
+**信源说明**：Tavily 可用（未触发 432）；gh api REST 逐仓核实 star/push/commits/releases；采集窗口 since 10-17 21:30 UTC，与上期无缝衔接
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #111/#112（sub-agent 隔离防 context rot；Reduce/Offload/Isolate 三原则）
+- `05-case-studies.md` — 10-19 快照：Codex 企业工作台 + Claude Code subagent auto-compact + 框架速报 + 案例启示
+- `README.md` — 更新日志 + 框架 star 数刷新
+
 ### 2026-10-18 - Anthropic 官方「移除 sprint 构件」简化实证 & Claude Code 自举数据 & handoff 权限边界
 
 **更新**：

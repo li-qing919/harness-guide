@@ -3367,6 +3367,53 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 
 ---
 
+## 112. Hugo Bowe：AI Agent Harness 三原则——Reduce / Offload / Isolate（2026-10-19 收录）
+
+**来源**：[AI Agent Harness, 3 Principles for Context Engineering, and the Bitter Lesson Revisited](https://hugobowne.substack.com/p/ai-agent-harness-3-principles-for)（Hugo Bowe substack）
+
+### 核心内容
+
+- **Reduce**：主动收缩进入模型的上下文——压缩旧工具调用只留摘要、历史过阈值后做轨迹级 summarization，而不是等模型「自己记住重点」
+- **Offload**：把信息与复杂度移出 prompt——工具结果全文落盘、用时再取；更进一步是 **offload action space**：与其塞 100 个工具把 prompt 撑爆，不如给 bash 这类原子工具，让 agent 以命令组合覆盖巨大动作面而不污染上下文
+- **Isolate**：多 agent 架构承接 token 密集子任务——主 agent 把复杂任务委派给独立上下文的专用 sub-agent，只回传简洁结论（与 bitter lesson 呼应：把「学习」交给模型，把「环境设计」交给 harness）
+
+### 实操要点
+
+- 工具面设计先问「能否用 3 个原子工具表达」，再考虑加专用工具；工具数量是 prompt 预算的一部分
+- 工具结果默认落盘（文件/外部存储），prompt 里只留引用句柄——检索成本远低于常驻成本
+- 压缩触发点前置：设定历史长度阈值自动 summarization，不等质量下滑才补救
+
+### 与既有条目的关系
+
+- 与 #111（HumanLayer）同日收录且框架同构：Reduce/Offload/Isolate 是「三原则」版，#111 是「sub-agent 泄压」深潜版，两者互为 total/partial 视角
+- 「offload action space 到原子工具」与 #93（capitalandcompute 七大扩展原语）的 bash-first 思路一致，与 #102（四种扩展机制选型边界）互补：先原子工具、后专用扩展
+
+---
+
+## 111. HumanLayer：Skill Issue——harness engineering 是 context engineering 的子集，sub-agent 隔离防「上下文腐烂」（2026-10-19 收录）
+
+**来源**：[Skill Issue: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)（HumanLayer Blog）
+
+### 核心内容
+
+- **学科定位**：harness engineering 是 context engineering 的**子集**——context engineering（12-factor agents 提出）是 prompt engineering 的超集，harness engineering 则专指**利用 harness 配置点系统性管理编码 agent 上下文窗口**的那部分
+- **问题锚点**：引用 Chroma「context rot」实证——模型在长上下文下性能衰减；harness 的核心职责是把主线程维持在「smart zone」，避免滑入「dumb zone」
+- **sub-agent 隔离机制**：把工作切成离散任务委派给 sub-agent，是主线程保持 smart zone 的主要手段；sub-agent 封装整个会话的产物，**父级只看到自己写的 prompt + sub-agent 最终结果**——中间所有工具调用、工具结果、消息都不进父上下文
+- **适用面**：research、implementation 等上下文密集任务日常都用这套隔离模式跑
+
+### 实操要点
+
+- 给 sub-agent 写好「任务契约」：dispatch agent 唯一成本是它写的 prompt + 返回的结论，prompt 质量决定隔离收益
+- 上下文密集型工作（调研、大范围改码）默认走 sub-agent，不要在主线程直接做
+- 用「主线程上下文长度」作为 harness 健康指标：频繁触顶 = 任务切分粒度不对
+
+### 与既有条目的关系
+
+- 与 #93（capitalandcompute subagent 泄压阀）、#96（Managed Agents 接口解耦）同主线：本条给出**学科定义级**的表述（harness ⊂ context engineering）与 context rot 实证锚点
+- 「父级只见 prompt+结果」与 #110（full reset + handoff 文件）互补：sub-agent 隔离是任务内垂直切分，handoff 文件是时间轴水平接力
+
+---
+
 ## 110. Anthropic 官方 harness 简化实证：移除 sprint 构件——每个组件都是一个待压测的模型能力假设（2026-10-18 收录）
 
 **来源**：[Anthropic Engineering: Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps)（官方原文细读补充，10-17 社区消化期后）

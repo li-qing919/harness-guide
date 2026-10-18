@@ -1521,3 +1521,31 @@ Faros.ai 建议先量化再决定投入方向：
 3. **传输层也是 harness 层**：gzip 与云会话加速提示：上下文传输成本/延迟可优化空间常被忽略，长会话场景收益显著
 
 
+
+---
+
+## 新闻与框架动态（2026-10-19 快照，GitHub API，since 10-17 21:30 UTC 采集）
+
+### 新闻补充
+
+- **OpenAI Codex 走向企业工作台**（VentureBeat/Engadget，2026-10 本周）：Codex 重大更新引入 Sites（企业半私有 Web 托管）、Annotations（就地编辑）与 **111 个插件**（skills+应用集成+MCP server 三合一）；负责人 Sottiaux「We're building the super app out in the open」——Codex 从编程助手扩为白领操作环境，插件化供给与 Claude Code skills 路线合流
+- **Codex CLI 0.160–0.162**（Releasebot，10-15 前后）：托管 Git worktrees、pinned tasks、opt-in Guardian review context、MCP OAuth client-secret、沙箱/网络重试加固——review context 可选化与「审什么由 harness 决定」思路一致
+- **Claude Code 2.1.292–2.1.296**（Releasebot，10-06~15）：plugin hooks 增强、managed-agent onboarding、subagent auto-compact、登录审批 Deny 选项——subagent auto-compact 与 #111 sub-agent 隔离主线互证：隔离的下一题是「隔离体自身的上下文回收」
+- **Anthropic 质量复盘持续被引用**（4 月 postmortem）：reasoning effort high→medium 回滚、per-model eval 门控 system prompt 变更——harness 调优纪律的官方范本，本周多篇综述引用
+
+### 框架速报（since 10-17 21:30 UTC，24h 窗口）
+
+- **bytedance/deer-flow**（84,077⭐，15+ commits）：修复密集日——SKILL.md/SOUL.md 交模型前剥 BOM（#6984/#7061）；**harness: deferred tool promotion 收窄到 user turn**（#6977）；guarded evolution host APIs（#5645，skills 带守卫的演化接口）；sandbox 字面 grep 长行搜索（#6969）；idle agent 等待不再消耗 worker turns（#7024）
+- **langchain-ai/langgraph**（43,458⭐，3 commits）：CLI `deploy` **默认指向 serverless**（#9333）——部署默认值向托管平台收敛；其余为依赖维护；1.2.16（10-16）后无新发版
+- **crewAIInc/crewAI**（59,837⭐，1 commit）：CLI 无终端时 headless 运行 JSON crews（#8239）——CI/无人值守适配，harness 的「环境探测降级」细节
+- **google/adk-python**（21,901⭐，2 commits）：被拒 dynamic child 改为 **retry 而非 replay**（状态机正确性，防重放副作用）；FunctionTool sync 装饰器包裹 async 工具的测试覆盖
+- **bmad-code-org/BMAD-METHOD**（54,300⭐，~13 commits）：verification-gap lens 只报告有具名回归的 gap 并检出 stale tests（#3106）；code-review 按**单次危害**而非频率 triage（#3105）；Sofia 取代 bmad-spec/bmad-ticket/bmad-correct-course（产品收敛信号）
+- **openai/openai-agents-python**（30,116⭐，默认分支 0 commits）：v0.24.0（10-15）后静默
+- **obra/superpowers**（301,609⭐）：10-10 起 9 天无 push，v7.0.0 后静默延续；star 日增 +441 仍居首
+
+### 案例启示（10-19）
+
+1. **deferred tool promotion 的作用域要窄**：deer-flow 把延迟工具晋升收窄到 user turn，防止系统事件/后台噪声触发工具面扩张——工具面的变更时机和工具面本身一样是 harness 决策点
+2. **「拒绝→重试」≠「拒绝→重放」**：ADK 的修复提示 agent 状态机里被拒动作的处理路径要显式设计，重放已产生副作用的动作是隐性 bug 源
+3. **编码规范类产物进模型前要过「字节级清洗」**：deer-flow 连修两处 BOM 剥离（SKILL.md/SOUL.md）——harness 供给上下文时的隐形字节（BOM/零宽字符/尾随空白）值得统一 sanitizer
+4. **无终端 headless 是 CI 场景一等需求**：crewAI 的适配说明 agent harness 要显式声明「无 TTY 时的行为契约」，不能依赖交互式假设
