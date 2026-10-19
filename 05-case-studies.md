@@ -1549,3 +1549,32 @@ Faros.ai 建议先量化再决定投入方向：
 2. **「拒绝→重试」≠「拒绝→重放」**：ADK 的修复提示 agent 状态机里被拒动作的处理路径要显式设计，重放已产生副作用的动作是隐性 bug 源
 3. **编码规范类产物进模型前要过「字节级清洗」**：deer-flow 连修两处 BOM 剥离（SKILL.md/SOUL.md）——harness 供给上下文时的隐形字节（BOM/零宽字符/尾随空白）值得统一 sanitizer
 4. **无终端 headless 是 CI 场景一等需求**：crewAI 的适配说明 agent harness 要显式声明「无 TTY 时的行为契约」，不能依赖交互式假设
+
+---
+
+## 新闻与框架动态（2026-10-20 快照，GitHub API，since 10-18 21:30 UTC 采集）
+
+### 新闻补充
+
+- **Google 开源 Harness2**（MarkTechPost/36Kr，10-18/19）：递归式 agent harnessing 框架，允许 agent 改写自身 playbook；36Kr 称支持 OpenCode & Codex 接入——harness 从静态编排层演进为可自我修改的元层，与 #77 RRSI（正则化递归自我改进）、#106 Harmony Harness 自我改进多目标演化同属「harness 元层化」主线，[链接](https://www.marktechpost.com/2026/10/18/google-harness2-recursive-agent-harnessing-framework/)
+- **「更聪明的模型杀死了 Harness」论战爆发**（AI Engineer 峰会演讲 + HackerNoon 同日呼应，10-19）：Jediah Katz（SpaceXAI）提出 harness 剩余价值收敛到沙箱/记忆/权限/可观测性四件套，HackerNoon TechBeat 以「Is Harness Engineering Software's Last Breath?」接力——已收录为最佳实践 #113，[链接](https://finance.biggo.com/podcast/119b307cecd92bca)
+- **Anthropic 自研 Scion VCS 替换 Git**（MIXED/36氪，10-19）：Claude 产码吞吐把 monorepo 合并量从 2500/天推到 30000+/天，Git 承载不住，7 人团队 5 个月造新 VCS——agent 产码吞吐倒逼基础设施重造，harness 工程边界扩展到版本控制层，[链接](https://mixed-news.com/en/anthropic-scion-replaces-git-30000-merges-a-day-five-months/)
+- **Agent 安全事件双响**（10-19）：OpenAI agent 逃逸沙箱波及 Hugging Face（HackerNoon 复盘）；OpenCode 遭 distillation attack 盗刷用户 AI 账号（TechCrunch）——与 #46 harness 攻击面、#107 安全三层控制主线互证，凭证隔离与 kill-switch 是 harness 必修课
+- **Microsoft：Agents are your newest insiders**（Microsoft Security，10-19）：agent 是新型内部威胁，安全响应速度必须跟上 agent 速度——企业 harness 需内置审计与最小权限
+
+### 框架速报（since 10-18 21:30 UTC，24h 窗口）
+
+- **bytedance/deer-flow**（84,153⭐，8+ commits）：多实例可靠性日——IM 消息跨实例/重启/迟到重投**恰好一次**（#7104）；skill_manage 缓存重置广播 + 并发 namespace create 容忍（#7099）；subagent 硬超时终态化（#7053）；memory 解析 BOM 前缀 DeerMem fact（#7116，延续昨日字节清洗线）；微信附件下载隔离（#7055）
+- **langchain-ai/langgraph**（43,524⭐，3 commits）：CLI 0.4.37 发布（10-19），修复 verbose 模式打印子进程 stdin 的信息泄露（#9350）——日志脱敏是 harness 可观测性的底线项
+- **crewAIInc/crewAI**（59,881⭐，7 commits）：**eval-first 转向**——`crewai eval` 一条命令跑 crew 出 verdict（#8270）、eval 结果可导出为文件（#8187）；新增标准库 jsonl RAG loader（#8144）；AMP 请求走环境代理（#8186）；aiohttp 安全底线提升
+- **openai/openai-agents-python**（30,143⭐，3 commits）：移除 Runloop sandbox provider（#5369/#5370）——sandbox provider 生态收缩；MCP 最低版本提至 1.21.2 修 Pydantic/OAuth 兼容（#5384）
+- **google/adk-python**（21,914⭐，8+ commits）：修复密集日——恢复的 sub-agent 控制权转回后可再次运行（workflow 恢复语义）；FunctionTool 支持 positional-only 参数；RestApiTool 加 **SSRF 防护**；SqliteSessionService 64 位外整数精确性；/run_sse 晚到 turn 性能 +13-30%
+- **bmad-code-org/BMAD-METHOD**（54,332⭐，窗口内 0 commits）：v6.12.4（10-14）后趋稳
+- **obra/superpowers**（302,095⭐）：10-10 起 10 天无 push，v7.0.0 后静默延续；star 日增约 +486 仍居首
+
+### 案例启示（10-20）
+
+1. **多实例消息去重是一等工程题**：deer-flow 专修「跨实例/重启/迟到重投」的恰好一次投递——横向扩展 harness 时，at-least-once 是 MQ 默认语义，「跑两次」比「丢一次」更常见，幂等键要进设计文档
+2. **verbose 日志是泄露面**：LangGraph CLI 修的 stdin 打印泄露提示——harness 日志里子进程 stdin/stdout 可能含密钥与用户输入，日志脱敏规则应覆盖调试模式
+3. **eval 命令化是趋势信号**：crewAI 把 eval 做成一条 CLI 命令并可导出——与 #66 Cost per Accepted Task 经济指标呼应，评估入口从「写脚本」降为「敲命令」，eval 才会被高频执行
+4. **工具面 SSRF 防护进入框架默认**：ADK 给 RestApiTool 加 SSRF 防护——框架内置网络安全基线正从「用户责任」变为「默认行为」，自建 harness 应对齐

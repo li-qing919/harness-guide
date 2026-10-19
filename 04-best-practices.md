@@ -3910,3 +3910,37 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 与 #89（Jinyan Su：随模型能力减负）互证「模型跨阈值改变 harness 回报结构」：#89 给组件级判据，本条给产业侧印证（三家一线公司都在做同一件事）
 - 「agent 环境工程主航道化」与 QCon 议程（09-25 在册）「harness engineering 成为核心基础设施」、Yext 产品化（09-30 在册）构成「概念→议程→产品→岗位」的品类成熟链
 - Coinbase spend-per-token 案例与 #86（Cursor token 优化五技）同属成本治理线：#86 是个体技法，本条是平台职能化
+
+---
+
+## 113. 「更聪明的模型杀死了 Harness」论战——harness 剩余价值收敛清单（2026-10-20 收录）
+
+**来源**：[Smarter Models Killed the Harness. Here's What's Left — Jediah Katz, SpaceXAI @ AI Engineer](https://finance.biggo.com/podcast/119b307cecd92bca)（2026-10-19）；同日 [HackerNoon TechBeat: Is Harness Engineering Software's Last Breath?](https://hackernoon.com/10-19-2026-techbeat)
+
+### 核心论点
+
+- 更强模型正在吞掉 harness 层的胶水逻辑：提示词补丁、手工重试编排、僵化的分步规划——这些「补偿模型短板」的组件随模型能力提升而贬值
+- **harness 剩余价值收敛到模型做不了的四件事**：沙箱隔离、记忆持久化、权限治理、可观测性——判断某组件去留时问「这是在补偿模型，还是在提供模型不具备的运行时保证」
+- 与 #89（随模型能力减负）、#110（Anthropic 移除 sprint 构件）、#94（薄 harness 哲学）构成同一条主线的三方印证：官方实证、方法论判据、产业论战齐了
+
+### 实操要点
+
+- 做 harness 组件盘点时按「补偿型 / 保证型」二分：补偿型组件（复杂提示工程、纠错重试链）标记为可随模型升级删除；保证型组件（沙箱、审计日志、权限门）标记为长期投资
+- 反方观点也记录在案：同一周 Google 开源 Harness2（递归式 agent harnessing，agent 可改写自身 playbook，[MarkTechPost 10-18](https://www.marktechpost.com/2026/10/18/google-harness2-recursive-agent-harnessing-framework/)）——大厂仍在加码 harness 元层，「harness 之死」更可能是「harness 换形态」
+
+---
+
+## 114. 把确定性约束固化在 harness：非确定性交给模型，确定性交给脚手架（2026-10-20 收录）
+
+**来源**：[1+1 is always 2: Bringing determinism back to AI-Assisted engineering — The Jerusalem Post](https://www.jpost.com/business-and-innovation/tech-and-start-ups/article-909171)（2026-10-17）
+
+### 核心内容
+
+- AI 辅助工程的可信度问题不是「模型不够聪明」而是「输出不确定」：解法是把确定性边界显式化——模型负责生成，harness 负责校验
+- 与 #113 的二分法互补：#113 讲哪些组件该删，本条讲留下来的组件应该怎么建——**校验、类型、契约测试等确定性约束必须固化在 harness 而非提示词里**
+
+### 实操要点
+
+- 提示词里写「请确保类型正确」是补偿型逻辑；CI 里跑 mypy/tsc + 契约测试是保证型逻辑——后者才是 harness 该做的事
+- 监管行业可参考同周 [HackerNoon SDD 工具盘点](https://hackernoon.com/8-best-spec-driven-development-tools-for-software-engineers-in-regulated-industries-2026)：spec 即审计凭证，把 spec 写入/校验做成 CI 环节（与 #99 AGENTS.md 治理线呼应）
+- 生产化 playbook 三支柱（[Solutions Review 10-19](https://solutionsreview.com/business-intelligence/pilot-to-production-a-modern-playbook-for-agentic-analytics/)）：治理、评估、权限分层——从试点到生产的差异全在 harness 层，不在模型层

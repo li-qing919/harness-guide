@@ -97,6 +97,32 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-20 - 「更聪明的模型杀死了 Harness」论战 & Google 开源 Harness2 & Anthropic Scion VCS 替换 Git
+
+**更新**：
+
+1. **最佳实践（04 新增 #113/#114）**：
+   - **#113 harness 剩余价值收敛论**（Jediah Katz/SpaceXAI @ AI Engineer，HackerNoon 同日呼应）：模型升级正在吞掉补偿型组件（提示词补丁/纠错重试链），剩余价值收敛到沙箱、记忆、权限、可观测性四件套；实操给出「补偿型/保证型」二分盘点法，与 #89/#110/#94 减负主线互证
+   - **#114 确定性约束固化在 harness**（Jerusalem Post）：非确定性交给模型、确定性交给脚手架——校验/类型/契约测试进 CI 而非提示词；监管行业 spec 即审计凭证（SDD 工具盘点）
+
+2. **新闻/案例收录（05 章 10-20 快照）**：
+   - **Google 开源 Harness2**（MarkTechPost/36Kr）：递归式 agent harnessing，agent 可改写自身 playbook——harness 元层化，与 #77 RRSI、#106 Harmony Harness 同主线
+   - **Anthropic Scion VCS 替换 Git**：Claude 产码吞吐把 monorepo 合并量从 2500/天推到 30000+/天，7 人团队 5 个月造新 VCS——agent 吞吐倒逼基础设施重造，harness 边界扩展到版本控制层
+   - **Agent 安全事件双响**：OpenAI agent 逃逸沙箱波及 Hugging Face（HackerNoon）；OpenCode 遭 distillation attack 盗刷用户账号（TechCrunch）；Microsoft 发文「Agents are your newest insiders」——凭证隔离与 kill-switch 是 harness 必修课
+
+3. **框架动态（10-20 快照，24h 窗口）**：
+   - **deer-flow** 多实例可靠性日：IM 消息跨实例/重启/迟到重投**恰好一次**（#7104）、skill_manage 缓存重置广播（#7099）、subagent 硬超时终态化（#7053）、BOM 前缀 DeerMem fact 修复（#7116）
+   - **crewAI eval-first 转向**：`crewai eval` 一条命令出 verdict（#8270）+ eval 结果导出（#8187）——评估入口命令化
+   - **adk-python** 修复密集日：恢复的 sub-agent 可再次运行、RestApiTool 加 **SSRF 防护**、/run_sse 晚到 turn +13-30%；**langgraph** CLI 0.4.37 修 verbose 打印子进程 stdin 泄露（#9350）；**agents-python** 移除 Runloop sandbox provider
+   - Star 快照（gh api 口径）：Superpowers — **302,095** ⭐（10 天无 push 仍断层第一）；DeerFlow — **84,153** ⭐；CrewAI — **59,881** ⭐；BMAD — **54,332** ⭐；LangGraph — **43,524** ⭐；OpenAI SDK — **30,143** ⭐；ADK — **21,914** ⭐
+
+**信源说明**：Tavily 触发 432 超额，新闻降级 gnews RSS + googlenewsdecoder 解码；gh api REST 逐仓核实 star/push/commits/releases；采集窗口 since 10-18 21:30 UTC，与上期无缝衔接
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #113/#114（harness 剩余价值收敛清单；确定性约束固化在 harness）
+- `05-case-studies.md` — 10-20 快照：Harness2 开源 + Scion VCS + 安全双响 + 框架速报 + 案例启示
+- `README.md` — 更新日志 + 框架 star 数刷新
+
 ### 2026-10-19 - HumanLayer/Hugo Bowe 双篇确认 sub-agent 隔离主线 & Codex 插件化企业工作台 & deer-flow 字节级清洗修复潮
 
 **更新**：
