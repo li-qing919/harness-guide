@@ -1578,3 +1578,30 @@ Faros.ai 建议先量化再决定投入方向：
 2. **verbose 日志是泄露面**：LangGraph CLI 修的 stdin 打印泄露提示——harness 日志里子进程 stdin/stdout 可能含密钥与用户输入，日志脱敏规则应覆盖调试模式
 3. **eval 命令化是趋势信号**：crewAI 把 eval 做成一条 CLI 命令并可导出——与 #66 Cost per Accepted Task 经济指标呼应，评估入口从「写脚本」降为「敲命令」，eval 才会被高频执行
 4. **工具面 SSRF 防护进入框架默认**：ADK 给 RestApiTool 加 SSRF 防护——框架内置网络安全基线正从「用户责任」变为「默认行为」，自建 harness 应对齐
+
+---
+
+## 10-21 快照：Terminal-Bench 4.0 榜单 & Monzo 自研 agent & 框架速报（24h 窗口 since 10-20 UTC）
+
+### 新闻与案例
+
+- **Terminal-Bench 4.0 发布**：Opus 5.5 以 65.15% 登顶（[tech-insider](https://tech-insider.org/terminal-bench-4-opus-5-5-gemini-argon-leaderboard-2026/)，10-19）——terminal/harness 评测基准换代，选型时注意榜单口径与自家 harness 配置的对齐成本
+- **「Harness 之死」论战延续**：HackerNoon TechBeat 10-19 专题「Is Harness Engineering Software's Last Breath?」（[链接](https://hackernoon.com/10-19-2026-techbeat)）；Katz 观点（模型杀死的是 scaffolding 不是 harness）与 Google Harness² 开源（10-18）形成正反两面，本指南 #113 已收录盘点法
+- **Google Harness² 实测出炉**：分数提升伴随额外 compute 开销，agent 可编辑（editable）是核心卖点（[Medium](https://medium.com/data-science-collective/inside-googles-harness%C2%B2-better-scores-extra-compute-and-an-editable-agent-05a0806ecc49)）——「更好的分数」要问「多了多少 token」，与 #66 经济指标呼应
+- **Monzo 自研 coding agent 规模化**（[AI Engineer podcast](https://finance.biggo.com/podcast/fd0f06dd01fe6618)，10-20）：银行内部平台化自研 agent 而非纯外购，合规/审计约束下自建 harness 路线的又一案例（标题级信息，深度内容待播客全文）
+
+### 框架动态（gh api 核实）
+
+- **bytedance/deer-flow**（84,203⭐，6+ commits）：可靠性续集——sandbox warm-pool 空闲计时改单调时钟（#7035）、checkpoints 完成后保守保留（#6051）、skills 报错文本不再透出为用户可见 500（#7155）、uploads 请求取消时保留文件属主（#7170）
+- **google/adk-python**（21,928⭐，6+ commits）：新增 **otel extra**（OTLP HTTP exporter，可观测性开箱化）、skill 工具顺序保留 + AgentTool 缓存 TTL 上限、dev server 非 loopback 访问 internal agents 返回 403（安全基线）、RunConfig 文档补 StreamingMode/ToolThreadPoolConfig
+- **crewAIInc/crewAI**（59,923⭐，6+ commits）：eval 数据持久化——`crewai eval` 完整评测数据留存项目内（#8326）、无终端时输出落日志（#8325）；单 Anthropic 工具改 auto tool choice（#8282）
+- **obra/superpowers**（302,560⭐，1 commit）：#2570 模板强制人工摘要（详见 04 章 #115）——10 天静默后恢复 commit
+- **langchain-ai/langgraph**（43,594⭐，1 commit）：CLI 0.4.37 追修 brace-expansion 依赖 major 版本
+- **openai/openai-agents-python**（30,180⭐，0 commits）/**BMAD-METHOD**（54,379⭐，0 commits）：窗口内静默，v0.24.0 / v6.12.4 后趋稳
+
+### 案例启示（10-21）
+
+1. **单调时钟是计时的唯一正确选项**：deer-flow 修 warm-pool idle age 用单调时钟——墙上时钟会受 NTP 跳变影响，任何「空闲回收/超时判定」逻辑都应默认 monotonic
+2. **可观测性 extras 化**：ADK 把 OTLP exporter 做成 `pip install adk[otel]`——自建 harness 可借鉴：观测能力内置但依赖可选，降低默认安装面的同时保住开箱体验
+3. **eval 数据资产化**：crewAI 两连发都在做「评测数据留在项目里」——eval 结果不是跑完即弃的日志，而是可 diff、可回归的资产，与 #66 CPA 指标体系衔接
+4. **模板即守门**：superpowers 用模板字段强制人工摘要——流程约束可以薄到只是一个模板字段，但位置必须在「进入人类决策链」的必经之路上

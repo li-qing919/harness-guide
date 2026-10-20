@@ -97,6 +97,33 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-21 - Terminal-Bench 4.0 换代 & superpowers 模板守门 & adk 可观测性 extras 化
+
+**更新**：
+
+1. **最佳实践（04 新增 #115）**：
+   - **#115 模板层强制「人工摘要」**（obra/superpowers #2570）：贡献模板强制 human-written summary + filer's instructions——AI 可起草一切，进入人类决策链的摘要必须人写；#113 补偿型/保证型二分法的模板化落地，人工摘要属保证型组件
+
+2. **新闻/案例收录（05 章 10-21 快照）**：
+   - **Terminal-Bench 4.0 发布**：Opus 5.5 以 65.15% 登顶——terminal/harness 评测基准换代
+   - **「Harness 之死」论战延续**：HackerNoon「Is Harness Engineering Software's Last Breath?」与 Katz 观点、Google Harness² 开源形成正反合
+   - **Harness² 实测**：分数提升伴随额外 compute 开销，「更好的分数」要问「多了多少 token」（呼应 #66）
+   - **Monzo 自研 coding agent 规模化**（AI Engineer podcast）：银行合规约束下的自建 harness 路线
+
+3. **框架动态（10-21 快照，24h 窗口）**：
+   - **deer-flow** 可靠性续集：sandbox warm-pool 计时改单调时钟（#7035）、checkpoints 保守保留（#6051）、skills 报错不透出 500（#7155）、uploads 保留文件属主（#7170）
+   - **adk-python** 新增 otel extra（OTLP HTTP exporter）+ dev server 非 loopback 拒绝 internal agents（403）+ AgentTool 缓存 TTL 上限
+   - **crewAI** eval 数据资产化：完整评测数据留存项目内（#8326）+ 无终端输出落日志（#8325）
+   - **superpowers** 10 天静默后恢复：#2570 模板守门；**langgraph** CLI 0.4.37 追修依赖；agents-python/BMAD 窗口内静默
+   - Star 快照（gh api 口径）：Superpowers — **302,560** ⭐（恢复 push）；DeerFlow — **84,203** ⭐；CrewAI — **59,923** ⭐；BMAD — **54,379** ⭐；LangGraph — **43,594** ⭐；OpenAI SDK — **30,180** ⭐；ADK — **21,928** ⭐
+
+**信源说明**：Tavily 触发 432 超额，新闻降级 gnews RSS + googlenewsdecoder 解码（0.1.7 dict 返回值口径）；gh api REST 逐仓核实 star/push/commits/releases；采集窗口 since 10-20 00:00 UTC
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #115（模板层强制人工摘要守门机制）
+- `05-case-studies.md` — 10-21 快照：Terminal-Bench 4.0 + Harness² 实测 + Monzo 自研 agent + 框架速报 + 案例启示
+- `README.md` — 更新日志 + 框架 star 数刷新
+
 ### 2026-10-20 - 「更聪明的模型杀死了 Harness」论战 & Google 开源 Harness2 & Anthropic Scion VCS 替换 Git
 
 **更新**：

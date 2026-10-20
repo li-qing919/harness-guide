@@ -3944,3 +3944,20 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 提示词里写「请确保类型正确」是补偿型逻辑；CI 里跑 mypy/tsc + 契约测试是保证型逻辑——后者才是 harness 该做的事
 - 监管行业可参考同周 [HackerNoon SDD 工具盘点](https://hackernoon.com/8-best-spec-driven-development-tools-for-software-engineers-in-regulated-industries-2026)：spec 即审计凭证，把 spec 写入/校验做成 CI 环节（与 #99 AGENTS.md 治理线呼应）
 - 生产化 playbook 三支柱（[Solutions Review 10-19](https://solutionsreview.com/business-intelligence/pilot-to-production-a-modern-playbook-for-agentic-analytics/)）：治理、评估、权限分层——从试点到生产的差异全在 harness 层，不在模型层
+
+---
+
+## 115. 模板层强制「人工摘要」：AI 产出进入人类决策链前的守门机制（2026-10-21 收录）
+
+**来源**：[obra/superpowers PR/issue 模板改动 #2570](https://github.com/obra/superpowers/commit/2570)（commit "Templates: require a human-written summary and the filer's instructions"，2026-10-20）
+
+### 核心内容
+
+- superpowers（30.2 万 star 的 agentic skills 框架）在贡献模板中**强制要求 human-written summary + filer's instructions**：AI 可以起草一切，但进入协作决策链的摘要必须由人手写
+- 本质是 #113「补偿型/保证型」二分法的模板化落地：人工摘要属于**保证型**组件——它不随模型变聪明而可删除，因为它的作用是保持人类对上下文的 ownership
+
+### 实操要点
+
+- 给 agent 产出设计流转模板时，把「摘要」字段设计为**人工填写而非 agent 生成**——哪怕 agent 的摘要更好，人写摘要的过程本身就是理解校验
+- 与 #114 呼应：确定性约束（模板字段、格式校验）固化在 harness 层，模板就是最低成本的守门 harness
+- 反面教训参考同周 Theo「Your prompts kinda suck」（t3.gg，10-19）：提示词质量仍是产出质量的最大杠杆，模板守门解决「责任归属」，提示词优化解决「产出质量」，两者不可互替
