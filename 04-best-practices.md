@@ -3961,3 +3961,20 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 给 agent 产出设计流转模板时，把「摘要」字段设计为**人工填写而非 agent 生成**——哪怕 agent 的摘要更好，人写摘要的过程本身就是理解校验
 - 与 #114 呼应：确定性约束（模板字段、格式校验）固化在 harness 层，模板就是最低成本的守门 harness
 - 反面教训参考同周 Theo「Your prompts kinda suck」（t3.gg，10-19）：提示词质量仍是产出质量的最大杠杆，模板守门解决「责任归属」，提示词优化解决「产出质量」，两者不可互替
+
+---
+
+## 116. Skill 抗 compaction 设计：让指令在上下文压缩后依然生效（2026-10-22 收录）
+
+**来源**：[obra/superpowers v7.0.1 Release](https://github.com/obra/superpowers/commit/2581)（"brainstorming retune, skills that better survive compaction, contribution templates"，2026-10-21）
+
+### 核心内容
+
+- superpowers v7.0.1 把「skills 在 compaction 后更健壮」作为 release 头条改动：长会话中上下文压缩（compaction/summarization）会截断或弱化 skill 指令，导致 agent 在任务中后段「忘掉」流程约束
+- 与 #115 模板守门同一脉络：harness 层的约束不能依赖「agent 记得」，而要设计成压缩后仍可恢复——触发词前置、关键步骤自带上下文、指令不依赖被截断的前文
+
+### 实操要点
+
+- SKILL.md 关键规则写在**文件头部且自包含**（不引用文件外状态），压缩后 agent 重新加载时仍能完整执行
+- 长任务的每步产出里内联「下一步指令」——让摘要天然保留行动线索，而不是依赖原始 prompt 存活
+- 周期性任务（cron/heartbeat）应假设每次都是「失忆重启」：指令完整写入任务文本，不依赖会话历史（与本指南 05 章 OpenClaw 案例「文件即记忆」一致）

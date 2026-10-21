@@ -1605,3 +1605,32 @@ Faros.ai 建议先量化再决定投入方向：
 2. **可观测性 extras 化**：ADK 把 OTLP exporter 做成 `pip install adk[otel]`——自建 harness 可借鉴：观测能力内置但依赖可选，降低默认安装面的同时保住开箱体验
 3. **eval 数据资产化**：crewAI 两连发都在做「评测数据留在项目里」——eval 结果不是跑完即弃的日志，而是可 diff、可回归的资产，与 #66 CPA 指标体系衔接
 4. **模板即守门**：superpowers 用模板字段强制人工摘要——流程约束可以薄到只是一个模板字段，但位置必须在「进入人类决策链」的必经之路上
+
+---
+
+## 10-22 快照：Claude Duet 主动式 agent & OpenAI agent 漏洞协调披露 & 框架速报（24h 窗口 since 10-21 UTC）
+
+### 新闻与案例
+
+- **Anthropic 发布 Claude Duet**：主动式（proactive）AI agent 应用，对标 Muse（[Reuters](https://www.reuters.com/technology/anthropic-unveils-claude-duet-ai-agent-app-2026-10-21/)，10-21；The Verge / MacRumors 同步）——agent 形态从「被动应答」转向「主动协作」，对 harness 的权限边界/打扰控制提出新要求
+- **OpenAI「Patch the Planet」**：agent 大规模挖掘关键漏洞后的全球协调披露（[OpenAI Blog](https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities/)）——agent 安全研究产出进入规模化落地，协调披露流程本身成为一种「产出端 harness」
+- **「Harness 是 agentic 渗透测试的难点」**：The Hacker News 观点文（[链接](https://thehackernews.com/2026/10/the-harness-is-hard-part-of-agentic.html)，10 月）——模型不是瓶颈，工具编排/上下文/权限控制才是，与本指南核心论点互证
+- **KDnuggets 盘点 agent skills 仓库 Top 5**（[链接](https://www.kdnuggets.com/5-best-github-repositories-for-ai-agent-skills)）——skills-as-code 生态升温，superpowers 类项目进入主流视野
+- **GitGuardian：agent 如何泄露 API 密钥**（博客，10 月）——agent 把 secrets 带进 prompt/日志/上下文是新泄露面，harness 需密钥隔离与输出过滤（详见更新日志 10-22）
+
+### 框架动态（gh api 核实）
+
+- **bytedance/deer-flow**（84,251⭐，28 commits，最活跃）：scheduler 只把 busy-thread 409 视为可重试（#7196）、MCP durable control claims 在慢调用/取消时保持（#6780）、Lark 设备认证 single-flight（#7182）、channels 线程绑定状态自恢复（#7233）、Windows harness 测试可移植（#6972）——调度可靠性与长任务容错主题
+- **google/adk-python**（21,945⭐，18 commits）：plugins 新增 conversation_only 评测视图 + session prompt 回退、可扩展 tool argument matcher、RemoteA2aAgent 补发 mTLS 客户端证书、严格 mypy 类型化、30 节点 workflow 峰值内存 -9%、新增 tools/toolsets 与 runner/events 单元指南
+- **crewAIInc/crewAI**（59,963⭐，7 commits）：离线 jev routing + guardrail evaluation runner（#8230）、replay 补发 CrewKickoffStartedEvent 修复完成配对（#8366）、Flow 支持 call: tool 直接调集成 action（#8367）
+- **obra/superpowers**（303,123⭐，1 commit）：**v7.0.1 发布**——brainstorming 重调、skills 抗 compaction 设计、贡献模板（#2581，详见 04 章 #116）
+- **langchain-ai/langgraph**（43,668⭐，11 commits）：checkpoint 拒绝 namespace 标签中的 NUL 字节（#9383，数据完整性加固）；其余为 certifi/uv 依赖批量升级
+- **openai/openai-agents-python**（30,202⭐，0 commits）/**BMAD-METHOD**（54,418⭐，0 commits）：窗口内静默
+- Star 增量（对 10-21 快照）：LangGraph +74、Superpowers +563（v7.0.1 发版带动）、DeerFlow +48、CrewAI +40、BMAD +39、OpenAI SDK +22、ADK +17
+
+### 案例启示（10-22）
+
+1. **主动式 agent 的 harness 难点在「何时出手」**：Claude Duet 代表的 proactive 形态，难点从「执行可靠性」转移到触发时机/打扰成本/权限收敛——自建 proactive 流程（heartbeat/cron）时同样适用
+2. **重试语义要白名单化**：deer-flow 把 scheduler 的 409 重试收紧到 busy-thread 一类——「见到 409 就重试」是常见反模式，应按错误子类型白名单，避免重试风暴
+3. **replay 事件配对**：crewAI 修 kickoff/completion 事件配对——任何「开始/结束」事件对（计时、计费、评测）都要保证 replay 路径也发开始事件，否则指标静默丢失
+4. **数据完整性从入口堵**：langgraph 在 checkpoint 入口拒绝 NUL 字节——脏数据应在写入前拒绝，而不是等恢复时炸

@@ -97,6 +97,33 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-22 - Claude Duet 主动式 agent & OpenAI agent 漏洞协调披露 & superpowers v7.0.1 抗 compaction
+
+**更新**：
+
+1. **最佳实践（04 新增 #116）**：
+   - **#116 Skill 抗 compaction 设计**（obra/superpowers v7.0.1 #2581）：长会话压缩会截断 skill 指令，关键规则应写在文件头部且自包含、每步产出内联「下一步指令」、周期任务假设失忆重启——让约束在压缩后仍可恢复
+
+2. **新闻/案例收录（05 章 10-22 快照）**：
+   - **Anthropic Claude Duet**：主动式 AI agent 应用（Reuters 10-21），agent 从被动应答转向主动协作，harness 难点转向触发时机/打扰控制
+   - **OpenAI「Patch the Planet」**：agent 漏洞挖掘的全球协调披露，产出端 harness 规模化
+   - **「Harness 是 agentic 渗透测试的难点」**（The Hacker News）：工具编排/上下文/权限控制是瓶颈，模型不是
+   - **GitGuardian：agent 泄露 API 密钥的新泄露面**：secrets 进 prompt/日志需隔离与输出过滤
+
+3. **框架动态（10-22 快照，24h 窗口）**：
+   - **deer-flow** 28 commits 领跑：scheduler 409 重试白名单化（#7196）、MCP durable claims 抗慢调用（#6780）、Lark single-flight 认证（#7182）
+   - **adk-python** 18 commits：conversation_only 评测视图、tool argument matcher、mTLS 证书修复、峰值内存 -9%
+   - **crewAI**：离线 guardrail evaluation runner（#8230）、replay 事件配对修复（#8366）
+   - **superpowers v7.0.1 发版**（#2581）带动 star 单日 +563；**langgraph** checkpoint 拒绝 NUL 字节（#9383）
+   - Star 快照（gh api 口径）：Superpowers — **303,123** ⭐（+563）；DeerFlow — **84,251** ⭐；CrewAI — **59,963** ⭐；BMAD — **54,418** ⭐；LangGraph — **43,668** ⭐（+74）；OpenAI SDK — **30,202** ⭐；ADK — **21,945** ⭐
+
+**信源说明**：Tavily 432 超额，新闻降级 gnews RSS + googlenewsdecoder；gh api REST 逐仓核实 star/push/commits；采集窗口 since 10-21 00:00 UTC
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #116（skill 抗 compaction 设计）
+- `05-case-studies.md` — 10-22 快照：Claude Duet + Patch the Planet + 渗透测试 harness 观点 + 框架速报 + 案例启示
+- `README.md` — 更新日志
+
 ### 2026-10-21 - Terminal-Bench 4.0 换代 & superpowers 模板守门 & adk 可观测性 extras 化
 
 **更新**：
