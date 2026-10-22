@@ -1634,3 +1634,30 @@ Faros.ai 建议先量化再决定投入方向：
 2. **重试语义要白名单化**：deer-flow 把 scheduler 的 409 重试收紧到 busy-thread 一类——「见到 409 就重试」是常见反模式，应按错误子类型白名单，避免重试风暴
 3. **replay 事件配对**：crewAI 修 kickoff/completion 事件配对——任何「开始/结束」事件对（计时、计费、评测）都要保证 replay 路径也发开始事件，否则指标静默丢失
 4. **数据完整性从入口堵**：langgraph 在 checkpoint 入口拒绝 NUL 字节——脏数据应在写入前拒绝，而不是等恢复时炸
+
+## 10-23 快照：Ramp 六周自建 Laminar & Notion Gen-6 长时自主 & Letta 记忆基准跨 harness 分化（24h 窗口 since 10-22 UTC）
+
+### 新闻与案例
+
+- **Ramp 六周自建 agent harness「Laminar」**（[The New Stack](https://thenewstack.io/ramp-laminar-agent-harness/)，10-22）：LangChain CEO 称头部公司自建 harness 是 agent 工程走向生产的范式信号——「买框架 vs 自建 harness」决策继续向自建倾斜，但前提是有六周级工程投入
+- **Notion 发布 Gen-6 Agent Harness**（[Forkast](https://forkast.news/notion-launches-gen-6-agent-harness-to-enable-24-hour-autonomous-workflows/)，10-22）：主打 24 小时级自主工作流——产品级 harness 竞争焦点从「单次任务质量」转向「长时运行可靠性」（调度/记忆/自恢复）
+- **Letta FrontierMemory 基准：五个 harness 同题横评差距悬殊**（[The New Stack](https://thenewstack.io/letta-frontiermemory-agent-harness-benchmark/)，10-22）：同一模型下不同 harness 的记忆管理能力分化巨大——再次验证 CORE-Bench 结论（同模型跨 harness 36pp 分差，见 10-15 快照）：**记忆策略是 harness 层最大性能变量之一**
+- **「Is the Agent Harness Dead?」Jediah Katz（SpaceXAI）@ AI Engineer**（[BigGo Finance](https://finance.biggo.com/podcast/119b307cecd92bca)，10-21）：10-20「更聪明的模型杀死了 Harness」论战的延续——观点：模型变强不会让 harness 消失，而是让 harness 职责上移（工具粘合 → 评估/记忆/权限治理）
+- **paper-to-code 提升 agent 能力无需重训**（[VentureBeat](https://venturebeat.com/orchestration/researchers-made-ai-agents-better-by-turning-academic-papers-into-working-code-no-retraining-required)，10-21）：把论文方法物化为 harness 内可执行组件即提分——skills-as-code 路线的学术版，与 Anthropic「harness 挤薄论」同向
+
+### 框架动态（gh api 核实）
+
+- **obra/superpowers**（**303,685**⭐，+562）：**v7.0.1 发版次日**，release notes 详解 brainstorming 回调——先读项目/spec/文件挖上下文再提问（#2560）、裁剪 3 个长 skill 抗 compaction、issue/PR 模板要求人类写摘要（详见 04 章 #116/#118）
+- **langchain-ai/langgraph**（43,727⭐，+59）：**thread priority 进入配置面**——feat(cli) `langgraph.json` 新增 priority 段（#9393）+ feat(sdk-py) SDK 侧 Priority 设置（#9392），平台级任务优先级调度成为一等公民
+- **google/adk-python**（21,966⭐，+21）：并行 workflow 失败改为**单项重试**而非整批重放（详见 04 章 #117）；plugin 可按 session 配置 event compaction；coordinator 对 task-mode 远程 agent 失败的应答修复
+- **bytedance/deer-flow**（84,291⭐，+40）：skill_manage 只把顶层 `scripts/` 路径视为可执行（#7088，skills 执行面收窄）；goal 无进展计数改为基于成功操作（#7271，避免误判卡死）；OIDC 认证修复 ×2
+- **crewAIInc/crewAI**（59,997⭐，+34）：pip-audit 安全修复（#8428）+ 依赖审计更新；examples 仓库重组后的链接修复
+- **openai/openai-agents-python**（30,233⭐，+31）：mcp 2.0.0→2.3.0（#5404）等依赖跟进，无功能性变化
+- **bmad-code-org/BMAD-METHOD**（54,453⭐，+35）：窗口内 0 commits（pushed_at 停在 10-20），连续静默
+
+### 案例启示（10-23）
+
+1. **自建 harness 的门槛叙事**：Ramp 用六周造 Laminar 且值得 The New Stack 报道——说明行业默认假设仍是「用现成框架」，自建是例外；但 Notion Gen-6、Ramp 连续出现意味着产品公司自建比例在上升，选型时应先评估团队工程带宽再决定买/建
+2. **记忆能力是 harness 选型的硬指标**：Letta 基准五 harness 差距悬殊——选型清单里「长时记忆策略」应与「工具生态」同级评估，跑一次同题基准比看 star 数有用
+3. **「harness 之死」论战的第三种答案**：不是死也不是不变，而是职责迁移——重复性粘合层被模型吸收，评估/记忆/权限治理层反而更重；做 harness 路线图时把投入从前者挪向后
+4. **skills 执行面要收窄**：deer-flow 把 skill 可执行路径收紧到顶层 `scripts/`——skill 沙箱化/最小权限是社区共同方向，自建 skill 体系时从第一天就限定可执行路径白名单

@@ -97,6 +97,34 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-23 - Ramp 六周自建 Laminar & Notion Gen-6 长时自主 & Letta 记忆基准跨 harness 分化
+
+**更新**：
+
+1. **最佳实践（04 新增 #117/#118）**：
+   - **#117 并行工作流按失败单元重试**（adk-python，10-22）：失败子项单独重试而非整批重放，重试粒度与失败粒度对齐；与 #114 白名单化互补（分类定「能不能」，粒度定「多大范围」）
+   - **#118 交互类 skill 先挖上下文再提问**（superpowers v7.0.1 #2560）：brainstorm 前先读项目/spec/文件，只问真缺口；v7.0.0→v7.0.1 十一天快速回调本身是交互设计方法论
+
+2. **新闻/案例收录（05 章 10-23 快照）**：
+   - **Ramp 六周自建 harness「Laminar」**（The New Stack 10-22）：LangChain CEO 确认自建 harness 成范式信号
+   - **Notion Gen-6 Agent Harness**（Forkast 10-22）：24 小时级自主工作流，产品级竞争焦点转向长时运行可靠性
+   - **Letta FrontierMemory 基准**（The New Stack 10-22）：五 harness 同题横评差距悬殊，记忆策略是最大性能变量之一（与 10-15 CORE-Bench 36pp 分差互证）
+   - **「Is the Agent Harness Dead?」**（AI Engineer 访谈 10-21）：10-20 论战延续——harness 不死，职责上移至评估/记忆/权限治理
+   - **paper-to-code 无需重训提分**（VentureBeat 10-21）：论文方法物化为 harness 可执行组件
+
+3. **框架动态（10-23 快照，24h 窗口）**：
+   - **superpowers v7.0.1 发版次日**详解：brainstorming 挖上下文再提问、裁 3 长skill 抗 compaction、模板要求人类写摘要；star 单日 +562 至 303,685
+   - **langgraph thread priority 进配置面**：`langgraph.json` priority 段（#9393）+ SDK Priority（#9392）
+   - **adk-python** 并行 workflow 单项重试 + per-session event compaction；**deer-flow** skill 执行面收窄至顶层 `scripts/`（#7088）+ goal 无进展计数修复
+   - Star 快照（gh api 口径）：Superpowers — **303,685** ⭐（+562）；DeerFlow — **84,291** ⭐；CrewAI — **59,997** ⭐；LangGraph — **43,727** ⭐（+59）；BMAD — **54,453** ⭐；OpenAI SDK — **30,233** ⭐；ADK — **21,966** ⭐；BMAD 窗口内 0 commits 连续静默
+
+**信源说明**：Tavily 432 超额，新闻降级 gnews RSS + googlenewsdecoder（解码 8/8 成功）；The New Stack 两篇 CF 挡全文，摘要基于标题/RSS；gh api REST 逐仓核实；采集窗口 since 10-22 00:00 UTC
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #117（单项重试）、#118（先挖上下文再提问）
+- `05-case-studies.md` — 10-23 快照：Ramp Laminar + Notion Gen-6 + Letta 记忆基准 + harness 存废论战 + 框架速报 + 案例启示
+- `README.md` — 更新日志
+
 ### 2026-10-22 - Claude Duet 主动式 agent & OpenAI agent 漏洞协调披露 & superpowers v7.0.1 抗 compaction
 
 **更新**：
