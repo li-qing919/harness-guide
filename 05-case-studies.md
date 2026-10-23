@@ -1661,3 +1661,30 @@ Faros.ai 建议先量化再决定投入方向：
 2. **记忆能力是 harness 选型的硬指标**：Letta 基准五 harness 差距悬殊——选型清单里「长时记忆策略」应与「工具生态」同级评估，跑一次同题基准比看 star 数有用
 3. **「harness 之死」论战的第三种答案**：不是死也不是不变，而是职责迁移——重复性粘合层被模型吸收，评估/记忆/权限治理层反而更重；做 harness 路线图时把投入从前者挪向后
 4. **skills 执行面要收窄**：deer-flow 把 skill 可执行路径收紧到顶层 `scripts/`——skill 沙箱化/最小权限是社区共同方向，自建 skill 体系时从第一天就限定可执行路径白名单
+
+## 10-24 快照：FrontierMemory 榜单揭晓 & Ramp Laminar 架构细节 & 发版潮（24h 窗口 since 10-22 21:30 UTC）
+
+### 新闻与案例（昨日头条的量化增量）
+
+- **Letta FrontierMemory 榜单分数揭晓**（[The New Stack](https://thenewstack.io/letta-frontiermemory-agent-harness-benchmark/)，10-22）：Letta Dream 73.3% / Prime Agent 60% / OpenAI Agents SDK 40% / Claude Managed Agents 33.3% / Hermes 26.7%；同模型对照（GPT-6.1 Sol 造记忆 + GPT-6 Sol 执行）Dream 60% vs OpenAI SDK 40%，模型变量被排除；记忆生成模型榜：Opus 5.5 与 **GLM-5.3 并列第一（73.3%）**、Kimi K3 66.7%、GPT-6.1 Sol / Gemini 4 Argon 60%、Muse Wonder 46.7%、Grok 4.7 33.3%。方法论已入 04 章 #119
+- **Ramp Laminar 架构细节披露**（[The New Stack](https://thenewstack.io/ramp-laminar-agent-harness/)，10-22）：执行/沙箱/可观测性/异步工作流四合一平台；自建动机 = 模型无关（按成本/速度/性能切模型）+ 观测性（自建调试界面，拒绝在第三方工具里挖 trace）；非阻塞异步 agent（不等每步完成）被 Chase 称为未来方向；**初始代码全部由 agent 生成、资深工程师掌舵架构**——已支撑客服 agent、云端编码 agent Ramp Inspect、长时协作 Glass 全产品矩阵
+- **ScholarEvolve 量化结果**（[VentureBeat](https://venturebeat.com/orchestration/researchers-made-ai-agents-better-by-turning-academic-papers-into-working-code-no-retraining-required)，[arXiv:2609.40169](https://arxiv.org/abs/2609.40169)，10-21）：UCSB+Microsoft 的论文→harness 代码升级框架，Qwen3.5-27B 在 AppWorld Normal 上 **69.0% → 81.4%，补齐与 GPT-5.4 差距的 74%**，全程不动权重——「不重训持续升级 harness」路线的首个强数据点
+- **Google Cloud「Agent Compute Engine」深潜**（[Google Cloud Blog](https://cloud.google.com/blog/topics/ai-infrastructure/agent-compute-engine-deep-dive)，10-22）：agent 基础设施层在云厂商产品线中独立成篇；同周 DeepSeek 成立产品事业部并开源推理框架 DeepInfer（10-23）
+- **Notion Gen-6 Agent Harness**（[Forkast](https://forkast.news/notion-launches-gen-6-agent-harness-to-enable-24-hour-autonomous-workflows/)，10-22）：24h 级自主工作流（延续 10-23 快照报道，无新增细节）
+
+### 框架动态（gh api 核实）
+
+- **crewAIInc/crewAI**（**60,039**⭐，+42，25 commits）：**1.15.29 发版**——Bedrock 支持 LiteLLM 兼容 kwargs（#8453）；flow 跟踪会话路由与公共回复（#8380）；fix(cli) AGENTS.md 评估期间误启动登录、三轮后停止（#8315，skill 内嵌登录流的边界 bug）；CLI 平台集成 token 改由 login 派生
+- **google/adk-python**（21,983⭐，+17，13 commits）：**v2.13.0 发版**——新增 MongoDB 记忆服务；fix LiteLlm 不再执行答案文本里被引号包裹的 tool call（prompt injection 面）；ApplicationIntegrationToolset 重名 connector tool 去歧义；BigQuery analytics 插件记录工作流节点观测
+- **langchain-ai/langgraph**（43,793⭐，+66）：cli 0.4.38（#9411）+ sdk-py 0.4.9（#9398）双发版，延续昨日 priority 配置面方向
+- **bytedance/deer-flow**（84,340⭐，+49，30+ commits 达分页上限）：**feat(workflows) 多 Gateway 协调与会话授权故障转移（#7138）**；sandbox 超时改用保存的进程组 ID（#7353）+ 隔离区 teardown 幂等（#7313）；ACP agent 退出 fail fast 并清空 stderr（#7354）——分布式协调与进程生命周期治理主题
+- **obra/superpowers**（304,206⭐，+521）：默认分支窗口内 0 commits（pushed_at 10-23 为分支推送），v7.0.1 发版热度延续
+- **openai/openai-agents-python**（30,246⭐，+13，1 commit）：playwright 1.50→1.63 依赖升级（#5402），无功能变化
+- **bmad-code-org/BMAD-METHOD**（54,484⭐，+31）：窗口内 0 commits，静默第 4 天
+
+### 案例启示（10-24）
+
+1. **对照法是 harness 选型的最优路径**：FrontierMemory 用「固定模型、只换 harness」把 20pp 分差干净地归因到 harness 层——自建评测时先设计变量隔离，再谈跑分
+2. **记忆生成环节未必用旗舰模型**：GLM-5.3 与 Opus 5.5 在记忆质量上并列第一——给 agent 配记忆/摘要模型时可下探性价比档位，用专项榜而非通用榜选型
+3. **AGENTS.md 也能成 bug 源**：crewAI 修「评估 AGENTS.md 时误触登录」——skill/配置文件解析路径里嵌入副作用（登录/网络请求）必须有轮次/开关防护，评估环境与执行环境要隔离
+4. **tool call 解析是最小权限最后一公里**：adk-python 修「执行答案文本中被引号包裹的 tool call」——模型输出里的任何可执行结构都要走结构化通道校验，不因长得像 tool call 就执行

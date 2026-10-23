@@ -97,6 +97,31 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-24 - FrontierMemory 榜单揭晓 & Ramp Laminar 架构细节 & crewAI/ADK 发版潮
+
+**更新**：
+
+1. **最佳实践（04 新增 #119）**：
+   - **#119 对照评测法：固定模型变量，单独测 harness**（Letta FrontierMemory，10-22）：同模型跨 harness 对照分高 20pp（Dream 60% vs OpenAI SDK 40%）纯归因 harness；附记忆生成质量模型榜（Opus 5.5 / GLM-5.3 并列 73.3%）与 15 任务小样本警示
+
+2. **新闻/案例收录（05 章 10-24 快照，昨日头条的量化增量）**：
+   - **FrontierMemory 榜单分数**：Dream 73.3% / Prime Agent 60% / OpenAI SDK 40% / Claude Managed 33.3% / Hermes 26.7%；记忆生成榜 Opus 5.5 与 GLM-5.3 并列第一
+   - **Ramp Laminar 架构细节**：执行/沙箱/可观测/异步四合一；自建动机（模型无关 + 观测性）；非阻塞异步 = 下一代形态；初始代码全部 agent 生成
+   - **ScholarEvolve 量化**：Qwen3.5-27B 在 AppWorld Normal 69.0%→81.4%，补齐与 GPT-5.4 差距的 74%，不动权重（arXiv:2609.40169）
+   - **Google Cloud Agent Compute Engine 深潜** + DeepSeek 产品事业部/DeepInfer 开源
+
+3. **框架动态（10-24 快照，24h 窗口）**：
+   - **crewAI 1.15.29 发版**（Bedrock LiteLLM kwargs、flow 会话路由追踪、AGENTS.md 评估误触登录 bug #8315）；**adk-python v2.13.0 发版**（MongoDB 记忆服务、引号包裹 tool call 不再执行、connector tool 重名去歧义）；**langgraph** cli 0.4.38 + sdk-py 0.4.9 双发版
+   - **deer-flow 多 Gateway 协调 + 会话授权故障转移（#7138）**，30+ commits 最活跃；superpowers 默认分支静默但 star +521（v7.0.1 热度延续）；BMAD 静默第 4 天
+   - Star 快照（gh api 口径）：Superpowers — **304,206** ⭐（+521）；DeerFlow — **84,340** ⭐（+49）；CrewAI — **60,039** ⭐（+42）；LangGraph — **43,793** ⭐（+66）；BMAD — **54,484** ⭐；OpenAI SDK — **30,246** ⭐；ADK — **21,983** ⭐
+
+**信源说明**：Tavily 432 超额，降级 gnews RSS + googlenewsdecoder（解码 12/12 成功）；The New Stack CF 挡直接抓取，用 r.jina.ai 取得全文；gh api REST 逐仓核实；采集窗口 since 10-22 21:30 UTC
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #119（对照评测法）
+- `05-case-studies.md` — 10-24 快照：FrontierMemory 分数 + Ramp 架构细节 + ScholarEvolve 量化 + 框架速报 + 案例启示
+- `README.md` — 更新日志
+
 ### 2026-10-23 - Ramp 六周自建 Laminar & Notion Gen-6 长时自主 & Letta 记忆基准跨 harness 分化
 
 **更新**：

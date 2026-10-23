@@ -4010,3 +4010,19 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 设计需求澄清/brainstorm 类流程时，第一步固定为「读现有材料」（代码、文档、历史决策），第二步才生成问题，且每个问题标注它要填补的缺口
 - 提问数量预算化：材料能回答的不问、低价值的不问，宁可先给假设再让用户纠偏，也不要开场抛十连问
 - 官方对用户反馈快速回调（10-10 v7.0.0 → 10-21 v7.0.1）本身值得学：交互设计的正确性靠反馈回路收敛，不靠一次设计到位
+
+## 119. 对照评测法：固定模型变量，单独测 harness（2026-10-24 收录）
+
+**来源**：[Letta FrontierMemory](https://frontiermemory.com/blog/v1/)（[The New Stack 报道](https://thenewstack.io/letta-frontiermemory-agent-harness-benchmark/)，2026-10-22）
+
+### 核心内容
+
+- Letta 用「固定模型对（GPT-6.1 Sol 生成记忆 + GPT-6 Sol 执行）、只换 harness」的对照法量化 harness 层贡献：Letta Dream 60% vs OpenAI Agents SDK 40%——**模型相同，分差 20pp，纯归因 harness**；放开模型后 Dream 73.3% / Prime Agent 60% / OpenAI Agents SDK 40% / Claude Managed Agents 33.3% / Hermes 26.7%
+- 配套的记忆生成质量模型榜（Dream harness 造记忆、Letta Code 执行）：Claude Opus 5.5 与 GLM-5.3 并列 73.3%，Kimi K3 66.7%，GPT-6.1 Sol / Gemini 4 Argon 60%，Muse Wonder 46.7%，Grok 4.7 33.3%——CEO Packer：事实回忆型 memory 基准已饱和，「recall 已解决，token 空间内的持续学习仍未解决」
+- 基准设计思路可复用：给 agent 前序任务（含失败）的 transcript，要求其**自行生成记忆**完成后续任务——若生成的记忆真的好，应体现为下游任务提分，而不是考「存了能不能背出来」
+
+### 实操要点
+
+- harness/框架选型时复刻对照法：同一模型 + 同一任务集，只换 harness 跑分，把「框架加成」从「模型能力」里剥离——比看 star 数/README 可靠一个量级
+- 注意样本量：FrontierMemory 1.0 只有 15 个任务，单任务 6.7pp 粒度粗，结论当方向性信号用，不当精确排名用
+- 记忆质量与成本/速度存在权衡（官方明确提示 tradeoff）：给 agent 配记忆生成模型时，用「记忆质量榜」而非「通用能力榜」选型——GLM-5.3 与 Opus 5.5 并列第一意味着该环节未必需要最贵模型
