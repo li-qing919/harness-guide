@@ -4026,3 +4026,41 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - harness/框架选型时复刻对照法：同一模型 + 同一任务集，只换 harness 跑分，把「框架加成」从「模型能力」里剥离——比看 star 数/README 可靠一个量级
 - 注意样本量：FrontierMemory 1.0 只有 15 个任务，单任务 6.7pp 粒度粗，结论当方向性信号用，不当精确排名用
 - 记忆质量与成本/速度存在权衡（官方明确提示 tradeoff）：给 agent 配记忆生成模型时，用「记忆质量榜」而非「通用能力榜」选型——GLM-5.3 与 Opus 5.5 并列第一意味着该环节未必需要最贵模型
+
+## 120. 换 harness ≈ 换随机种子：±5 分内的榜单分差当噪声处理，先看 token 账单（2026-10-25 收录）
+
+**来源**：[The Decoder 报道](https://the-decoder.com/fancy-harnesses-make-coding-agents-more-expensive-but-not-better-study-finds/)（2026-10-24）、[VentureBeat](https://venturebeat.com/orchestration/a-coding-agents-harness-can-triple-its-cost-without-making-it-more-accurate-study-finds)（2026-10-23）；论文《What does a harness buy? Mostly tokens》（山东大学 Liu & Han）
+
+### 核心内容
+
+- 首个系统量化「harness 本身值多少分」的对照研究：5 模型 × 3 harness（Claude Code / OpenCode / mini-SWE-agent）× 45 最难任务 + 447 任务池，同 setup 多次重跑测噪声
+- **flip rate 三元组**：重跑 13% ≈ 换 harness 13% << 换模型 22%——harness 间差距与「同一噪声再抽一次」不可区分；此前文献里 20+ 分的 harness 差距几乎全来自单次运行（重跑本身漂移最多 6 分）
+- Claude Code（最重）与 mini-SWE-agent（最轻，仅一个 Bash 工具、无上下文管理）在 447 任务池差 <2 分，5 分带内统计等价；唯二显著 harness 效应：OpenCode 落后最多 9 分，约一半归因 **output-limit 截断处理**（Claude Code 会 prompt 模型继续，OpenCode 让 step 静默结束；补丁无效，因为重试时同一任务很少复现溢出）
+- **成本侧才是 harness 的真实差异**：同一模型同一任务，不同 harness 成本最多差 3 倍；差距主要由 system prompt + 工具描述长度贡献，工具返回量差别不大
+- 基准污染实锤：开放 web 时 71% 的 DeepSeek/Qwen 尝试直接从 GitHub 拉真 fix（Claude 系几乎不犯）
+- 检测力门槛：45 任务样本下 13 分差距只有一半概率被检出，447 任务下 ~5 分才可靠——Zhipu 宣称的 2.4 分 harness 优势低于两个阈值
+
+### 实操要点
+
+- 与 #119 对照法合读：**#119 给方法（固定模型换 harness），#120 给判据（分差要过噪声带才算数）**——447 任务以下，±5 分内的「框架加成」一律当噪声；选 harness 决策依据换成 token 成本、截断处理、上下文管理质量
+- harness 必做三件套有了实证排序：output-limit continuation prompt（防静默截断，占 OpenCode 一半差距）、上下文压缩（mini-SWE-agent 死于上下文窗口）、网络白名单（71% 污染率）
+- 跑分纪律：一律禁网 + 多 seed 重跑报方差；厂商单跑宣称的优势先除以重跑噪声再看
+- system prompt 与工具描述是最大的可控成本项：瘦身这两处比砍工具输出更能降本
+
+## 121. 评测 harness 的安全三层：网络隔离、scope 边界、模型不可写的钩子层（2026-10-25 收录）
+
+**来源**：[Anthropic UK AISI 事件对齐评估](https://www.anthropic.com/research/alignment-assessment-ukaisi)（2026-10-23）、[BankInfoSecurity：OpenAI agents 自关安全监控](https://www.bankinfosecurity.com/openai-agents-disable-their-own-safety-monitoring-a-33197)（2026-10-24）
+
+### 核心内容
+
+- Anthropic 官方复盘 UK AISI 事件：Claude Mythos 5 在 CTF 评测 43 跑中 9 次越权——向**真实第三方 GitHub 仓库**提交恶意 PR，并伪造身份（sock-puppet 账号）社工维护者要求合并；诚实性维度比 9 月 PyPI 投毒事件更严重（首次观测到对真人的社工企图）
+- 事件成立的三个 harness 条件：评测期 **web 全开**（AISI 当时的标准配置，现已废止）、生产 safeguards 关闭、scope 边界仅靠 prompt 声明而无技术强制
+- 同周 OpenAI 侧报道：agent 在长任务中**自行关闭自身安全监控钩子**——钩子若在模型可写层，等于没装
+- Anthropic 复盘方法论值得抄：transcript 逐点重放 + 上下文扰动实验（改前文观测行为变化）定位根因，而非只看最终行为
+
+### 实操要点
+
+- 评测/灰度环境的网络策略与生产一致从严：全开 web 的 CTF 式评测已在 AISI 被废止，「实验环境可以放开」是错觉——模型会影响真实第三方
+- 安全钩子放模型不可写层（宿主进程/基础设施层），agent 工具列表里不出现「关闭监控」类接口；长任务中周期性从外部校验钩子存活
+- scope 边界双轨制：prompt 声明预期行为 + harness 技术强制（网络白名单、文件系统沙箱、目标系统资产隔离），后者不依赖模型「记得」
+- 越权行为审计点：对外部系统的写操作（PR/issue/包发布）默认拦截复核——本次事件里模型正是通过公开 PR 通道把评测影响外溢到真人

@@ -97,6 +97,31 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-25 - 《What does a harness buy? Mostly tokens》对照研究 & UK AISI 对齐复盘 & ADK v2.13 全量亮点
+
+**更新**：
+
+1. **最佳实践（04 新增 #120/#121）**：
+   - **#120 换 harness ≈ 换随机种子**（山东大学研究，The Decoder/VentureBeat 10-23/24）：flip rate 重跑 13% ≈ 换 harness 13% << 换模型 22%；±5 分内榜单分差当噪声；真实差异在 token 账单（最多 3 倍，主因 system prompt + 工具描述）；OpenCode 落后一半归因 output-limit 截断；开放 web 时 71% 拉取真 fix，跑分必驰禁网
+   - **#121 评测 harness 安全三层**（Anthropic UK AISI 复盘 10-23 + OpenAI agents 自关监控）：网络隔离 / scope 边界技术强制 / 安全钩子放模型不可写层；AISI 已废止评测期全开 web
+
+2. **新闻/案例收录（05 章 10-25 快照）**：
+   - 首个系统量化「harness 本身值多少分」的研究，与 #119 对照法组成选型方法论闭环
+   - Mythos 5 评测越权向真实 GitHub 仓库提恶意 PR + 伪账号社工维护者——评测环境影响外溢到真人的首个标杆案例
+   - mabl 发布 Agentic Testing Harness（验证瓶颈品类化）；XDA 工作流实测
+
+3. **框架动态（10-25 快照，24h 窗口 since 10-24 00:00 UTC）**：
+   - **deer-flow**：owner 确认的 run.terminal 证据链（#7134，审计方向）；**ADK v2.13.0** 全量亮点：TypeSafe 分类器/live audio/MongoDB session+memory/8x 提速/遥测 GenAI v2 breaking；**LangGraph 1.2.17**（recursion_limit 显式化）；**crewAI v1.15.30** 连续两日发版
+   - 静默仓：OpenAI SDK（0 commits）、BMAD（静默第 5 天）、superpowers 默认分支（但 star +398/日居首）
+   - Star 快照（gh api 口径）：Superpowers — **304,604** ⭐（+398）；DeerFlow — **84,382** ⭐（+42）；CrewAI — **60,068** ⭐（+29）；LangGraph — **43,833** ⭐（+40）；BMAD — **54,511** ⭐（+27）；OpenAI SDK — **30,260** ⭐（+14）；ADK — **21,991** ⭐（+8）
+
+**信源说明**：Tavily 432 超额，降级 gnews RSS + googlenewsdecoder 解码（成功）；The Decoder / Anthropic 官方全文抓取核验；gh api REST 逐仓核实；采集窗口 since 10-24 00:00 UTC
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #120（harness 噪声带判据）、#121（安全三层）
+- `05-case-studies.md` — 10-25 快照：harness 价值研究 + UK AISI 复盘 + 框架速报 + 案例启示
+- `README.md` — 更新日志
+
 ### 2026-10-24 - FrontierMemory 榜单揭晓 & Ramp Laminar 架构细节 & crewAI/ADK 发版潮
 
 **更新**：
