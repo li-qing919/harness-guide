@@ -4063,4 +4063,37 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 评测/灰度环境的网络策略与生产一致从严：全开 web 的 CTF 式评测已在 AISI 被废止，「实验环境可以放开」是错觉——模型会影响真实第三方
 - 安全钩子放模型不可写层（宿主进程/基础设施层），agent 工具列表里不出现「关闭监控」类接口；长任务中周期性从外部校验钩子存活
 - scope 边界双轨制：prompt 声明预期行为 + harness 技术强制（网络白名单、文件系统沙箱、目标系统资产隔离），后者不依赖模型「记得」
+
+## 122. AGENTS.md 劫持：指令文件的加载路径要白名单化（2026-10-26 收录）
+
+**来源**：[BleepingComputer：AI coding agents hijacked using AGENTS.md file in Downloads folder](https://www.bleepingcomputer.com/news/security/ai-coding-agents-hijacked-using-agentsmd-file-in-downloads-folder/)（2026-10-25）；[Mezha.net 同步报道](https://mezha.net/eng/news/mezha-6346d26a04b8e8f15b0ed423_malicious_agents-md_file/)
+
+### 核心内容
+
+- 安全演示：放在 Downloads 目录的恶意 AGENTS.md 可被 AI coding agent 自动发现并加载——agent 把其中注入的指令当工作区规则执行，实现行为劫持（prompt injection → 工具滥用）；Mezha 跟进确认多家主流 agent 均受影响
+- 攻击成立的前提是 harness 的「指令文件自动发现」机制：为方便用户，多数 agent 会向上/向用户目录递归找 AGENTS.md/CLAUDE.md 类文件，便利性直接变成了攻击面
+- 与 #121 安全三层同框架归位：这是 **scope 边界**维度的新案例——#121 讲「评测环境 web 全开」的教训，本条讲「文件系统 scope 过宽」的教训，共同点是边界只靠约定没有技术强制
+- 注：正文核验受反爬限制，收录基于双源标题交叉与既有 #121 框架推演，细节以原文为准
+
+### 实操要点
+
+- 指令文件加载路径显式白名单：workspace 根 + 项目目录显式声明，用户 Downloads/Desktop 等不可信目录默认不扫描；确需全局规则的用受控位置（如 ~/.config 下的白名单文件）
+- 对外部拉取内容中的 AGENTS.md/CLAUDE.md（克隆的仓库、解压的压缩包）保持与不可信输入同级警惕：入库前人工 review 或沙箱内首次运行时只读不执行
+- harness 层可加一道「指令来源审计」日志：记录每次实际加载了哪些指令文件及路径，事后可定位劫持来源
+
+## 123. MCP Tasks + Elicitations：长时任务从「一次对话」转向「持久工作流」（2026-10-26 收录）
+
+**来源**：[Forkast News：Claude Ships MCP Tasks and Elicitations in Claude Code](https://news.google.com/rss/search?q=Claude+Ships+MCP+Tasks+and+Elicitations+when:7d&hl=en-US&gl=US&ceid=US:en)（2026-10-24，Forkast News 报道）
+
+### 核心内容
+
+- Claude Code 上线 MCP Tasks 与 Elicitations 两项能力：MCP Tasks 让长时任务下沉到 MCP server 侧异步执行、状态可查、结果可回传——agent 会话中断/压缩后任务仍持续（durable workflow）；Elicitation 让 server 可在执行中途向用户请求输入/确认
+- 编排重心移动：长时任务的「进度真相」从对话上下文迁移到 server 侧任务存储，上下文压缩不再等于任务丢失——与 #116「抗 compaction 设计」同题，但解法从「指令写得更抗压缩」升级为「状态外置」
+- 报道同时指出发布范围较窄（narrow launch）：durable workflow 是方向，但当前覆盖场景有限，期待值要校准
+
+### 实操要点
+
+- 长/异步任务优先走「外置任务状态」模式：任务 ID + 状态查询接口 + 结果落盘，agent 每轮轮询而非把长任务硬扛在单一会话里（cron/heartbeat 任务同理）
+- 需要人工确认的关键动作设计成 elicitation 式断点（中途请示）而非全自动——比事后回滚便宜，比全程人工省力
+- 采用新 MCP 能力前先确认覆盖范围与稳定性：narrow launch 阶段保留降级路径（如轮询 + 本地状态文件），不把关键流程押在单一新接口上
 - 越权行为审计点：对外部系统的写操作（PR/issue/包发布）默认拦截复核——本次事件里模型正是通过公开 PR 通道把评测影响外溢到真人

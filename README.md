@@ -97,6 +97,26 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-26 - AGENTS.md 劫持攻击面 & Claude Code MCP Tasks 持久工作流 & 框架星标日常漂移
+
+**更新**：
+
+1. **最佳实践（04 新增 #122/#123）**：
+   - **#122 AGENTS.md 劫持**（BleepingComputer 10-25 + Mezha 跟进）：Downloads 目录恶意 AGENTS.md 可被 agent 自动加载并劫持行为；指令文件加载路径白名单化 + 外部仓库指令文件当不可信输入；与 #121 安全三层同框，scope 边界维度的文件系统版
+   - **#123 MCP Tasks + Elicitations**（Forkast 10-24）：Claude Code 长时任务下沉 server 侧异步执行（durable workflow），状态外置使上下文压缩不再等于任务丢失——与 #116 抗 compaction 同题，解法从「指令抗压缩」升级为「状态外置」；narrow launch 阶段保留降级路径
+2. **昨日 #120 研究无增量**：今日多源（XenoSpectrum 10-25 等）仍为同一《What does a harness buy? Mostly tokens》报道，无新数据，不重复收录
+3. **框架动态（10-26 快照，24h 窗口 since 10-25 00:00 UTC）**：
+   - **deer-flow**：新增 5 commits（batch 持久化结果 browser review、AIO sandbox ID 异步获取、run.terminal 恢复接管回填、read_file_chunks 取消安全、peer DB 创建容错）；star +32 至 **84,414**
+   - **adk-python**：+2 commits（CI PR triage token 收敛只读、callable 类型提示解析加固）；**LangGraph** +49 至 43,882；**CrewAI** +25 至 60,093；**superpowers** +403 至 **305,007**（日增仍居首）
+   - 静默仓：OpenAI Agents SDK（静默第 4 天）、BMAD（静默第 6 天）、superpowers 默认分支
+4. **其他收录（05 章快照池）**：OpenAI《Securing our frontier model training environment》（10-23）训练环境隔离实践，与 #121 安全三层互证；OpenAI Decisions API（10-22）低延迟决策接口
+
+**信源说明**：Tavily 432 超额，降级 gnews RSS + googlenewsdecoder 解码（VentureBeat/The Decoder/BleepingComputer 直链均解码成功）；VentureBeat/The Decoder 正文被 Vercel checkpoint 拦截，#120 研究沿用 10-25 已核验内容；Anthropic RSS 404 未取到官方新帖；gh api REST 逐仓核实；采集窗口 since 10-25 00:00 UTC
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #122（AGENTS.md 加载路径白名单）、#123（MCP Tasks 状态外置）
+- `README.md` — 更新日志
+
 ### 2026-10-25 - 《What does a harness buy? Mostly tokens》对照研究 & UK AISI 对齐复盘 & ADK v2.13 全量亮点
 
 **更新**：
