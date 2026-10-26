@@ -97,6 +97,26 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-27 - Downloads 劫持面三源实锤扩展 & crewAI SECT-601 紧急补丁 & LangGraph 三连发版
+
+**更新**：
+
+1. **最佳实践（04 新增 #124）**：
+   - **#124 Downloads 劫持面实锤扩展**（Help Net Security / CyberSecurityNews / CSO Online 三独立源 10-26 同日报道）：#122 的 AGENTS.md 劫持从单源演示升级为多源实锤，攻击面从 AGENTS.md 扩展到 Downloads 目录**任意**伪装文件，Codex 与 Claude Code 双双被点名；防线从「路径白名单建议」升级为「入口+依赖双防线」（不可信目录内容视为数据而非指令 + 框架紧升级）
+   - 同期 crewAI 紧急安全补丁 [SECT-601](https://github.com/crewAIInc/crewAI/commit/ed0abf2)（反序列化/SQLi/路径穿越一次修三，升级至 1.15.30+）作为框架层佐证纳入 #124
+2. **框架动态（10-27 快照，24h 窗口 since 10-26 00:00 UTC）**：
+   - **LangGraph** 发版 3 连：langgraph 1.2.18 / checkpoint 4.3.1 / sdk-py 0.4.10；增量：`@task` 流式返回值修复、error_handler 全路径恢复、delta snapshots 默认 100 条、ToolNode 工具名入图元数据；star 43,937
+   - **deer-flow** 高频 fix 持续：checkpoint 回放前缓存校验、Redis stream END 幂等发布、subagent 取消时清理 drain；star **84,447**（+33）
+   - **adk-python**：16 个 toolset/integration 特性转 stable（v2.13.0 后续）；breaking fix：畸形 live WebSocket 直接关闭不再卡死；star 22,015
+   - **CrewAI** star 60,132；**superpowers** 305,556；静默仓：OpenAI Agents SDK（仅 docs 更新，静默第 5 天）、BMAD（静默第 7 天）、superpowers 默认分支（静默第 4 天）
+3. **备查（未编号收录）**：OWASP Agent Control Standard + 2026 LLM Top 10（[OrcaRouter 报道](https://www.orcarouter.ai/blog/2026-09-01-owasp-agent-control-standard)，链接可达但原文日期存疑疑似 9 月旧文重推，宁缺毋滥暂不入编号条目）；Stack Overflow 2026 调查 Codex 使用率 65.5% vs Claude Code 29.5%（[shattered.io](https://shattered.io/codex-vs-claude-code-stack-overflow-65-5-vs-29-5-2026/)）
+
+**信源说明**：Tavily 432 超额，降级 gnews RSS + googlenewsdecoder 解码（ABC/CyberSecurityNews/CSO 直链解码成功）；三个关键链接 curl 状态码核验通过（200/202）；gh api REST 逐仓核实；采集窗口 since 10-26 00:00 UTC
+
+**更新文件**：
+- `04-best-practices.md` — 新增 #124（Downloads 劫持面扩展 + 入口/依赖双防线）
+- `README.md` — 更新日志
+
 ### 2026-10-26 - AGENTS.md 劫持攻击面 & Claude Code MCP Tasks 持久工作流 & 框架星标日常漂移
 
 **更新**：

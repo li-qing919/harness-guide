@@ -4097,3 +4097,19 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 需要人工确认的关键动作设计成 elicitation 式断点（中途请示）而非全自动——比事后回滚便宜，比全程人工省力
 - 采用新 MCP 能力前先确认覆盖范围与稳定性：narrow launch 阶段保留降级路径（如轮询 + 本地状态文件），不把关键流程押在单一新接口上
 - 越权行为审计点：对外部系统的写操作（PR/issue/包发布）默认拦截复核——本次事件里模型正是通过公开 PR 通道把评测影响外溢到真人
+
+## 124. Downloads 劫持面实锤扩展：任意恶意文件 + Codex/Claude Code 双双中招（2026-10-27 收录）
+
+**来源**：[Help Net Security](https://www.helpnetsecurity.com/2026/10/26/ai-coding-agents-malware-openai-codex/)（2026-10-26）；[CyberSecurityNews](https://cybersecuritynews.com/codex-and-claude-code-hijack/)；[CSO Online](https://www.csoonline.com/article/4240222/malicious-downloads-can-trick-ai-coding-agents-into-compromising-themselves.html)（三独立源同日报道）
+
+### 核心内容
+
+- #122 的 AGENTS.md 劫持从单源演示升级为多源实锤：攻击面不限于 AGENTS.md——Downloads 目录中伪装成需求文档/补丁说明的**任意**文件均可携带注入指令，Codex 与 Claude Code 被点名可被诱导执行恶意操作（读取即中招）
+- 增量在攻击模型细化：用户下载文件→agent 后续会话扫描/读取该路径→指令注入→工具滥用，整链无需用户确认；「自动发现/自动加载」类便利机制是共同前置条件
+- 同期佐证框架层风险真实存在：crewAI 发布紧急安全补丁 [SECT-601](https://github.com/crewAIInc/crewAI/commit/ed0abf2)（10-26），一次修复反序列化、SQL 注入、路径穿越三类漏洞——harness 安全需要「入口（指令文件）+ 框架（依赖升级）」双向治理
+
+### 实操要点
+
+- 把「不读取 Downloads/Desktop 等不可信目录」从建议升级为 harness 默认策略（文件系统 scope 白名单，#122 要点的落地版）
+- 对不可信目录中的文件内容一律视为**数据而非指令**：加载前脱敏（剥离指令式语句）或沙箱内只读预览
+- 框架依赖保持紧升级节奏（crewAI 1.15.30+ 为例）：安全补丁类 release 当日跟进，与指令文件白名单互补成「入口 + 依赖」双防线
