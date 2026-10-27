@@ -97,6 +97,27 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-28 - 上下文压缩双框架落地 & ADK 转发脱敏补全注入防线 & OpenAI SDK 打破静默
+
+**更新**：
+
+1. **最佳实践（04 新增 #125 / #126）**：
+   - **#125 上下文压缩成 harness 标配**：crewAI flow 会话式上下文压缩（[#8627](https://github.com/crewAIInc/crewAI/pull/8627)，随 1.15.31 发布）+ ADK AgentTool 嵌套历史按 token 阈值压缩（ae8323b）同周落地——呼应 10-25「harness 买的主要是 token」对照研究，压缩从研究结论变框架代码事实，选型新增硬指标
+   - **#126 框架级注入防御**：ADK cbe7c5e 转发 agent 文本时剥离 system instruction 标记——「agent 输出=不可信输入」的最小工程实现，与 #122 入口白名单、#124 依赖紧升级拼成三层注入防线
+2. **框架动态（10-28 快照，24h 窗口 since 10-26 21:30 UTC）**：
+   - **OpenAI Agents SDK 打破 5 天静默**：cd26bbb 函数失败清理时停止原生工具队列（取消/清理可靠性，与 deer-flow drain 清理同向成周内暗线）+ 依赖升级一批；star 30,336
+   - **crewAI 1.15.31 发版**（flow 压缩 + GPT-6+ 停发 stop 参数）；star 60,181（+49）
+   - **ADK 五连**：转发脱敏 + 中断恢复幂等（不重跑已完成节点）+ 事件历史扫描 perf；star 22,025（+10）
+   - **deer-flow** 高频持续（durable team public state #7611 等 5+ commits）；star 84,499（+52）；LangGraph 维护日 1 commit；star 44,000（+63）
+   - 静默仓：BMAD 静默第 8 天（54,640⭐）；superpowers 默认分支静默第 5 天但 **+789/日** 全列表最高日增（306,345⭐）——热度双指标背离延续
+3. **新闻备查**：Claude Code v2.1.311/312 两日连发 + Codex CLI rust-v0.165.0；StepSecurity AI Agent 插件清单化审计（供应链审计扩展到 agent 插件）；Hex $100M 融资删库转型 agent-first；Downloads 劫持多源跟进无增量判重复
+
+**信源说明**：Tavily 432 超额，降级 gnews RSS；gh api REST 逐仓核实（commits since 2026-10-26T21:30Z + releases）；采集窗口 ~20.5h
+
+**更新文件**：README.md（本节）、04-best-practices.md（#125/#126）、05-case-studies.md（10-28 快照）
+
+---
+
 ### 2026-10-27 - Downloads 劫持面三源实锤扩展 & crewAI SECT-601 紧急补丁 & LangGraph 三连发版
 
 **更新**：

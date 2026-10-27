@@ -1715,3 +1715,29 @@ Faros.ai 建议先量化再决定投入方向：
 2. **评测影响外溢是真实风险**：AISI 事件里模型通过公开 GitHub PR 影响到真人——评测环境≠无害环境，网络隔离从「防作弊」升级为「防伤害」
 3. **终端证据链 + 人工确认**（deer-flow #7134）与 superpowers 模板人工摘要（#115）同脉：关键产出落盘前插入 owner 确认点，审计与守门可以是一个机制
 4. **发版节奏信号**：crewAI 连续两日发版 + ADK 大版本全量落地 vs OpenAI SDK/BMAD/superpowers 窗口静默——活跃度分层明显，但 star 增速（superpowers +398/日）与 commit 活跃度并不同步，评估框架热度时两个指标都要看
+
+## 10-28 快照：上下文压缩双框架同周落地 & ADK 转发脱敏 & OpenAI SDK 打破静默（24h 窗口 since 10-26 21:30 UTC）
+
+### 新闻与案例
+
+- **Claude Code 两日连发 v2.1.311 / v2.1.312**（10-26/27，gh releases 核实）；**OpenAI Codex CLI rust-v0.165.0 发布**（10-27），v0.166.0-alpha.3 进预发布——双巨头 harness 发版节奏均在日级
+- **StepSecurity 推出 AI Agent 插件清单化审计**（10-27）：对 GitHub 仓库与开发机上的 agent 插件建 inventory（来源/版本/权限），供应链审计面从依赖包扩展到 agent 插件（备查级，暂不编号）
+- **Hex 融资 $100M 转型 agent-first**（Dealroom 10-27）：删除既有代码库、产品围绕 agent harness 重构——「agent-first」从口号进入公司级战略案例
+- Downloads 劫持话题 10-27 继续扩散（Help Net Security / GBHackers / Martin Cid Magazine 等多源跟进），但论据相对 #124 无实质增量，判重复不入册
+
+### 框架动态（gh api 核实，since 10-26 21:30 UTC）
+
+- **bytedance/deer-flow**（**84,499**⭐，+52）：5+ commits——durable team public state（#7611，团队公共状态持久化）、管理员诊断插件（#7612）、共享图片读授权修复（#7604）；持续高频迭代
+- **crewAIInc/crewAI**（**60,181**⭐，+49）：**1.15.31 发版**——flow 会话式上下文压缩（#8627，详 #125）、GPT-6+ 不再发送 stop 参数（#8674）、安全依赖升级（#8676）；上日 SECT-601 后维护正常化
+- **langchain-ai/langgraph**（**44,000**⭐，+63）：1 commit——paused tool 不再在 tools stream 上误报 failed（#9406）；1.2.18 昨日已发，今日维护日
+- **openai/openai-agents-python**（**30,336**⭐）：**打破静默**（静默第 5 天结束）——cd26bbb 函数失败清理时停止原生工具队列（工具取消可靠性）、依赖升级一批（pymongo≥4.18.3、certifi 2026.10.19、starlette≥1.9.0）
+- **google/adk-python**（**22,025**⭐，+10）：五连——转发文本剥离 system instruction 标记（cbe7c5e，详 #126）、事件历史扫描 perf（0ea43cc）、**中断恢复不重跑已完成节点**（d0c3af5，幂等性）、嵌套历史压缩（ae8323b）、SQLite 非 ASCII session 修复
+- **bmad-code-org/BMAD-METHOD**（**54,640**⭐）：窗口内 0 commits，静默第 8 天
+- **obra/superpowers**（**306,345**⭐，+789，全列表最高日增）：默认分支静默第 5 天，纯 star 流量高增延续
+
+### 案例启示（10-28）
+
+1. **压缩与幂等是长程 harness 的「水电煤」**：crewAI flow 压缩（#125）与 ADK 中断恢复幂等（d0c3af5）同日合入——长程任务的两类经典故障（token 膨胀、断点重放副作用）正被框架层逐一消化，自建 harness 的自研理由进一步减少
+2. **注入防线完成三层拼图**：入口文件白名单（#122/#124）+ 框架依赖紧升级（#124）+ 模型输出转发脱敏（#126）——ADK 用一个 commit 示范了第三层的最小实现，「agent 输出=不可信输入」应写入所有多 agent 架构评审清单
+3. **静默仓破冰信号值得跟踪**：OpenAI Agents SDK 结束 5 天静默且首刀砍在「工具取消可靠性」（cd26bbb）——取消/清理路径与 10-27 deer-flow drain 清理同向，「优雅取消」是本周代码面的暗线
+4. **star 增速与 commit 活跃度继续背离**：superpowers +789/日领跑而代码静默第 5 天；BMAD 静默 8 天但 star 稳步爬升——热度评估仍须双指标交叉（呼应 10-25 启示 4）

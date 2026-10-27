@@ -4113,3 +4113,35 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 把「不读取 Downloads/Desktop 等不可信目录」从建议升级为 harness 默认策略（文件系统 scope 白名单，#122 要点的落地版）
 - 对不可信目录中的文件内容一律视为**数据而非指令**：加载前脱敏（剥离指令式语句）或沙箱内只读预览
 - 框架依赖保持紧升级节奏（crewAI 1.15.30+ 为例）：安全补丁类 release 当日跟进，与指令文件白名单互补成「入口 + 依赖」双防线
+
+## 125. 上下文压缩从「可选优化」变为 harness 标配（2026-10-28 收录）
+
+**来源**：[crewAI #8627](https://github.com/crewAIInc/crewAI/pull/8627)（2026-10-27 合入，随 1.15.31 发布）；[google/adk-python ae8323b](https://github.com/google/adk-python/commit/ae8323b)（2026-10-27）
+
+### 核心内容
+
+- 同一周内两大框架在主线合入压缩能力，方向收敛：**crewAI flow 支持会话式上下文压缩**（#8627，conversational flow context compaction）——flow 型长流程在对话上下文膨胀时自动压缩，1.15.31 版本号 bump 一起落地
+- ADK 同步合入 **AgentTool 嵌套历史按调用方 token 阈值压缩**（ae8323b）：压缩从「顶层会话」下沉到「嵌套工具调用历史」粒度，说明框架作者把 token 膨胀视为长程任务的结构性问题而非偶发问题
+- 呼应 10-25 对照研究结论（「harness 买的主要是 token 管理」）：压缩能力正从研究结论变成框架代码事实，选型时应把「内置压缩/可配置压缩策略」列为硬指标
+
+### 实操要点
+
+- 自建 harness 不必手写压缩：优先复用框架内置（crewAI flow / ADK AgentTool 阈值压缩），触发条件用 token 阈值而非轮数
+- 压缩粒度分层：顶层会话摘要 + 嵌套调用历史单独压缩，避免一次全量摘要丢失工具返回的结构化细节
+- 升级节奏：crewAI 升至 1.15.31+、ADK 升至 v2.13.0+（含 ae8323b 的 commit 后版本）即可获得该能力，无需额外配置工作
+
+## 126. 框架级注入防御：转发 agent 文本时剥离 system instruction 标记（2026-10-28 收录）
+
+**来源**：[google/adk-python cbe7c5e](https://github.com/google/adk-python/commit/cbe7c5e)（2026-10-27，「elide system instruction markers from relayed agent text」）
+
+### 核心内容
+
+- ADK 合入一处小而关键的防御：agent 产出文本在**转发/接力**给下游时，剥离其中形如 system instruction 的标记——防止模型输出里伪造的「系统指令」在多 agent 转发链中被下游当作真指令执行
+- 这是 #122/#124 注入议题的**框架层工程化回应**：前两条讲「入口文件不可信」，本条讲「agent 自身输出同样不可信」——不可信边界从文件系统扩展到模型输出本身
+- 意义在于模式可复制：任何多 agent / 多轮转发架构都应做同样的「输出脱敏再转发」，成本一行级，收益是切断 prompt 注入的横向传播路径
+
+### 实操要点
+
+- 多 agent 转发链路上，对上游 agent 文本做标记剥离/转义后再入下游上下文（ADK 已提供参考实现）
+- 自建 harness 巡检项：grep 自己的转发代码里是否原样拼接上游文本；原样拼接即为待修点
+- 与入口白名单（#122）、依赖紧升级（#124）组合成「文件入口 + 模型输出 + 框架依赖」三层注入防线
