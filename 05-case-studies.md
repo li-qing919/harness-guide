@@ -1741,3 +1741,31 @@ Faros.ai 建议先量化再决定投入方向：
 2. **注入防线完成三层拼图**：入口文件白名单（#122/#124）+ 框架依赖紧升级（#124）+ 模型输出转发脱敏（#126）——ADK 用一个 commit 示范了第三层的最小实现，「agent 输出=不可信输入」应写入所有多 agent 架构评审清单
 3. **静默仓破冰信号值得跟踪**：OpenAI Agents SDK 结束 5 天静默且首刀砍在「工具取消可靠性」（cd26bbb）——取消/清理路径与 10-27 deer-flow drain 清理同向，「优雅取消」是本周代码面的暗线
 4. **star 增速与 commit 活跃度继续背离**：superpowers +789/日领跑而代码静默第 5 天；BMAD 静默 8 天但 star 稳步爬升——热度评估仍须双指标交叉（呼应 10-25 启示 4）
+
+## 10-29 快照：Skills 标准入 Linux Foundation & Claude Code 拆除最后闸门 & superpowers 日增破千（窗口 since 10-28 05:30 UTC，~40h）
+
+### 新闻与案例
+
+- **Anthropic Skills 标准移交 Linux Foundation**（WinBuzzer 10-27/28）：Agent Skills 工作流标准进入中立治理——skills 生态从厂商私有走向行业标准的关键信号，skills 作为 harness 能力扩展层的互操作性预期提升
+- **Claude Code v2.1.311 引入 CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS**（10-27/28 多源）：skip-permissions 模式下最后的 rm 拦截也可关闭（详 #127）；The Register 以「让用户跳出机舱不带降落伞」反讽，安全社区普遍负评但设计上仍是分层显式开关
+- **Codex sandbox escapes（Heapjack/Overpatch）公开解析**（OrcaRouter 10-27/28）：两种沙箱逃逸技术细节公开，沙箱单层防御已被当攻击面研究
+- **Firefox 159 修复 167 个漏洞，41 个由 Codex 发现**（Notebookcheck/Mezha 10-28）：harness 驱动自动化漏洞挖掘首次在主流产品安全公告中拿到量化席位
+- **Google 开放 Android 开发给第三方 AI agents + 新 Gemini APIs**（The Decoder 10-28）：平台级 harness 集成——OS/IDE 供应商为外部 agent 提供官方工具接口成为趋势
+- 备查：BankInfoSecurity《Securing AI Coding Harnesses》把 harness 权限闸门/审计列为企业安全议题；HackerNoon 2000+ 次运行上下文压缩实测（6 lessons，与 #125 同主题增量）
+
+### 框架动态（gh api 核实，star 较 10-28 快照）
+
+- **obra/superpowers**（**307,352**⭐，**+1,007，日增破千再创新高**）：默认分支静默第 6 天（v7.0.1，10-21）——star 流量与代码活跃背离拉大到历史极值
+- **bytedance/deer-flow**（**84,580**⭐，+81）：7 commits 全 fix——RunEvent snapshot 隔离 rebase（#7423）、sandbox timing 校验（#7651）、TUI picker 标签原样渲染（#7631）、mcp 拒绝不支持的 inline audio results（#7628）、nginx pin 1.31.2-alpine；快照/事件一致性打磨期
+- **langchain-ai/langgraph**（**44,060**⭐，+60）：4 commits——sdk-py SSE 数据与 cursor 状态跨 chunk 保留（#9477）、流断线 backoff 重连（#9462）；流式 harness 可靠性补强，1.2.18 后续维护
+- **crewAIInc/crewAI**（**60,222**⭐，+41）：6 commits——**feat(cli) crewai skill search**（组织 skills 检索，#8604）、crewai run --inputs 直通 python flow（#8606）、1.15.33 版本推进 + 向后兼容 import 修复（#8746）；skills 生态工具化跟进 Skills 标准
+- **google/adk-python**（**22,034**⭐，+9）：**23 commits 高产日**——AgentTool input_schema 校验错误回传模型、Enum 工具参数转换、workflow max_concurrency 排除 replayed nodes、每轮跳过两次 history 扫描（perf）、AgentEvaluator 支持运行时构建 agent 评估、deploy images 支持非 3.11 Python
+- **openai/openai-agents-python**（**30,355**⭐，+19）：窗口内 0 commits（昨日恢复活跃后今日再静默）；v0.24.0（10-15）后无新 release
+- **bmad-code-org/BMAD-METHOD**（**54,687**⭐，+47）：窗口内 0 commits，静默第 10 天（v6.12.4，10-14）
+
+### 案例启示（10-29）
+
+1. **Skills 标准化是本周最大变量**：Anthropic Skills 入 Linux Foundation + crewAI 同周上线 skill search CLI——「skills 即 harness 插件生态」的正反馈启动，自建 harness 的 skills 层设计应尽早对齐该标准（命名/清单/权限元数据）
+2. **安全闸门议题三线合流**：Claude Code 拆最后闸门（#127）+ Codex 沙箱逃逸解析 + 企业 harness 安全指南——权限闸门分层、沙箱隔离、审计日志三件套应进 harness 安全评审基线
+3. **快照一致性与流式可靠性仍是主线**：deer-flow RunEvent 隔离 rebase、langgraph SSE cursor 保留与断线 backoff——长程/流式 harness 的「不断不乱」工程持续加码，与上周「优雅取消」暗线（取消/清理）共同构成可靠性周主题
+4. **superpowers 日增破千但代码静默 6 天**：热度与开发背离达极值，警惕榜单类 star 数据失真风险——评估框架热度仍须双指标交叉（呼应 10-25/10-28 启示）

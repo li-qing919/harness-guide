@@ -97,6 +97,24 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-29 - Skills 标准入 Linux Foundation & 权限闸门分层设计 & superpowers 日增破千
+
+**更新**：
+
+1. **最佳实践（04 新增 #127）**：
+   - **#127 权限闸门分层设计**：以 Claude Code v2.1.311 引入 `CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS`（拆除 skip-permissions 下最后的 rm 拦截）为锚点，结合 Codex 沙箱逃逸（Heapjack/Overpatch）解析与企业侧《Securing AI Coding Harnesses》——沉淀闸门分层原则（高危操作保留默认开启、独立显式变量关闭的最后一道闸门）、危险开关命名即文档、审计兑底不可关闭
+2. **框架动态（10-29 快照，窗口 since 10-28 05:30 UTC ~40h）**：
+   - **superpowers 日增破千**（307,352⭐，+1,007）但代码静默第 6 天——热度/开发背离达历史极值；BMAD 静默第 10 天（54,687⭐，+47）
+   - **deer-flow** 7 commits 全 fix（RunEvent snapshot 隔离 rebase、sandbox timing 校验等）；84,580⭐（+81）
+   - **langgraph** SSE cursor 跨 chunk 保留 + 流断线 backoff 重连；44,060⭐（+60）；**crewAI** 新增 skill search CLI + 1.15.33 推进；60,222⭐（+41）；**adk-python** 23 commits 高产日（input_schema 错误回传模型、运行时 agent 评估等）；22,034⭐（+9）；**OpenAI SDK** 窗口内 0 commits（30,355⭐）
+3. **新闻备查**：Anthropic Skills 标准移交 Linux Foundation（中立治理，crewAI skill search 同周上线正反馈启动）；Firefox 159 的 167 个漏洞中 41 个由 Codex 发现（harness 自动化漏洞挖掘量化实锶）；Google 开放 Android 开发给第三方 AI agents；HackerNoon 2000+ 次运行上下文压缩实测（与 #125 同主题）
+
+**信源说明**：Tavily 432 超额，降级 gnews RSS + googlenewsdecoder 解码；gh api REST 逐仓核实；采集窗口 ~40h（时区换算误差 +8h 已标注）
+
+**更新文件**：README.md（本节）、04-best-practices.md（#127）、05-case-studies.md（10-29 快照）
+
+---
+
 ### 2026-10-28 - 上下文压缩双框架落地 & ADK 转发脱敏补全注入防线 & OpenAI SDK 打破静默
 
 **更新**：

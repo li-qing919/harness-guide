@@ -4145,3 +4145,20 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 多 agent 转发链路上，对上游 agent 文本做标记剥离/转义后再入下游上下文（ADK 已提供参考实现）
 - 自建 harness 巡检项：grep 自己的转发代码里是否原样拼接上游文本；原样拼接即为待修点
 - 与入口白名单（#122）、依赖紧升级（#124）组合成「文件入口 + 模型输出 + 框架依赖」三层注入防线
+
+## 127. 权限闸门分层设计：「最后一道闸门」该不该留、怎么留（2026-10-29 收录）
+
+**来源**：[Claude Code v2.1.311 引入 CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS](https://shattered.io/claude-code-2-1-311-even-more-dangerously-skip-permissions-2026/)（2026-10-27/28，Boris Cherny 确认，The Register/Mezha/lavx 多源跟进）；旁证：OrcaRouter Codex sandbox escapes（Heapjack/Overpatch）解析、BankInfoSecurity《Securing AI Coding Harnesses》
+
+### 核心内容
+
+- Anthropic 在 v2.1.311 加入新环境变量：skip-permissions 模式下原有的最后一道 `rm` 拦截也可关闭——业界关注度极高的「给 agent 拆掉最后一个降落伞」事件，本质是**权限闸门分层设计**的公开案例：普通模式 → skip-permissions → even-more-dangerously，三层闸门逐级放权，每层用独立显式开关而非复用同一开关
+- 同期 Codex 沙箱逃逸技术（Heapjack/Overpatch）被公开解析：**沙箱隔离 ≠ 权限闸门**，前者是运行时隔离，后者是操作前确认；两者是互补防线，逃逸研究热度上升说明沙箱单层防御已被当作攻击面研究
+- 企业侧（BankInfoSecurity）开始把「coding harness 的权限闸门与审计」列为独立安全议题——harness 安全从社区讨论进入企业风险清单
+
+### 实操要点
+
+- 闸门分层原则：高危操作（删文件/外发/付款类）至少保留一道**默认开启、需独立显式变量关闭**的闸门；不要让一个「信任模式」开关放权所有层级
+- 命名即文档：Claude Code 用超长变量名（`EVEN_MORE_DANGEROUSLY...`）提高关闭成本——自建 harness 可借鉴，危险开关的名字要写清后果，配置评审时一眼可辨
+- 审计兜底：无论闸门开几层，危险操作必须留审计日志（谁、何时、什么参数）——闸门可以被信任关闭，审计不可关闭
+- 巡检项：检查自己 harness 的 skip/dangerous 类开关是否存在「一键全放权」；有则拆分为逐级开关
