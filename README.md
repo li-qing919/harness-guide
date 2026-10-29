@@ -97,6 +97,26 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-30 - harness 商品化与 60/40 量化锚点 & MiniMax 整套 skills 开源 & deer-flow 推理档位下沉
+
+**更新**：
+
+1. **最佳实践（04 新增 #128 / #129）**：
+   - **#128 harness/模型投入占比量化参照**：Claude Code 51 万行泄露源码分析估计约 60% 代码在 harness 侧（编排/上下文/护栏）、40% 在模型交互——与 10-25「harness 买的主要是 token」对照研究同向，补上代码量占比维度；旁证 Anthropic 日均合并 3 万次变更（AI Engineer 大会）
+   - **#129 生产级 skill 集开源参考**：MiniMax 开源编码团队日常在用的 15 个 agent skills（MCode stack），skill 拆分粒度有了可对标的完整作业；同周 Infini-AI-Lab 开源 Hermit harness 适配器框架，跨 harness 可移植性议题浮出
+2. **新闻主线：harness 商品化三连**——微软将 Copilot Harness 经 Foundry 商业售卖（12/1 前免费）、Hermit 适配器框架开源、TDS 发布术语入门文《What Is Harness Engineering?》；「harness」完成从社区黑话到产品品类的话语迁移
+3. **框架动态（10-30 快照，24h 窗口 since 10-28 21:30 UTC）**：
+   - **adk-python** 21 commits：ReadFileTool 流式读防 OOM、evaluation/user simulation 从 experimental 毕业、semconv-genai v2 token 指标、新增 RefusalAnswer 拒答分类器；22,044⭐
+   - **deer-flow** 14 commits：**native subagents 支持 thinking/reasoning effort 配置**（#7668，推理档位下沉到 subagent 层）、run admission 与 heartbeat 隔离；84,656⭐
+   - **crewAI** 13 commits：tool-using agent 结束请求结构化输出、json refit 而非失败、重复工具调用告警、context_window_size 生效；60,260⭐；**langgraph** sdk-py 断线 backoff 重连三连；44,115⭐
+   - **superpowers** 日增连续破千（308,431⭐，+1,079）但代码静默第 7 天；**BMAD** 静默第 11 天（54,749⭐）；**OpenAI SDK** 0 commits（30,381⭐）
+
+**信源说明**：Tavily 432 超额，降级 gnews RSS + googlenewsdecoder 解码；gh api REST 逐仓核实；采集窗口 24h
+
+**更新文件**：README.md（本节）、04-best-practices.md（#128/#129）、05-case-studies.md（10-30 快照）
+
+---
+
 ### 2026-10-29 - Skills 标准入 Linux Foundation & 权限闸门分层设计 & superpowers 日增破千
 
 **更新**：
@@ -2711,12 +2731,12 @@ Harness Engineering (最上层)
    - ✅ 使用 docs/ 目录存放结构化知识库
    - ✅ 机械强制：CI 任务验证文档新鲜度和交叉链接
 
-4. **热门 Agent Harness 框架更新**（Star 快照 2026-10-18）
-   - [obra/superpowers](https://github.com/obra/superpowers) - 301K ⭐ - Agentic Skills 框架
-   - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) - 84K ⭐ - 字节跳动 SuperAgent Harness
+4. **热门 Agent Harness 框架更新**（Star 快照 2026-10-30）
+   - [obra/superpowers](https://github.com/obra/superpowers) - 308K ⭐ - Agentic Skills 框架
+   - [bytedance/deer-flow](https://github.com/bytedance/deer-flow) - 85K ⭐ - 字节跳动 SuperAgent Harness
    - [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) - 60K ⭐ - 多 Agent 协作框架
-   - [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) - 54K ⭐ - AI 驱动开发方法论
-   - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) - 43K ⭐ - 图结构 Agent 构建
+   - [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) - 55K ⭐ - AI 驱动开发方法论
+   - [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) - 44K ⭐ - 图结构 Agent 构建
    - [openai/openai-agents-python](https://github.com/openai/openai-agents-python) - 30K ⭐ - OpenAI 官方 Agent SDK
    - [google/adk-python](https://github.com/google/adk-python) - 22K ⭐ - Google Agent 开发工具包
 

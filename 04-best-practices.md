@@ -4162,3 +4162,35 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 命名即文档：Claude Code 用超长变量名（`EVEN_MORE_DANGEROUSLY...`）提高关闭成本——自建 harness 可借鉴，危险开关的名字要写清后果，配置评审时一眼可辨
 - 审计兜底：无论闸门开几层，危险操作必须留审计日志（谁、何时、什么参数）——闸门可以被信任关闭，审计不可关闭
 - 巡检项：检查自己 harness 的 skip/dangerous 类开关是否存在「一键全放权」；有则拆分为逐级开关
+
+## 128. harness/模型投入占比的量化参照：60/40 分割（2026-10-30 收录）
+
+**来源**：[Claude Code 510,000-Line Leak: the 60/40 Secret](https://www.alphamatch.ai/blog/claude-code-source-code-leak-60-40-secret)（2026-10-28，Alpha Match 对泄露源码的分析）
+
+### 核心内容
+
+- 对 Claude Code 约 51 万行源码的分析估计：**约 60% 代码在 harness 侧**（工具编排、上下文管理、防错护栏、权限闸门），约 40% 在模型交互本身——与直觉相反，头部编码 harness 的工程重心明显偏向「壳」而非「核」
+- 与 10-25《What does a harness buy? Mostly tokens》对照研究同向：harness 的价值不在提示词技巧，而在 token 效率 + 失败兜底的结构性工程；本条补上了**代码量占比**的量化视角
+- 同周 Anthropic 在 AI Engineer 大会披露日均合并 3 万次代码变更（Sonar × Anthropic，[链接](https://finance.biggo.com/podcast/ba92a25583dac843)）——大规模并行 agent + 评审/CI 护栏的流水线，佐证 harness 投入是产能杠杆
+
+### 实操要点
+
+- 资源分配自检：自建 harness 代码库里「编排/护栏/上下文管理」与「模型调用」的代码比如果远小于 60/40，说明护栏欠投入，失败重试/审计/压缩大概率缺失
+- 评审优先级：code review 时对 harness 侧改动（工具 schema、闸门、上下文裁剪）保持与业务代码同等的严格度——60/40 意味着多数缺陷藏在壳里
+- 选型参考：评估第三方 harness 时，看其开源仓库的目录结构中护栏/上下文模块占比，比看 star 数更能预测生产可靠性
+
+## 129. 生产级 skill 集开源参考：MiniMax MCode 15 skills（2026-10-30 收录）
+
+**来源**：[MiniMax Open-Sources MCode Stack: 15 Agent Skills Its Coding Team Uses Daily](https://www.marktechpost.com/2026/10/28/minimax-open-sources-mcode-stack-agent-skills/)（2026-10-28，MarkTechPost）
+
+### 核心内容
+
+- MiniMax 开源其编码团队**日常真实在用的 15 个 agent skills**（MCode stack）——不是 demo 集，而是生产工作流的整套输出；skill 粒度/拆分方式可直接对标
+- 呼应 10-29 案例「Skills 标准入 Linux Foundation」：skills 生态从单点示范（superpowers）走向「厂商整套开源 + 中立标准」双轨，自建 harness 的 skills 层有了可抄的完整作业
+- 价值在于拆分粒度的参照系：15 个 skills 对应团队真实任务切分，可对照自己的工作流检查「哪些重复劳动还没 skill 化、哪些 skill 拆得过细」
+
+### 实操要点
+
+- 逐个对照 MCode 的 skill 清单做 gap 分析：按「日频使用 / 单一职责 / 可验证产出」三标准筛自己团队待 skill 化的流程
+- 自建 skill 命名与清单格式尽早对齐 Linux Foundation 的 Agent Skills 标准（见 10-29 案例），保住跨 harness 可移植性
+- 关注同周出现的 harness 适配层动向（Infini-AI-Lab Hermit，[链接](https://www.marktechpost.com/2026/10/29/infini-ai-lab-hermit-harness-adapter-framework/)）：harness 可替换适配器框架若成熟，skills/工作流的跨 harness 迁移成本将大幅下降

@@ -1769,3 +1769,33 @@ Faros.ai 建议先量化再决定投入方向：
 2. **安全闸门议题三线合流**：Claude Code 拆最后闸门（#127）+ Codex 沙箱逃逸解析 + 企业 harness 安全指南——权限闸门分层、沙箱隔离、审计日志三件套应进 harness 安全评审基线
 3. **快照一致性与流式可靠性仍是主线**：deer-flow RunEvent 隔离 rebase、langgraph SSE cursor 保留与断线 backoff——长程/流式 harness 的「不断不乱」工程持续加码，与上周「优雅取消」暗线（取消/清理）共同构成可靠性周主题
 4. **superpowers 日增破千但代码静默 6 天**：热度与开发背离达极值，警惕榜单类 star 数据失真风险——评估框架热度仍须双指标交叉（呼应 10-25/10-28 启示）
+
+---
+
+## 10-30 快照：harness 商品化与量化参照 & MiniMax 整套 skills 开源 &框架速报（24h 窗口 since 10-28 21:30 UTC）
+
+### 新闻与案例
+
+- **《What Is Harness Engineering? A Hands-On Introduction》**（Towards Data Science 10-29，[链接](https://towardsdatascience.com/what-is-harness-engineering-a-hands-on-introduction/)）：术语基准文——harness = 围绕模型的工具/上下文/反馈回路外壳，含动手构建路径；适合作为对外解释「什么是 harness 工程」的引用源
+- **Microsoft Copilot Harness 进 Foundry 商业售卖（12 月 1 日前免费）**（Unite.AI / FourWeekMBA 10-28/29，[链接](https://www.unite.ai/microsoft-makes-copilot-harness-available-through-foundry/)）：「harness」从社区黑话进入大厂产品 SKU——赛道商品化标志事件
+- **Infini-AI-Lab 开源 Hermit harness 适配器框架**（MarkTechPost 10-29，[链接](https://www.marktechpost.com/2026/10/29/infini-ai-lab-hermit-harness-adapter-framework/)）：不同 agent runtime/harness 之间的可移植适配层；与 Skills 标准同向，harness 生态走向「可插拔」
+- **MiniMax 开源 MCode stack：15 个团队日常 agent skills**（MarkTechPost 10-28，详 #129）：生产级 skill 集整套开源
+- **Anthropic 日均合并 3 万次代码变更**（AI Engineer 大会，Sonar × Anthropic，[链接](https://finance.biggo.com/podcast/ba92a25583dac843)）：大规模并行 agent + 评审/CI 护栏流水线，与 #128 的 60/40 占比互为佐证
+- 备查：DOE 发布 35 个 Genesis Mission skills 供 Claude Code/Codex/Gemini CLI 使用（R&D World）；GitHub Octoverse 2026 安全团队要点（GitGuardian）
+
+### 框架动态（gh api 核实，star 较 10-29 快照）
+
+- **obra/superpowers**（**308,431**⭐，+1,079，日增连续破千）：默认分支静默第 7 天（v7.0.1，10-21）——背离持续
+- **google/adk-python**（**22,044**⭐，+10）：**21 commits**——ReadFileTool 流式读文件防 OOM、evaluation/user simulation 类从 experimental 毕业、telemetry 落地 semconv-genai v2 token 指标、新增 RefusalAnswer 分类器（模型拒答场景）、FirestoreSessionService 路径校验修复；可观测性与评估体系持续加码
+- **bytedance/deer-flow**（**84,656**⭐，+76）：14 commits——**native subagents 支持 thinking/reasoning effort 配置**（#7668）、run admission 与 heartbeat 隔离（#7664）、skills 包摘要捕获修复（#7583）、telegram 群回复上下文保持（#7654）；推理档位配置下沉到 subagent 层是新信号
+- **crewAIInc/crewAI**（**60,260**⭐，+38）：13 commits——tool-using agent 结束时请求结构化输出（#8703）、json 与输出模型不符时 refit 而非失败（#8702）、重复工具调用告警并保留工作（#8706）、空 LLM 回答重试一次抛类型化错误（#8729）、context_window_size 生效 + fallback 告警（#8704）；输出可靠性与上下文预算主题延续
+- **langchain-ai/langgraph**（**44,115**⭐，+55）：3 commits——sdk-py runs.wait/join/cancel 断线 backoff 重连（#9481）、无 Last-Event-ID 重连告警（#9482）+ 重连恢复测试（#9483）；1.2.18（10-26 发布）后流式可靠性维护
+- **openai/openai-agents-python**（**30,381**⭐，+26）：窗口内 0 commits，v0.24.0（10-15）后无新 release
+- **bmad-code-org/BMAD-METHOD**（**54,749**⭐，+62）：窗口内 0 commits，静默第 11 天（v6.12.4，10-14）
+
+### 案例启示（10-30）
+
+1. **harness 商品化三连**：微软 Foundry 售卖 Copilot Harness + Hermit 适配器框架开源 + TDS 术语入门文——「harness」完成从黑话到产品品类的话语体系迁移；选型讨论可以开始用统一词汇，采购/自建决策将更透明
+2. **量化参照系出现**：Claude Code 60/40 代码占比（#128）+ Anthropic 日均 3 万合并——harness 工程投入首次有了可对比的数字锚点，团队资源分配自检有了参照系
+3. **推理档位下沉 subagent 层**：deer-flow native workers 支持 thinking/reasoning effort 配置——成本控制粒度从「全局模型选择」细化到「每个 subagent 的推理档位」，长程多 agent 任务的 token 预算管理新维度
+4. **输出可靠性仍是 crewAI/ADK 主线**：结构化输出 refit、空回答重试、OOM 防护、评估类毕业——框架侧把「模型不确定性兜底」做进代码，与 #125/#126 的压缩/脱敏同属 harness 标配化进程
