@@ -97,6 +97,22 @@ Harness Engineering (最上层)
 
 ## 更新日志
 
+### 2026-10-31 - harness 范式扩散到多模态生成 & NemoClaw 自控栈路线 & ADK A2A agent card CLI
+
+**更新**：
+
+1. **新闻/案例（05 章 10-31 快照）**：
+   - **《Video Generation Meets Agent Harness》**（[alphaXiv 2610.40191](https://www.alphaxiv.org/abs/2610.40191)，10-30）——harness 范式扩散到视频生成/世界模型/递归自我改进，术语完成跨域升格
+   - **NVIDIA NemoClaw 官方博客**（[链接](https://developer.nvidia.com/blog/build-specialized-agents-on-a-stack-you-control-with-nvidia-nemoclaw/)）——自控技术栈构建专用 agent，与微软 Foundry 托管路线形成两极对照（详 #130）
+   - **InfoQ AI/ML/Data Engineering Trends Report 2026**（[链接](https://www.infoq.com/articles/ai-ml-data-engineering-trends-2026/)）——年度趋势报告，路线图对齐材料
+2. **最佳实践（04 新增 #130）**：NemoClaw 自托管 harness 栈——垂直专用 agent 的成本/合规分界评估 + 框架适配层独立工程化 + 锁定风险写入采购评审
+3. **框架动态（gh api 核实，24h 窗口）**：ADK CLI 生成 A2A agent card（互操作工具链化新信号）+ SKILL.md 健康检查上报；deer-flow 稳定性修复日（subagents 过期恢复/DNS 隔离）；langgraph 可观测性正确性修复；superpowers 日增回落至 +928（此前连续破千）；BMAD 静默第 12 天
+4. **信源说明**：Tavily 432 超额，降级 gnews RSS + googlenewsdecoder；gh api REST 逐仓核实；采集窗口 24h
+
+**更新文件**：README.md（本节）、04-best-practices.md（#130）、05-case-studies.md（10-31 快照）
+
+---
+
 ### 2026-10-30 - harness 商品化与 60/40 量化锚点 & MiniMax 整套 skills 开源 & deer-flow 推理档位下沉
 
 **更新**：

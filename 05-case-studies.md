@@ -1799,3 +1799,28 @@ Faros.ai 建议先量化再决定投入方向：
 2. **量化参照系出现**：Claude Code 60/40 代码占比（#128）+ Anthropic 日均 3 万合并——harness 工程投入首次有了可对比的数字锚点，团队资源分配自检有了参照系
 3. **推理档位下沉 subagent 层**：deer-flow native workers 支持 thinking/reasoning effort 配置——成本控制粒度从「全局模型选择」细化到「每个 subagent 的推理档位」，长程多 agent 任务的 token 预算管理新维度
 4. **输出可靠性仍是 crewAI/ADK 主线**：结构化输出 refit、空回答重试、OOM 防护、评估类毕业——框架侧把「模型不确定性兜底」做进代码，与 #125/#126 的压缩/脱敏同属 harness 标配化进程
+
+## 10-31 快照：harness 范式扩散到多模态生成 & NemoClaw 自控栈路线 & ADK A2A agent card CLI（24h 窗口 since 10-30）
+
+### 新闻与案例
+
+- **《Video Generation Meets Agent Harness: Agentic Video Generation, Agentic World Modeling and Recursive Self-Improvement》**（alphaXiv 2610.40191，10-30，[链接](https://www.alphaxiv.org/abs/2610.40191)）：harness 范式扩散信号——把 harness 概念引入视频生成/世界模型/递归自我改进，「harness engineering」从编码 agent 工程实践升格为通用 AI 系统设计词汇
+- **NVIDIA NemoClaw 官方博客：自控技术栈构建专用 agent**（10-30，[链接](https://developer.nvidia.com/blog/build-specialized-agents-on-a-stack-you-control-with-nvidia-nemoclaw/)，详 04 #130）：三框架适配 + 自托管路线厂商实现，与微软 Foundry 托管路线形成两极对照
+- **InfoQ AI/ML/Data Engineering Trends Report 2026**（10-30，[链接](https://www.infoq.com/articles/ai-ml-data-engineering-trends-2026/)）：年度趋势报告覆盖 agent/harness 工程位置，文章+播客双形态，路线图对齐材料
+- 备查：Fortune「Rent the model. Own the harness. Own the network.」（10-29 观点文，harness 资产化叙事佐证；Hermit/Foundry 10-30 已录，不重复展开）
+
+### 框架动态（gh api 核实，star 较 10-30 快照）
+
+- **google/adk-python**（**22,051**⭐，+7）：4 commits——**CLI 直接生成 A2A agent card**（agent 互操作从协议规范落到日常工具链）、SKILL.md 不可读时上报 on_error（skills 健康检查细化）、CascadeLive 历史回复修复、VertexAiSessionService JSON-safe state_delta
+- **bytedance/deer-flow**（**84,737**⭐，+81）：4 commits——subagents 过期尝试恢复（#7686）、browser egress DNS worker 隔离（#6301）、skill packager 直调（#6938）；长时程稳定性修复日
+- **langchain-ai/langgraph**（**44,178**⭐，+63）：2 commits——trace_policy 不再改写流式节点 payload（#9486）、messages/tools 事件命名空间归属 graph（#9458）；可观测性正确性收尾
+- **crewAIInc/crewAI**（**60,308**⭐，+48）：10-30 无 commit，1.15.33（10-29）后进入维护静默
+- **openai/openai-agents-python**（**30,398**⭐，+17）：1 commit——流未完成诊断改进（#5457）
+- **bmad-code-org/BMAD-METHOD**（**54,790**⭐，+41）：静默第 12 天（v6.12.4，10-14）
+- **obra/superpowers**（**309,359**⭐，+928）：日增回落至千以下（此前连续破千），默认分支静默第 8 天——热度仍在但增速降温
+
+### 案例启示（10-31）
+
+1. **harness 范式完成跨域扩散**：论文把 harness 用于视频生成/世界模型/递归自我改进——术语已从编码 agent 圈层进入通用 AI 系统设计词汇，团队对外沟通、招聘 JD 可放心使用该词而不需额外解释
+2. **自托管 vs 托管路线图清晰化**：NVIDIA NemoClaw（自控栈）vs 微软 Foundry Copilot harness（托管执行+锁定质疑）——路线选型有了两极参照，中间态由 Hermit 适配器补位；选型矩阵可按「控制面归属」一维展开
+3. **A2A agent card 进入 CLI 工具链**：ADK CLI 一条命令生成 agent card——多框架团队的互操作性检查从「读规范」降为「跑命令」，可列入 CI 选型检查项

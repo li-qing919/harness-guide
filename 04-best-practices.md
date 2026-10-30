@@ -4194,3 +4194,19 @@ Sourcegraph 详细介绍了 Anthropic 的结构化笔记模式：
 - 逐个对照 MCode 的 skill 清单做 gap 分析：按「日频使用 / 单一职责 / 可验证产出」三标准筛自己团队待 skill 化的流程
 - 自建 skill 命名与清单格式尽早对齐 Linux Foundation 的 Agent Skills 标准（见 10-29 案例），保住跨 harness 可移植性
 - 关注同周出现的 harness 适配层动向（Infini-AI-Lab Hermit，[链接](https://www.marktechpost.com/2026/10/29/infini-ai-lab-hermit-harness-adapter-framework/)）：harness 可替换适配器框架若成熟，skills/工作流的跨 harness 迁移成本将大幅下降
+
+## 130. 自控技术栈上的专用 agent：NVIDIA NemoClaw 三框架支持（2026-10-31 收录）
+
+**来源**：[Build Specialized Agents on a Stack You Control with NVIDIA NemoClaw](https://developer.nvidia.com/blog/build-specialized-agents-on-a-stack-you-control-with-nvidia-nemoclaw/)（2026-10-30，NVIDIA Technical Blog）
+
+### 核心内容
+
+- NVIDIA 官方博客演示用 **NemoClaw 在自控技术栈上构建专用 agent**，覆盖三大 agent 框架的适配（TOKENPOST 10-30 同日报道确认）——自托管 harness 路线的厂商级实现路径
+- 与微软 Foundry 开放 Copilot harness 托管执行（10-29）形成**路线两极对照**：managed execution（易用但锁定，The New Stack 批评）vs self-hosted control plane（可控但运维自负）
+- 呼应 10-29 Fortune 观点文「Rent the model. Own the harness. Own the network.」：模型租用化背景下，harness 层才是团队资产
+
+### 实操要点
+
+- 做专用/垂直 agent 时先做路线分界评估：合规、可观测、数据不出域要求高的场景，自控栈（NemoClaw 类）收益更高；通用研发场景托管 harness 仍省成本
+- 若选自托管，把「框架适配层」列为独立工程件（参考 Hermit 适配器思路），避免单框架深度耦合导致迁移重写
+- The New Stack 对 Foundry harness 的锁定性质疑可作为采购评审检查项：导出路径、运行时可替换性写入选型标准
